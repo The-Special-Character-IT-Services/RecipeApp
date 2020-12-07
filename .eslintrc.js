@@ -22,6 +22,7 @@ module.exports = {
   },
   plugins: ['react', 'react-native', 'import', 'jsx-a11y', 'react-hooks', 'prettier'],
   rules: {
+    'arrow-parens': ['error', 'as-needed'],
     'react/jsx-filename-extension': [1, { extensions: ['.js', '.jsx'] }],
 
     // React-Hooks Plugin
