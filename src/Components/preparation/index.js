@@ -48,9 +48,7 @@ const index = () => {
           marginVertical: 10,
         }}>
         <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
-          <Text style={{ fontSize: 20, paddingHorizontal: 30, fontWeight: 'bold' }}>
-            Preparation
-          </Text>
+          <Text style={{ fontSize: 20, paddingHorizontal: 30 }}>Preparation</Text>
           <View style={{ flexDirection: 'row', alignItems: 'center', padding: 1 }}>
             <Timer height={24} width={24} fill="black" />
             <Text style={{ alignItems: 'center', paddingRight: 20 }}> 35` </Text>
