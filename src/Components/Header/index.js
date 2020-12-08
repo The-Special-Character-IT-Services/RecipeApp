@@ -6,7 +6,7 @@ import { View, Text, Image } from 'react-native';
 const index = () => (
   <View>
     <View style={{ flexDirection: 'row', marginVertical: 20, marginHorizontal: 10 }}>
-      <Text style={{ paddingLeft: 10, fontSize: 30, marginTop: 20 }}>
+      <Text style={{ paddingLeft: 10, fontSize: 30, marginTop: 20, flex: 1 }}>
         Hello there,
         <Text style={{ color: 'orange', fontWeight: 'bold' }}> Ana!</Text>
       </Text>
