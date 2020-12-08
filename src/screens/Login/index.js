@@ -1,10 +1,16 @@
 import React from 'react';
-import { View, Text } from 'react-native';
+import { Text, SafeAreaView, Pressable } from 'react-native';
 
-const index = () => (
-  <View>
+const index = ({ navigation }) => (
+  <SafeAreaView>
     <Text>Login Screen</Text>
-  </View>
+    <Pressable
+      onPress={() => {
+        navigation.navigate('Registration');
+      }}>
+      <Text>Move to Registration Page</Text>
+    </Pressable>
+  </SafeAreaView>
 );
 
 export default index;
