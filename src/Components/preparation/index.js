@@ -2,35 +2,35 @@
 import React from 'react';
 import { View, Text, ScrollView, ImageBackground, Pressable } from 'react-native';
 // import { ScrollView } from 'react-native-gesture-handler';
-import Timer from '../assets/icons/timer.svg';
-import Play from '../assets/icons/play.svg';
+import Timer from '../../assets/icons/timer.svg';
+import Play from '../../assets/icons/play.svg';
 
 const index = () => {
   const Loopfood = [
     {
       id: 1,
       text: '1. Melt chocolate',
-      img: require('../assets/image/choco.png'),
+      img: require('../../assets/image/choco.png'),
     },
     {
       id: 2,
       text: '2. Squeeze juice',
-      img: require('../assets/image/lemon.png'),
+      img: require('../../assets/image/lemon.png'),
     },
     {
       id: 3,
       text: '3. South Indian',
-      img: require('../assets/image/dosa.png'),
+      img: require('../../assets/image/dosa.png'),
     },
     {
       id: 4,
       text: '4. Pizzas',
-      img: require('../assets/image/pizza.png'),
+      img: require('../../assets/image/pizza.png'),
     },
     {
       id: 5,
       text: '5. Birthday cakes',
-      img: require('../assets/image/cakes.png'),
+      img: require('../../assets/image/cakes.png'),
     },
   ];
 
