@@ -60,7 +60,7 @@ const index = () => (
       {PicCuisine.map(item => (
         <View
           key={item.id}
-          style={{ marginVertical: 5, marginHorizontal: 5, alignItems: 'center' }}>
+          style={{ paddingLeft: 5, marginVertical: 5, marginHorizontal: 5, alignItems: 'center' }}>
           <Image
             style={{
               borderRadius: 5,

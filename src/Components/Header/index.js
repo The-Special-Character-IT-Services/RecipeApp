@@ -6,9 +6,9 @@ import { View, Text, Image } from 'react-native';
 const index = () => (
   <View>
     <View style={{ flexDirection: 'row', marginVertical: 20, marginHorizontal: 10 }}>
-      <Text style={{ fontSize: 30, marginTop: 20 }}>
+      <Text style={{ paddingLeft: 10, fontSize: 30, marginTop: 20 }}>
         Hello there,
-        <Text style={{ color: 'rgb(200, 60, 50)', fontWeight: 'bold' }}> Ana!</Text>
+        <Text style={{ color: 'orange', fontWeight: 'bold' }}> Ana!</Text>
       </Text>
       <Image
         style={{ marginLeft: 30, height: 80, width: 80, borderRadius: 10 }}

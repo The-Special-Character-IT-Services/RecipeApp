@@ -1,3 +1,4 @@
+/* eslint-disable react-native/no-inline-styles */
 /* eslint-disable global-require */
 import React from 'react';
 import { View, Text, ScrollView, ImageBackground, Pressable } from 'react-native';
@@ -80,6 +81,7 @@ const index = () => {
             ))}
           </ScrollView>
           <Pressable
+            // eslint-disable-next-line no-alert
             onPress={() => alert('hi')}
             style={{
               marginHorizontal: 40,

@@ -20,7 +20,7 @@ const PicCategory = [
 
   {
     id: 2,
-    icon: () => <Lunch height={24} width={24} />,
+    icon: fill => <Lunch height={24} width={24} fill={fill} />,
     text: 'Lunch',
   },
 
@@ -32,7 +32,7 @@ const PicCategory = [
 
   {
     id: 4,
-    icon: () => <Dessert height={24} width={24} />,
+    icon: fill => <Dessert height={24} width={24} fill={fill} />,
     text: 'Dessert',
   },
 
@@ -44,13 +44,13 @@ const PicCategory = [
 
   {
     id: 6,
-    icon: () => <Starter height={24} width={24} />,
+    icon: fill => <Starter height={24} width={24} fill={fill} />,
     text: 'Starter',
   },
 
   {
     id: 7,
-    icon: () => <Fastfood height={24} width={24} />,
+    icon: fill => <Fastfood height={24} width={24} fill={fill} />,
     text: 'Fastfood',
   },
 ];
@@ -73,11 +73,11 @@ const index = () => (
               borderRadius: 12,
               width: 50,
               marginVertical: 10,
-              backgroundColor: item.id === 1 ? 'orange' : '#fff',
+              backgroundColor: item.id === 1 ? 'orange' : 'rgb(242,242,242)',
               alignItems: 'center',
               justifyContent: 'center',
             }}>
-            {item.icon(item.id === 1 ? '#fff' : 'black')}
+            {item.icon(item.id === 1 ? 'rgb(242,242,242)' : 'gray')}
           </View>
           <View>
             <Text style={{ fontSize: 10, color: 'black' }}>{item.text}</Text>
