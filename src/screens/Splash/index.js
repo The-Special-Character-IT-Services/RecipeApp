@@ -1,4 +1,3 @@
-/* eslint-disable global-require */
 import React from 'react';
 import { View, Text, ScrollView, ImageBackground } from 'react-native';
 // import CakeIcon from '../../assets/icons/cake-black.svg';
