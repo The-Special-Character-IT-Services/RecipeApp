@@ -1,9 +1,14 @@
 import React from 'react';
-import { View, Text } from 'react-native';
+import { View } from 'react-native';
+import Category from '../../components/Category';
+import Header from '../../components/Header';
+import Footer from '../../components/Footer';
 
 const index = () => (
   <View>
-    <Text>Tab Home</Text>
+    <Header />
+    <Category />
+    <Footer />
   </View>
 );
 
