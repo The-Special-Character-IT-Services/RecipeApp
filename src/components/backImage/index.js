@@ -15,7 +15,7 @@ const index = () => (
         top: 0,
         left: 0,
       }}
-      source={require('../../assets/images/black.png')}>
+      source={require('../../assets/images/FoodPic1.jpg')}>
       <View
         style={{
           flex: 1,
