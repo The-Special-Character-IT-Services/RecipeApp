@@ -10,7 +10,13 @@ const Stack = createStackNavigator();
 const App = () => (
   <NavigationContainer>
     <Stack.Navigator>
-      <Stack.Screen name="Splash" component={Splash} />
+      <Stack.Screen
+        name="Splash"
+        component={Splash}
+        options={{
+          headerShown: false,
+        }}
+      />
       <Stack.Screen name="Login" component={Login} />
       <Stack.Screen name="Registration" component={Registration} />
     </Stack.Navigator>
