@@ -37,7 +37,7 @@ const index = () => {
 
   return (
     <View>
-      <View style={{ marginLeft: 36, marginTop: 20 }}>
+      <View style={{ marginHorizontal: 30, marginTop: 20 }}>
         <Text style={{ fontSize: 26 }}>Very Berry Tart</Text>
         <Text numberOfLines={2} style={{ color: 'gray' }}>
           Amazing combo of sweet and sour taste! Super easy to cook.Enjoy!
@@ -48,7 +48,10 @@ const index = () => {
           marginVertical: 10,
         }}>
         <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
-          <Text style={{ fontSize: 20, paddingHorizontal: 30 }}>Preparation</Text>
+          <Text
+            style={{ fontSize: 20, paddingHorizontal: 30, marginVertical: 10, fontWeight: 'bold' }}>
+            Preparation
+          </Text>
           <View style={{ flexDirection: 'row', alignItems: 'center', padding: 1 }}>
             <Timer height={24} width={24} fill="black" />
             <Text style={{ alignItems: 'center', paddingRight: 20 }}> 35` </Text>
@@ -56,7 +59,8 @@ const index = () => {
         </View>
         <View style={{ borderRadius: 9, flexDirection: 'column' }}>
           <ScrollView
-            contentContainerStyle={{ paddingHorizontal: 15 }}
+            style={{ marginBottom: 10 }}
+            contentContainerStyle={{ paddingHorizontal: 27 }}
             horizontal
             showsHorizontalScrollIndicator={false}>
             {Loopfood.map(item => (
@@ -67,11 +71,11 @@ const index = () => {
                   imageStyle={{ borderRadius: 15 }}
                   source={item.img}
                   style={{
-                    height: 250,
+                    height: 230,
                     width: 150,
                     borderRadius: 500,
                   }}>
-                  <Text style={{ color: 'white', fontSize: 19, paddingLeft: 10, paddingTop: 5 }}>
+                  <Text style={{ color: 'white', fontSize: 16, paddingLeft: 10, paddingTop: 5 }}>
                     {item.text}
                   </Text>
                 </ImageBackground>

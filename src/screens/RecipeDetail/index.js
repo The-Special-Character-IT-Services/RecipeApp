@@ -1,8 +1,7 @@
 import React from 'react';
 import { View, Dimensions, ImageBackground } from 'react-native';
 import HeartIcon from '../../assets/icons/heart-icon.svg';
-import LeftArrow from '../../assets/icons/left-arrow.svg';
-import Preparation from '../../components/Preparation';
+import Preparation from '../../components/preparation';
 
 const { height: windowHeight, width: windowWidth } = Dimensions.get('window');
 
@@ -21,11 +20,10 @@ const index = () => (
         style={{
           flex: 1,
           flexDirection: 'row',
-          justifyContent: 'space-between',
+          justifyContent: 'flex-end',
           marginHorizontal: 20,
           marginVertical: 20,
         }}>
-        <LeftArrow height={24} width={24} fill="white" />
         <HeartIcon height={24} width={24} fill="white" />
       </View>
     </ImageBackground>
@@ -34,7 +32,7 @@ const index = () => (
         borderTopEndRadius: 30,
         borderTopStartRadius: 30,
 
-        height: windowHeight * 0.7,
+        height: windowHeight * 0.65,
         backgroundColor: '#FFF',
         zIndex: 1,
       }}>
