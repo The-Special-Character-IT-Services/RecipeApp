@@ -57,13 +57,13 @@ const PicCategory = [
 
 const index = () => (
   <View>
-    <View style={{ flexDirection: 'row', marginVertical: 10, marginHorizontal: 10 }}>
+    <View style={{ flexDirection: 'row', marginVertical: 10, marginHorizontal: 20 }}>
       <Text style={{ fontWeight: 'bold', color: 'gray', paddingLeft: 10 }}>Select a category</Text>
     </View>
     <ScrollView
       horizontal
       showsHorizontalScrollIndicator={false}
-      contentContainerStyle={{ paddingHorizontal: 10 }}>
+      contentContainerStyle={{ paddingHorizontal: 20 }}>
       {PicCategory.map(item => (
         <View key={item.id} style={{ marginHorizontal: 5, alignItems: 'center' }}>
           <View

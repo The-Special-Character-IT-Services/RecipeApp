@@ -1,6 +1,6 @@
 import { NavigationContainer, DefaultTheme } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
-import { View, StatusBar } from 'react-native';
+import { StatusBar, SafeAreaView } from 'react-native';
 import React from 'react';
 import Splash from './src/screens/Splash';
 import Login from './src/screens/Login';
@@ -17,7 +17,7 @@ const MyTheme = {
   },
 };
 const App = () => (
-  <View style={{ flex: 1 }}>
+  <SafeAreaView style={{ flex: 1 }}>
     <NavigationContainer theme={MyTheme}>
       <StatusBar backgroundColor="white" barStyle="dark-content" />
       <Stack.Navigator
@@ -31,7 +31,7 @@ const App = () => (
         <Stack.Screen name="RecipeDetail" component={RecipeDetail} />
       </Stack.Navigator>
     </NavigationContainer>
-  </View>
+  </SafeAreaView>
 );
 
 export default App;

@@ -50,13 +50,13 @@ const PicCuisine = [
 
 const index = () => (
   <View>
-    <View style={{ marginVertical: 20, paddingHorizontal: 10 }}>
+    <View style={{ marginVertical: 20, paddingHorizontal: 20 }}>
       <Text style={{ fontSize: 20, fontWeight: 'bold', paddingLeft: 10 }}>Search by Cuisine</Text>
     </View>
     <ScrollView
       horizontal
       showsHorizontalScrollIndicator={false}
-      contentContainerStyle={{ paddingHorizontal: 10 }}>
+      contentContainerStyle={{ paddingHorizontal: 20 }}>
       {PicCuisine.map(item => (
         <View
           key={item.id}
