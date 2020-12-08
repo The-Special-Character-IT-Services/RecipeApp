@@ -51,9 +51,9 @@ const index = () => {
           <Text style={{ fontSize: 20, paddingHorizontal: 30, fontWeight: 'bold' }}>
             Preparation
           </Text>
-          <View style={{ flexDirection: 'row', padding: 1 }}>
+          <View style={{ flexDirection: 'row', alignItems: 'center', padding: 1 }}>
             <Timer height={24} width={24} fill="black" />
-            <Text style={{ fontSize: 17, fontWeight: '900', paddingRight: 20 }}> 35` </Text>
+            <Text style={{ alignItems: 'center', paddingRight: 20 }}> 35` </Text>
           </View>
         </View>
         <View style={{ borderRadius: 9, flexDirection: 'column' }}>
