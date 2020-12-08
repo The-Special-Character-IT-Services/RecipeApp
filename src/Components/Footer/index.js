@@ -50,7 +50,7 @@ const PicCuisine = [
 
 const index = () => (
   <View>
-    <View style={{ marginVertical: 10, paddingHorizontal: 10 }}>
+    <View style={{ marginVertical: 20, paddingHorizontal: 10 }}>
       <Text style={{ fontSize: 20, fontWeight: 'bold', paddingLeft: 10 }}>Search by Cuisine</Text>
     </View>
     <ScrollView
