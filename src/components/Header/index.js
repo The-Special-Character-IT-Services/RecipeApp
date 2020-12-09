@@ -8,7 +8,7 @@ const index = () => (
   <View>
     <View style={{ flexDirection: 'row', marginVertical: 20, marginHorizontal: 10 }}>
       <TextEle variant="header1" style={{ paddingLeft: 18, marginTop: 20, flex: 1 }}>
-        {'Hello there, '}
+        {'Hello, '}
         <TextEle variant="header2" style={{ color: 'orange' }}>
           Priya!
         </TextEle>
