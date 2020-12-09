@@ -62,7 +62,7 @@ const index = ({ onRecipePress }) => (
         contentContainerStyle={{ paddingHorizontal: 20 }}>
         {PicInLoop.map(item => (
           <Pressable
-            onPress={onRecipePress}
+            onPress={() => onRecipePress(item)}
             key={item.id}
             style={{ marginHorizontal: 10, width: 300 }}>
             <ImageBackground
