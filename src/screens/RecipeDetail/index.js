@@ -1,7 +1,8 @@
 import React from 'react';
 import { View, Dimensions, ImageBackground } from 'react-native';
+// import { ScrollView } from 'react-native-gesture-handler';
 import HeartIcon from '../../assets/icons/heart-icon.svg';
-import Preparation from '../../components/preparation';
+import Preparation from '../../components/Preparation';
 
 const { height: windowHeight, width: windowWidth } = Dimensions.get('window');
 
