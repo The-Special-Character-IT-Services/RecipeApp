@@ -1,4 +1,4 @@
-import { NavigationContainer, DefaultTheme, DarkTheme, useTheme } from '@react-navigation/native';
+import { NavigationContainer, DefaultTheme, DarkTheme } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import { StatusBar } from 'react-native';
 import React from 'react';
@@ -9,6 +9,7 @@ import Login from './src/screens/Login';
 import Registration from './src/screens/Registration';
 import Home from './src/screens/Home';
 import RecipeDetail from './src/screens/RecipeDetail';
+import LikeButton from './src/components/LikeButton';
 
 const MyDefaultTheme = {
   ...DefaultTheme,
@@ -30,18 +31,18 @@ const Stack = createStackNavigator();
 
 const App = () => {
   const scheme = useColorScheme();
-  const { colors } = useTheme();
+  const currentTheme = scheme === 'dark' ? MyDarkTheme : MyDefaultTheme;
   return (
     <SafeAreaProvider>
-      <NavigationContainer theme={scheme === 'dark' ? MyDarkTheme : MyDefaultTheme}>
-        <StatusBar
-          backgroundColor={colors.card}
-          barStyle={scheme === 'dark' ? 'light-content' : 'dark-content'}
-        />
+      <StatusBar
+        backgroundColor={currentTheme.colors.card}
+        barStyle={scheme === 'dark' ? 'light-content' : 'dark-content'}
+      />
+      <NavigationContainer theme={currentTheme}>
         <Stack.Navigator
           screenOptions={{
             headerShown: false,
-            headerTintColor: colors.primary,
+            headerTintColor: currentTheme.colors.primary,
             title: false,
           }}>
           <Stack.Screen name="Splash" component={Splash} />
@@ -51,7 +52,12 @@ const App = () => {
           <Stack.Screen
             name="RecipeDetail"
             component={RecipeDetail}
-            options={{ headerShown: true, headerTransparent: 1, headerTintColor: 'white' }}
+            options={{
+              headerRight: LikeButton,
+              headerShown: true,
+              headerTransparent: 1,
+              headerTintColor: currentTheme.colors.primary,
+            }}
           />
         </Stack.Navigator>
       </NavigationContainer>

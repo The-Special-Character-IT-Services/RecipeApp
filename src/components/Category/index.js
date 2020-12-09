@@ -62,7 +62,9 @@ const Category = () => {
   return (
     <View>
       <View style={{ flexDirection: 'row', marginVertical: 10, marginHorizontal: 20 }}>
-        <TextEle style={{ fontWeight: 'bold', paddingLeft: 10 }}>Select a category</TextEle>
+        <TextEle variant="body2" style={{ color: 'gray', fontWeight: 'bold', paddingLeft: 10 }}>
+          Select a category
+        </TextEle>
       </View>
       <ScrollView
         horizontal
@@ -93,7 +95,7 @@ const Category = () => {
               {item.icon(item.id === 1 ? colors.card : colors.primary)}
             </View>
             <View>
-              <TextEle>{item.text}</TextEle>
+              <TextEle variant="caption">{item.text}</TextEle>
             </View>
           </View>
         ))}

@@ -14,7 +14,9 @@ const Popular = ({ onRecipePress }) => {
     <View>
       <View>
         <View style={{ paddingHorizontal: 30, marginVertical: 20 }}>
-          <TextEle style={{ fontSize: 20, fontWeight: 'bold' }}>Popular</TextEle>
+          <TextEle variant="title1" style={{ fontSize: 20, fontWeight: 'bold' }}>
+            Popular
+          </TextEle>
         </View>
         <ScrollView
           horizontal
@@ -22,7 +24,7 @@ const Popular = ({ onRecipePress }) => {
           contentContainerStyle={{ paddingHorizontal: 20 }}>
           {data.map(item => (
             <Pressable
-              onPress={onRecipePress}
+              onPress={() => onRecipePress(item)}
               key={item.id}
               style={{ marginHorizontal: 10, width: 300 }}>
               <ImageBackground
