@@ -1,5 +1,6 @@
 import React from 'react';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import { useTheme } from '@react-navigation/native';
 import TabHome from '../TabHome';
 import TabSearch from '../TabSearch';
 import TabLikes from '../TabLikes';
@@ -15,49 +16,53 @@ import SearchSharp from '../../assets/icons/search-sharp.svg';
 
 const Tab = createBottomTabNavigator();
 
-const index = () => (
-  <Tab.Navigator
-    screenOptions={({ route }) => ({
-      // eslint-disable-next-line react/prop-types
-      tabBarIcon: ({ focused, color }) => {
-        switch (route.name) {
-          case 'TabHome':
-            if (focused) {
-              return <HomeSharp height={24} width={24} fill={color} />;
-            }
-            return <HomeOutline height={24} width={24} fill={color} />;
+const Home = () => {
+  const { colors } = useTheme();
+  return (
+    <Tab.Navigator
+      screenOptions={({ route }) => ({
+        // eslint-disable-next-line react/prop-types
+        tabBarIcon: ({ focused, color }) => {
+          console.log(color);
+          switch (route.name) {
+            case 'TabHome':
+              if (focused) {
+                return <HomeSharp height={24} width={24} fill={color} />;
+              }
+              return <HomeOutline height={24} width={24} stroke={color} />;
 
-          case 'TabSearch':
-            if (focused) {
-              return <SearchSharp height={24} width={24} fill={color} />;
-            }
-            return <SearchOutline height={24} width={24} fill={color} />;
-          case 'TabLikes':
-            if (focused) {
-              return <HeartSharp height={24} width={24} fill={color} />;
-            }
-            return <HeartOutline height={24} width={24} fill={color} />;
-          case 'TabProfile':
-            if (focused) {
-              return <Personsharp height={24} width={24} fill={color} />;
-            }
-            return <PersonOutline height={24} width={24} fill={color} />;
+            case 'TabSearch':
+              if (focused) {
+                return <SearchSharp height={24} width={24} fill={color} />;
+              }
+              return <SearchOutline height={24} width={24} stroke={color} />;
+            case 'TabLikes':
+              if (focused) {
+                return <HeartSharp height={24} width={24} fill={color} />;
+              }
+              return <HeartOutline height={24} width={24} stroke={color} />;
+            case 'TabProfile':
+              if (focused) {
+                return <Personsharp height={24} width={24} fill={color} />;
+              }
+              return <PersonOutline height={24} width={24} stroke={color} />;
 
-          default:
-            return null;
-        }
-      },
-    })}
-    tabBarOptions={{
-      activeTintColor: 'orange',
-      inactiveTintColor: 'gray',
-      showLabel: false,
-    }}>
-    <Tab.Screen name="TabHome" component={TabHome} />
-    <Tab.Screen name="TabSearch" component={TabSearch} />
-    <Tab.Screen name="TabLikes" component={TabLikes} />
-    <Tab.Screen name="TabProfile" component={TabProfile} />
-  </Tab.Navigator>
-);
+            default:
+              return null;
+          }
+        },
+      })}
+      tabBarOptions={{
+        activeTintColor: colors.primary,
+        inactiveTintColor: colors.text,
+        showLabel: false,
+      }}>
+      <Tab.Screen name="TabHome" component={TabHome} />
+      <Tab.Screen name="TabSearch" component={TabSearch} />
+      <Tab.Screen name="TabLikes" component={TabLikes} />
+      <Tab.Screen name="TabProfile" component={TabProfile} />
+    </Tab.Navigator>
+  );
+};
 
-export default index;
+export default Home;

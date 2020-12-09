@@ -10,6 +10,22 @@ import Registration from './src/screens/Registration';
 import Home from './src/screens/Home';
 import RecipeDetail from './src/screens/RecipeDetail';
 
+const MyDefaultTheme = {
+  ...DefaultTheme,
+  colors: {
+    ...DefaultTheme.colors,
+    primary: '#F6552E',
+  },
+};
+
+const MyDarkTheme = {
+  ...DarkTheme,
+  colors: {
+    ...DarkTheme.colors,
+    primary: '#F6552E',
+  },
+};
+
 const Stack = createStackNavigator();
 
 const App = () => {
@@ -17,7 +33,7 @@ const App = () => {
   const { colors } = useTheme();
   return (
     <SafeAreaProvider>
-      <NavigationContainer theme={scheme === 'dark' ? DarkTheme : DefaultTheme}>
+      <NavigationContainer theme={scheme === 'dark' ? MyDarkTheme : MyDefaultTheme}>
         <StatusBar
           backgroundColor={colors.card}
           barStyle={scheme === 'dark' ? 'light-content' : 'dark-content'}
