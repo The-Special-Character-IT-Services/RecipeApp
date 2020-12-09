@@ -10,37 +10,47 @@ const index = () => {
   const Loopfood = [
     {
       id: 1,
-      text: '1. Melt chocolate',
-      img: require('../../assets/image/choco.png'),
+      text: '1. 5 ounces mixed spring greens',
+      img: require('../../assets/image/green.png'),
     },
     {
       id: 2,
-      text: '2. Squeeze juice',
-      img: require('../../assets/image/lemon.png'),
+      text: '2. 1 ripe avocado',
+      img: require('../../assets/image/avocado.png'),
     },
     {
       id: 3,
-      text: '3. South Indian',
-      img: require('../../assets/image/dosa.png'),
+      text: '3. half a small red onion',
+      img: require('../../assets/image/onions.png'),
     },
     {
       id: 4,
-      text: '4. Pizzas',
-      img: require('../../assets/image/pizza.png'),
+      text: '4. 1 cup halved cherry tomatoes',
+      img: require('../../assets/image/tomatoes.png'),
     },
     {
       id: 5,
-      text: '5. Birthday cakes',
-      img: require('../../assets/image/cakes.png'),
+      text: '5. 2/3 cup roughly-chopped fresh cilantro.',
+      img: require('../../assets/image/chopped.png'),
+    },
+    {
+      id: 6,
+      text: '6. 1/3 cup pepitas',
+      img: require('../../assets/image/papita.png'),
+    },
+    {
+      id: 7,
+      text: '7. optional: 1/2 cup crumbled queso fresco or cotija cheese.',
+      img: require('../../assets/image/cheese.png'),
     },
   ];
 
   return (
     <ScrollView>
       <View style={{ marginHorizontal: 30, marginTop: 20 }}>
-        <Text style={{ fontSize: 26 }}>Very Berry Tart</Text>
+        <Text style={{ fontSize: 26 }}>Maxican Salad</Text>
         <Text numberOfLines={2} style={{ color: 'gray' }}>
-          Amazing combo of sweet and sour taste! Super easy to cook.Enjoy!
+          Get ready for a healthy and tasty tour of Maxican Salad
         </Text>
       </View>
       <View
