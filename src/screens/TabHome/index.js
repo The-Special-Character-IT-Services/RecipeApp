@@ -6,7 +6,10 @@ import Footer from '../../components/Footer';
 import Popular from '../../components/Popular';
 
 const index = ({ navigation }) => (
-  <ScrollView style={{ flex: 1 }} contentContainerStyle={{ paddingBottom: 20 }}>
+  <ScrollView
+    style={{ flex: 1 }}
+    showsVerticalScrollIndicator={false}
+    contentContainerStyle={{ paddingBottom: 20 }}>
     <Header />
     <Category />
     <Popular
