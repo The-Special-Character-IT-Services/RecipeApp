@@ -2,7 +2,7 @@
 /* eslint-disable react/no-unused-state */
 import { useTheme } from '@react-navigation/native';
 import React, { useState } from 'react';
-import { TextInput, View, ScrollView } from 'react-native';
+import { TextInput, View } from 'react-native';
 // import { useTheme } from '@react-navigation/native';
 import TextEle from '../TextEle';
 
@@ -14,7 +14,7 @@ const Search = () => {
   };
 
   return (
-    <ScrollView>
+    <>
       <TextInput
         placeholder="Search here"
         style={{
@@ -75,7 +75,7 @@ const Search = () => {
           Sweets
         </TextEle>
       </View>
-    </ScrollView>
+    </>
   );
 };
 export default Search;

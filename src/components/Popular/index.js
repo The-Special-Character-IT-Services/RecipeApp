@@ -11,7 +11,7 @@ import data from './data';
 const Popular = ({ onRecipePress }) => {
   const { colors } = useTheme();
   return (
-    <View>
+    <>
       <View>
         <View style={{ paddingHorizontal: 30, marginVertical: 20 }}>
           <TextEle variant="title1" style={{ fontSize: 20, fontWeight: 'bold' }}>
@@ -62,7 +62,7 @@ const Popular = ({ onRecipePress }) => {
           ))}
         </ScrollView>
       </View>
-    </View>
+    </>
   );
 };
 
