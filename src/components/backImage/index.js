@@ -1,3 +1,4 @@
+/* eslint-disable react-native/no-inline-styles */
 import React from 'react';
 import { View, Dimensions, ImageBackground, ScrollView } from 'react-native';
 import HeartIcon from '../../assets/icons/heart-icon.svg';

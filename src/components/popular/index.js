@@ -1,3 +1,4 @@
+/* eslint-disable react-native/no-inline-styles */
 /* eslint-disable global-require */
 import React from 'react';
 import { View, Text, ScrollView, ImageBackground, Pressable } from 'react-native';
