@@ -35,7 +35,7 @@ const App = () => {
     <SafeAreaProvider>
       <NavigationContainer theme={scheme === 'dark' ? MyDarkTheme : MyDefaultTheme}>
         <StatusBar
-          backgroundColor={colors.card}
+          backgroundColor={colors.background}
           barStyle={scheme === 'dark' ? 'light-content' : 'dark-content'}
         />
         <Stack.Navigator

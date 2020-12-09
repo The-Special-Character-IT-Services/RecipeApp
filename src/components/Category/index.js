@@ -93,7 +93,7 @@ const Category = () => {
               {item.icon(item.id === 1 ? colors.card : colors.primary)}
             </View>
             <View>
-              <TextEle>{item.text}</TextEle>
+              <TextEle variant="overlineText">{item.text}</TextEle>
             </View>
           </View>
         ))}
