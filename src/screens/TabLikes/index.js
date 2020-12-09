@@ -23,7 +23,6 @@ const index = () => (
           borderTopEndRadius: 30,
           borderTopStartRadius: 30,
 
-          height: windowHeight * 0.6,
           backgroundColor: '#FFF',
           zIndex: 1,
         }}>
