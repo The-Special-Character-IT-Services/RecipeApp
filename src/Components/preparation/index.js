@@ -83,7 +83,7 @@ const index = () => {
             onPress={() => alert('hi')}
             style={{
               marginHorizontal: 40,
-              marginVertical: 20,
+              marginVertical: 50,
               height: 40,
               borderRadius: 20,
               backgroundColor: '#FD6D3B',
