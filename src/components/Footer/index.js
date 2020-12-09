@@ -72,7 +72,7 @@ const index = () => (
             }}
             source={item.img1}
           />
-          <TextEle style={{ fontSize: 13, marginTop: 5, color: 'black' }}>{item.text}</TextEle>
+          <TextEle variant="overlineText">{item.text}</TextEle>
         </View>
       ))}
     </ScrollView>
