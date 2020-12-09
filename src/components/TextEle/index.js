@@ -22,11 +22,12 @@ TextEle.propTypes = {
     'caption',
     'buttonText',
     'overlineText',
-  ]).isRequired,
+  ]),
   style: Text.propTypes.style,
 };
 
 TextEle.defaultProps = {
+  variant: 'body1',
   style: {},
 };
 

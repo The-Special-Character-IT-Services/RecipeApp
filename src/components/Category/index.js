@@ -1,7 +1,7 @@
 /* eslint-disable react-native/no-inline-styles */
 /* eslint-disable global-require */
 import React from 'react';
-import { View, Text } from 'react-native';
+import { View } from 'react-native';
 import { ScrollView } from 'react-native-gesture-handler';
 import Breakfast from '../../assets/icons/PicBreakfast.svg';
 import Lunch from '../../assets/icons/PicLunch.svg';
@@ -10,6 +10,7 @@ import Dessert from '../../assets/icons/PicDessert.svg';
 import Beverage from '../../assets/icons/PicBeverage.svg';
 import Starter from '../../assets/icons/PicStarter.svg';
 import Fastfood from '../../assets/icons/PicFastFood.svg';
+import TextEle from '../TextEle';
 
 const PicCategory = [
   {
@@ -58,7 +59,7 @@ const PicCategory = [
 const index = () => (
   <View>
     <View style={{ flexDirection: 'row', marginVertical: 10, marginHorizontal: 20 }}>
-      <Text style={{ fontWeight: 'bold', color: 'gray', paddingLeft: 10 }}>Select a category</Text>
+      <TextEle style={{ fontWeight: 'bold', paddingLeft: 10 }}>Select a category</TextEle>
     </View>
     <ScrollView
       horizontal
@@ -80,7 +81,7 @@ const index = () => (
             {item.icon(item.id === 1 ? 'rgb(242,242,242)' : 'gray')}
           </View>
           <View>
-            <Text style={{ fontSize: 10, color: 'black' }}>{item.text}</Text>
+            <TextEle>{item.text}</TextEle>
           </View>
         </View>
       ))}

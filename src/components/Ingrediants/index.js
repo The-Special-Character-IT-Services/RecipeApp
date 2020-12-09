@@ -1,6 +1,7 @@
 import React from 'react';
-import { View, Text, ScrollView, Image } from 'react-native';
+import { View, ScrollView, Image } from 'react-native';
 import Timer from '../../assets/icons/timer-black.svg';
+import TextEle from '../TextEle';
 
 const index = () => {
   const photos = [
@@ -44,13 +45,13 @@ const index = () => {
   return (
     <View style={{ flex: 1 }}>
       <View style={{ paddingHorizontal: 20, marginVertical: 10 }}>
-        <Text style={{ fontSize: 23, fontWeight: 'bold' }}>Mango Mule</Text>
-        <Text numberOfLines={2} style={{ color: 'gray' }}>
+        <TextEle style={{ fontSize: 23, fontWeight: 'bold' }}>Mango Mule</TextEle>
+        <TextEle numberOfLines={2} style={{ color: 'gray' }}>
           Amazing combo of sweet and sour taste!Super easy to prepare.Enjoy!
-        </Text>
+        </TextEle>
       </View>
       <View style={{ flexDirection: 'row', paddingHorizontal: 20 }}>
-        <Text
+        <TextEle
           style={{
             fontSize: 20,
             fontWeight: 'bold',
@@ -59,10 +60,10 @@ const index = () => {
             marginVertical: 5,
           }}>
           Ingredients
-        </Text>
+        </TextEle>
         <View style={{ paddingTop: 5, flexDirection: 'row', alignItems: 'center' }}>
           <Timer height={24} width={24} />
-          <Text style={{ marginLeft: 8, fontSize: 17 }}>35`</Text>
+          <TextEle style={{ marginLeft: 8, fontSize: 17 }}>35`</TextEle>
         </View>
       </View>
       <ScrollView contentContainerStyle={{ paddingVertical: 10, paddingHorizontal: 20 }}>
@@ -75,10 +76,10 @@ const index = () => {
                 paddingLeft: 15,
                 justifyContent: 'center',
               }}>
-              <Text style={{ fontWeight: 'bold', fontFamily: 'sans-serif', fontSize: 17 }}>
+              <TextEle style={{ fontWeight: 'bold', fontFamily: 'sans-serif', fontSize: 17 }}>
                 {item.text}
-              </Text>
-              <Text style={{ color: 'gray' }}>{item.amount}</Text>
+              </TextEle>
+              <TextEle style={{ color: 'gray' }}>{item.amount}</TextEle>
             </View>
           </View>
         ))}

@@ -1,7 +1,8 @@
 /* eslint-disable react-native/no-inline-styles */
 /* eslint-disable react/no-unused-state */
 import React, { PureComponent } from 'react';
-import { Text, TextInput, View } from 'react-native';
+import { TextInput, View } from 'react-native';
+import TextEle from '../TextEle';
 
 export default class index extends PureComponent {
   state = {
@@ -28,7 +29,7 @@ export default class index extends PureComponent {
           onchangeText={this.onchangeText}
         />
         <View style={{ flexDirection: 'row' }}>
-          <Text
+          <TextEle
             style={{
               paddingTop: 5,
               paddingStart: 10,
@@ -41,8 +42,8 @@ export default class index extends PureComponent {
               borderColor: 'black',
             }}>
             Trending
-          </Text>
-          <Text
+          </TextEle>
+          <TextEle
             style={{
               paddingTop: 5,
               paddingStart: 10,
@@ -56,8 +57,8 @@ export default class index extends PureComponent {
               borderColor: 'black',
             }}>
             Rice Items
-          </Text>
-          <Text
+          </TextEle>
+          <TextEle
             style={{
               paddingTop: 5,
               paddingStart: 10,
@@ -71,7 +72,7 @@ export default class index extends PureComponent {
               borderColor: 'black',
             }}>
             Sweets
-          </Text>
+          </TextEle>
         </View>
       </View>
     );

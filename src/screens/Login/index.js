@@ -1,14 +1,15 @@
 import React from 'react';
-import { Text, SafeAreaView, Pressable } from 'react-native';
+import { SafeAreaView, Pressable } from 'react-native';
+import TextEle from '../../components/TextEle';
 
 const index = ({ navigation }) => (
   <SafeAreaView>
-    <Text>Login Screen</Text>
+    <TextEle>Login Screen</TextEle>
     <Pressable
       onPress={() => {
         navigation.navigate('Registration');
       }}>
-      <Text>Move to Registration Page</Text>
+      <TextEle>Move to Registration Page</TextEle>
     </Pressable>
   </SafeAreaView>
 );

@@ -1,0 +1,42 @@
+export default [
+  {
+    id: 1,
+    img: require('../../assets/images/FoodPic1.jpg'),
+    time: '25`',
+    rating: '4.0',
+    TextHeading: 'Maxican Salad',
+    Description: 'Amazing Combo of different taste',
+  },
+  {
+    id: 2,
+    img: require('../../assets/images/Pizza.jpg'),
+    time: '30`',
+    rating: '4.5',
+    TextHeading: 'Italian Pizza',
+    Description: 'Amazing taste of original Italian food',
+  },
+  {
+    id: 3,
+    img: require('../../assets/images/Sandwich.jpg'),
+    time: '15`',
+    rating: '4.0',
+    TextHeading: 'Sandwich',
+    Description: 'Amazing Combo of mayo, salad with liquid cheese',
+  },
+  {
+    id: 4,
+    img: require('../../assets/images/Pie.jpg'),
+    time: '35`',
+    rating: '5.0',
+    TextHeading: 'Chocolate Pie',
+    Description: 'Amazing Combo of strawberry and soft choco pie',
+  },
+  {
+    id: 5,
+    img: require('../../assets/images/Something.jpg'),
+    time: '30`',
+    rating: '5.0',
+    TextHeading: 'Maxican christmas Special',
+    Description: 'Amazing Combo of maxican salad and different spices',
+  },
+];

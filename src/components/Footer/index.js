@@ -1,8 +1,9 @@
 /* eslint-disable react-native/no-inline-styles */
 /* eslint-disable global-require */
 import React from 'react';
-import { View, Text, Image } from 'react-native';
+import { View, Image } from 'react-native';
 import { ScrollView } from 'react-native-gesture-handler';
+import TextEle from '../TextEle';
 
 const PicCuisine = [
   {
@@ -51,7 +52,9 @@ const PicCuisine = [
 const index = () => (
   <View>
     <View style={{ marginVertical: 20, paddingHorizontal: 20 }}>
-      <Text style={{ fontSize: 20, fontWeight: 'bold', paddingLeft: 10 }}>Search by Cuisine</Text>
+      <TextEle style={{ fontSize: 20, fontWeight: 'bold', paddingLeft: 10 }}>
+        Search by Cuisine
+      </TextEle>
     </View>
     <ScrollView
       horizontal
@@ -69,7 +72,7 @@ const index = () => (
             }}
             source={item.img1}
           />
-          <Text style={{ fontSize: 13, marginTop: 5, color: 'black' }}>{item.text}</Text>
+          <TextEle style={{ fontSize: 13, marginTop: 5, color: 'black' }}>{item.text}</TextEle>
         </View>
       ))}
     </ScrollView>

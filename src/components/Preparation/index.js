@@ -1,10 +1,11 @@
 /* eslint-disable react-native/no-inline-styles */
 /* eslint-disable global-require */
 import React from 'react';
-import { View, Text, ScrollView, ImageBackground, Pressable } from 'react-native';
+import { View, ScrollView, ImageBackground, Pressable } from 'react-native';
 // import { ScrollView } from 'react-native-gesture-handler';
 import Timer from '../../assets/icons/timer.svg';
 import Play from '../../assets/icons/play.svg';
+import TextEle from '../TextEle';
 
 const index = () => {
   const Loopfood = [
@@ -48,23 +49,23 @@ const index = () => {
   return (
     <ScrollView showsVerticalScrollIndicator={false}>
       <View style={{ marginHorizontal: 30, marginTop: 20 }}>
-        <Text style={{ fontSize: 26 }}>Maxican Salad</Text>
-        <Text numberOfLines={2} style={{ color: 'gray' }}>
+        <TextEle style={{ fontSize: 26 }}>Maxican Salad</TextEle>
+        <TextEle numberOfLines={2} style={{ color: 'gray' }}>
           Get ready for a healthy and tasty tour of Maxican Salad
-        </Text>
+        </TextEle>
       </View>
       <View
         style={{
           marginVertical: 10,
         }}>
         <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
-          <Text
+          <TextEle
             style={{ fontSize: 20, paddingHorizontal: 30, marginVertical: 10, fontWeight: 'bold' }}>
             Preparation
-          </Text>
+          </TextEle>
           <View style={{ flexDirection: 'row', alignItems: 'center', padding: 1 }}>
             <Timer height={24} width={24} fill="black" />
-            <Text style={{ alignItems: 'center', paddingRight: 20 }}> 35` </Text>
+            <TextEle style={{ alignItems: 'center', paddingRight: 20 }}> 35` </TextEle>
           </View>
         </View>
         <View style={{ borderRadius: 9, flexDirection: 'column' }}>
@@ -85,9 +86,9 @@ const index = () => {
                     width: 150,
                     borderRadius: 500,
                   }}>
-                  <Text style={{ color: 'white', fontSize: 16, paddingLeft: 10, paddingTop: 5 }}>
+                  <TextEle style={{ color: 'white', fontSize: 16, paddingLeft: 10, paddingTop: 5 }}>
                     {item.text}
-                  </Text>
+                  </TextEle>
                 </ImageBackground>
               </View>
             ))}
@@ -106,7 +107,7 @@ const index = () => {
               alignItems: 'center',
             }}>
             <Play height={24} width={24} fill="white" />
-            <Text style={{ color: 'white' }}>Watch Video</Text>
+            <TextEle style={{ color: 'white' }}>Watch Video</TextEle>
           </Pressable>
         </View>
       </View>

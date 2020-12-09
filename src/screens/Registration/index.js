@@ -1,9 +1,10 @@
 import React from 'react';
-import { View, Text } from 'react-native';
+import { View } from 'react-native';
+import TextEle from '../../components/TextEle';
 
 const index = () => (
   <View>
-    <Text>Registration Screen</Text>
+    <TextEle>Registration Screen</TextEle>
   </View>
 );
 
