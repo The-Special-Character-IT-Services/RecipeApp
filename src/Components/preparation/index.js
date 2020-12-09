@@ -40,13 +40,13 @@ const index = () => {
     },
     {
       id: 7,
-      text: '7. optional: 1/2 cup crumbled queso fresco or cotija cheese.',
+      text: '7. 1/2 cup crumbled queso fresco or cotija cheese.',
       img: require('../../assets/image/cheese.png'),
     },
   ];
 
   return (
-    <ScrollView>
+    <ScrollView showsVerticalScrollIndicator={false}>
       <View style={{ marginHorizontal: 30, marginTop: 20 }}>
         <Text style={{ fontSize: 26 }}>Maxican Salad</Text>
         <Text numberOfLines={2} style={{ color: 'gray' }}>
