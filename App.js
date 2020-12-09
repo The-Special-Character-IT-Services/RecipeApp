@@ -23,12 +23,18 @@ const App = () => (
       <Stack.Navigator
         screenOptions={{
           headerShown: false,
+          headerTintColor: 'black',
+          title: false,
         }}>
         <Stack.Screen name="Splash" component={Splash} />
         <Stack.Screen name="Login" component={Login} />
         <Stack.Screen name="Registration" component={Registration} />
         <Stack.Screen name="Home" component={Home} />
-        <Stack.Screen name="RecipeDetail" component={RecipeDetail} />
+        <Stack.Screen
+          name="RecipeDetail"
+          component={RecipeDetail}
+          options={{ headerShown: true, headerTransparent: 1, headerTintColor: 'white' }}
+        />
       </Stack.Navigator>
     </NavigationContainer>
   </SafeAreaView>

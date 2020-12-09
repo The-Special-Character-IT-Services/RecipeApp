@@ -1,9 +1,10 @@
 import React from 'react';
-import { View, Text } from 'react-native';
+import { View } from 'react-native';
+import SearchBar from '../../components/Search';
 
 const index = () => (
   <View>
-    <Text>Tab Search Page</Text>
+    <SearchBar />
   </View>
 );
 
