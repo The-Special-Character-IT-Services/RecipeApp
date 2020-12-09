@@ -13,8 +13,8 @@ const index = ({ navigation }) => (
     <Header />
     <Category />
     <Popular
-      onRecipePress={() => {
-        navigation.navigate('RecipeDetail');
+      onRecipePress={item => {
+        navigation.navigate('RecipeDetail', item);
       }}
     />
     <Footer />
