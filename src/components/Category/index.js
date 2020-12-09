@@ -3,6 +3,7 @@
 import React from 'react';
 import { View } from 'react-native';
 import { ScrollView } from 'react-native-gesture-handler';
+import { useTheme } from '@react-navigation/native';
 import Breakfast from '../../assets/icons/PicBreakfast.svg';
 import Lunch from '../../assets/icons/PicLunch.svg';
 import Dinner from '../../assets/icons/PicDinner.svg';
@@ -56,37 +57,49 @@ const PicCategory = [
   },
 ];
 
-const index = () => (
-  <View>
-    <View style={{ flexDirection: 'row', marginVertical: 10, marginHorizontal: 20 }}>
-      <TextEle style={{ fontWeight: 'bold', paddingLeft: 10 }}>Select a category</TextEle>
-    </View>
-    <ScrollView
-      horizontal
-      showsHorizontalScrollIndicator={false}
-      contentContainerStyle={{ paddingHorizontal: 20 }}>
-      {PicCategory.map(item => (
-        <View key={item.id} style={{ marginHorizontal: 5, alignItems: 'center' }}>
-          <View
-            style={{
-              marginHorizontal: 5,
-              height: 50,
-              borderRadius: 12,
-              width: 50,
-              marginVertical: 10,
-              backgroundColor: item.id === 1 ? 'orange' : 'rgb(242,242,242)',
-              alignItems: 'center',
-              justifyContent: 'center',
-            }}>
-            {item.icon(item.id === 1 ? 'rgb(242,242,242)' : 'gray')}
-          </View>
-          <View>
-            <TextEle>{item.text}</TextEle>
-          </View>
-        </View>
-      ))}
-    </ScrollView>
-  </View>
-);
+const Category = () => {
+  const { colors } = useTheme();
+  return (
+    <View>
+      <View style={{ flexDirection: 'row', marginVertical: 10, marginHorizontal: 20 }}>
+        <TextEle style={{ fontWeight: 'bold', paddingLeft: 10 }}>Select a category</TextEle>
+      </View>
+      <ScrollView
+        horizontal
+        showsHorizontalScrollIndicator={false}
+        contentContainerStyle={{ paddingHorizontal: 20 }}>
+        {PicCategory.map(item => (
+          <View key={item.id} style={{ marginHorizontal: 5, alignItems: 'center' }}>
+            <View
+              style={{
+                marginHorizontal: 5,
+                height: 50,
+                borderRadius: 12,
+                width: 50,
+                marginVertical: 10,
+                backgroundColor: item.id === 1 ? colors.primary : colors.card,
+                alignItems: 'center',
+                justifyContent: 'center',
+                shadowColor: colors.text,
+                shadowOffset: {
+                  width: 0,
+                  height: 4,
+                },
+                shadowOpacity: 0.3,
+                shadowRadius: 4.65,
 
-export default index;
+                elevation: 8,
+              }}>
+              {item.icon(item.id === 1 ? colors.card : colors.primary)}
+            </View>
+            <View>
+              <TextEle>{item.text}</TextEle>
+            </View>
+          </View>
+        ))}
+      </ScrollView>
+    </View>
+  );
+};
+
+export default Category;

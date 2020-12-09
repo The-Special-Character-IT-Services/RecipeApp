@@ -12,8 +12,9 @@ const TabHome = ({ navigation }) => {
 
   return (
     <ScrollView
-      style={{ flex: 1, paddingTop: insets.top }}
-      contentContainerStyle={{ paddingBottom: 20 }}>
+      style={{ flex: 1 }}
+      showsVerticalScrollIndicator={false}
+      contentContainerStyle={{ paddingTop: insets.top, paddingBottom: insets.bottom }}>
       <Header />
       <Category />
       <Popular
