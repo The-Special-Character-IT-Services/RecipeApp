@@ -36,7 +36,7 @@ const index = () => {
   ];
 
   return (
-    <View>
+    <ScrollView>
       <View style={{ marginHorizontal: 30, marginTop: 20 }}>
         <Text style={{ fontSize: 26 }}>Very Berry Tart</Text>
         <Text numberOfLines={2} style={{ color: 'gray' }}>
@@ -87,7 +87,7 @@ const index = () => {
             onPress={() => alert('hi')}
             style={{
               marginHorizontal: 40,
-              marginVertical: 20,
+              marginVertical: 50,
               height: 40,
               borderRadius: 20,
               backgroundColor: '#FD6D3B',
@@ -100,7 +100,7 @@ const index = () => {
           </Pressable>
         </View>
       </View>
-    </View>
+    </ScrollView>
   );
 };
 
