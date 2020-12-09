@@ -29,6 +29,7 @@ const index = () => (
       </View>
     </ImageBackground>
     <View
+      // eslint-disable-next-line react-native/no-inline-styles
       style={{
         borderTopEndRadius: 30,
         borderTopStartRadius: 30,
