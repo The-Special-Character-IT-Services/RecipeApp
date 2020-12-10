@@ -2,21 +2,24 @@ import BottomSheet, { BottomSheetView } from '@gorhom/bottom-sheet';
 import { useTheme } from '@react-navigation/native';
 import { useHeaderHeight } from '@react-navigation/stack';
 import PropTypes from 'prop-types';
+import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
 
 import React, { useMemo, useRef } from 'react';
 import { View, Dimensions, Image } from 'react-native';
 // import { ScrollView } from 'react-native-gesture-handler';
-import Preparation from '../../components/Preparation';
+import Preparation from './pages/preparation';
+import Ingrediants from './pages/ingrediants';
 
 const { height: windowHeight, width: windowWidth } = Dimensions.get('window');
 
-const RecipeDetail = ({ route, navigation }) => {
+const RecipeDetail = ({ route }) => {
   const { colors } = useTheme();
 
   const { img } = route.params;
   const headerHeight = useHeaderHeight();
   const bottomSheetRef = useRef(null);
   const snapPoints = useMemo(() => [windowHeight * 0.6, '100%'], []);
+  const Tab = createMaterialTopTabNavigator();
 
   return (
     <View style={{ flex: 1, justifyContent: 'flex-end' }}>
@@ -43,11 +46,38 @@ const RecipeDetail = ({ route, navigation }) => {
             borderTopLeftRadius: 20,
             borderTopRightRadius: 20,
           }}>
-          <Preparation
-            onWatchVideoPress={() => {
-              navigation.navigate('RecipeVideo');
-            }}
-          />
+          <Tab.Navigator
+            tabBarOptions={{
+              activeTintColor: colors.primary,
+              inactiveTintColor: colors.text,
+              indicatorStyle: {
+                width: 5,
+                height: 5,
+                backgroundColor: 'orange',
+                borderRadius: 1,
+                marginLeft: 95,
+                marginBottom: 5,
+              },
+              tabStyle: {
+                borderTopRightRadius: 20,
+                borderTopLeftRadius: 20,
+              },
+            }}>
+            <Tab.Screen
+              name="Preparation"
+              component={Preparation}
+              options={{
+                title: 'Preparation',
+              }}
+            />
+            <Tab.Screen
+              name="Ingrediants"
+              component={Ingrediants}
+              options={{
+                title: 'Ingrediants',
+              }}
+            />
+          </Tab.Navigator>
         </BottomSheetView>
       </BottomSheet>
     </View>

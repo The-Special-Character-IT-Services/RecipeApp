@@ -87,23 +87,18 @@ const TabProfile = () => {
           tabBarOptions={{
             activeTintColor: colors.primary,
             inactiveTintColor: colors.text,
-            tabStyle: {
-              borderTopRightRadius: 20,
-              borderTopLeftRadius: 20,
+            indicatorStyle: {
+              width: 5,
+              height: 5,
+              backgroundColor: 'orange',
+              borderRadius: 1,
+              marginLeft: 60,
+              marginBottom: 5,
             },
-            renderIndicator: () => (
-              <View
-                style={{
-                  height: 10,
-                  width: 10,
-                  borderRadius: 5,
-                  backgroundColor: colors.primary,
-                  position: 'absolute',
-                  bottom: 0,
-                  left: 0,
-                }}
-              />
-            ),
+            tabStyle: {
+              borderTopRightRadius: 40,
+              borderTopLeftRadius: 40,
+            },
           }}>
           <Tab.Screen
             name="MyRecipes"
