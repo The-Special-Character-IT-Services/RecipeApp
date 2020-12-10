@@ -1,6 +1,7 @@
 /* eslint-disable import/no-unresolved */
 import React from 'react';
 import { View, ImageBackground } from 'react-native';
+import PropTypes from 'prop-types';
 import { useTheme } from '@react-navigation/native';
 import { ScrollView, RectButton } from 'react-native-gesture-handler';
 import Timer from '../../assets/icons/timer.svg';
@@ -8,7 +9,7 @@ import Play from '../../assets/icons/play.svg';
 import TextEle from '../TextEle';
 import data0 from './data';
 
-const Preparation = () => {
+const Preparation = ({ onWatchVideoPress }) => {
   const { colors } = useTheme();
   return (
     <>
@@ -59,7 +60,7 @@ const Preparation = () => {
         </ScrollView>
         <RectButton
           // eslint-disable-next-line no-alert
-          onPress={() => {}}
+          onPress={onWatchVideoPress}
           style={{
             marginHorizontal: 40,
             marginVertical: 50,
@@ -77,5 +78,7 @@ const Preparation = () => {
     </>
   );
 };
-
+Preparation.propTypes = {
+  onWatchVideoPress: PropTypes.func.isRequired,
+};
 export default Preparation;
