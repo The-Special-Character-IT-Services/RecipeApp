@@ -4,6 +4,7 @@ import React from 'react';
 import { View } from 'react-native';
 import { ScrollView } from 'react-native-gesture-handler';
 import { useTheme } from '@react-navigation/native';
+import SearchSharp from '../../assets/icons/search-sharp.svg';
 
 import TextEle from '../TextEle';
 
@@ -27,23 +28,20 @@ const ListAdd = [
 const RecentltyAdd = () => {
   const { colors } = useTheme();
   return (
-    <View style={{ flex: 1 }}>
+    <View style={{ flex: 1, paddingHorizontal: 15 }}>
       <View style={{ flexDirection: 'row', marginVertical: 15, marginHorizontal: 15 }}>
-        <TextEle variant="body2" style={{ paddingTop: 20, fontWeight: 'bold', paddingLeft: 10 }}>
-          Recentlty Added
+        <TextEle variant="body2" style={{ paddingTop: 20, fontWeight: 'bold' }}>
+          Recentlty Searched
         </TextEle>
       </View>
-      <ScrollView
-        verticle
-        showsHorizontalScrollIndicator={false}
-        contentContainerStyle={{ paddingHorizontal: 20 }}>
+      <ScrollView verticle showsHorizontalScrollIndicator={false}>
         {ListAdd.map(item => (
           <View
             key={item.id}
             style={{
               marginHorizontal: 5,
               alignItems: 'flex-start',
-              borderWidth: 2,
+              borderBottomWidth: 0.5,
               borderRadius: 5,
               paddingHorizontal: 10,
 
@@ -51,9 +49,19 @@ const RecentltyAdd = () => {
               paddingVertical: 5,
             }}>
             <View>
-              <TextEle variant="body1" style={{ color: colors.text, marginVertical: 3 }}>
-                {item.text}
-              </TextEle>
+              <View style={{ flexDirection: 'row' }}>
+                <SearchSharp
+                  height={24}
+                  width={24}
+                  fill={colors.text}
+                  style={{ position: 'absolute', left: 0, top: 5 }}
+                />
+                <TextEle
+                  variant="body1"
+                  style={{ color: colors.text, marginVertical: 3, margin: 30 }}>
+                  {item.text}
+                </TextEle>
+              </View>
             </View>
           </View>
         ))}
