@@ -2,7 +2,7 @@
 import React from 'react';
 import { View, ImageBackground } from 'react-native';
 import { useTheme } from '@react-navigation/native';
-import { ScrollView, TouchableOpacity } from 'react-native-gesture-handler';
+import { ScrollView, RectButton } from 'react-native-gesture-handler';
 import Timer from '../../assets/icons/timer.svg';
 import Play from '../../assets/icons/play.svg';
 import TextEle from '../TextEle';
@@ -57,9 +57,9 @@ const Preparation = () => {
             </View>
           ))}
         </ScrollView>
-        <TouchableOpacity
+        <RectButton
           // eslint-disable-next-line no-alert
-          onPress={() => alert('hi')}
+          onPress={() => {}}
           style={{
             marginHorizontal: 40,
             marginVertical: 50,
@@ -72,7 +72,7 @@ const Preparation = () => {
           }}>
           <Play height={24} width={24} fill="white" />
           <TextEle style={{ color: 'white', paddingLeft: 10 }}>Watch Video</TextEle>
-        </TouchableOpacity>
+        </RectButton>
       </View>
     </>
   );
