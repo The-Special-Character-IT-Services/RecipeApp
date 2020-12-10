@@ -1,23 +1,44 @@
 import { useTheme } from '@react-navigation/native';
+import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
 import React from 'react';
-import { Dimensions, Pressable, View } from 'react-native';
+import { Dimensions, View } from 'react-native';
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import Header from '../../components/Header';
 import TextEle from '../../components/TextEle';
+import MyRecipes from './pages/MyRecipes';
+import Settings from './pages/Settings';
+import Followers from './pages/Followers';
 
 const { height: windowHeight } = Dimensions.get('window');
+const Tab = createMaterialTopTabNavigator();
+
+const data = [
+  {
+    text: 'Recipes',
+    value: 43,
+  },
+  {
+    text: 'Liked',
+    value: 12,
+  },
+  {
+    text: 'Saves',
+    value: 10,
+  },
+];
 
 const TabProfile = () => {
   const { colors } = useTheme();
+  const insets = useSafeAreaInsets();
 
   return (
-    <View style={{}}>
+    <View style={{ flex: 1, paddingTop: insets.top }}>
       <View
         style={{
           borderBottomEndRadius: 30,
           borderBottomStartRadius: 30,
-
-          height: windowHeight * 0.4,
-          backgroundColor: colors.card,
+          height: windowHeight * 0.3,
+          backgroundColor: colors.background,
           zIndex: 1,
         }}>
         <Header />
@@ -29,66 +50,83 @@ const TabProfile = () => {
           <View
             style={{
               flexDirection: 'row',
-              justifyContent: 'space-between',
-              paddingLeft: 20,
-              paddingTop: 20,
-              paddingRight: 20,
-              backgroundColor: colors.border,
+              justifyContent: 'space-evenly',
+              alignItems: 'center',
+              backgroundColor: colors.card,
               borderRadius: 25,
-              height: 110,
+              height: 100,
             }}>
-            <View
-              style={{
-                justifyContent: 'flex-start',
-                alignItems: 'center',
-                flexDirection: 'column',
-              }}>
-              <TextEle variant="header2">43</TextEle>
-              <TextEle variant="body2" style={{ color: colors.text }}>
-                Recipes
-              </TextEle>
-            </View>
-            <View
-              style={{
-                justifyContent: 'flex-start',
-                alignItems: 'center',
-                flexDirection: 'column',
-              }}>
-              <TextEle variant="header2">162</TextEle>
-              <TextEle variant="body2" style={{ color: colors.text }}>
-                Followers
-              </TextEle>
-            </View>
-            <View
-              style={{
-                justifyContent: 'flex-start',
-                alignItems: 'center',
-                flexDirection: 'column',
-              }}>
-              <TextEle variant="header2">26</TextEle>
-              <TextEle variant="body2" style={{ color: colors.text }}>
-                Saves
-              </TextEle>
-            </View>
+            {data.map((x, i) => (
+              <>
+                {i !== 0 && <View style={{ height: 40, width: 1, backgroundColor: 'gray' }} />}
+                <View
+                  key={x.text}
+                  style={{
+                    justifyContent: 'flex-start',
+                    alignItems: 'center',
+                    flexDirection: 'column',
+                  }}>
+                  <TextEle variant="header2">{x.value}</TextEle>
+                  <TextEle variant="body2" style={{ color: colors.text }}>
+                    {x.text}
+                  </TextEle>
+                </View>
+              </>
+            ))}
           </View>
         </View>
       </View>
       <View
         style={{
-          paddingHorizontal: 30,
-          justifyContent: 'space-between',
-          flexDirection: 'row',
-          paddingTop: 30,
+          backgroundColor: colors.card,
+          flex: 1,
+          borderTopLeftRadius: 30,
+          borderTopRightRadius: 30,
         }}>
-        <Pressable onPress={() => alert('My recipes')}>
-          <TextEle style={{ color: 'orange' }}>My recipes</TextEle>
-        </Pressable>
-        <Pressable onPress={() => alert('Followers')}>
-          <TextEle>Followers</TextEle>
-        </Pressable>
-        <Pressable>
-          <TextEle onPress={() => alert('Settings')}>Settings</TextEle>
-        </Pressable>
+        <Tab.Navigator
+          tabBarOptions={{
+            activeTintColor: colors.primary,
+            inactiveTintColor: colors.text,
+            tabStyle: {
+              borderTopRightRadius: 20,
+              borderTopLeftRadius: 20,
+            },
+            renderIndicator: () => (
+              <View
+                style={{
+                  height: 10,
+                  width: 10,
+                  borderRadius: 5,
+                  backgroundColor: colors.primary,
+                  position: 'absolute',
+                  bottom: 0,
+                  left: 0,
+                }}
+              />
+            ),
+          }}>
+          <Tab.Screen
+            name="MyRecipes"
+            component={MyRecipes}
+            options={{
+              title: 'My Recipes',
+            }}
+          />
+          <Tab.Screen
+            name="Followers"
+            component={Followers}
+            options={{
+              title: 'Followers',
+            }}
+          />
+          <Tab.Screen
+            name="Settings"
+            component={Settings}
+            options={{
+              title: 'Settings',
+            }}
+          />
+        </Tab.Navigator>
       </View>
     </View>
   );

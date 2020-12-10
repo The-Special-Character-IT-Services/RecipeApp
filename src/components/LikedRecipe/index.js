@@ -46,7 +46,6 @@ const LikedRecipe = () => {
           style={{
             fontSize: 20,
             fontWeight: 'bold',
-            fontFamily: 'sans-serif',
             flex: 1,
             marginVertical: 15,
           }}>
@@ -67,9 +66,7 @@ const LikedRecipe = () => {
                 paddingLeft: 15,
                 justifyContent: 'center',
               }}>
-              <TextEle style={{ fontWeight: 'bold', fontFamily: 'sans-serif', fontSize: 17 }}>
-                {item.text}
-              </TextEle>
+              <TextEle style={{ fontWeight: 'bold', fontSize: 17 }}>{item.text}</TextEle>
               <TextEle style={{ color: 'gray' }}>{item.amount}</TextEle>
             </View>
           </View>
