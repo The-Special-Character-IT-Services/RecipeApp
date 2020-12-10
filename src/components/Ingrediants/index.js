@@ -3,7 +3,7 @@ import { View, ScrollView, Image } from 'react-native';
 import Timer from '../../assets/icons/timer-black.svg';
 import TextEle from '../TextEle';
 
-const index = () => {
+const index = ({ children }) => {
   const photos = [
     {
       id: 1,
@@ -59,10 +59,10 @@ const index = () => {
             flex: 1,
             marginVertical: 5,
           }}>
-          Ingredients
+          {children}
         </TextEle>
         <View style={{ paddingTop: 5, flexDirection: 'row', alignItems: 'center' }}>
-          <Timer height={24} width={24} />
+          <Timer height={24} width={24} fill="black" />
           <TextEle style={{ marginLeft: 8, fontSize: 17 }}>35`</TextEle>
         </View>
       </View>
