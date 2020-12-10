@@ -1,8 +1,8 @@
 /* eslint-disable import/no-unresolved */
 import React from 'react';
-import { View, ImageBackground, Pressable } from 'react-native';
-import { BottomSheetScrollView } from '@gorhom/bottom-sheet';
+import { View, ImageBackground } from 'react-native';
 import { useTheme } from '@react-navigation/native';
+import { ScrollView, TouchableOpacity } from 'react-native-gesture-handler';
 import Timer from '../../assets/icons/timer.svg';
 import Play from '../../assets/icons/play.svg';
 import TextEle from '../TextEle';
@@ -11,7 +11,7 @@ import data0 from './data';
 const Preparation = () => {
   const { colors } = useTheme();
   return (
-    <View>
+    <>
       <View style={{ marginHorizontal: 30, marginTop: 20 }}>
         <TextEle variant="header2">Maxican Salad</TextEle>
         <TextEle variant="caption" numberOfLines={2} style={{ color: 'gray' }}>
@@ -31,7 +31,7 @@ const Preparation = () => {
             <TextEle style={{ alignItems: 'center', paddingRight: 20 }}> 35` </TextEle>
           </View>
         </View>
-        <BottomSheetScrollView
+        <ScrollView
           style={{ marginBottom: 10 }}
           horizontal
           contentContainerStyle={{ paddingHorizontal: 27 }}
@@ -56,8 +56,8 @@ const Preparation = () => {
               </ImageBackground>
             </View>
           ))}
-        </BottomSheetScrollView>
-        <Pressable
+        </ScrollView>
+        <TouchableOpacity
           // eslint-disable-next-line no-alert
           onPress={() => alert('hi')}
           style={{
@@ -70,11 +70,11 @@ const Preparation = () => {
             justifyContent: 'center',
             alignItems: 'center',
           }}>
-          <Play height={24} width={24} fill={colors.background} />
-          <TextEle style={{ color: 'white' }}>Watch Video</TextEle>
-        </Pressable>
+          <Play height={24} width={24} fill="white" />
+          <TextEle style={{ color: 'white', paddingLeft: 10 }}>Watch Video</TextEle>
+        </TouchableOpacity>
       </View>
-    </View>
+    </>
   );
 };
 
