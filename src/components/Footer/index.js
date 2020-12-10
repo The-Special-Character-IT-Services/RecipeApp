@@ -52,7 +52,7 @@ const PicCuisine = [
 const index = () => (
   <View>
     <View style={{ marginVertical: 20, paddingHorizontal: 20 }}>
-      <TextEle style={{ fontSize: 20, fontWeight: 'bold', paddingLeft: 10 }}>
+      <TextEle variant="body2" style={{ fontWeight: 'bold', paddingLeft: 10 }}>
         Search by Cuisine
       </TextEle>
     </View>

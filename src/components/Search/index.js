@@ -21,6 +21,7 @@ const Search = () => {
         placeholder="Search here"
         placeholderTextColor={colors.text}
         style={{
+          fontSize: 18,
           color: colors.text,
           borderColor: colors.text,
           borderWidth: 1,

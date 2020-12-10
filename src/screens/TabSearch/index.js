@@ -3,7 +3,7 @@ import { ScrollView, View } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import SearchBar from '../../components/Search';
 import Footer from '../../components/Footer';
-import Popular from '../../components/Popular';
+import RecentlyAdd from '../../components/RecentlyAdd';
 
 const TabSearch = () => {
   const insets = useSafeAreaInsets();
@@ -15,7 +15,7 @@ const TabSearch = () => {
       }}>
       <SearchBar />
       <ScrollView style={{ flex: 1 }}>
-        <Popular />
+        <RecentlyAdd />
         <Footer />
       </ScrollView>
     </View>
