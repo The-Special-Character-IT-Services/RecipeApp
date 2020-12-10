@@ -1,9 +1,12 @@
+import { useTheme } from '@react-navigation/native';
 import React from 'react';
-import { View, ScrollView, Image } from 'react-native';
+import { View, Image } from 'react-native';
+import { ScrollView } from 'react-native-gesture-handler';
 import Timer from '../../assets/icons/timer-black.svg';
 import TextEle from '../TextEle';
 
-const index = ({ children }) => {
+const LikedRecipe = () => {
+  const { colors } = useTheme();
   const photos = [
     {
       id: 1,
@@ -45,12 +48,12 @@ const index = ({ children }) => {
             fontWeight: 'bold',
             fontFamily: 'sans-serif',
             flex: 1,
-            marginVertical: 5,
+            marginVertical: 15,
           }}>
-          {children}
+          Liked Recipes
         </TextEle>
         <View style={{ paddingTop: 5, flexDirection: 'row', alignItems: 'center' }}>
-          <Timer height={24} width={24} fill="black" />
+          <Timer height={24} width={24} fill={colors.text} />
           <TextEle style={{ marginLeft: 8, fontSize: 17 }}>35`</TextEle>
         </View>
       </View>
@@ -76,4 +79,4 @@ const index = ({ children }) => {
   );
 };
 
-export default index;
+export default LikedRecipe;
