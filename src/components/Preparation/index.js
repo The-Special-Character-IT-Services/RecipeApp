@@ -47,7 +47,7 @@ const index = ({ onWatchVideoPress }) => {
   ];
 
   return (
-    <ScrollView showsVerticalScrollIndicator={false}>
+    <>
       <View style={{ marginHorizontal: 30, marginTop: 20 }}>
         <TextEle style={{ fontSize: 26 }}>Maxican Salad</TextEle>
         <TextEle numberOfLines={2} style={{ color: 'gray' }}>
@@ -111,7 +111,7 @@ const index = ({ onWatchVideoPress }) => {
           </Pressable>
         </View>
       </View>
-    </ScrollView>
+    </>
   );
 };
 

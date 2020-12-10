@@ -1,12 +1,21 @@
-import React from 'react';
+import BottomSheet, { BottomSheetScrollView } from '@gorhom/bottom-sheet';
+import PropTypes from 'prop-types';
+
+import React, { useCallback, useMemo, useRef } from 'react';
 import { View, Dimensions, Image } from 'react-native';
 // import { ScrollView } from 'react-native-gesture-handler';
 import Preparation from '../../components/Preparation';
 
 const { height: windowHeight, width: windowWidth } = Dimensions.get('window');
 
-const index = ({ route, navigation }) => {
+const RecipeDetail = ({ route, navigation }) => {
   const { img } = route.params;
+  const bottomSheetRef = useRef(null);
+  const snapPoints = useMemo(() => ['70%', '98%'], []);
+  const handleSheetChanges = useCallback((index: number) => {
+    console.log('handleSheetChanges', index);
+  }, []);
+
   return (
     <View style={{ flex: 1, justifyContent: 'flex-end' }}>
       <Image
@@ -19,7 +28,20 @@ const index = ({ route, navigation }) => {
         }}
         source={img}
       />
-      <View
+      <BottomSheet
+        ref={bottomSheetRef}
+        initialSnapIndex={0}
+        snapPoints={snapPoints}
+        onChange={handleSheetChanges}>
+        <BottomSheetScrollView contentContainerStyle={{ backgroundColor: 'white' }}>
+          <Preparation
+            onWatchVideoPress={() => {
+              navigation.navigate('RecipeVideo');
+            }}
+          />
+        </BottomSheetScrollView>
+      </BottomSheet>
+      {/* <View
         // eslint-disable-next-line react-native/no-inline-styles
         style={{
           borderTopEndRadius: 30,
@@ -29,14 +51,20 @@ const index = ({ route, navigation }) => {
           backgroundColor: '#FFF',
           zIndex: 1,
         }}>
-        <Preparation
-          onWatchVideoPress={() => {
-            navigation.navigate('RecipeVideo');
-          }}
-        />
-      </View>
+      </View> */}
     </View>
   );
 };
 
-export default index;
+RecipeDetail.propTypes = {
+  route: PropTypes.shape({
+    params: PropTypes.shape({
+      img: PropTypes.number,
+    }),
+  }).isRequired,
+  navigation: PropTypes.shape({
+    navigate: PropTypes.func,
+  }).isRequired,
+};
+
+export default RecipeDetail;
