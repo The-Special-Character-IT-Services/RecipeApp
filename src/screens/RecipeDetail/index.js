@@ -5,7 +5,7 @@ import Preparation from '../../components/Preparation';
 
 const { height: windowHeight, width: windowWidth } = Dimensions.get('window');
 
-const index = ({ route }) => {
+const index = ({ route, navigation }) => {
   const { img } = route.params;
   return (
     <View style={{ flex: 1, justifyContent: 'flex-end' }}>
@@ -29,7 +29,11 @@ const index = ({ route }) => {
           backgroundColor: '#FFF',
           zIndex: 1,
         }}>
-        <Preparation />
+        <Preparation
+          onWatchVideoPress={() => {
+            navigation.navigate('RecipeVideo');
+          }}
+        />
       </View>
     </View>
   );

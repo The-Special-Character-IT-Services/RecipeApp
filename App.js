@@ -10,6 +10,7 @@ import Registration from './src/screens/Registration';
 import Home from './src/screens/Home';
 import RecipeDetail from './src/screens/RecipeDetail';
 import LikeButton from './src/components/LikeButton';
+import RecipeVideo from './src/components/RecipeVideo';
 
 const MyDefaultTheme = {
   ...DefaultTheme,
@@ -49,6 +50,7 @@ const App = () => {
           <Stack.Screen name="Login" component={Login} />
           <Stack.Screen name="Registration" component={Registration} />
           <Stack.Screen name="Home" component={Home} />
+          <Stack.Screen name="RecipeVideo" component={RecipeVideo} />
           <Stack.Screen
             name="RecipeDetail"
             component={RecipeDetail}

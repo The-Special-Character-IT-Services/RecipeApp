@@ -7,7 +7,7 @@ import Timer from '../../assets/icons/timer.svg';
 import Play from '../../assets/icons/play.svg';
 import TextEle from '../TextEle';
 
-const index = () => {
+const index = ({ onWatchVideoPress }) => {
   const Loopfood = [
     {
       id: 1,
@@ -95,7 +95,7 @@ const index = () => {
           </ScrollView>
           <Pressable
             // eslint-disable-next-line no-alert
-            onPress={() => alert('hi')}
+            onPress={onWatchVideoPress}
             style={{
               marginHorizontal: 40,
               marginVertical: 50,
