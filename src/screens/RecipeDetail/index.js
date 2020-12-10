@@ -50,17 +50,6 @@ const RecipeDetail = ({ route, navigation }) => {
           />
         </BottomSheetView>
       </BottomSheet>
-      {/* <View
-        // eslint-disable-next-line react-native/no-inline-styles
-        style={{
-          borderTopEndRadius: 30,
-          borderTopStartRadius: 30,
-
-          height: windowHeight * 0.65,
-          backgroundColor: '#FFF',
-          zIndex: 1,
-        }}>
-      </View> */}
     </View>
   );
 };
