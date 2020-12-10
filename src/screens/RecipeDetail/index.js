@@ -1,4 +1,5 @@
 import BottomSheet, { BottomSheetScrollView } from '@gorhom/bottom-sheet';
+import { useTheme } from '@react-navigation/native';
 import PropTypes from 'prop-types';
 
 import React, { useCallback, useMemo, useRef } from 'react';
@@ -9,6 +10,8 @@ import Preparation from '../../components/Preparation';
 const { height: windowHeight, width: windowWidth } = Dimensions.get('window');
 
 const RecipeDetail = ({ route, navigation }) => {
+  const { colors } = useTheme();
+
   const { img } = route.params;
   const bottomSheetRef = useRef(null);
   const snapPoints = useMemo(() => ['70%', '98%'], []);
@@ -33,7 +36,7 @@ const RecipeDetail = ({ route, navigation }) => {
         initialSnapIndex={0}
         snapPoints={snapPoints}
         onChange={handleSheetChanges}>
-        <BottomSheetScrollView contentContainerStyle={{ backgroundColor: 'white' }}>
+        <BottomSheetScrollView contentContainerStyle={{ backgroundColor: colors.background }}>
           <Preparation
             onWatchVideoPress={() => {
               navigation.navigate('RecipeVideo');
