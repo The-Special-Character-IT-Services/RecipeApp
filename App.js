@@ -10,7 +10,7 @@ import Registration from './src/screens/Registration';
 import Home from './src/screens/Home';
 import RecipeDetail from './src/screens/RecipeDetail';
 import LikeButton from './src/components/LikeButton';
-import RecipeVideo from './src/components/RecipeVideo';
+import RecipeVideo from './src/screens/RecipeVideo';
 
 const MyDefaultTheme = {
   ...DefaultTheme,
