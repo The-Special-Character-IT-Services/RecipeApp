@@ -1,15 +1,27 @@
-import React from 'react';
+import React, { useEffect, useRef } from 'react';
 import PropTypes from 'prop-types';
-import { View, ScrollView, ImageBackground, Pressable } from 'react-native';
-import { useTheme } from '@react-navigation/native';
-import HeartIcon from '../../assets/icons/heart-icon.svg';
-import TimerIcon from '../../assets/icons/Timer-icon.svg';
-import StarIcon from '../../assets/icons/star-icon.svg';
+import { View, Dimensions, Platform } from 'react-native';
+import { FlatList } from 'react-native-gesture-handler';
 import TextEle from '../TextEle';
 import data from './data';
+import ListItem from './ListItem';
+
+const { width: windowWidth } = Dimensions.get('window');
+
+export const CARD_WIDTH = windowWidth * 0.9;
+
+const cardInset = (windowWidth - CARD_WIDTH) / 2;
 
 const Popular = ({ onRecipePress }) => {
-  const { colors } = useTheme();
+  const flatListRef = useRef(null);
+
+  useEffect(() => {
+    flatListRef.current.scrollToOffset({
+      animated: false,
+      offset: -cardInset,
+    });
+  }, []);
+
   return (
     <>
       <View>
@@ -18,49 +30,38 @@ const Popular = ({ onRecipePress }) => {
             Popular
           </TextEle>
         </View>
-        <ScrollView
+        <FlatList
+          ref={flatListRef}
+          data={data}
           horizontal
+          pagingEnabled
+          snapToAlignment="center"
+          decelerationRate="fast"
+          scrollEventThrottle={16}
+          snapToInterval={CARD_WIDTH}
+          renderToHardwareTextureAndroid
+          contentInset={{
+            top: 0,
+            left: cardInset,
+            bottom: 0,
+            right: cardInset,
+          }}
+          contentContainerStyle={[
+            {
+              paddingHorizontal: Platform.OS === 'android' ? cardInset : 0,
+            },
+          ]}
           showsHorizontalScrollIndicator={false}
-          contentContainerStyle={{ paddingHorizontal: 20 }}>
-          {data.map(item => (
-            <Pressable
-              onPress={() => onRecipePress(item)}
-              key={item.id}
-              style={{ marginHorizontal: 10, width: 300 }}>
-              <ImageBackground
-                style={{ height: 200, width: 300 }}
-                imageStyle={{ borderRadius: 20 }}
-                source={item.img}>
-                <View
-                  style={{
-                    flex: 1,
-                    flexDirection: 'row',
-                    justifyContent: 'flex-end',
-                    marginHorizontal: 10,
-                    marginVertical: 10,
-                  }}>
-                  <HeartIcon height={24} width={24} fill={item.id === 1 ? 'red' : 'white'} />
-                </View>
-              </ImageBackground>
-              <View>
-                <TextEle style={{ paddingTop: 20, paddingBottom: 5 }}>{item.TextHeading}</TextEle>
-                <TextEle
-                  style={{ flexWrap: 'wrap', paddingBottom: 10, color: 'gray', fontSize: 12 }}
-                  numberOfLines={2}>
-                  {item.Description}
-                </TextEle>
-                <View style={{ flexDirection: 'row', alignItems: 'center' }}>
-                  <TimerIcon height={24} width={24} fill={colors.text} />
-                  <TextEle style={{ marginLeft: 8 }}>{item.time}</TextEle>
-                  <View style={{ flexDirection: 'row', paddingLeft: 10, alignItems: 'center' }}>
-                    <StarIcon height={24} width={24} fill={colors.text} />
-                    <TextEle style={{ marginLeft: 8 }}>{item.rating}</TextEle>
-                  </View>
-                </View>
-              </View>
-            </Pressable>
-          ))}
-        </ScrollView>
+          renderItem={({ item }) => (
+            <View style={{ width: CARD_WIDTH }}>
+              <ListItem item={item} onRecipePress={onRecipePress} cardWidth={CARD_WIDTH} />
+            </View>
+          )}
+          windowSize={1}
+          initialNumToRender={1}
+          maxToRenderPerBatch={1}
+          removeClippedSubviews
+        />
       </View>
     </>
   );
