@@ -1,7 +1,8 @@
 import BottomSheet, { BottomSheetScrollView } from '@gorhom/bottom-sheet';
+import { useHeaderHeight } from '@react-navigation/stack';
 import PropTypes from 'prop-types';
 
-import React, { useCallback, useMemo, useRef } from 'react';
+import React, { useMemo, useRef } from 'react';
 import { View, Dimensions, Image } from 'react-native';
 // import { ScrollView } from 'react-native-gesture-handler';
 import Preparation from '../../components/Preparation';
@@ -10,11 +11,9 @@ const { height: windowHeight, width: windowWidth } = Dimensions.get('window');
 
 const RecipeDetail = ({ route, navigation }) => {
   const { img } = route.params;
+  const headerHeight = useHeaderHeight();
   const bottomSheetRef = useRef(null);
-  const snapPoints = useMemo(() => ['70%', '98%'], []);
-  const handleSheetChanges = useCallback((index: number) => {
-    console.log('handleSheetChanges', index);
-  }, []);
+  const snapPoints = useMemo(() => [windowHeight * 0.6, '100%'], []);
 
   return (
     <View style={{ flex: 1, justifyContent: 'flex-end' }}>
@@ -32,8 +31,8 @@ const RecipeDetail = ({ route, navigation }) => {
         ref={bottomSheetRef}
         initialSnapIndex={0}
         snapPoints={snapPoints}
-        onChange={handleSheetChanges}>
-        <BottomSheetScrollView contentContainerStyle={{ backgroundColor: 'white' }}>
+        topInset={headerHeight}>
+        <BottomSheetScrollView contentContainerStyle={{ flex: 1, backgroundColor: 'white' }}>
           <Preparation
             onWatchVideoPress={() => {
               navigation.navigate('RecipeVideo');
