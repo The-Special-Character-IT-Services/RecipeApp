@@ -1,29 +1,51 @@
 import React from 'react';
 import { View, ImageBackground } from 'react-native';
-import data from '../../../../components/Preparation/data';
+import { FlatList } from 'react-native-gesture-handler';
+import data from './data/data';
 import TextEle from '../../../../components/TextEle';
+import StarIcon from '../../../../assets/icons/star-icon.svg';
 
 const MyRecipes = () => (
-  <View style={{ flex: 1, backgroundColor: '#fff' }}>
-    <View style={{ flexDirection: 'row' }}>
-      {data.map(item => (
-        <View style={{ flexDirection: 'row', paddingHorizontal: 5, paddingTop: 10 }} key={item.id}>
-          <ImageBackground
-            imageStyle={{ borderRadius: 15 }}
-            source={item.img}
+  <FlatList
+    data={data}
+    renderItem={({ item }) => (
+      <View
+        style={{
+          justifyContent: 'space-between',
+          paddingHorizontal: 10,
+          paddingTop: 10,
+        }}
+        key={item.id}>
+        <ImageBackground
+          imageStyle={{ borderRadius: 15 }}
+          source={item.img}
+          style={{
+            height: 230,
+            width: 150,
+            borderRadius: 500,
+          }}>
+          <TextEle variant="caption" style={{ color: 'white', paddingLeft: 10, paddingTop: 5 }}>
+            {item.text}
+          </TextEle>
+          <View
             style={{
-              height: 230,
-              width: 150,
-              borderRadius: 500,
+              flex: 1,
+              flexWrap: 'wrap-reverse',
+              justifyContent: 'flex-start',
+              padding: 10,
+              flexDirection: 'row',
             }}>
-            <TextEle variant="caption" style={{ color: 'white', paddingLeft: 10, paddingTop: 5 }}>
-              {item.text}
+            <StarIcon fill="white" />
+            <TextEle variant="body2" style={{ color: 'white' }}>
+              {item.rating}
             </TextEle>
-          </ImageBackground>
-        </View>
-      ))}
-    </View>
-  </View>
+          </View>
+        </ImageBackground>
+      </View>
+    )}
+    numColumns={2}>
+    <View style={{ flexDirection: 'column' }} />
+  </FlatList>
 );
 
 export default MyRecipes;

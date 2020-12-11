@@ -1,10 +1,9 @@
 import React, { useMemo, useRef } from 'react';
 import { Dimensions, Image, TextInput, View } from 'react-native';
-import BottomSheet, { BottomSheetView } from '@gorhom/bottom-sheet';
+import BottomSheet, { BottomSheetScrollView } from '@gorhom/bottom-sheet';
 import { useTheme } from '@react-navigation/native';
 import { useHeaderHeight } from '@react-navigation/stack';
 import LikedRecipe from '../../components/LikedRecipe';
-import TextEle from '../../components/TextEle';
 import AllFood from '../../assets/images/AllFood.jpg';
 
 const { height: windowHeight, width: windowWidth } = Dimensions.get('window');
@@ -28,14 +27,13 @@ const TabLikes = () => {
         }}
         source={AllFood}
       />
-      <TextEle style={{}}>Liked Recipes</TextEle>
       <TextInput
         placeholder="Search your liked recipes"
         placeholderTextColor={colors.text}
         style={{
           color: colors.text,
           borderColor: colors.text,
-          borderWidth: 1,
+          borderWidth: 2,
           borderRadius: 20,
           paddingVertical: 10,
           paddingHorizontal: 20,
@@ -48,7 +46,7 @@ const TabLikes = () => {
         snapPoints={snapPoints}
         handleComponent={() => null}
         topInset={headerHeight}>
-        <BottomSheetView
+        <BottomSheetScrollView
           style={{
             flex: 1,
             backgroundColor: colors.card,
@@ -56,7 +54,7 @@ const TabLikes = () => {
             borderTopRightRadius: 20,
           }}>
           <LikedRecipe />
-        </BottomSheetView>
+        </BottomSheetScrollView>
       </BottomSheet>
     </View>
   );
