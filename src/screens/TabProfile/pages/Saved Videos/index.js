@@ -3,7 +3,7 @@ import React from 'react';
 import { View } from 'react-native';
 import TextEle from '../../../../components/TextEle';
 
-const Followers = () => {
+const SavedVideos = () => {
   const { colors } = useTheme();
 
   return (
@@ -13,4 +13,4 @@ const Followers = () => {
   );
 };
 
-export default Followers;
+export default SavedVideos;
