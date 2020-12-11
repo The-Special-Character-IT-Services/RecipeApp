@@ -5,25 +5,9 @@ import { View } from 'react-native';
 import { ScrollView } from 'react-native-gesture-handler';
 import { useTheme } from '@react-navigation/native';
 import SearchSharp from '../../assets/icons/search-sharp.svg';
+import Data from './data';
 
 import TextEle from '../TextEle';
-
-const ListAdd = [
-  {
-    id: 1,
-    text: 'Maxican Salad',
-  },
-
-  {
-    id: 2,
-    text: 'Chocolate Pie',
-  },
-
-  {
-    id: 3,
-    text: 'Maxican christmas Special',
-  },
-];
 
 const RecentltyAdd = () => {
   const { colors } = useTheme();
@@ -35,7 +19,7 @@ const RecentltyAdd = () => {
         </TextEle>
       </View>
       <ScrollView verticle showsHorizontalScrollIndicator={false}>
-        {ListAdd.map(item => (
+        {Data.map(item => (
           <View
             key={item.id}
             style={{
