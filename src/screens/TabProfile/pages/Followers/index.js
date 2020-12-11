@@ -7,7 +7,7 @@ const Followers = () => {
   const { colors } = useTheme();
 
   return (
-    <View style={{ flex: 1, backgroundColor: colors.background }}>
+    <View style={{ flex: 1, backgroundColor: colors.card }}>
       <TextEle>Saved Videos</TextEle>
     </View>
   );
