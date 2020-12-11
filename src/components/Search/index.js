@@ -48,6 +48,7 @@ const Search = () => {
         horizontal>
         {arr.map(x => (
           <View
+            key={x.id}
             style={{
               paddingHorizontal: 10,
               borderRadius: 8,

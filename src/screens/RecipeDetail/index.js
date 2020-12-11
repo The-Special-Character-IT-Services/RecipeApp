@@ -8,7 +8,7 @@ import React, { useMemo, useRef } from 'react';
 import { View, Dimensions, Image } from 'react-native';
 // import { ScrollView } from 'react-native-gesture-handler';
 import Preparation from './pages/preparation';
-import Ingrediants from './pages/ingrediants';
+import Ingrediants from '../../components/Ingrediants';
 
 const { height: windowHeight, width: windowWidth } = Dimensions.get('window');
 
@@ -53,8 +53,8 @@ const RecipeDetail = ({ route }) => {
               indicatorStyle: {
                 width: 5,
                 height: 5,
-                backgroundColor: 'orange',
-                borderRadius: 1,
+                backgroundColor: colors.primary,
+                borderRadius: 2,
                 marginLeft: 95,
                 marginBottom: 5,
               },
@@ -64,17 +64,17 @@ const RecipeDetail = ({ route }) => {
               },
             }}>
             <Tab.Screen
-              name="Preparation"
-              component={Preparation}
-              options={{
-                title: 'Preparation',
-              }}
-            />
-            <Tab.Screen
               name="Ingrediants"
               component={Ingrediants}
               options={{
                 title: 'Ingrediants',
+              }}
+            />
+            <Tab.Screen
+              name="Preparation"
+              component={Preparation}
+              options={{
+                title: 'Preparation',
               }}
             />
           </Tab.Navigator>

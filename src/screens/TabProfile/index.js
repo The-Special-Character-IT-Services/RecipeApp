@@ -90,9 +90,9 @@ const TabProfile = () => {
             indicatorStyle: {
               width: 5,
               height: 5,
-              backgroundColor: 'orange',
-              borderRadius: 1,
-              marginLeft: 60,
+              backgroundColor: colors.primary,
+              borderRadius: 2,
+              marginLeft: 62,
               marginBottom: 5,
             },
             tabStyle: {
