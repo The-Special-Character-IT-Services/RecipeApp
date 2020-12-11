@@ -1,5 +1,6 @@
 import React from 'react';
-import { View, ScrollView, Image } from 'react-native';
+import { View, Image } from 'react-native';
+import { ScrollView } from 'react-native-gesture-handler';
 import Timer from '../../assets/icons/timer-black.svg';
 import TextEle from '../TextEle';
 
