@@ -11,7 +11,7 @@ const { width: windowWidth } = Dimensions.get('window');
 
 export const CARD_WIDTH = windowWidth * 0.9;
 
-const cardInset = (windowWidth - CARD_WIDTH) / 1.5;
+const cardInset = (windowWidth - CARD_WIDTH) / 2;
 
 const SearchCuisine = () => {
   const flatListRef = useRef(null);
@@ -54,8 +54,8 @@ const SearchCuisine = () => {
           ]}
           showsHorizontalScrollIndicator={false}
           renderItem={({ item }) => (
-            <View>
-              <ListItem item={item} />
+            <View style={{ width: CARD_WIDTH }}>
+              <ListItem item={item} cardWidth={CARD_WIDTH} />
             </View>
           )}
           windowSize={1}
@@ -69,37 +69,3 @@ const SearchCuisine = () => {
 };
 
 export default SearchCuisine;
-
-// const index = () => (
-//   <View>
-//     <View style={{ marginVertical: 20, paddingHorizontal: 20 }}>
-//       <TextEle variant="body2" style={{ fontWeight: 'bold', paddingLeft: 10 }}>
-//         Search by Cuisine
-//       </TextEle>
-//     </View>
-//     <ScrollView
-//       horizontal
-//       showsHorizontalScrollIndicator={false}
-//       contentContainerStyle={{ paddingHorizontal: 20 }}>
-//       {data.map(item => (
-//         <View
-//           key={item.id}
-//           style={{
-// paddingLeft: 5, marginVertical: 5, marginHorizontal: 5, alignItems:
-// 'center' }}>
-//           <Image
-//             style={{
-//               borderRadius: 10,
-//               height: 200,
-//               width: 300,
-//             }}
-//             source={item.img1}
-//           />
-//           <TextEle variant="title">{item.text}</TextEle>
-//         </View>
-//       ))}
-//     </ScrollView>
-//   </View>
-// );
-
-// export default index;

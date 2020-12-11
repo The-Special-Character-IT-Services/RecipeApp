@@ -3,7 +3,7 @@ import { View, Image } from 'react-native';
 import PropTypes from 'prop-types';
 import TextEle from '../TextEle';
 
-const ListItem = ({ item }) => (
+const ListItem = ({ item, cardWidth }) => (
   <View
     key={item.id}
     style={{
@@ -16,8 +16,9 @@ const ListItem = ({ item }) => (
       style={{
         borderRadius: 10,
         height: 200,
-        width: 300,
+        width: cardWidth - 10,
       }}
+      imageStyle={{ borderRadius: 20 }}
       source={item.img1}
     />
     <TextEle variant="title">{item.text}</TextEle>
@@ -30,5 +31,6 @@ ListItem.propTypes = {
     id: PropTypes.number,
     text: PropTypes.string,
   }).isRequired,
+  cardWidth: PropTypes.number.isRequired,
 };
 export default ListItem;
