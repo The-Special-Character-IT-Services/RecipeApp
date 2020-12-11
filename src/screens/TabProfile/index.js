@@ -89,9 +89,10 @@ const TabProfile = () => {
             activeTintColor: colors.primary,
             inactiveTintColor: colors.text,
             indicatorStyle: {
-              height: 10,
-              width: 10,
-              borderRadius: 5,
+              height: 5,
+              width: 5,
+              borderRadius: 3,
+              marginBottom: 5,
               borderBottomWidth: 0,
               alignSelf: 'center',
               left: windowWidth / 3 / 2 - 5,

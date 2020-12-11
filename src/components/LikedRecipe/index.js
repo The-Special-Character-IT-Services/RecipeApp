@@ -4,8 +4,9 @@ import { View, Image } from 'react-native';
 import { RectButton, ScrollView } from 'react-native-gesture-handler';
 import TextEle from '../TextEle';
 import data from './data';
+// import RecipeDetail from '../../screens/RecipeDetail';
 
-const LikedRecipe = ({ navigation }) => (
+const LikedRecipe = ({ onRecipeDetail }) => (
   <View style={{ flex: 1 }}>
     <View style={{ flexDirection: 'row', paddingHorizontal: 20 }}>
       <TextEle
@@ -23,10 +24,7 @@ const LikedRecipe = ({ navigation }) => (
       {data.map(item => (
         <View key={item.id} style={{ flexDirection: 'row', marginVertical: 5, height: 100 }}>
           <Image style={{ height: 100, width: 100, borderRadius: 20 }} source={item.img} />
-          <RectButton
-            onPress={() => {
-              navigation.navigate('RecipeDetail');
-            }}>
+          <RectButton onPress={() => onRecipeDetail(item)}>
             <View
               style={{
                 flex: 1,
@@ -44,9 +42,7 @@ const LikedRecipe = ({ navigation }) => (
 );
 
 LikedRecipe.propTypes = {
-  navigation: PropTypes.shape({
-    navigate: PropTypes.func,
-  }).isRequired,
+  onRecipeDetail: PropTypes.func.isRequired,
 };
 
 export default LikedRecipe;
