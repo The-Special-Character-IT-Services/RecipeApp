@@ -1,7 +1,7 @@
 import React, { useMemo, useRef } from 'react';
 import PropTypes from 'prop-types';
 import { Dimensions, Image, TextInput, View } from 'react-native';
-import BottomSheet, { BottomSheetScrollView } from '@gorhom/bottom-sheet';
+import BottomSheet from '@gorhom/bottom-sheet';
 import { useTheme } from '@react-navigation/native';
 import { useHeaderHeight } from '@react-navigation/stack';
 import LikedRecipe from '../../components/LikedRecipe';
@@ -47,19 +47,19 @@ const TabLikes = ({ navigation }) => {
         snapPoints={snapPoints}
         handleComponent={() => null}
         topInset={headerHeight}>
-        <BottomSheetScrollView
+        {/* <BottomSheetScrollView
           style={{
             flex: 1,
             backgroundColor: colors.card,
             borderTopLeftRadius: 20,
             borderTopRightRadius: 20,
-          }}>
-          <LikedRecipe
-            onRecipeDetail={item => {
-              navigation.navigate('RecipeDetail', item);
-            }}
-          />
-        </BottomSheetScrollView>
+          }}> */}
+        <LikedRecipe
+          onRecipeDetail={item => {
+            navigation.navigate('RecipeDetail', item);
+          }}
+        />
+        {/* </BottomSheetScrollView> */}
       </BottomSheet>
     </View>
   );

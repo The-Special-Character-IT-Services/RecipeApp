@@ -1,4 +1,4 @@
-import BottomSheet, { BottomSheetScrollView } from '@gorhom/bottom-sheet';
+import BottomSheet from '@gorhom/bottom-sheet';
 import { useTheme } from '@react-navigation/native';
 import { useHeaderHeight } from '@react-navigation/stack';
 import PropTypes from 'prop-types';
@@ -39,57 +39,57 @@ const RecipeDetail = ({ route }) => {
         snapPoints={snapPoints}
         handleComponent={() => null}
         topInset={headerHeight}>
-        <BottomSheetScrollView
+        {/* <BottomSheetScrollView
           style={{
             flex: 1,
             backgroundColor: colors.card,
             borderTopLeftRadius: 20,
             borderTopRightRadius: 20,
+          }}> */}
+        <Tab.Navigator
+          tabBarOptions={{
+            activeTintColor: colors.primary,
+            inactiveTintColor: colors.text,
+            indicatorStyle: {
+              width: 5,
+              height: 5,
+              backgroundColor: colors.primary,
+              borderRadius: 2,
+              marginLeft: 95,
+              marginBottom: 5,
+            },
+            style: {
+              borderTopLeftRadius: 20,
+              borderTopRightRadius: 20,
+              backgroundColor: colors.background,
+              borderBottomWidth: 0,
+              borderTopWidth: 0,
+              borderBottomColor: 'transparent',
+              elevation: 0,
+              shadowColor: '#5bc4ff',
+              shadowOpacity: 0,
+              shadowOffset: {
+                height: 0,
+              },
+              shadowRadius: 0,
+            },
           }}>
-          <Tab.Navigator
-            tabBarOptions={{
-              activeTintColor: colors.primary,
-              inactiveTintColor: colors.text,
-              indicatorStyle: {
-                width: 5,
-                height: 5,
-                backgroundColor: colors.primary,
-                borderRadius: 2,
-                marginLeft: 95,
-                marginBottom: 5,
-              },
-              style: {
-                borderTopLeftRadius: 20,
-                borderTopRightRadius: 20,
-                backgroundColor: colors.background,
-                borderBottomWidth: 0,
-                borderTopWidth: 0,
-                borderBottomColor: 'transparent',
-                elevation: 0,
-                shadowColor: '#5bc4ff',
-                shadowOpacity: 0,
-                shadowOffset: {
-                  height: 0,
-                },
-                shadowRadius: 0,
-              },
-            }}>
-            <Tab.Screen
-              name="Ingrediants"
-              component={Ingrediants}
-              options={{
-                title: 'Ingrediants',
-              }}
-            />
-            <Tab.Screen
-              name="Preparation"
-              component={Preparation}
-              options={{
-                title: 'Preparation',
-              }}
-            />
-          </Tab.Navigator>
-        </BottomSheetScrollView>
+          <Tab.Screen
+            name="Ingrediants"
+            component={Ingrediants}
+            options={{
+              title: 'Ingrediants',
+            }}
+          />
+          <Tab.Screen
+            name="Preparation"
+            component={Preparation}
+            options={{
+              title: 'Preparation',
+            }}
+          />
+        </Tab.Navigator>
+        {/* </BottomSheetScrollView> */}
       </BottomSheet>
     </View>
   );

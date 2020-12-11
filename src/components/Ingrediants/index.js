@@ -1,6 +1,6 @@
+import { BottomSheetScrollView, BottomSheetView } from '@gorhom/bottom-sheet';
 import React from 'react';
 import { View, Image } from 'react-native';
-import { ScrollView } from 'react-native-gesture-handler';
 import Timer from '../../assets/icons/timer-black.svg';
 import TextEle from '../TextEle';
 
@@ -44,7 +44,7 @@ const index = () => {
     },
   ];
   return (
-    <View style={{ flex: 1 }}>
+    <BottomSheetView style={{ flex: 1 }}>
       <View style={{ paddingHorizontal: 20, marginVertical: 10 }}>
         <TextEle style={{ fontSize: 23, fontWeight: 'bold' }}>Mango Mule</TextEle>
         <TextEle numberOfLines={2} style={{ color: 'gray' }}>
@@ -66,7 +66,7 @@ const index = () => {
           <TextEle style={{ marginLeft: 8, fontSize: 17 }}>35`</TextEle>
         </View>
       </View>
-      <ScrollView contentContainerStyle={{ paddingVertical: 10, paddingHorizontal: 20 }}>
+      <BottomSheetScrollView contentContainerStyle={{ paddingVertical: 10, paddingHorizontal: 20 }}>
         {photos.map(item => (
           <View key={item.id} style={{ flexDirection: 'row', marginVertical: 5, height: 100 }}>
             <Image style={{ height: 100, width: 100, borderRadius: 20 }} source={item.img} />
@@ -81,8 +81,8 @@ const index = () => {
             </View>
           </View>
         ))}
-      </ScrollView>
-    </View>
+      </BottomSheetScrollView>
+    </BottomSheetView>
   );
 };
 
