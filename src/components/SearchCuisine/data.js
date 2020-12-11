@@ -26,7 +26,7 @@ export default [
   {
     id: 5,
     img1: require('../../assets/images/MaxicanFood.png'),
-    text: 'Maxican',
+    text: 'Mexican',
   },
 
   {

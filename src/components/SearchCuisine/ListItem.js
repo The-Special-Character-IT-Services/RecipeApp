@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Image } from 'react-native';
+import { View, ImageBackground } from 'react-native';
 import PropTypes from 'prop-types';
 import TextEle from '../TextEle';
 
@@ -12,16 +12,18 @@ const ListItem = ({ item, cardWidth }) => (
       marginHorizontal: 5,
       alignItems: 'center',
     }}>
-    <Image
+    <ImageBackground
       style={{
         borderRadius: 10,
         height: 200,
         width: cardWidth - 10,
       }}
       imageStyle={{ borderRadius: 20 }}
-      source={item.img1}
-    />
-    <TextEle variant="title">{item.text}</TextEle>
+      source={item.img1}>
+      <TextEle style={{ color: 'white', marginHorizontal: 10, marginVertical: 5 }} variant="title">
+        {item.text}
+      </TextEle>
+    </ImageBackground>
   </View>
 );
 
