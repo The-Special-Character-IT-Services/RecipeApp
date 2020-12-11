@@ -1,9 +1,10 @@
 import React from 'react';
-import { View, ScrollView, Image } from 'react-native';
+import { View, Image } from 'react-native';
+import { ScrollView } from 'react-native-gesture-handler';
 import Timer from '../../assets/icons/timer-black.svg';
 import TextEle from '../TextEle';
 
-const index = ({ children }) => {
+const index = () => {
   const photos = [
     {
       id: 1,
@@ -58,7 +59,7 @@ const index = ({ children }) => {
             flex: 1,
             marginVertical: 5,
           }}>
-          {children}
+          Ingrediants
         </TextEle>
         <View style={{ paddingTop: 5, flexDirection: 'row', alignItems: 'center' }}>
           <Timer height={24} width={24} fill="black" />

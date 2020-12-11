@@ -62,7 +62,7 @@ const Category = () => {
   return (
     <View>
       <View style={{ flexDirection: 'row', marginVertical: 10, marginHorizontal: 20 }}>
-        <TextEle variant="body2" style={{ color: 'gray', fontWeight: 'bold', paddingLeft: 10 }}>
+        <TextEle variant="body1" style={{ color: 'gray', fontWeight: 'bold', paddingLeft: 10 }}>
           Select a category
         </TextEle>
       </View>

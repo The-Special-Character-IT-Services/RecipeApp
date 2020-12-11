@@ -10,7 +10,7 @@ const { width: windowWidth } = Dimensions.get('window');
 
 export const CARD_WIDTH = windowWidth * 0.9;
 
-const cardInset = (windowWidth - CARD_WIDTH) / 2;
+const cardInset = (windowWidth - CARD_WIDTH) / 1.5;
 
 const Popular = ({ onRecipePress }) => {
   const flatListRef = useRef(null);
@@ -26,7 +26,7 @@ const Popular = ({ onRecipePress }) => {
     <>
       <View>
         <View style={{ paddingHorizontal: 30, marginVertical: 20 }}>
-          <TextEle variant="title1" style={{ fontSize: 20, fontWeight: 'bold' }}>
+          <TextEle variant="body1" style={{ fontSize: 20, fontWeight: 'bold' }}>
             Popular
           </TextEle>
         </View>
