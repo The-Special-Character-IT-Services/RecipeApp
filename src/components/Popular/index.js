@@ -57,9 +57,6 @@ const Popular = ({ onRecipePress }) => {
               <ListItem item={item} onRecipePress={onRecipePress} cardWidth={CARD_WIDTH} />
             </View>
           )}
-          windowSize={1}
-          initialNumToRender={1}
-          maxToRenderPerBatch={1}
           removeClippedSubviews
         />
       </View>

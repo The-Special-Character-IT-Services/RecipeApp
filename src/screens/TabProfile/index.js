@@ -9,7 +9,7 @@ import MyRecipes from './pages/MyRecipes';
 import Settings from './pages/Settings';
 import Followers from './pages/Followers';
 
-const { height: windowHeight } = Dimensions.get('window');
+const { height: windowHeight, width: windowWidth } = Dimensions.get('window');
 const Tab = createMaterialTopTabNavigator();
 
 const data = [
@@ -84,26 +84,32 @@ const TabProfile = () => {
           borderTopRightRadius: 30,
         }}>
         <Tab.Navigator
+          removeClippedSubviews
           tabBarOptions={{
             activeTintColor: colors.primary,
             inactiveTintColor: colors.text,
-            tabStyle: {
-              borderTopRightRadius: 20,
-              borderTopLeftRadius: 20,
+            indicatorStyle: {
+              height: 10,
+              width: 10,
+              borderRadius: 5,
+              borderBottomWidth: 0,
+              alignSelf: 'center',
+              left: windowWidth / 3 / 2 - 5,
             },
-            renderIndicator: () => (
-              <View
-                style={{
-                  height: 10,
-                  width: 10,
-                  borderRadius: 5,
-                  backgroundColor: colors.primary,
-                  position: 'absolute',
-                  bottom: 0,
-                  left: 0,
-                }}
-              />
-            ),
+            style: {
+              borderTopLeftRadius: 20,
+              borderTopRightRadius: 20,
+              borderBottomWidth: 0,
+              borderTopWidth: 0,
+              borderBottomColor: 'transparent',
+              elevation: 0,
+              shadowColor: '#5bc4ff',
+              shadowOpacity: 0,
+              shadowOffset: {
+                height: 0,
+              },
+              shadowRadius: 0,
+            },
           }}>
           <Tab.Screen
             name="MyRecipes"
