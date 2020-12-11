@@ -108,10 +108,10 @@ const TabProfile = () => {
             }}
           />
           <Tab.Screen
-            name="Followers"
+            name="Saved Videos"
             component={Followers}
             options={{
-              title: 'Followers',
+              title: 'Saved Videos',
             }}
           />
           <Tab.Screen

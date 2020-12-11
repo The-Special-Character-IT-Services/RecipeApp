@@ -1,10 +1,16 @@
+import { useTheme } from '@react-navigation/native';
 import React from 'react';
-import { View, Text } from 'react-native';
+import { View } from 'react-native';
+import TextEle from '../../../../components/TextEle';
 
-const Settings = () => (
-  <View style={{ flex: 1, backgroundColor: '#fff' }}>
-    <Text>Settings</Text>
-  </View>
-);
+const Settings = () => {
+  const { colors } = useTheme();
+
+  return (
+    <View style={{ flex: 1, backgroundColor: colors.background }}>
+      <TextEle>Settings</TextEle>
+    </View>
+  );
+};
 
 export default Settings;

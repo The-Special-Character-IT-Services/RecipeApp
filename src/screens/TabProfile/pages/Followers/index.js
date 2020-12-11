@@ -1,10 +1,16 @@
+import { useTheme } from '@react-navigation/native';
 import React from 'react';
-import { View, Text } from 'react-native';
+import { View } from 'react-native';
+import TextEle from '../../../../components/TextEle';
 
-const Followers = () => (
-  <View style={{ flex: 1, backgroundColor: '#fff' }}>
-    <Text>Followers</Text>
-  </View>
-);
+const Followers = () => {
+  const { colors } = useTheme();
+
+  return (
+    <View style={{ flex: 1, backgroundColor: colors.background }}>
+      <TextEle>Saved Videos</TextEle>
+    </View>
+  );
+};
 
 export default Followers;
