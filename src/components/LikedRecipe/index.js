@@ -1,10 +1,11 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { View, Image } from 'react-native';
-import { ScrollView } from 'react-native-gesture-handler';
+import { RectButton, ScrollView } from 'react-native-gesture-handler';
 import TextEle from '../TextEle';
 import data from './data';
 
-const LikedRecipe = () => (
+const LikedRecipe = ({ navigation }) => (
   <View style={{ flex: 1 }}>
     <View style={{ flexDirection: 'row', paddingHorizontal: 20 }}>
       <TextEle
@@ -22,19 +23,30 @@ const LikedRecipe = () => (
       {data.map(item => (
         <View key={item.id} style={{ flexDirection: 'row', marginVertical: 5, height: 100 }}>
           <Image style={{ height: 100, width: 100, borderRadius: 20 }} source={item.img} />
-          <View
-            style={{
-              flex: 1,
-              paddingLeft: 15,
-              justifyContent: 'center',
+          <RectButton
+            onPress={() => {
+              navigation.navigate('RecipeDetail');
             }}>
-            <TextEle style={{ fontWeight: 'bold', fontSize: 17 }}>{item.text}</TextEle>
-            <TextEle style={{ color: 'gray' }}>{item.amount}</TextEle>
-          </View>
+            <View
+              style={{
+                flex: 1,
+                paddingLeft: 15,
+                justifyContent: 'center',
+              }}>
+              <TextEle style={{ fontWeight: 'bold', fontSize: 17 }}>{item.text}</TextEle>
+              <TextEle style={{ color: 'gray' }}>{item.amount}</TextEle>
+            </View>
+          </RectButton>
         </View>
       ))}
     </ScrollView>
   </View>
 );
+
+LikedRecipe.propTypes = {
+  navigation: PropTypes.shape({
+    navigate: PropTypes.func,
+  }).isRequired,
+};
 
 export default LikedRecipe;

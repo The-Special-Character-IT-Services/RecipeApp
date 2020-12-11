@@ -1,4 +1,4 @@
-import BottomSheet, { BottomSheetView } from '@gorhom/bottom-sheet';
+import BottomSheet, { BottomSheetScrollView } from '@gorhom/bottom-sheet';
 import { useTheme } from '@react-navigation/native';
 import { useHeaderHeight } from '@react-navigation/stack';
 import PropTypes from 'prop-types';
@@ -39,7 +39,7 @@ const RecipeDetail = ({ route }) => {
         snapPoints={snapPoints}
         handleComponent={() => null}
         topInset={headerHeight}>
-        <BottomSheetView
+        <BottomSheetScrollView
           style={{
             flex: 1,
             backgroundColor: colors.card,
@@ -78,7 +78,7 @@ const RecipeDetail = ({ route }) => {
               }}
             />
           </Tab.Navigator>
-        </BottomSheetView>
+        </BottomSheetScrollView>
       </BottomSheet>
     </View>
   );
