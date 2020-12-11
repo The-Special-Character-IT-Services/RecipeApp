@@ -1,4 +1,3 @@
-import {} from '@react-navigation/native';
 import React from 'react';
 import { View, ImageBackground } from 'react-native';
 import { FlatList } from 'react-native-gesture-handler';
@@ -37,7 +36,9 @@ const MyRecipes = () => (
               flexDirection: 'row',
             }}>
             <StarIcon fill="white" />
-            <TextEle variant="body2">{item.rating}</TextEle>
+            <TextEle variant="body2" style={{ color: 'white' }}>
+              {item.rating}
+            </TextEle>
           </View>
         </ImageBackground>
       </View>
