@@ -1,4 +1,5 @@
 import React, { useMemo, useRef } from 'react';
+import PropTypes from 'prop-types';
 import { Dimensions, Image, TextInput, View } from 'react-native';
 import BottomSheet, { BottomSheetScrollView } from '@gorhom/bottom-sheet';
 import { useTheme } from '@react-navigation/native';
@@ -8,7 +9,7 @@ import AllFood from '../../assets/images/AllFood.jpg';
 
 const { height: windowHeight, width: windowWidth } = Dimensions.get('window');
 
-const TabLikes = () => {
+const TabLikes = ({ navigation }) => {
   const { colors } = useTheme();
 
   const headerHeight = useHeaderHeight();
@@ -53,11 +54,21 @@ const TabLikes = () => {
             borderTopLeftRadius: 20,
             borderTopRightRadius: 20,
           }}>
-          <LikedRecipe />
+          <LikedRecipe
+            onRecipeDetail={item => {
+              navigation.navigate('RecipeDetail', item);
+            }}
+          />
         </BottomSheetScrollView>
       </BottomSheet>
     </View>
   );
+};
+
+TabLikes.propTypes = {
+  navigation: PropTypes.shape({
+    navigate: PropTypes.func,
+  }).isRequired,
 };
 
 export default TabLikes;
