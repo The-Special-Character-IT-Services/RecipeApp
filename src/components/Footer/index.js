@@ -52,8 +52,8 @@ const PicCuisine = [
 const index = () => (
   <View>
     <View style={{ marginVertical: 20, paddingHorizontal: 20 }}>
-      <TextEle variant="body2" style={{ fontWeight: 'bold', paddingLeft: 10 }}>
-        Search by Cuisine
+      <TextEle variant="body1" style={{ fontWeight: 'bold', paddingLeft: 10 }}>
+        Popular Cuisine
       </TextEle>
     </View>
     <ScrollView
@@ -72,7 +72,7 @@ const index = () => (
             }}
             source={item.img1}
           />
-          <TextEle variant="overlineText">{item.text}</TextEle>
+          <TextEle variant="caption">{item.text}</TextEle>
         </View>
       ))}
     </ScrollView>
