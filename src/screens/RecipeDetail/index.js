@@ -58,9 +58,20 @@ const RecipeDetail = ({ route }) => {
                 marginLeft: 95,
                 marginBottom: 5,
               },
-              tabStyle: {
-                borderTopRightRadius: 20,
+              style: {
                 borderTopLeftRadius: 20,
+                borderTopRightRadius: 20,
+                backgroundColor: colors.background,
+                borderBottomWidth: 0,
+                borderTopWidth: 0,
+                borderBottomColor: 'transparent',
+                elevation: 0,
+                shadowColor: '#5bc4ff',
+                shadowOpacity: 0,
+                shadowOffset: {
+                  height: 0,
+                },
+                shadowRadius: 0,
               },
             }}>
             <Tab.Screen
