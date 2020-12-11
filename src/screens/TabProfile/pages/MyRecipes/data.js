@@ -1,0 +1,51 @@
+export default [
+  {
+    id: 1,
+    text: '1. Pizzas',
+    img: require('../../../../assets/image/pizza.png'),
+    rating: '5.0',
+    icon: require('../../../../assets/icons/star-icon.svg'),
+  },
+  {
+    id: 2,
+    text: '2. Maxican Salad',
+    img: require('../../../../assets/images/FoodPic1.jpg'),
+    rating: '4.1',
+    icon: require('../../../../assets/icons/star-icon.svg'),
+  },
+  {
+    id: 3,
+    text: '3. Onions',
+    img: require('../../../../assets/image/onions.png'),
+    rating: '3.8',
+    icon: require('../../../../assets/icons/star-icon.svg'),
+  },
+  {
+    id: 4,
+    text: '4. Tomatoes',
+    img: require('../../../../assets/image/tomatoes.png'),
+    rating: '4.6',
+    icon: require('../../../../assets/icons/star-icon.svg'),
+  },
+  {
+    id: 5,
+    text: '5. Chopped.',
+    img: require('../../../../assets/image/chopped.png'),
+    rating: '4.3',
+    icon: require('../../../../assets/icons/star-icon.svg'),
+  },
+  {
+    id: 6,
+    text: '6. Pepitas',
+    img: require('../../../../assets/image/papita.png'),
+    rating: '4.0',
+    icon: require('../../../../assets/icons/star-icon.svg'),
+  },
+  {
+    id: 7,
+    text: '7. Cheese.',
+    img: require('../../../../assets/image/cheese.png'),
+    rating: '4.1',
+    icon: require('../../../../assets/icons/star-icon.svg'),
+  },
+];

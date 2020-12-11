@@ -37,7 +37,7 @@ const TabProfile = () => {
         style={{
           borderBottomEndRadius: 30,
           borderBottomStartRadius: 30,
-          height: windowHeight * 0.3,
+          height: windowHeight * 0.35,
           backgroundColor: colors.background,
           zIndex: 1,
         }}>
