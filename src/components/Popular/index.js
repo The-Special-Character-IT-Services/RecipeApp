@@ -26,7 +26,7 @@ const Popular = ({ onRecipePress }) => {
     <>
       <View>
         <View style={{ paddingHorizontal: 30, marginVertical: 20 }}>
-          <TextEle variant="title1" style={{ fontSize: 20, fontWeight: 'bold' }}>
+          <TextEle variant="body1" style={{ fontSize: 20, fontWeight: 'bold' }}>
             Popular
           </TextEle>
         </View>
