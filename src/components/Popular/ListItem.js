@@ -3,17 +3,17 @@ import PropTypes from 'prop-types';
 
 import { ImageBackground, Pressable, View } from 'react-native';
 import { useTheme } from '@react-navigation/native';
-import HeartIcon from '../../assets/icons/heart-icon.svg';
 import TimerIcon from '../../assets/icons/Timer-icon.svg';
 import StarIcon from '../../assets/icons/star-icon.svg';
 import TextEle from '../TextEle';
+import LikeButton from '../LikeButton';
 
 const ListItem = ({ item, onRecipePress, cardWidth }) => {
   const { colors } = useTheme();
   return (
     <Pressable onPress={() => onRecipePress(item)} key={item.id} style={{ width: cardWidth }}>
       <ImageBackground
-        style={{ height: 200, width: cardWidth - 10 }}
+        style={{ height: 225, width: cardWidth - 10 }}
         imageStyle={{ borderRadius: 20 }}
         source={item.img}>
         <View
@@ -24,7 +24,7 @@ const ListItem = ({ item, onRecipePress, cardWidth }) => {
             marginHorizontal: 10,
             marginVertical: 10,
           }}>
-          <HeartIcon height={24} width={24} fill={item.id === 1 ? 'red' : 'white'} />
+          <LikeButton />
         </View>
       </ImageBackground>
       <View>

@@ -91,11 +91,11 @@ const TabProfile = () => {
             indicatorStyle: {
               height: 5,
               width: 5,
-              borderRadius: 3,
+              borderRadius: 2,
               marginBottom: 5,
               borderBottomWidth: 0,
               alignSelf: 'center',
-              left: windowWidth / 3 / 2 - 5,
+              left: windowWidth / 3 / 2 - 2,
             },
             style: {
               borderTopLeftRadius: 20,
