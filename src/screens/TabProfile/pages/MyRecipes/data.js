@@ -8,7 +8,7 @@ export default [
   },
   {
     id: 2,
-    text: '2. Maxican Salad',
+    text: '2. Salad',
     img: require('../../../../assets/images/FoodPic1.jpg'),
     rating: '4.1',
     icon: require('../../../../assets/icons/star-icon.svg'),
