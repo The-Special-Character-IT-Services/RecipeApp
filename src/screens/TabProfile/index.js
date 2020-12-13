@@ -7,7 +7,7 @@ import Header from '../../components/Header';
 import TextEle from '../../components/TextEle';
 import MyRecipes from './pages/MyRecipes';
 import Settings from './pages/Settings';
-import Followers from './pages/Followers';
+import SavedVideos from './pages/SavedVideos';
 
 const { height: windowHeight, width: windowWidth } = Dimensions.get('window');
 const Tab = createMaterialTopTabNavigator();
@@ -120,10 +120,10 @@ const TabProfile = () => {
             }}
           />
           <Tab.Screen
-            name="Saved Videos"
-            component={Followers}
+            name="SavedVideos"
+            component={SavedVideos}
             options={{
-              title: 'Saved Videos',
+              title: 'SavedVideos',
             }}
           />
           <Tab.Screen
