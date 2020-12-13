@@ -46,7 +46,7 @@ const MyRecipes = () => {
                 paddingRight: 20,
                 paddingLeft: 10,
               }}>
-              <StarIcon fill="white" />
+              <StarIcon fill={colors.text} />
               <TextEle variant="body2" style={{ color: colors.text }}>
                 {item.rating}
               </TextEle>
