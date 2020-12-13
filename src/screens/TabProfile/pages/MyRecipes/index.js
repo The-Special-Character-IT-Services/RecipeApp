@@ -38,7 +38,7 @@ const MyRecipes = () => {
                   padding: 10,
                   flexDirection: 'row',
                 }}>
-                <StarIcon fill="white" />
+                <StarIcon fill={colors.text} />
                 <TextEle variant="body2" style={{ color: 'white' }}>
                   {item.rating}
                 </TextEle>
