@@ -1,20 +1,19 @@
 import { BottomSheetScrollView, BottomSheetView } from '@gorhom/bottom-sheet';
 import React from 'react';
 import { View, Image } from 'react-native';
-import Timer from '../../assets/icons/timer-black.svg';
 import TextEle from '../TextEle';
 
 const index = () => {
   const photos = [
     {
       id: 1,
-      img: require('../../assets/images/cucumber-slices.jpg'),
+      img: require('../../assets/images/cucumber.jpg'),
       text: 'Slices of cucumber',
       amount: '4-5 Pieces',
     },
     {
       id: 2,
-      img: require('../../assets/images/honey-syrup.jpg'),
+      img: require('../../assets/images/honey.jpg'),
       text: 'Honey Syrup',
       amount: '2 Spoon',
     },
@@ -61,10 +60,6 @@ const index = () => {
           }}>
           Ingrediants
         </TextEle>
-        <View style={{ paddingTop: 5, flexDirection: 'row', alignItems: 'center' }}>
-          <Timer height={24} width={24} fill="black" />
-          <TextEle style={{ marginLeft: 8, fontSize: 17 }}>35`</TextEle>
-        </View>
       </View>
       <BottomSheetScrollView contentContainerStyle={{ paddingVertical: 10, paddingHorizontal: 20 }}>
         {photos.map(item => (
