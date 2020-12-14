@@ -1,6 +1,7 @@
 /* eslint-disable react-native/no-inline-styles */
 import React, { useState } from 'react';
 import { ScrollView, View, Image } from 'react-native';
+import { useTheme } from '@react-navigation/native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import SearchBar from '../../components/Search';
 import RecentlyAdd from '../../components/RecentlyAdd';
@@ -9,6 +10,7 @@ import Data from '../../components/Popular/data';
 import TextEle from '../../components/TextEle';
 
 const TabSearch = () => {
+  const { colors } = useTheme();
   const insets = useSafeAreaInsets();
   const [text, setText] = useState('');
   const onchangeText = val => {
@@ -33,7 +35,7 @@ const TabSearch = () => {
               <Image source={item.img} style={{ height: 100, width: 100, borderRadius: 10 }} />
               <TextEle
                 style={{
-                  color: 'white',
+                  color: colors.text,
                   flexDirection: 'row',
                   marginHorizontal: 10,
                   marginVertical: 20,
