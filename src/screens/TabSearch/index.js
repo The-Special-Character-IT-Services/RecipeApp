@@ -4,7 +4,7 @@ import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import SearchBar from '../../components/Search';
 import RecentlyAdd from '../../components/RecentlyAdd';
 import SearchCuisine from '../../components/SearchCuisine';
-// import Data from '../../components/RecentlyAdd/data';
+import Data from '../../components/RecentlyAdd/data';
 
 const TabSearch = () => {
   const insets = useSafeAreaInsets();
@@ -26,9 +26,11 @@ const TabSearch = () => {
         </ScrollView>
       ) : (
         <View style={{ flexDirection: 'column' }}>
-          <Text style={{ color: 'white', flexDirection: 'column' }}>
-            Maxican Salad, Chocolate Pie, Maxican christmas Special
-          </Text>
+          {Data.map(item => (
+            <View>
+              <Text style={{ color: 'white', flexDirection: 'column' }}>{item.text}</Text>
+            </View>
+          ))}
         </View>
       )}
     </View>
