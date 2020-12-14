@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, ImageBackground } from 'react-native';
+import { View, Image } from 'react-native';
 import { useTheme } from '@react-navigation/native';
 import { FlatList } from 'react-native-gesture-handler';
 import data from './data';
@@ -8,48 +8,59 @@ import StarIcon from '../../../../assets/icons/star-icon.svg';
 
 const MyRecipes = () => {
   const { colors } = useTheme();
+  const finalData = data.length % 2 === 0 ? data : data.push({ isEmpty: true });
   return (
     <FlatList
-      data={data}
-      style={{ backgroundColor: colors.card }}
-      renderItem={({ item }) => (
-        <View style={{ flex: 1, padding: 10, alignItems: 'center' }}>
-          <View
-            style={{
-              justifyContent: 'space-around',
-            }}
-            key={item.id}>
-            <ImageBackground
-              imageStyle={{ borderRadius: 15 }}
+      data={finalData}
+      contentContainerStyle={{ marginHorizontal: 20 }}
+      renderItem={({ item, index }) => (
+        <View
+          style={{
+            flex: 1,
+            flexDirection: 'column',
+            marginRight: index % 2 === 0 ? 10 : 0,
+          }}>
+          {!item.isEmpty && (
+            <Image
               source={item.img}
+              resizeMode="cover"
               style={{
+                flex: 1,
                 height: 230,
-                width: 150,
-                borderRadius: 500,
+                width: undefined,
+                borderRadius: 10,
+              }}
+            />
+          )}
+          {!item.isEmpty && (
+            <View
+              style={{
+                flexDirection: 'row',
+                alignItems: 'center',
+                justifyContent: 'space-between',
+                paddingBottom: 10,
               }}>
-              <TextEle variant="body2" style={{ color: 'white', paddingLeft: 10, paddingTop: 5 }}>
+              <TextEle variant="body2" style={{ color: colors.text, paddingLeft: 10 }}>
                 {item.text}
               </TextEle>
               <View
                 style={{
-                  flex: 1,
-                  flexWrap: 'wrap-reverse',
-                  justifyContent: 'flex-start',
-                  padding: 10,
                   flexDirection: 'row',
+                  alignItems: 'center',
+                  paddingRight: 20,
+                  paddingLeft: 10,
                 }}>
                 <StarIcon fill={colors.text} />
-                <TextEle variant="body2" style={{ color: 'white' }}>
+                <TextEle variant="body2" style={{ color: colors.text }}>
                   {item.rating}
                 </TextEle>
               </View>
-            </ImageBackground>
-          </View>
+            </View>
+          )}
         </View>
       )}
-      numColumns={2}>
-      <View style={{ flexDirection: 'column' }} />
-    </FlatList>
+      numColumns={2}
+    />
   );
 };
 

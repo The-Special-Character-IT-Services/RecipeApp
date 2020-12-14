@@ -10,12 +10,12 @@ const ListItem = ({ item, cardWidth }) => {
     <View key={item.id} style={{ width: cardWidth }}>
       <View style={{ paddingHorizontal: 5, paddingTop: 10 }}>
         <Image
-          imageStyle={{ borderRadius: 15 }}
           source={item.img}
           style={{
             height: 230,
             width: 330,
             borderRadius: 50,
+            marginRight: 10,
           }}
         />
         <TextEle variant="caption" style={{ color: colors.text, marginTop: 20 }}>
