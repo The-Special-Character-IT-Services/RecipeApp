@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { View, Image } from 'react-native';
 import { useTheme } from '@react-navigation/native';
 import { FlatList } from 'react-native-gesture-handler';
@@ -8,13 +8,21 @@ import StarIcon from '../../../../assets/icons/star-icon.svg';
 
 const MyRecipes = () => {
   const { colors } = useTheme();
-  const finalData = data.length % 2 === 0 ? data : data.push({ isEmpty: true });
+
+  const [recipes, setRecipes] = useState(data);
+
+  useEffect(() => {
+    setRecipes([...recipes, { isEmpty: true }]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
   return (
     <FlatList
-      data={finalData}
+      data={recipes}
       contentContainerStyle={{ marginHorizontal: 20 }}
       renderItem={({ item, index }) => (
         <View
+          key={item.id}
           style={{
             flex: 1,
             flexDirection: 'column',
