@@ -29,16 +29,27 @@ const TabSearch = () => {
           <SearchCuisine />
         </ScrollView>
       ) : (
-        <ScrollView style={{ marginVertical: 20 }}>
+        <ScrollView
+          style={{
+            marginVertical: 10,
+            marginHorizontal: 10,
+            flexDirection: 'row',
+          }}>
           {Data.map(item => (
-            <View style={{ flexDirection: 'row', marginVertical: 10, marginHorizontal: 10 }}>
-              <Image source={item.img} style={{ height: 100, width: 100, borderRadius: 10 }} />
+            <View
+              style={{
+                flexDirection: 'row',
+                marginVertical: 10,
+                marginHorizontal: 10,
+              }}>
+              <Image source={item.img} style={{ height: 50, width: 50, borderRadius: 5 }} />
               <TextEle
+                variant="body1"
                 style={{
                   color: colors.text,
                   flexDirection: 'row',
                   marginHorizontal: 10,
-                  marginVertical: 20,
+                  marginVertical: 3,
                 }}>
                 {item.TextHeading}
               </TextEle>
