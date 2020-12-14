@@ -6557,6 +6557,14 @@ react-native-appearance@^0.3.4:
     invariant "^2.2.4"
     use-subscription "^1.0.0"
 
+react-native-fullscreen-video@^0.0.9:
+  version "0.0.9"
+  resolved "https://registry.yarnpkg.com/react-native-fullscreen-video/-/react-native-fullscreen-video-0.0.9.tgz#752a10e4baed75bb6baf7fa87b655ba170de3e28"
+  integrity sha1-dSoQ5Lrtdbtrr3+oe2VboXDePig=
+  dependencies:
+    react-native-orientation "git+https://github.com/yamill/react-native-orientation.git"
+    react-native-video "git+https://github.com/react-native-community/react-native-video#master"
+
 react-native-gesture-handler@^1.9.0:
   version "1.9.0"
   resolved "https://registry.yarnpkg.com/react-native-gesture-handler/-/react-native-gesture-handler-1.9.0.tgz#e441b1c0277c3fd4ca3e5c58fdd681e2f0ceddf0"
@@ -6572,6 +6580,15 @@ react-native-iphone-x-helper@^1.3.0:
   version "1.3.1"
   resolved "https://registry.yarnpkg.com/react-native-iphone-x-helper/-/react-native-iphone-x-helper-1.3.1.tgz#20c603e9a0e765fd6f97396638bdeb0e5a60b010"
   integrity sha512-HOf0jzRnq2/aFUcdCJ9w9JGzN3gdEg0zFE4FyYlp4jtidqU03D5X7ZegGKfT1EWteR0gPBGp9ye5T5FvSWi9Yg==
+
+react-native-orientation-locker@^1.2.0:
+  version "1.2.0"
+  resolved "https://registry.yarnpkg.com/react-native-orientation-locker/-/react-native-orientation-locker-1.2.0.tgz#9fa51b3aade9b847e63066b6fd60509371940a7e"
+  integrity sha512-lnwp9Jbt1m/0Gfw9a5Mrwj/APNSuYkVdJEgBKRyQgOshDrKRv5dxpD0P786AgIEjnEbjyrNOS6GQvBdqPYSxsg==
+
+"react-native-orientation@git+https://github.com/yamill/react-native-orientation.git":
+  version "3.1.3"
+  resolved "git+https://github.com/yamill/react-native-orientation.git#b45830cce0837fa668838554e023979497673c82"
 
 react-native-reanimated@^2.0.0-alpha.9.2:
   version "2.0.0-rc.0"
@@ -6624,10 +6641,9 @@ react-native-tab-view@^2.15.2:
   resolved "https://registry.yarnpkg.com/react-native-tab-view/-/react-native-tab-view-2.15.2.tgz#4bc7832d33a119306614efee667509672a7ee64e"
   integrity sha512-2hxLkBnZtEKFDyfvNO5EUywhy3f/EiLOBO8SWqKj4BMBTO0QwnybaPE5MVF00Fhz+VA4+h/iI40Dkrrtq70dGg==
 
-react-native-video@^5.1.0-alpha8:
+react-native-video@^5.1.0-alpha8, "react-native-video@git+https://github.com/react-native-community/react-native-video#master":
   version "5.1.0-alpha8"
-  resolved "https://registry.yarnpkg.com/react-native-video/-/react-native-video-5.1.0-alpha8.tgz#f0cb4cb2d74154b7916e68bef0f9b9cdcfe5f568"
-  integrity sha512-RRDSxqKe2F4OtiDWKCQlwVzvcsZ/TcWQdRxeAE3wsGBmFpAYFyhCz52QkFXgQQgYUuIK6Wd+j2lVxUoLp4+R2w==
+  resolved "git+https://github.com/react-native-community/react-native-video#faf8aed29bb566fe3b7a3125cc91845d68a62982"
   dependencies:
     keymirror "^0.1.1"
     prop-types "^15.7.2"
