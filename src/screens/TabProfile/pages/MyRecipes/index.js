@@ -38,7 +38,7 @@ const MyRecipes = () => {
                 flexDirection: 'row',
                 alignItems: 'center',
                 justifyContent: 'space-between',
-                paddingBottom: 10,
+                paddingBottom: 15,
               }}>
               <TextEle variant="body2" style={{ color: colors.text, paddingLeft: 10 }}>
                 {item.text}
