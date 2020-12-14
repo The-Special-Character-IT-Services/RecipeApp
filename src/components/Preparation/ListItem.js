@@ -8,14 +8,13 @@ const ListItem = ({ item, cardWidth }) => {
   const { colors } = useTheme();
   return (
     <View key={item.id} style={{ width: cardWidth }}>
-      <View style={{ paddingHorizontal: 5, paddingTop: 10 }}>
+      <View style={{ marginHorizontal: 5 }}>
         <Image
           source={item.img}
           style={{
             height: 230,
             width: 330,
-            borderRadius: 50,
-            marginRight: 10,
+            borderRadius: 20,
           }}
         />
         <TextEle variant="caption" style={{ color: colors.text, marginTop: 20 }}>
