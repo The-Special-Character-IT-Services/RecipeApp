@@ -1,10 +1,12 @@
+/* eslint-disable react-native/no-inline-styles */
 import React, { useState } from 'react';
-import { ScrollView, View, Text } from 'react-native';
+import { ScrollView, View, Image } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import SearchBar from '../../components/Search';
 import RecentlyAdd from '../../components/RecentlyAdd';
 import SearchCuisine from '../../components/SearchCuisine';
-import Data from '../../components/RecentlyAdd/data';
+import Data from '../../components/Popular/data';
+import TextEle from '../../components/TextEle';
 
 const TabSearch = () => {
   const insets = useSafeAreaInsets();
@@ -25,13 +27,22 @@ const TabSearch = () => {
           <SearchCuisine />
         </ScrollView>
       ) : (
-        <View style={{ flexDirection: 'column' }}>
+        <ScrollView style={{ marginVertical: 20 }}>
           {Data.map(item => (
-            <View>
-              <Text style={{ color: 'white', flexDirection: 'column' }}>{item.text}</Text>
+            <View style={{ flexDirection: 'row', marginVertical: 10, marginHorizontal: 10 }}>
+              <Image source={item.img} style={{ height: 100, width: 100, borderRadius: 10 }} />
+              <TextEle
+                style={{
+                  color: 'white',
+                  flexDirection: 'row',
+                  marginHorizontal: 10,
+                  marginVertical: 20,
+                }}>
+                {item.TextHeading}
+              </TextEle>
             </View>
           ))}
-        </View>
+        </ScrollView>
       )}
     </View>
   );
