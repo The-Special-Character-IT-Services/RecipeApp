@@ -11,7 +11,7 @@ import data from './data';
 const LikedRecipe = ({ onRecipeDetail }) => {
   const { colors } = useTheme();
   return (
-    <BottomSheetView style={{ flex: 1, backgroundColor: colors.background }}>
+    <BottomSheetView style={{ flex: 1, backgroundColor: colors.background, borderRadius: 20 }}>
       <View style={{ flexDirection: 'row', paddingHorizontal: 20 }}>
         <TextEle
           style={{
