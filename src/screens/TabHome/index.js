@@ -25,8 +25,8 @@ const TabHome = ({ navigation }) => {
         </TextEle>
       </View>
       <Popular
-        onRecipePress={item => {
-          navigation.navigate('RecipeDetail', item);
+        onRecipePress={() => {
+          navigation.navigate('Modal');
         }}
       />
       <View style={{ paddingHorizontal: 30, marginVertical: 20 }}>
