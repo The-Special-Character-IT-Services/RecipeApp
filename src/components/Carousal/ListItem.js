@@ -1,6 +1,5 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-
 import { ImageBackground, Pressable, View } from 'react-native';
 import { useTheme } from '@react-navigation/native';
 import TimerIcon from '../../assets/icons/Timer-icon.svg';

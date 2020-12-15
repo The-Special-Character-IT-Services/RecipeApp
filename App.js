@@ -1,6 +1,6 @@
 import { NavigationContainer, DefaultTheme, DarkTheme } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
-import { StatusBar } from 'react-native';
+import { StatusBar, View } from 'react-native';
 import React from 'react';
 import { useColorScheme } from 'react-native-appearance';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
@@ -11,6 +11,7 @@ import Home from './src/screens/Home';
 import RecipeDetail from './src/screens/RecipeDetail';
 import LikeButton from './src/components/LikeButton';
 import RecipeVideo from './src/screens/RecipeVideo';
+import ShareButton from './src/components/ShareButton';
 
 const MyDefaultTheme = {
   ...DefaultTheme,
@@ -55,7 +56,12 @@ const App = () => {
             name="RecipeDetail"
             component={RecipeDetail}
             options={{
-              headerRight: LikeButton,
+              headerRight: () => (
+                <View style={{ flexDirection: 'row' }}>
+                  <ShareButton />
+                  <LikeButton />
+                </View>
+              ),
               headerShown: true,
               headerTransparent: 1,
               headerTintColor: currentTheme.colors.primary,
