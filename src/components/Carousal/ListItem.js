@@ -6,9 +6,11 @@ import TimerIcon from '../../assets/icons/Timer-icon.svg';
 import StarIcon from '../../assets/icons/star-icon.svg';
 import TextEle from '../TextEle';
 import LikeButton from '../LikeButton';
+import Lock from '../../assets/icons/lock.svg';
 
 const ListItem = ({ item, onRecipePress, cardWidth }) => {
   const { colors } = useTheme();
+
   return (
     <Pressable onPress={() => onRecipePress(item)} key={item.id} style={{ width: cardWidth }}>
       <ImageBackground
@@ -18,12 +20,29 @@ const ListItem = ({ item, onRecipePress, cardWidth }) => {
         <View
           style={{
             flex: 1,
-            flexDirection: 'row',
-            justifyContent: 'flex-end',
             marginHorizontal: 10,
             marginVertical: 10,
           }}>
-          <LikeButton />
+          <View
+            style={{
+              flexDirection: 'row',
+              justifyContent: 'flex-end',
+            }}>
+            <LikeButton />
+          </View>
+          {item.id === 3 ? (
+            <View
+              style={{
+                justifyContent: 'center',
+                alignItems: 'center',
+                opacity: 0.5,
+                marginVertical: 20,
+              }}>
+              <Lock height={100} width={100} fill="white" />
+            </View>
+          ) : (
+            <></>
+          )}
         </View>
       </ImageBackground>
       <View>
