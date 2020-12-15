@@ -6,7 +6,13 @@ import styles from './styles';
 
 const TextEle = ({ variant, style, ...rest }) => {
   const { colors } = useTheme();
-  return <Text style={[styles[variant], { color: colors.text }, style]} {...rest} />;
+  return (
+    <Text
+      allowFontScaling={false}
+      style={[styles[variant], { color: colors.text }, style]}
+      {...rest}
+    />
+  );
 };
 
 TextEle.propTypes = {
