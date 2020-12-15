@@ -1,6 +1,8 @@
+/* eslint-disable react-native/no-inline-styles */
 import { useTheme } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import React from 'react';
+import { View } from 'react-native';
 import Registration from '../screens/Registration';
 import Home from '../screens/Home';
 import RecipeDetail from '../screens/RecipeDetail';
@@ -8,6 +10,7 @@ import LikeButton from '../components/LikeButton';
 import RecipeVideo from '../screens/RecipeVideo';
 import Splash from '../screens/Splash';
 import Login from '../screens/Login';
+import ShareButton from '../components/ShareButton';
 
 const MainStack = createStackNavigator();
 
@@ -29,7 +32,12 @@ const MainStackScreen = () => {
         name="RecipeDetail"
         component={RecipeDetail}
         options={{
-          headerRight: LikeButton,
+          headerRight: () => (
+            <View style={{ flexDirection: 'row' }}>
+              <ShareButton />
+              <LikeButton />
+            </View>
+          ),
           headerShown: true,
           headerTransparent: 1,
           headerTintColor: colors.primary,

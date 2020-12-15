@@ -1,11 +1,9 @@
 import { NavigationContainer, DefaultTheme, DarkTheme } from '@react-navigation/native';
 import { createStackNavigator, CardStyleInterpolators } from '@react-navigation/stack';
-import { StatusBar, View } from 'react-native';
+import { StatusBar } from 'react-native';
 import React from 'react';
 import { useColorScheme } from 'react-native-appearance';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
-import LikeButton from './src/components/LikeButton';
-import ShareButton from './src/components/ShareButton';
 import MasterNavigation from './src/navigation/MasterNavigation';
 import ModalNavigation from './src/navigation/ModalNavigation';
 
@@ -43,12 +41,6 @@ const App = () => {
             name="Modal"
             component={ModalNavigation}
             options={{
-              headerRight: () => (
-                <View style={{ flexDirection: 'row' }}>
-                  <ShareButton />
-                  <LikeButton />
-                </View>
-              ),
               headerShown: true,
               headerTransparent: 1,
               headerTintColor: currentTheme.colors.primary,
