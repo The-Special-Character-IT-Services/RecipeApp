@@ -6,7 +6,7 @@ import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import SearchBar from '../../components/Search';
 import RecentlyAdd from '../../components/RecentlyAdd';
 import SearchCuisine from '../../components/SearchCuisine';
-import Data from '../../components/Popular/data';
+import Data from '../../components/Carousal/data';
 import TextEle from '../../components/TextEle';
 
 const TabSearch = () => {

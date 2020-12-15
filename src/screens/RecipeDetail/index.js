@@ -1,22 +1,22 @@
 import BottomSheet from '@gorhom/bottom-sheet';
 import { useTheme } from '@react-navigation/native';
-import { useHeaderHeight } from '@react-navigation/stack';
 import PropTypes from 'prop-types';
 import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
-
 import React, { useMemo, useRef } from 'react';
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { View, Dimensions, Image } from 'react-native';
-// import { ScrollView } from 'react-native-gesture-handler';
-import Preparation from './pages/preparation';
+import { RectButton } from 'react-native-gesture-handler';
+import Play from '../../assets/icons/play.svg';
 import Ingrediants from '../../components/Ingrediants';
+import TextEle from '../../components/TextEle';
+import Preparation from '../../components/Preparation';
 
 const { height: windowHeight, width: windowWidth } = Dimensions.get('window');
 
-const RecipeDetail = ({ route }) => {
+const RecipeDetail = ({ route, navigation }) => {
   const { colors } = useTheme();
-
+  const insets = useSafeAreaInsets();
   const { img } = route.params;
-  const headerHeight = useHeaderHeight();
   const bottomSheetRef = useRef(null);
   const snapPoints = useMemo(() => [windowHeight * 0.6, '100%'], []);
   const Tab = createMaterialTopTabNavigator();
@@ -38,14 +38,7 @@ const RecipeDetail = ({ route }) => {
         initialSnapIndex={0}
         snapPoints={snapPoints}
         handleComponent={() => null}
-        topInset={headerHeight}>
-        {/* <BottomSheetScrollView
-          style={{
-            flex: 1,
-            backgroundColor: colors.card,
-            borderTopLeftRadius: 20,
-            borderTopRightRadius: 20,
-          }}> */}
+        topInset={insets.top}>
         <Tab.Navigator
           tabBarOptions={{
             activeTintColor: colors.primary,
@@ -91,6 +84,21 @@ const RecipeDetail = ({ route }) => {
         </Tab.Navigator>
         {/* </BottomSheetScrollView> */}
       </BottomSheet>
+      <RectButton
+        onPress={() => navigation.navigate('RecipeVideo')}
+        style={{
+          marginHorizontal: 40,
+          marginVertical: 50,
+          height: 40,
+          borderRadius: 20,
+          backgroundColor: '#FD6D3B',
+          flexDirection: 'row',
+          justifyContent: 'center',
+          alignItems: 'center',
+        }}>
+        <Play height={24} width={24} fill="white" />
+        <TextEle style={{ color: 'white', paddingLeft: 10 }}>Watch Video</TextEle>
+      </RectButton>
     </View>
   );
 };

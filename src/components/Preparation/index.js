@@ -1,11 +1,9 @@
 /* eslint-disable import/no-unresolved */
 import React, { useEffect, useRef } from 'react';
 import { View, Dimensions, Platform } from 'react-native';
-import PropTypes from 'prop-types';
 import { useTheme } from '@react-navigation/native';
-import { RectButton, FlatList } from 'react-native-gesture-handler';
+import { FlatList } from 'react-native-gesture-handler';
 import Timer from '../../assets/icons/timer.svg';
-import Play from '../../assets/icons/play.svg';
 import TextEle from '../TextEle';
 import data from './data';
 import ListItem from './ListItem';
@@ -16,7 +14,7 @@ export const CARD_WIDTH = windowWidth * 0.9;
 
 const cardInset = (windowWidth - CARD_WIDTH) / 1.4;
 
-const Preparation = ({ onWatchVideoPress }) => {
+const Preparation = () => {
   const { colors } = useTheme();
   const flatListRef = useRef(null);
 
@@ -75,49 +73,11 @@ const Preparation = ({ onWatchVideoPress }) => {
             </View>
           )}
           removeClippedSubviews
+          keyExtractor={item => `${item.id}`}
         />
-        {/* <ScrollView
-          style={{ marginBottom: 10 }}
-          horizontal
-          contentContainerStyle={{ paddingHorizontal: 27 }}
-          showsHorizontalScrollIndicator={false}>
-          {data0.map(item => (
-            <View style={{ paddingHorizontal: 5, paddingTop: 10 }} key={item.id}>
-              <Image
-                imageStyle={{ borderRadius: 15 }}
-                source={item.img}
-                style={{
-                  height: 230,
-                  width: 330,
-                  borderRadius: 50,
-                }}
-              />
-              <TextEle variant="caption" style={{ color: 'white', marginTop: 20 }}>
-                {item.text}
-              </TextEle>
-            </View>
-          ))}
-        </ScrollView> */}
-        <RectButton
-          onPress={onWatchVideoPress}
-          style={{
-            marginHorizontal: 40,
-            marginVertical: 50,
-            height: 40,
-            borderRadius: 20,
-            backgroundColor: '#FD6D3B',
-            flexDirection: 'row',
-            justifyContent: 'center',
-            alignItems: 'center',
-          }}>
-          <Play height={24} width={24} fill="white" />
-          <TextEle style={{ color: 'white', paddingLeft: 10 }}>Watch Video</TextEle>
-        </RectButton>
       </View>
     </>
   );
 };
-Preparation.propTypes = {
-  onWatchVideoPress: PropTypes.func.isRequired,
-};
+
 export default Preparation;

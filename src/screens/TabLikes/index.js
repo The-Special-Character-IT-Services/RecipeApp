@@ -2,8 +2,8 @@ import React, { useMemo, useRef } from 'react';
 import PropTypes from 'prop-types';
 import { Dimensions, Image, TextInput, View } from 'react-native';
 import BottomSheet from '@gorhom/bottom-sheet';
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { useTheme } from '@react-navigation/native';
-import { useHeaderHeight } from '@react-navigation/stack';
 import LikedRecipe from '../../components/LikedRecipe';
 import AllFood from '../../assets/images/AllFood.jpg';
 
@@ -11,13 +11,13 @@ const { height: windowHeight, width: windowWidth } = Dimensions.get('window');
 
 const TabLikes = ({ navigation }) => {
   const { colors } = useTheme();
+  const insets = useSafeAreaInsets();
 
-  const headerHeight = useHeaderHeight();
   const bottomSheetRef = useRef(null);
   const snapPoints = useMemo(() => [windowHeight * 0.6, '80%'], []);
 
   return (
-    <View style={{ flex: 1 }}>
+    <View style={{ flex: 1, paddingTop: insets.top }}>
       <Image
         style={{
           height: windowHeight * 0.5,
@@ -46,7 +46,7 @@ const TabLikes = ({ navigation }) => {
         initialSnapIndex={0}
         snapPoints={snapPoints}
         handleComponent={() => null}
-        topInset={headerHeight}>
+        topInset={insets.top}>
         <LikedRecipe
           onRecipeDetail={item => {
             navigation.navigate('RecipeDetail', item);
