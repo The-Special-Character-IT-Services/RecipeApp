@@ -19,6 +19,7 @@ const MyRecipes = () => {
   return (
     <FlatList
       data={recipes}
+      style={{ backgroundColor: colors.card }}
       contentContainerStyle={{ marginHorizontal: 20 }}
       renderItem={({ item, index }) => (
         <View
