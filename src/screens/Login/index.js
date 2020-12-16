@@ -9,6 +9,7 @@ const Login = () => {
   const onSubmit = values => {
     console.log(values);
   };
+
   return (
     <View style={{ flex: 1, paddingTop: insets.top }}>
       <Form initialValues={initialValues} fields={loginForm} onSubmit={onSubmit} />
