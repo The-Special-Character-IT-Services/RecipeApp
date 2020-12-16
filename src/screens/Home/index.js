@@ -4,6 +4,7 @@ import { useTheme } from '@react-navigation/native';
 import TabHome from '../TabHome';
 import TabSearch from '../TabSearch';
 import TabLikes from '../TabLikes';
+import TabShop from '../TabShop';
 // import TabProfile from '../TabProfile';
 import TabEvent from '../TabEvent';
 import HeartOutline from '../../assets/icons/heart-outline.svg';
@@ -16,6 +17,8 @@ import SearchOutline from '../../assets/icons/search-outline.svg';
 import SearchSharp from '../../assets/icons/search-sharp.svg';
 import EventOutline from '../../assets/icons/event1-outline.svg';
 import EventSharp from '../../assets/icons/event1-sharp.svg';
+import ShopSharp from '../../assets/icons/cart-sharp.svg';
+import ShopOutline from '../../assets/icons/cart-outline.svg';
 
 const Tab = createBottomTabNavigator();
 
@@ -52,6 +55,12 @@ const Home = () => {
               }
               return <EventOutline height={24} width={24} fill={color} />;
 
+            case 'TabShop':
+              if (focused) {
+                return <ShopSharp height={24} width={24} fill={color} />;
+              }
+              return <ShopOutline height={24} width={24} fill={color} />;
+
             default:
               return null;
           }
@@ -67,6 +76,7 @@ const Home = () => {
       <Tab.Screen name="TabLikes" component={TabLikes} />
       {/* <Tab.Screen name="TabProfile" component={TabProfile} /> */}
       <Tab.Screen name="TabEvent" component={TabEvent} />
+      <Tab.Screen name="TabShop" component={TabShop} />
     </Tab.Navigator>
   );
 };
