@@ -4,6 +4,8 @@ import React from 'react';
 import { Image, View } from 'react-native';
 import { ScrollView } from 'react-native-gesture-handler';
 import { useTheme } from '@react-navigation/native';
+import StarIcon from '../../assets/icons/star-icon.svg';
+
 import Data1 from './data';
 
 import TextEle from '../TextEle';
@@ -18,9 +20,9 @@ const ShopProduct = () => {
             <View>
               <Image source={item.image} style={{ height: 100, width: 100, borderRadius: 10 }} />
             </View>
-            <View>
+            <View style={{ flexDirection: 'column' }}>
               <TextEle
-                variant="subTitle1"
+                variant="subTitle2"
                 style={{
                   color: colors.text,
                   marginHorizontal: 10,
@@ -28,6 +30,28 @@ const ShopProduct = () => {
                 }}>
                 {item.text}
               </TextEle>
+              <View style={{ flexDirection: 'row' }}>
+                <TextEle
+                  variant="caption"
+                  style={{
+                    color: colors.text,
+                    marginHorizontal: 10,
+                    marginVertical: 5,
+                  }}>
+                  {item.cal}
+                </TextEle>
+                <View style={{ height: 25, width: 1, backgroundColor: 'gray' }} />
+                <TextEle
+                  variant="caption"
+                  style={{
+                    color: colors.text,
+                    marginHorizontal: 10,
+                    marginVertical: 5,
+                  }}>
+                  {item.Rate}
+                </TextEle>
+                <StarIcon height={20} width={20} fill={colors.text} top={4} left={-7} />
+              </View>
             </View>
           </View>
         ))}

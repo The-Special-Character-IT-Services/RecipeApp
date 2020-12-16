@@ -1,17 +1,26 @@
-import React from 'react';
-import { SafeAreaView, Pressable } from 'react-native';
+import React, { useEffect } from 'react';
+import { SafeAreaView } from 'react-native';
+import PropTypes from 'prop-types';
+import SplashScreen from 'react-native-splash-screen';
 import TextEle from '../../components/TextEle';
 
-const index = ({ navigation }) => (
-  <SafeAreaView>
-    <TextEle>Splash Screen</TextEle>
-    <Pressable
-      onPress={() => {
-        navigation.navigate('Home');
-      }}>
-      <TextEle>Move to Login Page</TextEle>
-    </Pressable>
-  </SafeAreaView>
-);
+const Splash = ({ navigation }) => {
+  useEffect(() => {
+    SplashScreen.hide();
+    navigation.navigate('Home');
+  }, [navigation]);
 
-export default index;
+  return (
+    <SafeAreaView>
+      <TextEle>Splash Screen</TextEle>
+    </SafeAreaView>
+  );
+};
+
+Splash.propTypes = {
+  navigation: PropTypes.shape({
+    navigate: PropTypes.func,
+  }).isRequired,
+};
+
+export default Splash;
