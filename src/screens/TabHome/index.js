@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-expressions */
 import React from 'react';
 import PropTypes from 'prop-types';
 import { View } from 'react-native';
@@ -25,8 +26,10 @@ const TabHome = ({ navigation }) => {
         </TextEle>
       </View>
       <Popular
-        onRecipePress={() => {
-          navigation.navigate('PriceTag');
+        onRecipePress={item => {
+          item.id === 3 || item.id === 2
+            ? navigation.navigate('PriceTag')
+            : navigation.navigate('RecipeVideo');
         }}
       />
       <View style={{ paddingHorizontal: 30, marginVertical: 20 }}>
@@ -36,7 +39,9 @@ const TabHome = ({ navigation }) => {
       </View>
       <Popular
         onRecipePress={item => {
-          navigation.navigate('RecipeDetail', item);
+          item.id === 3 || item.id === 2
+            ? navigation.navigate('RecipeDetail', item)
+            : navigation.navigate('RecipeVideo');
         }}
       />
       <Footer />

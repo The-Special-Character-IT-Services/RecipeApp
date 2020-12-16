@@ -12,56 +12,95 @@ const ListItem = ({ item, onRecipePress, cardWidth }) => {
   const { colors } = useTheme();
 
   return (
-    <Pressable onPress={() => onRecipePress(item)} key={item.id} style={{ width: cardWidth }}>
-      <ImageBackground
-        style={{ height: 225, width: cardWidth - 10 }}
-        imageStyle={{ borderRadius: 20 }}
-        source={item.img}>
-        <View
-          style={{
-            flex: 1,
-            marginHorizontal: 10,
-            marginVertical: 10,
-          }}>
-          <View
-            style={{
-              flexDirection: 'row',
-              justifyContent: 'flex-end',
-            }}>
-            <LikeButton />
-          </View>
-          {item.id === 3 ? (
+    <View>
+      {item.id === 3 || item.id === 2 ? (
+        <Pressable onPress={() => onRecipePress(item)} key={item.id} style={{ width: cardWidth }}>
+          <ImageBackground
+            style={{ height: 225, width: cardWidth - 10 }}
+            imageStyle={{ borderRadius: 20 }}
+            source={item.img}>
             <View
               style={{
-                justifyContent: 'center',
-                alignItems: 'center',
-                opacity: 0.7,
-                marginVertical: 20,
+                flex: 1,
+                marginHorizontal: 10,
+                marginVertical: 10,
               }}>
-              <Lock height={100} width={100} fill="black" />
+              <View
+                style={{
+                  flexDirection: 'row',
+                  justifyContent: 'flex-end',
+                }}>
+                <LikeButton />
+              </View>
+
+              <View
+                style={{
+                  justifyContent: 'center',
+                  alignItems: 'center',
+                  opacity: 0.7,
+                  marginVertical: 20,
+                }}>
+                <Lock height={100} width={100} fill="black" />
+              </View>
             </View>
-          ) : (
-            <></>
-          )}
-        </View>
-      </ImageBackground>
-      <View>
-        <TextEle style={{ paddingTop: 20, paddingBottom: 5 }}>{item.TextHeading}</TextEle>
-        <TextEle
-          style={{ flexWrap: 'wrap', paddingBottom: 10, color: 'gray', fontSize: 12 }}
-          numberOfLines={2}>
-          {item.Description}
-        </TextEle>
-        <View style={{ flexDirection: 'row', alignItems: 'center' }}>
-          <TimerIcon height={24} width={24} fill={colors.text} />
-          <TextEle style={{ marginLeft: 8 }}>{item.time}</TextEle>
-          <View style={{ flexDirection: 'row', paddingLeft: 10, alignItems: 'center' }}>
-            <StarIcon height={24} width={24} fill={colors.text} />
-            <TextEle style={{ marginLeft: 8 }}>{item.rating}</TextEle>
+          </ImageBackground>
+          <View>
+            <TextEle style={{ paddingTop: 20, paddingBottom: 5 }}>{item.TextHeading}</TextEle>
+            <TextEle
+              style={{ flexWrap: 'wrap', paddingBottom: 10, color: 'gray', fontSize: 12 }}
+              numberOfLines={2}>
+              {item.Description}
+            </TextEle>
+            <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+              <TimerIcon height={24} width={24} fill={colors.text} />
+              <TextEle style={{ marginLeft: 8 }}>{item.time}</TextEle>
+              <View style={{ flexDirection: 'row', paddingLeft: 10, alignItems: 'center' }}>
+                <StarIcon height={24} width={24} fill={colors.text} />
+                <TextEle style={{ marginLeft: 8 }}>{item.rating}</TextEle>
+              </View>
+            </View>
           </View>
-        </View>
-      </View>
-    </Pressable>
+        </Pressable>
+      ) : (
+        <Pressable onPress={() => onRecipePress()} key={item.id} style={{ width: cardWidth }}>
+          <ImageBackground
+            style={{ height: 225, width: cardWidth - 10 }}
+            imageStyle={{ borderRadius: 20 }}
+            source={item.img}>
+            <View
+              style={{
+                flex: 1,
+                marginHorizontal: 10,
+                marginVertical: 10,
+              }}>
+              <View
+                style={{
+                  flexDirection: 'row',
+                  justifyContent: 'flex-end',
+                }}>
+                <LikeButton />
+              </View>
+            </View>
+          </ImageBackground>
+          <View>
+            <TextEle style={{ paddingTop: 20, paddingBottom: 5 }}>{item.TextHeading}</TextEle>
+            <TextEle
+              style={{ flexWrap: 'wrap', paddingBottom: 10, color: 'gray', fontSize: 12 }}
+              numberOfLines={2}>
+              {item.Description}
+            </TextEle>
+            <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+              <TimerIcon height={24} width={24} fill={colors.text} />
+              <TextEle style={{ marginLeft: 8 }}>{item.time}</TextEle>
+              <View style={{ flexDirection: 'row', paddingLeft: 10, alignItems: 'center' }}>
+                <StarIcon height={24} width={24} fill={colors.text} />
+                <TextEle style={{ marginLeft: 8 }}>{item.rating}</TextEle>
+              </View>
+            </View>
+          </View>
+        </Pressable>
+      )}
+    </View>
   );
 };
 
