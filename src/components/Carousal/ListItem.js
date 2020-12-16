@@ -62,7 +62,7 @@ const ListItem = ({ item, onRecipePress, cardWidth }) => {
           </View>
         </Pressable>
       ) : (
-        <Pressable onPress={() => onRecipePress()} key={item.id} style={{ width: cardWidth }}>
+        <Pressable onPress={() => onRecipePress(item)} key={item.id} style={{ width: cardWidth }}>
           <ImageBackground
             style={{ height: 225, width: cardWidth - 10 }}
             imageStyle={{ borderRadius: 20 }}

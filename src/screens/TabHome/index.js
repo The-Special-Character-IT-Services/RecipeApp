@@ -40,8 +40,8 @@ const TabHome = ({ navigation }) => {
       <Popular
         onRecipePress={item => {
           item.id === 3 || item.id === 2
-            ? navigation.navigate('RecipeDetail', item)
-            : navigation.navigate('RecipeVideo');
+            ? navigation.navigate('PriceTag')
+            : navigation.navigate('RecipeDetail', item);
         }}
       />
       <Footer />
