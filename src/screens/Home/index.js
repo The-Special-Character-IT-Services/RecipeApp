@@ -15,8 +15,8 @@ import HomeSharp from '../../assets/icons/home-sharp.svg';
 // import Personsharp from '../../assets/icons/person-sharp.svg';
 import SearchOutline from '../../assets/icons/search-outline.svg';
 import SearchSharp from '../../assets/icons/search-sharp.svg';
-import EventOutline from '../../assets/icons/event1-outline.svg';
-import EventSharp from '../../assets/icons/event1-sharp.svg';
+import EventOutline from '../../assets/icons/calendar-outline.svg';
+import EventSharp from '../../assets/icons/calendar.svg';
 import ShopSharp from '../../assets/icons/cart-sharp.svg';
 import ShopOutline from '../../assets/icons/cart-outline.svg';
 
@@ -53,13 +53,13 @@ const Home = () => {
               if (focused) {
                 return <EventSharp height={24} width={24} fill={color} />;
               }
-              return <EventOutline height={24} width={24} fill={color} />;
+              return <EventOutline height={24} width={24} stroke={color} />;
 
             case 'TabShop':
               if (focused) {
                 return <ShopSharp height={24} width={24} fill={color} />;
               }
-              return <ShopOutline height={24} width={24} fill={color} />;
+              return <ShopOutline height={24} width={24} stroke={color} />;
 
             default:
               return null;
