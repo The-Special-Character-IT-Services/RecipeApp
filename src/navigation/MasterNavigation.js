@@ -11,6 +11,7 @@ import RecipeVideo from '../screens/RecipeVideo';
 import Splash from '../screens/Splash';
 import Login from '../screens/Login';
 import ShareButton from '../components/ShareButton';
+import Profile from '../screens/Profile';
 
 const MainStack = createStackNavigator();
 
@@ -29,6 +30,15 @@ const MainStackScreen = () => {
       <MainStack.Screen name="Registration" component={Registration} />
       <MainStack.Screen name="Home" component={Home} />
       <MainStack.Screen name="RecipeVideo" component={RecipeVideo} />
+      <MainStack.Screen
+        name="Profile"
+        component={Profile}
+        options={{
+          headerShown: true,
+          title: 'Profile',
+          headerTitleAlign: 'center',
+        }}
+      />
       <MainStack.Screen
         name="RecipeDetail"
         component={RecipeDetail}

@@ -6,9 +6,9 @@ import { View, Image } from 'react-native';
 import { useTheme } from '@react-navigation/native';
 import { RectButton } from 'react-native-gesture-handler';
 
-import TextEle from '../TextEle';
+import TextEle from '../../components/TextEle';
 
-const Header = ({ navigation }) => {
+const Header = ({ onProfilePress }) => {
   const { colors } = useTheme();
   return (
     <View>
@@ -19,10 +19,7 @@ const Header = ({ navigation }) => {
             Chetna!
           </TextEle>
         </TextEle>
-        <RectButton
-          onPress={() => {
-            navigation.navigate('TabProfile');
-          }}>
+        <RectButton onPress={onProfilePress}>
           <Image
             style={{ marginLeft: 30, height: 80, width: 80, borderRadius: 10 }}
             source={require('../../assets/images/profilelogo.png')}
@@ -37,6 +34,7 @@ Header.propTypes = {
   navigation: PropTypes.shape({
     navigate: PropTypes.func,
   }).isRequired,
+  onProfilePress: PropTypes.func.isRequired,
 };
 
 export default Header;

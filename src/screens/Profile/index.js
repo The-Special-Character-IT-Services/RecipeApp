@@ -3,13 +3,12 @@ import { createMaterialTopTabNavigator } from '@react-navigation/material-top-ta
 import React from 'react';
 import { Dimensions, View } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
-import Header from '../../components/Header';
 import TextEle from '../../components/TextEle';
 import MyRecipes from './pages/MyRecipes';
 import Settings from './pages/Settings';
 import SavedVideos from './pages/SavedVideos';
 
-const { height: windowHeight, width: windowWidth } = Dimensions.get('window');
+const { width: windowWidth } = Dimensions.get('window');
 const Tab = createMaterialTopTabNavigator();
 
 const data = [
@@ -27,7 +26,7 @@ const data = [
   },
 ];
 
-const TabProfile = () => {
+const Profile = () => {
   const { colors } = useTheme();
   const insets = useSafeAreaInsets();
 
@@ -37,11 +36,10 @@ const TabProfile = () => {
         style={{
           borderBottomEndRadius: 30,
           borderBottomStartRadius: 30,
-          height: windowHeight * 0.35,
+          height: 140,
           backgroundColor: colors.background,
           zIndex: 1,
         }}>
-        <Header />
         <View
           style={{
             flex: 1,
@@ -55,6 +53,7 @@ const TabProfile = () => {
               backgroundColor: colors.card,
               borderRadius: 25,
               height: 100,
+              marginVertical: 20,
             }}>
             {data.map((x, i) => (
               <>
@@ -139,4 +138,4 @@ const TabProfile = () => {
   );
 };
 
-export default TabProfile;
+export default Profile;
