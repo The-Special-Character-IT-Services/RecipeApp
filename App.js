@@ -1,9 +1,10 @@
+import React, { useEffect } from 'react';
 import { NavigationContainer, DefaultTheme, DarkTheme } from '@react-navigation/native';
 import { createStackNavigator, CardStyleInterpolators } from '@react-navigation/stack';
 import { StatusBar } from 'react-native';
-import React from 'react';
 import { useColorScheme } from 'react-native-appearance';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
+import SplashScreen from 'react-native-splash-screen';
 import MasterNavigation from './src/navigation/MasterNavigation';
 import ModalNavigation from './src/navigation/ModalNavigation';
 import PriceTag from './src/components/PriceTag';
@@ -29,6 +30,10 @@ const RootStack = createStackNavigator();
 const App = () => {
   const scheme = useColorScheme();
   const currentTheme = scheme === 'dark' ? MyDarkTheme : MyDefaultTheme;
+
+  useEffect(() => {
+    SplashScreen.hide();
+  }, []);
   return (
     <SafeAreaProvider>
       <StatusBar

@@ -19,7 +19,6 @@ const MainStackScreen = () => {
   const { colors } = useTheme();
   return (
     <MainStack.Navigator
-      initialRouteName="splash"
       screenOptions={{
         headerShown: false,
         headerTintColor: colors.primary,
