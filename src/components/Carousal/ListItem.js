@@ -35,10 +35,10 @@ const ListItem = ({ item, onRecipePress, cardWidth }) => {
               style={{
                 justifyContent: 'center',
                 alignItems: 'center',
-                opacity: 0.5,
+                opacity: 0.7,
                 marginVertical: 20,
               }}>
-              <Lock height={100} width={100} fill="white" />
+              <Lock height={100} width={100} fill="black" />
             </View>
           ) : (
             <></>
