@@ -1,49 +1,39 @@
 /* eslint-disable react-native/no-inline-styles */
-import React, { useEffect, useRef } from 'react';
-import { Dimensions, Platform } from 'react-native';
-import { FlatList } from 'react-native-gesture-handler';
-import data from './data';
+/* eslint-disable global-require */
+import React from 'react';
+import { Image, View } from 'react-native';
+import { ScrollView } from 'react-native-gesture-handler';
+import { useTheme } from '@react-navigation/native';
+import Data1 from './data';
 
-const { width: windowWidth } = Dimensions.get('window');
+import TextEle from '../TextEle';
 
-export const CARD_WIDTH = windowWidth * 0.9;
-
-const cardInset = (windowWidth - CARD_WIDTH) / 1.5;
-
-const Popular = () => {
-  const flatListRef = useRef(null);
-
-  useEffect(() => {
-    flatListRef.current.scrollToOffset({
-      animated: false,
-      offset: -cardInset,
-    });
-  }, []);
-
+const ShopProduct = () => {
+  const { colors } = useTheme();
   return (
-    <FlatList
-      ref={flatListRef}
-      data={data}
-      horizontal
-      pagingEnabled
-      snapToAlignment="center"
-      decelerationRate="fast"
-      scrollEventThrottle={16}
-      snapToInterval={CARD_WIDTH}
-      renderToHardwareTextureAndroid
-      contentInset={{
-        top: 0,
-        left: cardInset,
-        bottom: 0,
-        right: cardInset,
-      }}
-      contentContainerStyle={[
-        {
-          paddingHorizontal: Platform.OS === 'android' ? cardInset : 0,
-        },
-      ]}
-    />
+    <View style={{ flex: 1 }}>
+      <ScrollView verticle showsVerticleScrollIndicator={false}>
+        {Data1.map(item => (
+          <View style={{ flexDirection: 'row', marginVertical: 10, marginHorizontal: 5 }}>
+            <View>
+              <Image source={item.image} style={{ height: 100, width: 100, borderRadius: 10 }} />
+            </View>
+            <View>
+              <TextEle
+                variant="subTitle1"
+                style={{
+                  color: colors.text,
+                  marginHorizontal: 10,
+                  marginVertical: 5,
+                }}>
+                {item.text}
+              </TextEle>
+            </View>
+          </View>
+        ))}
+      </ScrollView>
+    </View>
   );
 };
 
-export default Popular;
+export default ShopProduct;
