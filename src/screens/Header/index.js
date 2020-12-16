@@ -19,9 +19,9 @@ const Header = ({ onProfilePress }) => {
             Chetna!
           </TextEle>
         </TextEle>
-        <RectButton onPress={onProfilePress}>
+        <RectButton rippleColor={colors.background} onPress={onProfilePress}>
           <Image
-            style={{ marginLeft: 30, height: 80, width: 80, borderRadius: 10 }}
+            style={{ height: 80, width: 80, borderRadius: 10 }}
             source={require('../../assets/images/profilelogo.png')}
           />
         </RectButton>
