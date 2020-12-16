@@ -1,10 +1,11 @@
 import React from 'react';
-import { View, Text } from 'react-native';
+import { View } from 'react-native';
+import TextEle from '../../components/TextEle';
 
 export default function index() {
   return (
     <View>
-      <Text>Future Events</Text>
+      <TextEle>Future Events</TextEle>
     </View>
   );
 }
