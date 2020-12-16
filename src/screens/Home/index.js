@@ -23,6 +23,7 @@ const Home = () => {
   const { colors } = useTheme();
   return (
     <Tab.Navigator
+      lazy
       screenOptions={({ route }) => ({
         // eslint-disable-next-line react/prop-types
         tabBarIcon: ({ focused, color }) => {
