@@ -26,7 +26,7 @@ const TabHome = ({ navigation }) => {
       </View>
       <Popular
         onRecipePress={() => {
-          navigation.navigate('Modal');
+          navigation.navigate('PriceTag');
         }}
       />
       <View style={{ paddingHorizontal: 30, marginVertical: 20 }}>

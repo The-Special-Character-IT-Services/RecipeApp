@@ -1,6 +1,5 @@
 import BottomSheet from '@gorhom/bottom-sheet';
 import { useTheme } from '@react-navigation/native';
-import PropTypes from 'prop-types';
 import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
 import React, { useMemo, useRef } from 'react';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
@@ -75,44 +74,10 @@ const RecipeDetail = () => {
               title: 'Ingrediants',
             }}
           />
-          {/* <Tab.Screen
-            name="Preparation"
-            component={Preparation}
-            options={{
-              title: 'Preparation',
-            }}
-          /> */}
         </Tab.Navigator>
-        {/* </BottomSheetScrollView> */}
       </BottomSheet>
-      {/* <RectButton
-        onPress={() => navigation.navigate('RecipeVideo')}
-        style={{
-          marginHorizontal: 40,
-          marginVertical: 50,
-          height: 40,
-          borderRadius: 20,
-          backgroundColor: '#FD6D3B',
-          flexDirection: 'row',
-          justifyContent: 'center',
-          alignItems: 'center',
-        }}>
-        <Play height={24} width={24} fill="white" />
-        <TextEle style={{ color: 'white', paddingLeft: 10 }}>Watch Video</TextEle>
-      </RectButton> */}
     </View>
   );
-};
-
-RecipeDetail.propTypes = {
-  route: PropTypes.shape({
-    params: PropTypes.shape({
-      img: PropTypes.number,
-    }),
-  }).isRequired,
-  navigation: PropTypes.shape({
-    navigate: PropTypes.func,
-  }).isRequired,
 };
 
 export default RecipeDetail;

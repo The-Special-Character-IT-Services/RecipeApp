@@ -6,6 +6,7 @@ import { useColorScheme } from 'react-native-appearance';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 import MasterNavigation from './src/navigation/MasterNavigation';
 import ModalNavigation from './src/navigation/ModalNavigation';
+import PriceTag from './src/components/PriceTag';
 
 const MyDefaultTheme = {
   ...DefaultTheme,
@@ -41,6 +42,19 @@ const App = () => {
             name="Modal"
             component={ModalNavigation}
             options={{
+              headerShown: true,
+              headerTransparent: 1,
+              headerTintColor: currentTheme.colors.primary,
+              cardStyleInterpolator: CardStyleInterpolators.forFadeFromBottomAndroid,
+            }}
+          />
+          <RootStack.Screen
+            name="PriceTag"
+            component={PriceTag}
+            options={{
+              headerShown: true,
+              headerTransparent: 1,
+              headerTintColor: currentTheme.colors.primary,
               cardStyleInterpolator: CardStyleInterpolators.forFadeFromBottomAndroid,
             }}
           />
