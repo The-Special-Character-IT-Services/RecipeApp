@@ -1,9 +1,10 @@
 import { BottomSheetScrollView, BottomSheetView } from '@gorhom/bottom-sheet';
 import React from 'react';
+import { RectButton } from 'react-native-gesture-handler';
 import { View, Image } from 'react-native';
 import TextEle from '../TextEle';
 
-const index = () => {
+const EventRecipe = () => {
   const photos = [
     {
       id: 1,
@@ -55,7 +56,7 @@ const index = () => {
       <View style={{ flexDirection: 'row', paddingHorizontal: 20 }}>
         <TextEle
           style={{
-            fontSize: 30,
+            fontSize: 27,
             fontWeight: 'bold',
             flex: 1,
             marginVertical: 5,
@@ -63,9 +64,14 @@ const index = () => {
           Buy Online Classes
         </TextEle>
       </View>
+
       <BottomSheetScrollView contentContainerStyle={{ paddingVertical: 10, paddingHorizontal: 20 }}>
         {photos.map(item => (
-          <View key={item.id} style={{ flexDirection: 'row', marginVertical: 5, height: 100 }}>
+          <RectButton
+            rippleColor="#2f2f2f"
+            onPress={() => {}}
+            key={item.id}
+            style={{ flexDirection: 'row', marginVertical: 5, height: 100 }}>
             <Image style={{ height: 100, width: 100, borderRadius: 20 }} source={item.img} />
             <View
               style={{
@@ -77,11 +83,11 @@ const index = () => {
               <TextEle style={{ color: 'gray', fontSize: 17 }}>{item.desc}</TextEle>
               <TextEle style={{ color: 'gray', fontSize: 15 }}>{item.amount}</TextEle>
             </View>
-          </View>
+          </RectButton>
         ))}
       </BottomSheetScrollView>
     </BottomSheetView>
   );
 };
 
-export default index;
+export default EventRecipe;
