@@ -52,7 +52,9 @@ const ShopProduct = () => {
                   {item.Rate}
                 </TextEle>
                 <StarIcon height={20} width={20} fill={colors.text} top={4} left={-7} />
-                <AddToCart />
+                <View style={{ marginVertical: 20, marginHorizontal: 30 }}>
+                  <AddToCart />
+                </View>
               </View>
             </View>
           </View>
