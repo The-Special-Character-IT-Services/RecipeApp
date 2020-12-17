@@ -1,10 +1,11 @@
 import React from 'react';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import { createStackNavigator } from '@react-navigation/stack';
 import { useTheme } from '@react-navigation/native';
 import TabHome from '../TabHome';
 import TabSearch from '../TabSearch';
 import TabLikes from '../TabLikes';
-import TabShop from '../TabShop';
+import TabShopPage from '../TabShop';
 // import TabProfile from '../TabProfile';
 import TabEvent from '../TabEvent';
 import HeartOutline from '../../assets/icons/heart-outline.svg';
@@ -21,6 +22,13 @@ import ShopSharp from '../../assets/icons/cart-sharp.svg';
 import ShopOutline from '../../assets/icons/cart-outline.svg';
 
 const Tab = createBottomTabNavigator();
+const TabShopStack = createStackNavigator();
+
+const TabShop = () => (
+  <TabShopStack.Navigator>
+    <TabShopStack.Screen name="TabShopPage" component={TabShopPage} />
+  </TabShopStack.Navigator>
+);
 
 const Home = () => {
   const { colors } = useTheme();

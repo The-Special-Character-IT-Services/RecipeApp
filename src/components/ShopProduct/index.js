@@ -5,6 +5,7 @@ import { Image, View } from 'react-native';
 import { ScrollView } from 'react-native-gesture-handler';
 import { useTheme } from '@react-navigation/native';
 import StarIcon from '../../assets/icons/star-icon.svg';
+import AddToCart from '../AddToCart';
 
 import Data1 from './data';
 
@@ -51,6 +52,9 @@ const ShopProduct = () => {
                   {item.Rate}
                 </TextEle>
                 <StarIcon height={20} width={20} fill={colors.text} top={4} left={-7} />
+                <View style={{ marginVertical: 20, marginHorizontal: 30 }}>
+                  <AddToCart />
+                </View>
               </View>
             </View>
           </View>
