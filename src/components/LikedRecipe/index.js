@@ -1,3 +1,4 @@
+/* eslint-disable react-native/no-inline-styles */
 import React from 'react';
 import PropTypes from 'prop-types';
 import { BottomSheetScrollView, BottomSheetView } from '@gorhom/bottom-sheet';
@@ -5,7 +6,7 @@ import { View, Image } from 'react-native';
 import { RectButton } from 'react-native-gesture-handler';
 import { useTheme } from '@react-navigation/native';
 import TextEle from '../TextEle';
-import data from './data';
+import data from '../Carousal/data';
 // import RecipeDetail from '../../screens/RecipeDetail';
 
 const LikedRecipe = ({ onRecipeDetail }) => {
@@ -35,8 +36,8 @@ const LikedRecipe = ({ onRecipeDetail }) => {
                   paddingLeft: 15,
                   justifyContent: 'center',
                 }}>
-                <TextEle style={{ fontWeight: 'bold', fontSize: 17 }}>{item.text}</TextEle>
-                <TextEle style={{ color: 'gray' }}>{item.amount}</TextEle>
+                <TextEle style={{ fontWeight: 'bold', fontSize: 17 }}>{item.TextHeading}</TextEle>
+                <TextEle style={{ color: 'gray' }}>{item.Description}</TextEle>
               </View>
             </RectButton>
           </View>
