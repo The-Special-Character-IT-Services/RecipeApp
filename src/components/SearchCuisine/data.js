@@ -1,7 +1,7 @@
 export default [
   {
     id: 1,
-    img1: require('../../assets/images/IndianFood.png'),
+    img1: require('../../assets/image/indian.png'),
     text: 'Indian',
   },
 
