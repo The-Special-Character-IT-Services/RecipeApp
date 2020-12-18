@@ -12,15 +12,15 @@ export default [
     img: require('../../assets/pics/pulavspecial.png'),
     time: '30`',
     rating: '4.5',
-    TextHeading: 'Spacial Pulav',
-    Description: 'Amazing Combo food includes Kadhi and Ssmbhara',
+    TextHeading: 'Special Pulav',
+    Description: 'Amazing Combo food includes Kadhi and Sambhara',
   },
   {
     id: 3,
     img: require('../../assets/pics/WinterSpecialVasana.png'),
     time: '15`',
     rating: '4.0',
-    TextHeading: 'Spacial Winter Vasana',
+    TextHeading: 'Special Winter Vasana',
     Description: 'An Amazing Winter Sweet',
   },
   {
@@ -28,7 +28,7 @@ export default [
     img: require('../../assets/pics/lipsmackingsoup.png'),
     time: '35`',
     rating: '5.0',
-    TextHeading: 'Lip Smacing Soup',
+    TextHeading: 'Lip Smacking Soup',
     Description: 'Amazing Combo of sweet and souvery',
   },
   {
