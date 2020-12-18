@@ -6,6 +6,9 @@ import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { RectButton } from 'react-native-gesture-handler';
 import TextEle from '../TextEle';
 import Pie from '../../assets/images/Pie.jpg';
+import Dips from './Dips';
+import Salad from './Salad';
+import BreadWiches from './BreadWiches';
 
 const { height: windowHeight, width: windowWidth } = Dimensions.get('window');
 
@@ -14,99 +17,6 @@ const PriceTag = () => {
   const insets = useSafeAreaInsets();
   const bottomSheetRef = useRef(null);
   const snapPoints = useMemo(() => [windowHeight * 0.6, '100%'], []);
-
-  const Data = [
-    {
-      id: 1,
-      img: require('../../assets/images/FoodPic1.jpg'),
-      Dips: '1. Cocktail Dip',
-      salad: '1. Mexican Salad',
-      Breadwiches: '1. California Veggie Sandwich',
-    },
-    {
-      id: 2,
-      img: require('../../assets/images/Pizza.jpg'),
-      Dips: '2. Pesto Mayo Dip',
-      salad: '2.Russian Salad',
-      Breadwiches: '2. Mediterranean Grill Sandwich',
-    },
-    {
-      id: 3,
-      img: require('../../assets/images/Sandwich.jpg'),
-      time: '15`',
-      rating: '4.0',
-      Dips: '3.Curd Cucumber Dip',
-      salad: '3.Guacamole Salad',
-      Breadwiches: '3. Russian Toast Club Sandwich',
-    },
-    {
-      id: 4,
-      img: require('../../assets/images/Pie.jpg'),
-      Dips: '4. Honey Mustard Mayo Dip',
-      salad: '4. Chop Masala Salad',
-      Breadwiches: '4. Roasted Corn N Avacado Bagel',
-    },
-    {
-      id: 5,
-      img: require('../../assets/images/Something.jpg'),
-      Breadwiches: '5. Multigrain Caramelized Focaccia sandwich',
-    },
-    {
-      id: 6,
-      img: require('../../assets/images/Something.jpg'),
-      Breadwiches: '6.American Corn Bonanza Sandwich',
-    },
-    {
-      id: 7,
-      img: require('../../assets/images/Something.jpg'),
-      Breadwiches: '7.Chipotle Club Grill Sandwich',
-    },
-    {
-      id: 8,
-      img: require('../../assets/images/Something.jpg'),
-      Breadwiches: '8.Street Style Melting Cheese Sandwich',
-    },
-    {
-      id: 9,
-      img: require('../../assets/images/Something.jpg'),
-      Breadwiches: '9.Pickle Veg Cold Sandwich',
-    },
-    {
-      id: 10,
-      img: require('../../assets/images/Something.jpg'),
-      Breadwiches: '10.Junglee Paneer Sandwich',
-    },
-    {
-      id: 11,
-      img: require('../../assets/images/Something.jpg'),
-      Breadwiches: '11.Kutch Masala Sandwich',
-    },
-    {
-      id: 12,
-      img: require('../../assets/images/Something.jpg'),
-      Breadwiches: '12.Spinach Cold Sandwich',
-    },
-    {
-      id: 13,
-      img: require('../../assets/images/Something.jpg'),
-      Breadwiches: '13.Chinese Masala Toast Sandwich',
-    },
-    {
-      id: 14,
-      img: require('../../assets/images/Something.jpg'),
-      Breadwiches: '14.Cocktail Toasties',
-    },
-    {
-      id: 15,
-      img: require('../../assets/images/Something.jpg'),
-      Breadwiches: '15.Cheese Club Sandwich',
-    },
-    {
-      id: 16,
-      img: require('../../assets/images/Something.jpg'),
-      Breadwiches: '16.Paneer Pasto Toasties',
-    },
-  ];
 
   return (
     <View style={{ flex: 1, justifyContent: 'flex-end' }}>
@@ -126,19 +36,29 @@ const PriceTag = () => {
         snapPoints={snapPoints}
         handleComponent={() => null}
         topInset={insets.top}>
-        <BottomSheetView style={{ flex: 1, backgroundColor: colors.background, borderRadius: 20 }}>
-          <TextEle style variant="header1">
+        <BottomSheetView
+          style={{
+            paddingVertical: 10,
+            paddingHorizontal: 20,
+            flex: 1,
+            backgroundColor: colors.background,
+            borderRadius: 20,
+          }}>
+          <TextEle style={{}} variant="header1">
             Varities
           </TextEle>
-          <BottomSheetScrollView
-            contentContainerStyle={{ paddingVertical: 10, paddingHorizontal: 20 }}>
+          <BottomSheetScrollView>
             <TextEle>Dips:-</TextEle>
-            {Data.map(item => (
+            {Dips.map(item => (
               <TextEle>{item.Dips}</TextEle>
             ))}
             <TextEle>Salad:-</TextEle>
-            {Data.map(element => (
+            {Salad.map(element => (
               <TextEle>{element.salad}</TextEle>
+            ))}
+            <TextEle>BreadWiches:-</TextEle>
+            {BreadWiches.map(element => (
+              <TextEle>{element.Breadwiches}</TextEle>
             ))}
           </BottomSheetScrollView>
         </BottomSheetView>
