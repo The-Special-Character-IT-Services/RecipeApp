@@ -15,9 +15,6 @@ const TabLikes = ({ navigation }) => {
   const insets = useSafeAreaInsets();
   const { onLayout, ...layout } = useLayout();
 
-  console.warn(windowHeight - layout.height - insets.top);
-  console.warn(windowHeight);
-
   const bottomSheetRef = useRef(null);
   const snapPoints = useMemo(
     () => [windowHeight * 0.6, windowHeight - layout.height - insets.top],
