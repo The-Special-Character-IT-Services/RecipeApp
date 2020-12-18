@@ -1,10 +1,11 @@
 import { BottomSheetScrollView, BottomSheetView } from '@gorhom/bottom-sheet';
 import React from 'react';
+import PropTypes from 'prop-types';
 import { RectButton } from 'react-native-gesture-handler';
 import { View, Image } from 'react-native';
 import TextEle from '../TextEle';
 
-const EventRecipe = () => {
+const EventRecipe = ({ onEventPress }) => {
   const photos = [
     {
       id: 1,
@@ -68,8 +69,8 @@ const EventRecipe = () => {
       <BottomSheetScrollView contentContainerStyle={{ paddingVertical: 10, paddingHorizontal: 20 }}>
         {photos.map(item => (
           <RectButton
-            rippleColor="#2f2f2f"
-            onPress={() => {}}
+            rippleColor="#D3D3D3"
+            onPress={onEventPress}
             key={item.id}
             style={{ flexDirection: 'row', marginVertical: 5, height: 100 }}>
             <Image style={{ height: 100, width: 100, borderRadius: 20 }} source={item.img} />
@@ -88,6 +89,9 @@ const EventRecipe = () => {
       </BottomSheetScrollView>
     </BottomSheetView>
   );
+};
+EventRecipe.propTypes = {
+  onEventPress: PropTypes.func.isRequired,
 };
 
 export default EventRecipe;
