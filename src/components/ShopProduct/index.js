@@ -12,7 +12,7 @@ import TextEle from '../TextEle';
 const ShopProduct = () => {
   const { colors } = useTheme();
   return (
-    <ScrollView style={{ flex: 1 }}>
+    <ScrollView>
       {Data1.map(item => (
         <View style={{ flexDirection: 'row', flex: 1, margin: 10 }}>
           <Image source={item.image} style={{ height: 100, width: 100, borderRadius: 20 }} />
