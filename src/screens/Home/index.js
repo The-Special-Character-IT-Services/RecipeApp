@@ -37,6 +37,7 @@ const TabShop = () => {
           title: 'Order Now',
           headerShown: true,
           headerLeft: false,
+          headerTitleAlign: 'center',
           headerTintColor: colors.primary,
           headerRight: () => (
             <View>
