@@ -1,11 +1,15 @@
 /* eslint-disable react-native/no-inline-styles */
 import React from 'react';
-import { View } from 'react-native';
+import { ScrollView } from 'react-native-gesture-handler';
 import ShopProduct from '../../components/ShopProduct';
+import Advertisement from '../../components/Advertisement';
 
 const TabShop = () => (
-  <View style={{ flex: 1 }}>
-    <ShopProduct />
-  </View>
+  <ScrollView style={{}}>
+    <Advertisement />
+    <ScrollView>
+      <ShopProduct />
+    </ScrollView>
+  </ScrollView>
 );
 export default TabShop;
