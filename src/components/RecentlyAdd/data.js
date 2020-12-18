@@ -1,7 +1,7 @@
 export default [
   {
     id: 1,
-    text: 'Maxican Salad',
+    text: 'Mexican Salad',
   },
 
   {
@@ -11,6 +11,6 @@ export default [
 
   {
     id: 3,
-    text: 'Maxican christmas Special',
+    text: 'Mexican christmas Special',
   },
 ];
