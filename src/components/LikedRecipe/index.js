@@ -27,9 +27,14 @@ const LikedRecipe = ({ onRecipeDetail }) => {
       </View>
       <BottomSheetScrollView contentContainerStyle={{ paddingVertical: 10, paddingHorizontal: 20 }}>
         {data.map(item => (
-          <View key={item.id} style={{ flexDirection: 'row', marginVertical: 5, height: 100 }}>
+          <View
+            key={item.id}
+            style={{ flex: 1, flexDirection: 'row', marginVertical: 5, height: 100 }}>
             <Image style={{ height: 100, width: 100, borderRadius: 20 }} source={item.img} />
-            <RectButton style={{ flex: 1 }} onPress={() => onRecipeDetail(item)}>
+            <RectButton
+              rippleColor="#D3D3D3"
+              style={{ flex: 1 }}
+              onPress={() => onRecipeDetail(item)}>
               <View
                 style={{
                   flex: 1,
