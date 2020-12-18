@@ -1,6 +1,7 @@
 import BottomSheet, { BottomSheetView } from '@gorhom/bottom-sheet';
 import { useTheme } from '@react-navigation/native';
 import React, { useMemo, useRef } from 'react';
+import PropTypes from 'prop-types';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { View, Dimensions, Image } from 'react-native';
 // import Ingrediants from '../../components/Ingrediants';
@@ -11,7 +12,7 @@ import EventRecipe from '../../components/EventRecipe';
 
 const { height: windowHeight, width: windowWidth } = Dimensions.get('window');
 
-const RecipeDetail = () => {
+const TabEvent = ({ navigation }) => {
   const { colors } = useTheme();
   const insets = useSafeAreaInsets();
   // const { img } = route.params;
@@ -37,11 +38,17 @@ const RecipeDetail = () => {
         handleComponent={() => null}
         topInset={insets.top}>
         <BottomSheetView style={{ backgroundColor: colors.background, borderRadius: 25 }}>
-          <EventRecipe />
+          <EventRecipe onEventPress={() => navigation.navigate('PriceTag')} />
         </BottomSheetView>
       </BottomSheet>
     </View>
   );
 };
 
-export default RecipeDetail;
+TabEvent.propTypes = {
+  navigation: PropTypes.shape({
+    navigate: PropTypes.func,
+  }).isRequired,
+};
+
+export default TabEvent;
