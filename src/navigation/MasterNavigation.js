@@ -12,6 +12,7 @@ import Splash from '../screens/Splash';
 import Login from '../screens/Login';
 import ShareButton from '../components/ShareButton';
 import Profile from '../screens/Profile';
+import PriceTag from '../components/PriceTag';
 
 const MainStack = createStackNavigator();
 
@@ -28,7 +29,11 @@ const MainStackScreen = () => {
       <MainStack.Screen name="Login" component={Login} />
       <MainStack.Screen name="Registration" component={Registration} />
       <MainStack.Screen name="Home" component={Home} />
-      <MainStack.Screen name="RecipeVideo" component={RecipeVideo} />
+      <MainStack.Screen
+        name="RecipeVideo"
+        component={RecipeVideo}
+        options={{ headerShown: true }}
+      />
       <MainStack.Screen
         name="Profile"
         component={Profile}
@@ -45,6 +50,20 @@ const MainStackScreen = () => {
           headerRight: () => (
             <View style={{ flexDirection: 'row' }}>
               <ShareButton />
+              <LikeButton />
+            </View>
+          ),
+          headerShown: true,
+          headerTransparent: 1,
+          headerTintColor: colors.primary,
+        }}
+      />
+      <MainStack.Screen
+        name="PriceTag"
+        component={PriceTag}
+        options={{
+          headerRight: () => (
+            <View style={{ flexDirection: 'row' }}>
               <LikeButton />
             </View>
           ),
