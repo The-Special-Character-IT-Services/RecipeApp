@@ -6,61 +6,56 @@ import { ScrollView } from 'react-native-gesture-handler';
 import { useTheme } from '@react-navigation/native';
 import StarIcon from '../../assets/icons/star-icon.svg';
 import AddToCart from '../AddToCart';
-
 import Data1 from './data';
-
 import TextEle from '../TextEle';
 
 const ShopProduct = () => {
   const { colors } = useTheme();
   return (
-    <View style={{ flex: 1 }}>
-      <ScrollView verticle showsVerticleScrollIndicator={false}>
-        {Data1.map(item => (
-          <View style={{ flexDirection: 'row', marginVertical: 10, marginHorizontal: 5 }}>
-            <View>
-              <Image source={item.image} style={{ height: 100, width: 100, borderRadius: 10 }} />
-            </View>
-            <View style={{ flexDirection: 'column' }}>
+    <ScrollView style={{ flex: 1 }}>
+      {Data1.map(item => (
+        <View style={{ flexDirection: 'row', flex: 1, margin: 10 }}>
+          <Image source={item.image} style={{ height: 100, width: 100, borderRadius: 20 }} />
+          <View style={{ flexDirection: 'column', flex: 1 }}>
+            <TextEle
+              variant="subTitle2"
+              style={{
+                color: colors.text,
+                marginHorizontal: 10,
+                marginVertical: 5,
+              }}>
+              {item.text}
+            </TextEle>
+            <View style={{ flexDirection: 'row' }}>
               <TextEle
-                variant="subTitle2"
+                variant="caption"
                 style={{
                   color: colors.text,
                   marginHorizontal: 10,
                   marginVertical: 5,
                 }}>
-                {item.text}
+                {item.cal}
               </TextEle>
-              <View style={{ flexDirection: 'row' }}>
-                <TextEle
-                  variant="caption"
-                  style={{
-                    color: colors.text,
-                    marginHorizontal: 10,
-                    marginVertical: 5,
-                  }}>
-                  {item.cal}
-                </TextEle>
-                <View style={{ height: 25, width: 1, backgroundColor: 'gray' }} />
-                <TextEle
-                  variant="caption"
-                  style={{
-                    color: colors.text,
-                    marginHorizontal: 10,
-                    marginVertical: 5,
-                  }}>
-                  {item.Rate}
-                </TextEle>
-                <StarIcon height={20} width={20} fill={colors.text} top={4} left={-7} />
-                <View style={{ marginVertical: 20, marginHorizontal: 30 }}>
-                  <AddToCart />
-                </View>
-              </View>
+              <View style={{ height: 25, width: 1, backgroundColor: 'gray' }} />
+              <TextEle
+                variant="caption"
+                style={{
+                  color: colors.text,
+                  marginHorizontal: 10,
+                  marginVertical: 5,
+                }}>
+                {item.Rate}
+              </TextEle>
+              <StarIcon height={20} width={20} fill={colors.text} top={4} left={-7} />
+            </View>
+            <View style={{ flexDirection: 'row', flex: 1 }}>
+              <TextEle style={{ flex: 1, marginLeft: 10 }}>Text</TextEle>
+              <AddToCart />
             </View>
           </View>
-        ))}
-      </ScrollView>
-    </View>
+        </View>
+      ))}
+    </ScrollView>
   );
 };
 
