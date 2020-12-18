@@ -29,7 +29,7 @@ const TabHome = ({ navigation }) => {
         onRecipePress={item => {
           item.id === 3 || item.id === 2
             ? navigation.navigate('PriceTag')
-            : navigation.navigate('RecipeVideo');
+            : navigation.navigate('RecipeDetail', item);
         }}
       />
       <View style={{ paddingHorizontal: 30, marginVertical: 20 }}>

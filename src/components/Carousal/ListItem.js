@@ -8,7 +8,7 @@ import TextEle from '../TextEle';
 import LikeButton from '../LikeButton';
 import Lock from '../../assets/icons/lock.svg';
 
-const ImagePress = ({ onRecipePress, item, cardWidth }) => {
+const ListItem = ({ onRecipePress, item, cardWidth }) => {
   const { colors } = useTheme();
 
   return (
@@ -65,29 +65,7 @@ const ImagePress = ({ onRecipePress, item, cardWidth }) => {
   );
 };
 
-const ListItem = ({ item, onRecipePress, cardWidth }) => (
-  <View>
-    {item.id === 3 || item.id === 2 ? (
-      <ImagePress item={item} onRecipePress={onRecipePress} cardWidth={cardWidth} />
-    ) : (
-      <ImagePress item={item} onRecipePress={onRecipePress} cardWidth={cardWidth} />
-    )}
-  </View>
-);
-
 ListItem.propTypes = {
-  item: PropTypes.shape({
-    id: PropTypes.number,
-    Description: PropTypes.string,
-    img: PropTypes.number,
-    TextHeading: PropTypes.string,
-    rating: PropTypes.string,
-    time: PropTypes.string,
-  }).isRequired,
-  onRecipePress: PropTypes.func.isRequired,
-  cardWidth: PropTypes.number.isRequired,
-};
-ImagePress.propTypes = {
   item: PropTypes.shape({
     id: PropTypes.number,
     Description: PropTypes.string,
