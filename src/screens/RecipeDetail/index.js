@@ -1,9 +1,9 @@
 import BottomSheet from '@gorhom/bottom-sheet';
 import { useTheme } from '@react-navigation/native';
+import { useHeaderHeight } from '@react-navigation/stack';
 import PropTypes from 'prop-types';
 import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
 import React, { useMemo, useRef } from 'react';
-import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { View, Dimensions, Image } from 'react-native';
 import { RectButton } from 'react-native-gesture-handler';
 import Play from '../../assets/icons/play.svg';
@@ -15,8 +15,8 @@ const { height: windowHeight, width: windowWidth } = Dimensions.get('window');
 
 const RecipeDetail = ({ route, navigation }) => {
   const { colors } = useTheme();
-  const insets = useSafeAreaInsets();
   const { img } = route.params;
+  const headerHeight = useHeaderHeight();
   const bottomSheetRef = useRef(null);
   const snapPoints = useMemo(() => [windowHeight * 0.6, '100%'], []);
   const Tab = createMaterialTopTabNavigator();
@@ -38,7 +38,7 @@ const RecipeDetail = ({ route, navigation }) => {
         initialSnapIndex={0}
         snapPoints={snapPoints}
         handleComponent={() => null}
-        topInset={insets.top}>
+        topInset={headerHeight}>
         <Tab.Navigator
           tabBarOptions={{
             activeTintColor: colors.primary,

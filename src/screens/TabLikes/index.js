@@ -4,6 +4,7 @@ import { Dimensions, Image, TextInput, View } from 'react-native';
 import BottomSheet from '@gorhom/bottom-sheet';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { useTheme } from '@react-navigation/native';
+import { useLayout } from '@react-native-community/hooks';
 import LikedRecipe from '../../components/LikedRecipe';
 import AllFood from '../../assets/images/AllFood.jpg';
 
@@ -12,12 +13,19 @@ const { height: windowHeight, width: windowWidth } = Dimensions.get('window');
 const TabLikes = ({ navigation }) => {
   const { colors } = useTheme();
   const insets = useSafeAreaInsets();
+  const { onLayout, ...layout } = useLayout();
+
+  console.warn(windowHeight - layout.height - insets.top);
+  console.warn(windowHeight);
 
   const bottomSheetRef = useRef(null);
-  const snapPoints = useMemo(() => [windowHeight * 0.6, '80%'], []);
+  const snapPoints = useMemo(
+    () => [windowHeight * 0.6, windowHeight - layout.height - insets.top],
+    [layout.height, insets.top],
+  );
 
   return (
-    <View style={{ flex: 1, paddingTop: insets.top }}>
+    <View style={{ flex: 1 }}>
       <Image
         style={{
           height: windowHeight * 0.5,
@@ -28,22 +36,23 @@ const TabLikes = ({ navigation }) => {
         }}
         source={AllFood}
       />
-      <TextInput
-        placeholder="Search your liked recipes"
-        placeholderTextColor={colors.text}
-        style={{
-          color: colors.text,
-          borderColor: colors.text,
-          borderWidth: 2,
-          borderRadius: 20,
-          paddingVertical: 10,
-          paddingHorizontal: 20,
-          margin: 20,
-        }}
-      />
+      <View onLayout={onLayout} style={{ paddingTop: insets.top, paddingBottom: 30 }}>
+        <TextInput
+          placeholder="Search your liked recipes"
+          placeholderTextColor={colors.text}
+          style={{
+            color: colors.text,
+            borderColor: colors.text,
+            borderWidth: 2,
+            borderRadius: 20,
+            paddingVertical: 10,
+            paddingHorizontal: 20,
+            margin: 20,
+          }}
+        />
+      </View>
       <BottomSheet
         ref={bottomSheetRef}
-        initialSnapIndex={0}
         snapPoints={snapPoints}
         handleComponent={() => null}
         topInset={insets.top}>
