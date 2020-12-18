@@ -65,14 +65,17 @@ const EventRecipe = ({ onEventPress }) => {
           Buy Online Classes
         </TextEle>
       </View>
-
-      <BottomSheetScrollView contentContainerStyle={{ paddingVertical: 10, paddingHorizontal: 20 }}>
+      <BottomSheetScrollView>
         {photos.map(item => (
           <RectButton
             rippleColor="#D3D3D3"
             onPress={onEventPress}
             key={item.id}
-            style={{ flexDirection: 'row', marginVertical: 5, height: 100 }}>
+            style={{
+              flexDirection: 'row',
+              paddingHorizontal: 10,
+              paddingVertical: 5,
+            }}>
             <Image style={{ height: 100, width: 100, borderRadius: 20 }} source={item.img} />
             <View
               style={{
