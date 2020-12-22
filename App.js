@@ -1,3 +1,4 @@
+/* eslint-disable react-native/no-inline-styles */
 import React, { useEffect } from 'react';
 import { NavigationContainer, DefaultTheme, DarkTheme } from '@react-navigation/native';
 import { createStackNavigator, CardStyleInterpolators } from '@react-navigation/stack';
@@ -5,10 +6,11 @@ import { KeyboardAvoidingView, StatusBar } from 'react-native';
 import { useColorScheme } from 'react-native-appearance';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 import SplashScreen from 'react-native-splash-screen';
-import MasterNavigation from './src/navigation/MasterNavigation';
+// import MasterNavigation from './src/navigation/MasterNavigation';
 import ModalNavigation from './src/navigation/ModalNavigation';
 import PriceTag from './src/components/PriceTag';
 import { isIOS } from './src/utils';
+// import Login from './src/screens/Login/index';
 
 const MyDefaultTheme = {
   ...DefaultTheme,
@@ -44,7 +46,7 @@ const App = () => {
       <KeyboardAvoidingView behavior={isIOS ? 'padding' : undefined} style={{ flex: 1 }}>
         <NavigationContainer theme={currentTheme}>
           <RootStack.Navigator mode="modal" headerMode="none">
-            <RootStack.Screen name="Main" component={MasterNavigation} />
+            {/* <RootStack.Screen name="Login" component={MasterNavigation} /> */}
             <RootStack.Screen
               name="Modal"
               component={ModalNavigation}

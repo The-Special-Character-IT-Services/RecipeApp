@@ -35,7 +35,7 @@ const styles = StyleSheet.create({
     color: 'gray',
   },
   buttonText: {
-    fontSize: 16,
+    fontSize: 18,
     fontWeight: '700',
   },
   overlineText: {

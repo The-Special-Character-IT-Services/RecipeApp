@@ -6,6 +6,7 @@ const ModalStack = createStackNavigator();
 
 const ModalStackScreen = () => (
   <ModalStack.Navigator
+    intialRouteName="Login"
     screenOptions={{
       headerShown: false,
     }}>

@@ -20,6 +20,7 @@ const RATextInput = ({
       autoCorrect={false}
       allowFontScaling={false}
       style={[styles.textInput, style]}
+      placeholderTextColor="white"
       {...rest}
     />
     {touched[field.name] && errors[field.name] && <TextEle>{errors[field.name]}</TextEle>}
