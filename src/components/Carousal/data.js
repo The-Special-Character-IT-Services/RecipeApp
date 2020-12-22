@@ -2,7 +2,7 @@ export default [
   {
     id: 1,
     img: require('../../assets/pics/EroticSandwich.png'),
-    time: '25`',
+    time: '25',
     rating: '4.0',
     TextHeading: 'Erotic Sandwich',
     Description: 'Amazing Combo of different taste',
