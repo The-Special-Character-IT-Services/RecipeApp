@@ -1,10 +1,10 @@
 import { useTheme } from '@react-navigation/native';
+import PropTypes from 'prop-types';
 import React from 'react';
 import { RectButton } from 'react-native-gesture-handler';
-import TextEle from '../TextEle';
 import styles from './styles';
 
-const RAButton = ({ ...rest }) => {
+const RAButton = ({ children, ...rest }) => {
   const { colors } = useTheme();
   return (
     <RectButton
@@ -18,9 +18,12 @@ const RAButton = ({ ...rest }) => {
         },
         rest.style,
       ]}>
-      <TextEle variant="buttonText">{rest.title}</TextEle>
+      {children}
     </RectButton>
   );
 };
 
+RAButton.propTypes = {
+  children: PropTypes.shape.isRequired,
+};
 export default RAButton;

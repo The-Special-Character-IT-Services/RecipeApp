@@ -1,7 +1,6 @@
 import { Field, Formik } from 'formik';
 import React from 'react';
 import { View } from 'react-native';
-import RAButton from '../RAButton';
 import styles from './styles';
 
 const index = ({ fields, ...rest }) => (
@@ -11,8 +10,6 @@ const index = ({ fields, ...rest }) => (
         {fields.map(x => (
           <Field {...x} />
         ))}
-
-        <RAButton title="Submit" />
       </View>
     )}
   </Formik>

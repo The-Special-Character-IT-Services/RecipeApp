@@ -2,7 +2,7 @@ import { StyleSheet } from 'react-native';
 
 const styles = StyleSheet.create({
   button: {
-    opacity: 0.4,
+    margin: 10,
     height: 44,
     borderRadius: 6,
     justifyContent: 'center',
