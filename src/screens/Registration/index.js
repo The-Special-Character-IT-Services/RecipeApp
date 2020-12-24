@@ -3,7 +3,15 @@
 /* eslint-disable no-console */
 import React from 'react';
 import { useTheme } from '@react-navigation/native';
-import { ImageBackground, Dimensions, KeyboardAvoidingView, View, Image } from 'react-native';
+import {
+  ImageBackground,
+  Dimensions,
+  KeyboardAvoidingView,
+  View,
+  Image,
+  Pressable,
+} from 'react-native';
+import PropTypes from 'prop-types';
 import Form from '../../components/Form';
 import { initialValues, RegistrationForm } from './credentials';
 import LoginImage from '../../assets/pics/LoginImage.png';
@@ -14,7 +22,7 @@ import GoogleLogo from '../../assets/icons/logo-google.svg';
 
 const { width: windowWidth, height: windowHeight } = Dimensions.get('window');
 
-const Registration = () => {
+const Registration = ({ navigation }) => {
   const { colors } = useTheme();
 
   const onSubmit = values => {
@@ -45,9 +53,11 @@ const Registration = () => {
           <Form initialValues={initialValues} fields={RegistrationForm} onSubmit={onSubmit} />
         </View>
         <View style={{ width: '100%' }}>
-          <RAButton style={{ opacity: 0.6, backgroundColor: colors.background }}>
-            <TextEle variant="buttonText">Continue</TextEle>
-          </RAButton>
+          <Pressable onPress={() => navigation.navigate('Splash')}>
+            <RAButton style={{ opacity: 0.6, backgroundColor: colors.background }}>
+              <TextEle variant="buttonText">Continue</TextEle>
+            </RAButton>
+          </Pressable>
           <View>
             <RAButton style={{ opacity: 1, flexDirection: 'row' }}>
               <GoogleLogo height={24} width={24} fill={colors.text} style={{ marginRight: 20 }} />
@@ -58,6 +68,13 @@ const Registration = () => {
       </KeyboardAvoidingView>
     </ImageBackground>
   );
+};
+
+Registration.propTypes = {
+  route: PropTypes.shape({}).isRequired,
+  navigation: PropTypes.shape({
+    navigate: PropTypes.func,
+  }).isRequired,
 };
 
 export default Registration;

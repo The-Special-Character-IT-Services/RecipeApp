@@ -2,7 +2,6 @@ import React, { useEffect } from 'react';
 import { SafeAreaView } from 'react-native';
 import PropTypes from 'prop-types';
 import SplashScreen from 'react-native-splash-screen';
-import TextEle from '../../components/TextEle';
 
 const Splash = ({ navigation }) => {
   useEffect(() => {
@@ -10,11 +9,7 @@ const Splash = ({ navigation }) => {
     navigation.navigate('Home');
   }, [navigation]);
 
-  return (
-    <SafeAreaView>
-      <TextEle>Splash Screen</TextEle>
-    </SafeAreaView>
-  );
+  return <SafeAreaView />;
 };
 
 Splash.propTypes = {

@@ -1,3 +1,4 @@
+/* eslint-disable react/forbid-prop-types */
 import { useTheme } from '@react-navigation/native';
 import PropTypes from 'prop-types';
 import React from 'react';
@@ -24,6 +25,6 @@ const RAButton = ({ children, ...rest }) => {
 };
 
 RAButton.propTypes = {
-  children: PropTypes.shape.isRequired,
+  children: PropTypes.object.isRequired,
 };
 export default RAButton;

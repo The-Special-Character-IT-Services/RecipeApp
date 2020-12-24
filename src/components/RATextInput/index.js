@@ -37,7 +37,11 @@ RATextInput.propTypes = {
     handleBlur: PropTypes.func,
     handleChange: PropTypes.func,
   }).isRequired,
-  style: PropTypes.shape({}).isRequired,
+  style: PropTypes.string,
+};
+
+RATextInput.defaultProps = {
+  style: '',
 };
 
 export default RATextInput;

@@ -42,8 +42,6 @@ const Login = ({ navigation }) => {
           marginBottom: 20,
         }}>
         <Image source={FoodCourter} style={{ height: 100, width: 100, marginTop: 20 }} />
-        {/* <GoogleLogo height={24} width={24} fill="white" /> */}
-
         <View>
           <TextEle variant="header2" style={{ color: 'white', alignItems: 'center' }}>
             Welcome to Food Courture
