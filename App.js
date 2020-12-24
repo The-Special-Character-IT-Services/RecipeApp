@@ -46,7 +46,7 @@ const App = () => {
       <KeyboardAvoidingView behavior={isIOS ? 'padding' : undefined} style={{ flex: 1 }}>
         <NavigationContainer theme={currentTheme}>
           <RootStack.Navigator mode="modal" headerMode="none">
-            {/* <RootStack.Screen name="Login" component={MasterNavigation} /> */}
+            {/* <RootStack.Screen name="Registration" component={MasterNavigation} /> */}
             <RootStack.Screen
               name="Modal"
               component={ModalNavigation}

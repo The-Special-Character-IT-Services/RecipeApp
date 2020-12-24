@@ -1,9 +1,18 @@
-/* eslint-disable import/no-named-as-default */
-/* eslint-disable react-native/no-inline-styles */
 /* eslint-disable no-console */
+/* eslint-disable react/no-unescaped-entities */
+/* eslint-disable react-native/no-inline-styles */
 import React from 'react';
 import { useTheme } from '@react-navigation/native';
-import { ImageBackground, Dimensions, KeyboardAvoidingView, View, Image } from 'react-native';
+import PropTypes from 'prop-types';
+
+import {
+  ImageBackground,
+  Dimensions,
+  KeyboardAvoidingView,
+  View,
+  Image,
+  Pressable,
+} from 'react-native';
 import Form from '../../components/Form';
 import { initialValues, loginForm } from './fields';
 import LoginImage from '../../assets/pics/LoginImage.png';
@@ -14,7 +23,7 @@ import GoogleLogo from '../../assets/icons/logo-google.svg';
 
 const { width: windowWidth, height: windowHeight } = Dimensions.get('window');
 
-const Login = () => {
+const Login = ({ navigation }) => {
   const { colors } = useTheme();
 
   const onSubmit = values => {
@@ -51,10 +60,39 @@ const Login = () => {
               <TextEle variant="buttonText">Sign in with google</TextEle>
             </RAButton>
           </View>
+          <View
+            style={{
+              flexDirection: 'row',
+              margin: 5,
+              justifyContent: 'center',
+            }}>
+            <TextEle variant="body1" style={{ color: 'white' }}>
+              Don't Have any account?
+            </TextEle>
+            <Pressable
+              rippleColor="black"
+              onPress={() => navigation.navigate('Registration')}
+              style={{
+                marginHorizontal: 5,
+                borderBottomWidth: 1,
+                borderColor: 'white',
+                backgroundColor: 'blue',
+              }}>
+              <TextEle variant="buttonText" style={{ color: 'white' }}>
+                Sign Up Here
+              </TextEle>
+            </Pressable>
+          </View>
         </View>
       </KeyboardAvoidingView>
     </ImageBackground>
   );
 };
 
+Login.propTypes = {
+  route: PropTypes.shape({}).isRequired,
+  navigation: PropTypes.shape({
+    navigate: PropTypes.func,
+  }).isRequired,
+};
 export default Login;
