@@ -6,9 +6,8 @@ import { KeyboardAvoidingView, StatusBar } from 'react-native';
 import { useColorScheme } from 'react-native-appearance';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 import SplashScreen from 'react-native-splash-screen';
-// import MasterNavigation from './src/navigation/MasterNavigation';
+import MasterNavigation from './src/navigation/MasterNavigation';
 import ModalNavigation from './src/navigation/ModalNavigation';
-import PriceTag from './src/components/PriceTag';
 import { isIOS } from './src/utils';
 // import Login from './src/screens/Login/index';
 
@@ -45,11 +44,10 @@ const App = () => {
       />
       <KeyboardAvoidingView behavior={isIOS ? 'padding' : undefined} style={{ flex: 1 }}>
         <NavigationContainer theme={currentTheme}>
-          <RootStack.Navigator mode="modal" headerMode="none">
-            {/* <RootStack.Screen name="login" component={MasterNavigation} /> */}
+          <RootStack.Navigator initialRouteName="Main" mode="modal" headerMode="none">
             <RootStack.Screen
-              name="Modal"
-              component={ModalNavigation}
+              name="Main"
+              component={MasterNavigation}
               options={{
                 headerShown: true,
                 headerTransparent: 1,
@@ -58,8 +56,8 @@ const App = () => {
               }}
             />
             <RootStack.Screen
-              name="PriceTag"
-              component={PriceTag}
+              name="Modal"
+              component={ModalNavigation}
               options={{
                 headerShown: true,
                 headerTransparent: 1,

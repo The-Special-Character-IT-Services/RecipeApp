@@ -49,7 +49,9 @@ const Login = ({ navigation }) => {
           <Form initialValues={initialValues} fields={loginForm} onSubmit={onSubmit} />
         </View>
         <View style={{ width: '100%' }}>
-          <RAButton style={{ opacity: 0.6, backgroundColor: colors.background }}>
+          <RAButton
+            onPress={() => navigation.navigate('Home')}
+            style={{ opacity: 0.6, backgroundColor: colors.background }}>
             <TextEle variant="buttonText">Continue</TextEle>
           </RAButton>
           <View>
@@ -72,11 +74,10 @@ const Login = ({ navigation }) => {
               onPress={() => navigation.navigate('Registration')}
               style={{
                 marginHorizontal: 5,
-                borderBottomWidth: 1,
-                borderColor: 'white',
-                backgroundColor: 'blue',
               }}>
-              <TextEle variant="buttonText" style={{ color: 'white' }}>
+              <TextEle
+                variant="buttonText"
+                style={{ color: 'blue', borderBottomWidth: 1, borderColor: 'blue' }}>
                 Sign Up Here
               </TextEle>
             </Pressable>
