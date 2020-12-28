@@ -33,7 +33,7 @@ const MainStackScreen = () => {
       <MainStack.Screen
         name="RecipeVideo"
         component={RecipeVideo}
-        options={{ headerShown: true }}
+        options={{ headerShown: true, headerTransparent: true }}
       />
       <MainStack.Screen
         name="Profile"
