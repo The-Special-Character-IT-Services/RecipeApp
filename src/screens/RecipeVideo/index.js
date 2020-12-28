@@ -28,14 +28,19 @@ const index = () => (
     />
     <ScrollView style={{ margin: 15 }}>
       <Text style={{ fontSize: 20, fontWeight: 'bold' }}>Nutritional Info.</Text>
-      <VictoryPie
-        // theme={VictoryTheme.material}
-        colorScale={['tomato', 'orange', 'gold', 'cyan', 'navy']}
-        width={200}
-        height={200}
-        innerRadius={60}
-        data={[{ y: 100 }, { y: 100 }, { y: 100 }, { y: 100 }, { y: 100 }]}
-      />
+      <View>
+        <VictoryPie
+          // theme={VictoryTheme.material}
+          colorScale={['tomato', 'orange', 'gold', 'cyan', 'navy']}
+          width={200}
+          height={200}
+          innerRadius={60}
+          data={[{ y: 100 }, { y: 100 }, { y: 100 }, { y: 100 }, { y: 100 }]}
+        />
+        <View style={{ position: 'absolute', top: '44%', left: '20%' }}>
+          <Text style={{ fontSize: 20, fontWeight: 'bold' }}>71 Cal</Text>
+        </View>
+      </View>
       <View style={{ height: 1, width: 370, backgroundColor: 'gray' }} />
       <Text style={{ fontSize: 20, fontWeight: 'bold' }}>
         Generally, nutrients are divided into two classes:
