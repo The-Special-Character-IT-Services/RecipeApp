@@ -5,11 +5,11 @@ export default [
   },
   {
     id: 2,
-    salad: '2.Russian Salad',
+    salad: '2. Russian Salad',
   },
   {
     id: 3,
-    salad: '3.Guacamole Salad',
+    salad: '3. Guacamole Salad',
   },
   {
     id: 4,

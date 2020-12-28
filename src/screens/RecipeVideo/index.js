@@ -3,6 +3,7 @@ import { Dimensions, Text, View } from 'react-native';
 import { ScrollView } from 'react-native-gesture-handler';
 import Video from 'react-native-video';
 import { VictoryPie } from 'victory-native';
+import data from './data';
 
 const summary = `Macronutrients: Macronutrients are required daily in large quantities. They include proteins, fats, carbohydrates, some minerals, and water.
 Micronutrients: Micronutrients are required daily in small quantities—in milligrams (one thousandth of a gram) to micrograms (one millionth of a gram). They include vitamins and certain minerals that enable the body to use macronutrients. These minerals are called trace minerals because the body needs only very small amounts.
@@ -28,14 +29,33 @@ const index = () => (
     />
     <ScrollView style={{ margin: 15 }}>
       <Text style={{ fontSize: 20, fontWeight: 'bold' }}>Nutritional Info.</Text>
-      <VictoryPie
-        // theme={VictoryTheme.material}
-        colorScale={['tomato', 'orange', 'gold', 'cyan', 'navy']}
-        width={200}
-        height={200}
-        innerRadius={60}
-        data={[{ y: 100 }, { y: 100 }, { y: 100 }, { y: 100 }, { y: 100 }]}
-      />
+      <View style={{ flexDirection: 'row' }}>
+        <VictoryPie
+          // theme={VictoryTheme.material}
+          colorScale={['tomato', 'orange', 'gold', 'cyan', 'navy']}
+          width={200}
+          height={200}
+          innerRadius={60}
+          data={[{ y: 100 }, { y: 100 }, { y: 100 }, { y: 100 }, { y: 100 }]}
+        />
+        <View style={{ padding: 10, justifyContent: 'center', alignContent: 'space-around' }}>
+          {data.map(item => (
+            <View style={{ flexDirection: 'row' }}>
+              <View
+                style={{
+                  height: 10,
+                  width: 30,
+                  backgroundColor: item.color,
+                  borderRadius: 5,
+                  justifyContent: 'space-evenly',
+                }}
+              />
+              <Text>{item.weight}</Text>
+              <Text style={{ color: 'gray' }}>{item.neu}</Text>
+            </View>
+          ))}
+        </View>
+      </View>
       <View style={{ height: 1, width: 370, backgroundColor: 'gray' }} />
       <Text style={{ fontSize: 20, fontWeight: 'bold' }}>
         Generally, nutrients are divided into two classes:
