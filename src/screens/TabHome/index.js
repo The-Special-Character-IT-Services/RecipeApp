@@ -1,11 +1,12 @@
 /* eslint-disable react-native/no-inline-styles */
 /* eslint-disable no-unused-expressions */
-import React from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
-import { View } from 'react-native';
+import { Pressable, View } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { ScrollView } from 'react-native-gesture-handler';
 import Category from '../../components/Category';
+import SearchBar from '../../components/Search';
 import Header from '../Header';
 import Footer from '../../components/Footer';
 import Popular from '../../components/Carousal';
@@ -13,6 +14,10 @@ import TextEle from '../../components/TextEle';
 
 const TabHome = ({ navigation }) => {
   const insets = useSafeAreaInsets();
+  const [text, setText] = useState('');
+  const onchangeText = val => {
+    setText(val);
+  };
 
   return (
     <ScrollView
@@ -20,6 +25,14 @@ const TabHome = ({ navigation }) => {
       showsVerticalScrollIndicator={false}
       contentContainerStyle={{ paddingTop: insets.top, paddingBottom: insets.bottom }}>
       <Header onProfilePress={() => navigation.navigate('Profile')} />
+      <Pressable onPress={() => navigation.navigate('TabSearch')}>
+        <SearchBar
+          editable={false}
+          selectTextOnFocus={false}
+          onchangeText={onchangeText}
+          value={text}
+        />
+      </Pressable>
       <Category />
       <View style={{ paddingHorizontal: 30, marginVertical: 20 }}>
         <TextEle variant="body1" style={{ fontSize: 20, fontWeight: 'bold' }}>

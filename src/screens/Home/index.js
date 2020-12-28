@@ -5,7 +5,6 @@ import { createStackNavigator } from '@react-navigation/stack';
 import { useTheme } from '@react-navigation/native';
 import { View } from 'react-native';
 import TabHome from '../TabHome';
-import TabSearch from '../TabSearch';
 import TabLikes from '../TabLikes';
 import TabShopPage from '../TabShop';
 import TabEvent from '../TabEvent';
@@ -13,8 +12,6 @@ import HeartOutline from '../../assets/icons/heart-outline.svg';
 import HeartSharp from '../../assets/icons/heart-sharp.svg';
 import HomeOutline from '../../assets/icons/home-outline.svg';
 import HomeSharp from '../../assets/icons/home-sharp.svg';
-import SearchOutline from '../../assets/icons/search-outline.svg';
-import SearchSharp from '../../assets/icons/search-sharp.svg';
 import EventOutline from '../../assets/icons/calendar-outline.svg';
 import EventSharp from '../../assets/icons/calendar.svg';
 import ShopSharp from '../../assets/icons/cart-sharp.svg';
@@ -70,11 +67,6 @@ const Home = () => {
               }
               return <HomeOutline height={24} width={24} stroke={color} />;
 
-            case 'TabSearch':
-              if (focused) {
-                return <SearchSharp height={24} width={24} fill={color} />;
-              }
-              return <SearchOutline height={24} width={24} stroke={color} />;
             case 'TabLikes':
               if (focused) {
                 return <HeartSharp height={24} width={24} fill={color} />;
@@ -104,12 +96,9 @@ const Home = () => {
         showLabel: false,
       }}>
       <Tab.Screen name="TabHome" component={TabHome} />
-      <Tab.Screen name="TabSearch" component={TabSearch} />
-      <Tab.Screen name="TabLikes" component={TabLikes} />
-      {/* <Tab.Screen name="TabProfile" component={TabProfile} /> */}
       <Tab.Screen name="TabEvent" component={TabEvent} />
+      <Tab.Screen name="TabLikes" component={TabLikes} />
       <Tab.Screen name="TabShop" component={TabShop} />
-      {/* <Tab.Screen name="CartScreen" component={CartScreen} /> */}
     </Tab.Navigator>
   );
 };
