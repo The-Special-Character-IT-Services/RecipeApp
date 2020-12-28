@@ -38,22 +38,19 @@ const index = () => (
           innerRadius={60}
           data={[{ y: 100 }, { y: 100 }, { y: 100 }, { y: 100 }, { y: 100 }]}
         />
-        <View style={{ padding: 10, justifyContent: 'center', alignContent: 'space-around' }}>
+        <View>
           {data.map(item => (
-            <View style={{ flexDirection: 'row' }}>
+            <View style={{ flexDirection: 'row', padding: 5 }}>
               <View
-                style={{
-                  height: 10,
-                  width: 30,
-                  backgroundColor: item.color,
-                  borderRadius: 5,
-                  justifyContent: 'space-evenly',
-                }}
+                style={{ height: 10, width: 30, backgroundColor: item.color, borderRadius: 5 }}
               />
               <Text>{item.weight}</Text>
               <Text style={{ color: 'gray' }}>{item.neu}</Text>
             </View>
           ))}
+        </View>
+        <View style={{ position: 'absolute', top: '44%', left: '20%' }}>
+          <Text style={{ fontSize: 20, fontWeight: 'bold' }}>71 Cal</Text>
         </View>
       </View>
       <View style={{ height: 1, width: 370, backgroundColor: 'gray' }} />
