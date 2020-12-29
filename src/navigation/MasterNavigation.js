@@ -14,6 +14,7 @@ import Initial from '../screens/Initial';
 import ShareButton from '../components/ShareButton';
 import Profile from '../screens/Profile';
 import PriceTag from '../components/PriceTag';
+import TabSearch from '../screens/TabSearch';
 
 const MainStack = createStackNavigator();
 
@@ -40,6 +41,11 @@ const MainStackScreen = () => {
         options={{ headerShown: true, headerTransparent: true }}
       />
       <MainStack.Screen name="Home" component={Home} />
+      <MainStack.Screen
+        name="TabSearch"
+        component={TabSearch}
+        options={{ headerShown: true, title: 'Search', headerTitleAlign: 'center' }}
+      />
       <MainStack.Screen
         name="RecipeVideo"
         component={RecipeVideo}
