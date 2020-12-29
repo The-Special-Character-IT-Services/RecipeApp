@@ -27,8 +27,16 @@ const MainStackScreen = () => {
         title: false,
       }}>
       <MainStack.Screen name="Splash" component={Splash} />
-      <MainStack.Screen name="Login" component={Login} />
-      <MainStack.Screen name="Registration" component={Registration} />
+      <MainStack.Screen
+        name="Login"
+        component={Login}
+        options={{ headerShown: true, headerTransparent: true }}
+      />
+      <MainStack.Screen
+        name="Registration"
+        component={Registration}
+        options={{ headerShown: true, headerTransparent: true }}
+      />
       <MainStack.Screen name="Home" component={Home} />
       <MainStack.Screen
         name="RecipeVideo"
