@@ -14,10 +14,10 @@ import {
 import PropTypes from 'prop-types';
 import Form from '../../components/Form';
 import { initialValues, RegistrationForm } from './credentials';
-import LoginImage from '../../assets/pics/LoginImage.png';
+import LoginImage from '../../assets/images/LoginImage.png';
 import TextEle from '../../components/TextEle';
 import RAButton from '../../components/RAButton';
-import FoodCourter from '../../assets/pics/FoodCourter.png';
+import FoodCourter from '../../assets/images/FoodCourter.png';
 import GoogleLogo from '../../assets/icons/logo-google.svg';
 
 const { width: windowWidth, height: windowHeight } = Dimensions.get('window');

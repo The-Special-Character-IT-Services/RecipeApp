@@ -15,7 +15,7 @@ const { height: windowHeight, width: windowWidth } = Dimensions.get('window');
 
 const RecipeDetail = ({ route, navigation }) => {
   const { colors } = useTheme();
-  const { img } = route.params;
+  const { img, TextHeading, Description } = route.params;
   const headerHeight = useHeaderHeight();
   const bottomSheetRef = useRef(null);
   const snapPoints = useMemo(() => [windowHeight * 0.6, '100%'], []);
@@ -85,7 +85,7 @@ const RecipeDetail = ({ route, navigation }) => {
         {/* </BottomSheetScrollView> */}
       </BottomSheet>
       <RectButton
-        onPress={() => navigation.navigate('RecipeVideo')}
+        onPress={() => navigation.navigate('RecipeVideo', { TextHeading, Description })}
         style={{
           marginHorizontal: 40,
           marginVertical: 50,
@@ -107,6 +107,8 @@ RecipeDetail.propTypes = {
   route: PropTypes.shape({
     params: PropTypes.shape({
       img: PropTypes.number,
+      TextHeading: PropTypes.string,
+      Description: PropTypes.string,
     }),
   }).isRequired,
   navigation: PropTypes.shape({
