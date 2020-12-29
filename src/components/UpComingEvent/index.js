@@ -3,8 +3,8 @@ import React, { useEffect, useRef } from 'react';
 import PropTypes from 'prop-types';
 import { View, Dimensions, Platform } from 'react-native';
 import { FlatList } from 'react-native-gesture-handler';
-import data from './data';
-import ListItem from './ListItem';
+import data from '../EventRecipe/data';
+import EventDetails from './EventDetails';
 
 const { width: windowWidth } = Dimensions.get('window');
 
@@ -12,7 +12,7 @@ export const CARD_WIDTH = windowWidth * 0.9;
 
 const cardInset = (windowWidth - CARD_WIDTH) / 1.5;
 
-const Popular = ({ onRecipePress }) => {
+const UpComingEvent = ({ onRecipePress }) => {
   const flatListRef = useRef(null);
 
   useEffect(() => {
@@ -47,7 +47,7 @@ const Popular = ({ onRecipePress }) => {
       showsHorizontalScrollIndicator={false}
       renderItem={({ item }) => (
         <View style={{ width: CARD_WIDTH }}>
-          <ListItem item={item} onRecipePress={onRecipePress} cardWidth={CARD_WIDTH} />
+          <EventDetails item={item} onRecipePress={onRecipePress} cardWidth={CARD_WIDTH} />
         </View>
       )}
       removeClippedSubviews
@@ -56,8 +56,8 @@ const Popular = ({ onRecipePress }) => {
   );
 };
 
-Popular.propTypes = {
+UpComingEvent.propTypes = {
   onRecipePress: PropTypes.func.isRequired,
 };
 
-export default Popular;
+export default UpComingEvent;

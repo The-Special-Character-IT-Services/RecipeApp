@@ -9,6 +9,7 @@ import Category from '../../components/Category';
 import Header from '../Header';
 import Footer from '../../components/Footer';
 import Popular from '../../components/Carousal';
+import UpComingEvent from '../../components/UpComingEvent';
 import TextEle from '../../components/TextEle';
 
 const TabHome = ({ navigation }) => {
@@ -45,6 +46,12 @@ const TabHome = ({ navigation }) => {
             : navigation.navigate('RecipeDetail', item);
         }}
       />
+      <View style={{ paddingHorizontal: 30, marginVertical: 20 }}>
+        <TextEle variant="body1" style={{ fontSize: 20, fontWeight: 'bold' }}>
+          UpComing Events
+        </TextEle>
+      </View>
+      <UpComingEvent />
       <Footer />
     </ScrollView>
   );
