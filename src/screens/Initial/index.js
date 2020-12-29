@@ -5,19 +5,17 @@ import React from 'react';
 import { useTheme } from '@react-navigation/native';
 import PropTypes from 'prop-types';
 
-import { ImageBackground, Dimensions, KeyboardAvoidingView, View, Image } from 'react-native';
+import { ImageBackground, KeyboardAvoidingView, View, Image } from 'react-native';
 import LoginImage from '../../assets/images/LoginImage.png';
 import TextEle from '../../components/TextEle';
 import RAButton from '../../components/RAButton';
 import FoodCourter from '../../assets/images/FoodCourter.png';
 
-const { width: windowWidth, height: windowHeight } = Dimensions.get('window');
-
 const Initial = ({ navigation }) => {
   const { colors } = useTheme();
 
   return (
-    <ImageBackground source={LoginImage} style={{ height: windowHeight, width: windowWidth }}>
+    <ImageBackground source={LoginImage} style={{ flex: 1 }}>
       <KeyboardAvoidingView
         behavior="padding"
         keyboardVerticalOffset={40}

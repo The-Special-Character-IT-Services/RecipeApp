@@ -5,7 +5,7 @@ import React from 'react';
 import { useTheme } from '@react-navigation/native';
 import PropTypes from 'prop-types';
 
-import { ImageBackground, Dimensions, KeyboardAvoidingView, View, Image } from 'react-native';
+import { ImageBackground, KeyboardAvoidingView, View, Image } from 'react-native';
 import Form from '../../components/Form';
 import { initialValues, loginForm } from './fields';
 import LoginImage from '../../assets/images/LoginImage.png';
@@ -14,7 +14,7 @@ import RAButton from '../../components/RAButton';
 import FoodCourter from '../../assets/images/FoodCourter.png';
 import GoogleLogo from '../../assets/icons/logo-google.svg';
 
-const { width: windowWidth, height: windowHeight } = Dimensions.get('window');
+// const { width: windowWidth, height: windowHeight } = Dimensions.get('window');
 
 const Login = ({ navigation }) => {
   const { colors } = useTheme();
@@ -24,7 +24,7 @@ const Login = ({ navigation }) => {
   };
 
   return (
-    <ImageBackground source={LoginImage} style={{ height: windowHeight, width: windowWidth }}>
+    <ImageBackground source={LoginImage} style={{ flex: 1 }}>
       <KeyboardAvoidingView
         behavior="padding"
         keyboardVerticalOffset={40}
