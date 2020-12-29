@@ -1,6 +1,6 @@
 /* eslint-disable react-native/no-inline-styles */
 import React, { useState } from 'react';
-import { ScrollView, View, Image } from 'react-native';
+import { ScrollView, View, Image, KeyboardAvoidingView } from 'react-native';
 import { useTheme } from '@react-navigation/native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import SearchBar from '../../components/Search';
@@ -9,22 +9,44 @@ import SearchCuisine from '../../components/SearchCuisine';
 import Data from '../../components/Carousal/data';
 import TextEle from '../../components/TextEle';
 
+const arr = ['Trending', 'Recently Added ', 'Rice Items', 'Sweets', 'Salads'];
+
 const TabSearch = () => {
   const { colors } = useTheme();
   const insets = useSafeAreaInsets();
   const [text, setText] = useState('');
-  const onchangeText = val => {
+  const onChangeText = val => {
     setText(val);
   };
   return (
-    <View
+    <KeyboardAvoidingView
       style={{
-        flex: 1,
         paddingTop: insets.top,
       }}>
-      <SearchBar onchangeText={onchangeText} text={text} />
+      <SearchBar onChangeText={onChangeText} text={text} />
+      <ScrollView
+        showsHorizontalScrollIndicator={false}
+        contentContainerStyle={{ paddingHorizontal: 15, paddingVertical: 10 }}
+        horizontal>
+        {arr.map(x => (
+          <View
+            key={x.id}
+            style={{
+              paddingHorizontal: 10,
+              borderRadius: 8,
+              borderWidth: 1,
+              borderColor: colors.text,
+              marginHorizontal: 5,
+              justifyContent: 'center',
+              height: 40,
+            }}>
+            <TextEle>{x}</TextEle>
+          </View>
+        ))}
+      </ScrollView>
+
       {text <= 0 ? (
-        <ScrollView style={{ flex: 1 }}>
+        <ScrollView>
           <RecentlyAdd />
           <SearchCuisine />
         </ScrollView>
@@ -57,7 +79,7 @@ const TabSearch = () => {
           ))}
         </ScrollView>
       )}
-    </View>
+    </KeyboardAvoidingView>
   );
 };
 

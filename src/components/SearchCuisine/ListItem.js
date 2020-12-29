@@ -20,7 +20,7 @@ const ListItem = ({ item, cardWidth }) => (
       }}
       imageStyle={{ borderRadius: 20 }}
       source={item.img1}>
-      <TextEle style={{ color: 'white', marginHorizontal: 10, marginVertical: 5 }} variant="title">
+      <TextEle style={{ color: 'white', marginHorizontal: 10, marginVertical: 5 }} variant="title1">
         {item.text}
       </TextEle>
     </ImageBackground>
