@@ -6,7 +6,7 @@ import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { View, Dimensions, Image } from 'react-native';
 // import Ingrediants from '../../components/Ingrediants';
 // import TextEle from '../../components/TextEle';
-import food1 from '../../assets/image/food1.jpg';
+import food1 from '../../assets/images/food1.jpg';
 import EventRecipe from '../../components/EventRecipe';
 // import Preparation from '../../components/Preparation';
 

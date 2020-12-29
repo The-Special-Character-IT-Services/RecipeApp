@@ -1,7 +1,7 @@
 export default [
   {
     id: 1,
-    img: require('../../assets/pics/EroticSandwich.png'),
+    img: require('../../assets/images/EroticSandwich.png'),
     time: '25',
     rating: '4.0',
     TextHeading: 'Erotic Sandwich',
@@ -9,7 +9,7 @@ export default [
   },
   {
     id: 2,
-    img: require('../../assets/pics/pulavspecial.png'),
+    img: require('../../assets/images/pulavspecial.png'),
     time: '30`',
     rating: '4.5',
     TextHeading: 'Special Pulav',
@@ -17,7 +17,7 @@ export default [
   },
   {
     id: 3,
-    img: require('../../assets/pics/WinterSpecialVasana.png'),
+    img: require('../../assets/images/WinterSpecialVasana.png'),
     time: '15`',
     rating: '4.0',
     TextHeading: 'Special Winter Vasana',
@@ -25,7 +25,7 @@ export default [
   },
   {
     id: 4,
-    img: require('../../assets/pics/lipsmackingsoup.png'),
+    img: require('../../assets/images/lipsmackingsoup.png'),
     time: '35`',
     rating: '5.0',
     TextHeading: 'Lip Smacking Soup',
@@ -33,7 +33,7 @@ export default [
   },
   {
     id: 5,
-    img: require('../../assets/pics/breadwich.png'),
+    img: require('../../assets/images/breadwich.png'),
     time: '30`',
     rating: '5.0',
     TextHeading: 'Breadwich',
