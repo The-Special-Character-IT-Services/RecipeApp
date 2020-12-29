@@ -4,6 +4,7 @@
   "private": true,
   "scripts": {
     "precommit": "lint-staged",
+    "publish:android": "react-native run-android --variant=release",  
     "android": "react-native run-android",
     "ios": "react-native run-ios",
     "start": "react-native start",
