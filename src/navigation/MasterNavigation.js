@@ -10,6 +10,7 @@ import RecipeDetail from '../screens/RecipeDetail';
 import LikeButton from '../components/LikeButton';
 import RecipeVideo from '../screens/RecipeVideo';
 import Splash from '../screens/Splash';
+import Initial from '../screens/Initial';
 import ShareButton from '../components/ShareButton';
 import Profile from '../screens/Profile';
 import PriceTag from '../components/PriceTag';
@@ -20,13 +21,14 @@ const MainStackScreen = () => {
   const { colors } = useTheme();
   return (
     <MainStack.Navigator
-      initialRouteName="Login"
+      initialRouteName="Initial"
       screenOptions={{
         headerShown: false,
         headerTintColor: colors.primary,
         title: false,
       }}>
       <MainStack.Screen name="Splash" component={Splash} />
+      <MainStack.Screen name="Initial" component={Initial} />
       <MainStack.Screen
         name="Login"
         component={Login}
