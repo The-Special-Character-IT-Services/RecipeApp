@@ -7,7 +7,9 @@ import PropTypes from 'prop-types';
 import { VictoryLabel, VictoryPie } from 'victory-native';
 
 const summary = `Macronutrients: Macronutrients are required daily in large quantities. They include proteins, fats, carbohydrates, some minerals, and water.
+
 Micronutrients: Micronutrients are required daily in small quantities—in milligrams (one thousandth of a gram) to micrograms (one millionth of a gram). They include vitamins and certain minerals that enable the body to use macronutrients. These minerals are called trace minerals because the body needs only very small amounts.
+
 Foods consumed in the daily diet contain as many as 100,000 substances. But only 300 are classified as nutrients, and only 45 are classified as essential nutrients:
 
 1) Vitamins
@@ -84,10 +86,10 @@ const RecipeVideo = ({ route }) => {
           </View>
         </View>
         <View style={{ height: 1, width: 370, backgroundColor: 'gray' }} />
-        <Text style={{ fontSize: 20, fontWeight: 'bold' }}>
+        <Text style={{ fontSize: 20, fontWeight: 'bold', marginVertical: 10 }}>
           Generally, nutrients are divided into two classes:
         </Text>
-        <Text style={{ fontSize: 15 }}>{summary}</Text>
+        <Text style={{ fontSize: 15, textAlign: 'justify' }}>{summary}</Text>
       </ScrollView>
     </View>
   );
