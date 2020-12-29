@@ -1,4 +1,3 @@
-/* eslint-disable react-native/no-inline-styles */
 import React, { useEffect, useRef } from 'react';
 import PropTypes from 'prop-types';
 import { View, Dimensions, Platform } from 'react-native';

@@ -8,12 +8,6 @@ import data from './data';
 
 const EventRecipe = ({ onEventPress }) => (
   <BottomSheetView style={{ flex: 1 }}>
-    {/* <View style={{ paddingHorizontal: 20, marginVertical: 10 }}>
-        <TextEle style={{ fontSize: 23, fontWeight: 'bold' }}>Mango Mule</TextEle>
-        <TextEle numberOfLines={2} style={{ color: 'gray' }}>
-          Amazing combo of sweet and sour taste!Super easy to prepare.Enjoy!
-        </TextEle>
-      </View> */}
     <View style={{ flexDirection: 'row', paddingHorizontal: 20 }}>
       <TextEle
         style={{
