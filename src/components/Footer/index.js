@@ -8,7 +8,7 @@ import TextEle from '../TextEle';
 const PicCuisine = [
   {
     id: 1,
-    img1: require('../../assets/image/indian.png'),
+    img1: require('../../assets/images/indian.png'),
     text: 'Indian',
   },
 

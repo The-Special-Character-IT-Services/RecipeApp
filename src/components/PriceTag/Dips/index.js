@@ -9,7 +9,7 @@ export default [
   },
   {
     id: 3,
-    Dips: '3.Curd Cucumber Dip',
+    Dips: '3. Curd Cucumber Dip',
   },
   {
     id: 4,

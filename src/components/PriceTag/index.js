@@ -2,7 +2,7 @@ import BottomSheet, { BottomSheetScrollView, BottomSheetView } from '@gorhom/bot
 import { useTheme } from '@react-navigation/native';
 import React, { useMemo, useRef } from 'react';
 import { View, Image, Dimensions } from 'react-native';
-import { useSafeAreaInsets } from 'react-native-safe-area-context';
+// import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { RectButton } from 'react-native-gesture-handler';
 import TextEle from '../TextEle';
 import Pie from '../../assets/images/Pie.jpg';
@@ -14,7 +14,7 @@ const { height: windowHeight, width: windowWidth } = Dimensions.get('window');
 
 const PriceTag = () => {
   const { colors } = useTheme();
-  const insets = useSafeAreaInsets();
+  // const insets = useSafeAreaInsets();
   const bottomSheetRef = useRef(null);
   const snapPoints = useMemo(() => [windowHeight * 0.6, '100%'], []);
 
@@ -35,7 +35,7 @@ const PriceTag = () => {
         initialSnapIndex={0}
         snapPoints={snapPoints}
         handleComponent={() => null}
-        topInset={insets.top}>
+        topInset={60}>
         <BottomSheetView
           style={{
             paddingVertical: 10,

@@ -21,47 +21,47 @@ export default [
   },
   {
     id: 6,
-    Breadwiches: '6.American Corn Bonanza Sandwich',
+    Breadwiches: '6. American Corn Bonanza Sandwich',
   },
   {
     id: 7,
-    Breadwiches: '7.Chipotle Club Grill Sandwich',
+    Breadwiches: '7. Chipotle Club Grill Sandwich',
   },
   {
     id: 8,
-    Breadwiches: '8.Street Style Melting Cheese Sandwich',
+    Breadwiches: '8. Street Style Melting Cheese Sandwich',
   },
   {
     id: 9,
-    Breadwiches: '9.Pickle Veg Cold Sandwich',
+    Breadwiches: '9. Pickle Veg Cold Sandwich',
   },
   {
     id: 10,
-    Breadwiches: '10.Junglee Paneer Sandwich',
+    Breadwiches: '10. Junglee Paneer Sandwich',
   },
   {
     id: 11,
-    Breadwiches: '11.Kutch Masala Sandwich',
+    Breadwiches: '11. Kutch Masala Sandwich',
   },
   {
     id: 12,
-    Breadwiches: '12.Spinach Cold Sandwich',
+    Breadwiches: '12. Spinach Cold Sandwich',
   },
   {
     id: 13,
-    Breadwiches: '13.Chinese Masala Toast Sandwich',
+    Breadwiches: '13. Chinese Masala Toast Sandwich',
   },
   {
     id: 14,
-    Breadwiches: '14.Cocktail Toasties',
+    Breadwiches: '14. Cocktail Toasties',
   },
   {
     id: 15,
-    Breadwiches: '15.Cheese Club Sandwich',
+    Breadwiches: '15. Cheese Club Sandwich',
   },
   {
     id: 16,
-    Breadwiches: '16.Paneer Pasto Toasties',
+    Breadwiches: '16. Paneer Pasto Toasties',
   },
   {
     id: 17,
