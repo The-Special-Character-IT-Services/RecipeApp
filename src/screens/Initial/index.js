@@ -1,10 +1,6 @@
-/* eslint-disable no-console */
-/* eslint-disable react/no-unescaped-entities */
-/* eslint-disable react-native/no-inline-styles */
 import React from 'react';
 import { useTheme } from '@react-navigation/native';
 import PropTypes from 'prop-types';
-
 import { ImageBackground, Dimensions, KeyboardAvoidingView, View, Image } from 'react-native';
 import LoginImage from '../../assets/images/LoginImage.png';
 import TextEle from '../../components/TextEle';
