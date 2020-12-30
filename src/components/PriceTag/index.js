@@ -1,20 +1,21 @@
-import BottomSheet, { BottomSheetScrollView, BottomSheetView } from '@gorhom/bottom-sheet';
+import BottomSheet, { BottomSheetScrollView } from '@gorhom/bottom-sheet';
 import { useTheme } from '@react-navigation/native';
 import React, { useMemo, useRef } from 'react';
 import { View, Image, Dimensions } from 'react-native';
-// import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { RectButton } from 'react-native-gesture-handler';
 import TextEle from '../TextEle';
+import data from './data';
 import Pie from '../../assets/images/Pie.jpg';
-import Dips from './Dips';
-import Salad from './Salad';
 import BreadWiches from './BreadWiches';
 
 const { height: windowHeight, width: windowWidth } = Dimensions.get('window');
 
+const subt = `Recipes in this write-up are protected by copyright law. Reproduction and distribution
+of the same without a written consent from Studio D’ Food Couture is prohibited. ©
+Studio De Food Couture `;
+
 const PriceTag = () => {
   const { colors } = useTheme();
-  // const insets = useSafeAreaInsets();
   const bottomSheetRef = useRef(null);
   const snapPoints = useMemo(() => [windowHeight * 0.6, '100%'], []);
 
@@ -36,7 +37,7 @@ const PriceTag = () => {
         snapPoints={snapPoints}
         handleComponent={() => null}
         topInset={60}>
-        <BottomSheetView
+        <BottomSheetScrollView
           style={{
             paddingVertical: 10,
             paddingHorizontal: 20,
@@ -44,26 +45,37 @@ const PriceTag = () => {
             backgroundColor: colors.background,
             borderRadius: 20,
           }}>
-          <TextEle style={{}} variant="header1">
-            Varities
+          <TextEle style={{}} variant="title">
+            Key Points:-
           </TextEle>
-          <BottomSheetScrollView>
-            <TextEle>Dips:-</TextEle>
-            {Dips.map(item => (
-              <TextEle>{item.Dips}</TextEle>
+          <View>
+            {data.map(element => (
+              <View>
+                <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
+                  <TextEle key={element.id} variant="body2" style={{ paddingVertical: 10 }}>
+                    {element.Sen}
+                  </TextEle>
+                  <TextEle
+                    variant="body2"
+                    style={{ paddingVertical: 10, color: 'gray', width: 120 }}>
+                    {element.Sub}
+                  </TextEle>
+                </View>
+                <View style={{ height: 1, width: 330, backgroundColor: 'gray' }} />
+              </View>
             ))}
-            <TextEle>Salad:-</TextEle>
-            {Salad.map(element => (
-              <TextEle>{element.salad}</TextEle>
-            ))}
-            <TextEle>BreadWiches:-</TextEle>
-            {BreadWiches.map(element => (
-              <TextEle>{element.Breadwiches}</TextEle>
-            ))}
-          </BottomSheetScrollView>
-        </BottomSheetView>
+            <TextEle variant="caption" style={{ marginVertical: 20 }}>
+              {subt}
+            </TextEle>
+          </View>
+          <TextEle>Varieties:-</TextEle>
+          {BreadWiches.map(element => (
+            <TextEle variant="body1" style={{ textAlign: 'justify', width: 400 }}>
+              {element.Breadwiches}
+            </TextEle>
+          ))}
+        </BottomSheetScrollView>
       </BottomSheet>
-
       <RectButton
         style={{
           marginHorizontal: 40,
