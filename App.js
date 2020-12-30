@@ -6,9 +6,10 @@ import { KeyboardAvoidingView, StatusBar } from 'react-native';
 import { useColorScheme } from 'react-native-appearance';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 import SplashScreen from 'react-native-splash-screen';
-import MasterNavigation from './src/navigation/MasterNavigation';
-import ModalNavigation from './src/navigation/ModalNavigation';
+import ModalNavigation from '@navigation/ModalNavigation';
+import MasterNavigation from '@navigation/MasterNavigation';
 import { isIOS } from './src/utils';
+
 // import Login from './src/screens/Login/index';
 
 const MyDefaultTheme = {

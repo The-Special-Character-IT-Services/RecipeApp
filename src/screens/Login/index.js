@@ -6,11 +6,11 @@ import { useTheme } from '@react-navigation/native';
 import PropTypes from 'prop-types';
 
 import { ImageBackground, Dimensions, KeyboardAvoidingView, View, Image } from 'react-native';
-import Form from '../../components/Form';
+import Form from '@components/Form';
+import TextEle from '@components/TextEle';
+import RAButton from '@components/RAButton';
 import { initialValues, loginForm } from './fields';
 import LoginImage from '../../assets/images/LoginImage.png';
-import TextEle from '../../components/TextEle';
-import RAButton from '../../components/RAButton';
 import FoodCourter from '../../assets/images/FoodCourter.png';
 import GoogleLogo from '../../assets/icons/logo-google.svg';
 

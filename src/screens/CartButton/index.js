@@ -3,8 +3,8 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Pressable, View } from 'react-native';
 // import TextEle from '../TextEle';
+import TextEle from '@components/TextEle';
 import IconCart from '../../assets/icons/cart-outline.svg';
-import TextEle from '../../components/TextEle';
 
 const CartIcon = ({ onCartPress }) => {
   const { colors } = useTheme();

@@ -6,10 +6,10 @@ import { createMaterialTopTabNavigator } from '@react-navigation/material-top-ta
 import React, { useMemo, useRef } from 'react';
 import { View, Dimensions, Image } from 'react-native';
 import { RectButton } from 'react-native-gesture-handler';
+import Ingrediants from '@components/Ingrediants';
+import TextEle from '@components/TextEle';
+import Preparation from '@components/Preparation';
 import Play from '../../assets/icons/play.svg';
-import Ingrediants from '../../components/Ingrediants';
-import TextEle from '../../components/TextEle';
-import Preparation from '../../components/Preparation';
 
 const { height: windowHeight, width: windowWidth } = Dimensions.get('window');
 

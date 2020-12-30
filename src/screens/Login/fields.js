@@ -1,5 +1,5 @@
 /* eslint-disable max-len */
-import RATextInput from '../../components/RATextInput';
+import RATextInput from '@components/RATextInput';
 
 export const loginForm = [
   {
