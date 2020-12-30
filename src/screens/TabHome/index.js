@@ -26,7 +26,7 @@ const TabHome = ({ navigation }) => {
       showsVerticalScrollIndicator={false}
       contentContainerStyle={{ paddingTop: insets.top, paddingBottom: insets.bottom }}>
       <Header onProfilePress={() => navigation.navigate('Profile')} />
-      <Pressable onPress={() => navigation.navigate('TabSearch')}>
+      <Pressable onPress={() => navigation.navigate('Search')}>
         <SearchBar
           editable={false}
           selectTextOnFocus={false}
