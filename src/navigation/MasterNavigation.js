@@ -15,6 +15,7 @@ import ShareButton from '../components/ShareButton';
 import Profile from '../screens/Profile';
 import PriceTag from '../components/PriceTag';
 import TabSearch from '../screens/TabSearch';
+import Verification from '../screens/Verification';
 
 const MainStack = createStackNavigator();
 
@@ -30,6 +31,11 @@ const MainStackScreen = () => {
       }}>
       <MainStack.Screen name="Splash" component={Splash} />
       <MainStack.Screen name="Initial" component={Initial} />
+      <MainStack.Screen
+        name="Verification"
+        component={Verification}
+        options={{ headerShown: true, headerTransparent: true }}
+      />
       <MainStack.Screen
         name="Login"
         component={Login}
