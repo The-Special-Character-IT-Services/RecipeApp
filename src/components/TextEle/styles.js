@@ -13,6 +13,10 @@ const styles = StyleSheet.create({
     fontSize: 24,
     fontWeight: '600',
   },
+  title1: {
+    fontSize: 24,
+    fontWeight: 'bold',
+  },
   subTitle1: {
     fontSize: 22,
     fontWeight: '500',
