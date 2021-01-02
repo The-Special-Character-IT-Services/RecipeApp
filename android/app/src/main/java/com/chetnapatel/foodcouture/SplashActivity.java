@@ -1,4 +1,4 @@
-package com.recipeapp; // Change this to your package name.
+package com.chetnapatel.foodcouture;
 
 import android.content.Intent;
 import android.os.Bundle;

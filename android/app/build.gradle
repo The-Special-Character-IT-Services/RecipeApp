@@ -1,3 +1,9 @@
+project.ext.envConfigFiles = [
+    debug: ".env.development",
+    release: ".env.production",
+    anothercustombuild: ".env",
+]
+
 apply plugin: "com.android.application"
 apply from: project(':react-native-config').projectDir.getPath() + "/dotenv.gradle"
 
@@ -134,7 +140,7 @@ android {
     } 
 
     defaultConfig {
-        applicationId "com.recipeapp"
+        applicationId "com.chetnapatel.foodcouture"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
         versionCode 1
