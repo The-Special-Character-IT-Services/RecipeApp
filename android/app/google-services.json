@@ -1,0 +1,62 @@
+{
+  "project_info": {
+    "project_number": "588766919175",
+    "project_id": "food-couture-cfeb8",
+    "storage_bucket": "food-couture-cfeb8.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:588766919175:android:9c73f2f85739d1d99208a2",
+        "android_client_info": {
+          "package_name": "com.chetnapatel.foodcouture"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "588766919175-0u5ovvjh7utfqfegci47pga4mjq2qgap.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.chetnapatel.foodcouture",
+            "certificate_hash": "192b621716bde3a652f0e9c8736149c701deea3a"
+          }
+        },
+        {
+          "client_id": "588766919175-aloqug8rddc5nqhs3qdo0i25oa9fppv9.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.chetnapatel.foodcouture",
+            "certificate_hash": "3340ea277c27eb445dfc1abdecf1a120c3141de8"
+          }
+        },
+        {
+          "client_id": "588766919175-jjdcn5cealfito5t8tp5dlkvk5u4n3kc.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAjfPYRIafyG1k9FAD4DfeN3nZS1YWr9xQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "588766919175-jjdcn5cealfito5t8tp5dlkvk5u4n3kc.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "588766919175-6slae4sdsak5ftvcs6gn6qdgf2q3vg0b.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.chetnapatel.foodcouture"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
