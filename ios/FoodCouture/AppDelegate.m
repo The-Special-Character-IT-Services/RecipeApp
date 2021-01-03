@@ -4,6 +4,7 @@
 #import <React/RCTBundleURLProvider.h>
 #import <React/RCTRootView.h>
 #import <React/RCTLinkingManager.h>
+#import <FBSDKCoreKit/FBSDKCoreKit.h>
 #import "RNSplashScreen.h"
 #import <Firebase.h>
 
@@ -50,6 +51,8 @@ static void InitializeFlipper(UIApplication *application) {
   if ([FIRApp defaultApp] == nil) {
       [FIRApp configure];
   }
+  [[FBSDKApplicationDelegate sharedInstance] application:application
+                             didFinishLaunchingWithOptions:launchOptions];
   return YES;
 }
 
@@ -92,7 +95,15 @@ static void InitializeFlipper(UIApplication *application) {
    openURL:(NSURL *)url
    options:(NSDictionary<UIApplicationOpenURLOptionsKey,id> *)options
 {
-  return [RCTLinkingManager application:application openURL:url options:options];
+  if ([RCTLinkingManager application:application openURL:url options:options]) {
+    return YES;
+  }
+  if ([[FBSDKApplicationDelegate sharedInstance] application:application
+                                                   openURL:url
+                                                     options:options]){
+  return YES;
+  }
+  return NO;
 }
 
 - (BOOL)application:(UIApplication *)application continueUserActivity:(nonnull NSUserActivity *)userActivity
@@ -102,5 +113,7 @@ static void InitializeFlipper(UIApplication *application) {
                   continueUserActivity:userActivity
                     restorationHandler:restorationHandler];
 }
+
+
 
 @end

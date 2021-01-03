@@ -5,6 +5,7 @@ import React from 'react';
 import { useTheme } from '@react-navigation/native';
 import PropTypes from 'prop-types';
 import { GoogleSignin, statusCodes } from '@react-native-community/google-signin';
+import { LoginButton, AccessToken } from 'react-native-fbsdk';
 
 import {
   ImageBackground,
@@ -82,12 +83,24 @@ const Login = ({ navigation }) => {
             style={{ opacity: 0.6, backgroundColor: colors.background }}>
             <TextEle variant="buttonText">Continue</TextEle>
           </RAButton>
-          <View>
-            <RAButton style={{ opacity: 1, flexDirection: 'row' }} onPress={signIn}>
-              <GoogleLogo height={24} width={24} fill={colors.text} style={{ marginRight: 20 }} />
-              <TextEle variant="buttonText">Sign in with google</TextEle>
-            </RAButton>
-          </View>
+          <RAButton style={{ opacity: 1, flexDirection: 'row' }} onPress={signIn}>
+            <GoogleLogo height={24} width={24} fill={colors.text} style={{ marginRight: 20 }} />
+            <TextEle variant="buttonText">Sign in with google</TextEle>
+          </RAButton>
+          <LoginButton
+            onLoginFinished={(error, result) => {
+              if (error) {
+                console.log(`login has error: ${result.error}`);
+              } else if (result.isCancelled) {
+                console.log('login is cancelled.');
+              } else {
+                AccessToken.getCurrentAccessToken().then(data => {
+                  console.log(data.accessToken.toString());
+                });
+              }
+            }}
+            onLogoutFinished={() => console.log('logout.')}
+          />
         </View>
       </KeyboardAvoidingView>
     </ImageBackground>

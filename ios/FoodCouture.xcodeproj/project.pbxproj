@@ -16,6 +16,7 @@
 		2D02E4BF1E0B4AB3006451C7 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB71A68108700A75B9A /* main.m */; };
 		2DCD954D1E0B4F2C00145EB5 /* FoodCoutureTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 00E356F21AD99517003FC87E /* FoodCoutureTests.m */; };
 		3157C8C125A1A2B20065672C /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3157C8C025A1A2B20065672C /* GoogleService-Info.plist */; };
+		31C53D9025A1C9CF00478AD0 /* File.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31C53D8F25A1C9CF00478AD0 /* File.swift */; };
 		691CCF92BE5CE0589F7B4191 /* libPods-FoodCouture-tvOSTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 826973BD2DB523B74BECBD2D /* libPods-FoodCouture-tvOSTests.a */; };
 		70A7473DE2CF1626A254C367 /* libPods-FoodCouture-tvOS.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6020EF138DC0CA4B55C9B7CB /* libPods-FoodCouture-tvOS.a */; };
 		7F480D741D2C1F0D41A0D742 /* libPods-FoodCouture.a in Frameworks */ = {isa = PBXBuildFile; fileRef = CAE961AF03F853CB7756BBA9 /* libPods-FoodCouture.a */; };
@@ -56,6 +57,8 @@
 		2D02E4901E0B4A5D006451C7 /* FoodCouture-tvOSTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "FoodCouture-tvOSTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		3157C8C025A1A2B20065672C /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../../../Downloads/GoogleService-Info.plist"; sourceTree = "<group>"; };
 		3157C92525A1A9F90065672C /* FoodCouture.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; name = FoodCouture.entitlements; path = FoodCouture/FoodCouture.entitlements; sourceTree = "<group>"; };
+		31C53D8A25A1C94400478AD0 /* FoodCouture-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "FoodCouture-Bridging-Header.h"; sourceTree = "<group>"; };
+		31C53D8F25A1C9CF00478AD0 /* File.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = File.swift; path = FoodCouture/File.swift; sourceTree = "<group>"; };
 		492589AEBEDB8CA8A770294D /* Pods-FoodCouture-FoodCoutureTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FoodCouture-FoodCoutureTests.release.xcconfig"; path = "Target Support Files/Pods-FoodCouture-FoodCoutureTests/Pods-FoodCouture-FoodCoutureTests.release.xcconfig"; sourceTree = "<group>"; };
 		6020EF138DC0CA4B55C9B7CB /* libPods-FoodCouture-tvOS.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-FoodCouture-tvOS.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		65E837FCFADFBF41A73B78D5 /* Pods-FoodCouture.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FoodCouture.release.xcconfig"; path = "Target Support Files/Pods-FoodCouture/Pods-FoodCouture.release.xcconfig"; sourceTree = "<group>"; };
@@ -137,6 +140,8 @@
 				13B07FB61A68108700A75B9A /* Info.plist */,
 				81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */,
 				13B07FB71A68108700A75B9A /* main.m */,
+				31C53D8A25A1C94400478AD0 /* FoodCouture-Bridging-Header.h */,
+				31C53D8F25A1C9CF00478AD0 /* File.swift */,
 			);
 			name = FoodCouture;
 			sourceTree = "<group>";
@@ -300,7 +305,7 @@
 						TestTargetID = 13B07F861A680F5B00A75B9A;
 					};
 					13B07F861A680F5B00A75B9A = {
-						LastSwiftMigration = 1120;
+						LastSwiftMigration = 1230;
 						ProvisioningStyle = Automatic;
 					};
 					2D02E47A1E0B4A5D006451C7 = {
@@ -392,11 +397,13 @@
 			);
 			inputPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-FoodCouture/Pods-FoodCouture-resources.sh",
+				"${PODS_ROOT}/FBSDKCoreKit/FacebookSDKStrings.bundle",
 				"${PODS_ROOT}/GoogleSignIn/Resources/GoogleSignIn.bundle",
 				"${PODS_CONFIGURATION_BUILD_DIR}/React-Core/AccessibilityResources.bundle",
 			);
 			name = "[CP] Copy Pods Resources";
 			outputPaths = (
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/FacebookSDKStrings.bundle",
 				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/GoogleSignIn.bundle",
 				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/AccessibilityResources.bundle",
 			);
@@ -484,11 +491,13 @@
 			);
 			inputPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-FoodCouture-FoodCoutureTests/Pods-FoodCouture-FoodCoutureTests-resources.sh",
+				"${PODS_ROOT}/FBSDKCoreKit/FacebookSDKStrings.bundle",
 				"${PODS_ROOT}/GoogleSignIn/Resources/GoogleSignIn.bundle",
 				"${PODS_CONFIGURATION_BUILD_DIR}/React-Core/AccessibilityResources.bundle",
 			);
 			name = "[CP] Copy Pods Resources";
 			outputPaths = (
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/FacebookSDKStrings.bundle",
 				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/GoogleSignIn.bundle",
 				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/AccessibilityResources.bundle",
 			);
@@ -605,6 +614,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				13B07FBC1A68108700A75B9A /* AppDelegate.m in Sources */,
+				31C53D9025A1C9CF00478AD0 /* File.swift in Sources */,
 				13B07FC11A68108700A75B9A /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -646,6 +656,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = EF1628C56369600C785B6759 /* Pods-FoodCouture-FoodCoutureTests.debug.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"DEBUG=1",
@@ -669,6 +680,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 492589AEBEDB8CA8A770294D /* Pods-FoodCouture-FoodCoutureTests.release.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				COPY_PHASE_STRIP = NO;
 				INFOPLIST_FILE = FoodCoutureTests/Info.plist;
@@ -707,8 +719,10 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.chetnapatel.foodcouture;
 				PRODUCT_NAME = FoodCouture;
 				PROVISIONING_PROFILE_SPECIFIER = "";
+				SWIFT_OBJC_BRIDGING_HEADER = "FoodCouture-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
 				VERSIONING_SYSTEM = "apple-generic";
 			};
 			name = Debug;
@@ -730,7 +744,9 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.chetnapatel.foodcouture;
 				PRODUCT_NAME = FoodCouture;
+				SWIFT_OBJC_BRIDGING_HEADER = "FoodCouture-Bridging-Header.h";
 				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
 				VERSIONING_SYSTEM = "apple-generic";
 			};
 			name = Release;
