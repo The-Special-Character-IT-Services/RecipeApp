@@ -6,6 +6,7 @@ import { useTheme } from '@react-navigation/native';
 import PropTypes from 'prop-types';
 import { GoogleSignin, statusCodes } from '@react-native-community/google-signin';
 import { LoginButton, AccessToken } from 'react-native-fbsdk';
+import Config from 'react-native-config';
 
 import {
   ImageBackground,
@@ -25,7 +26,11 @@ import GoogleLogo from '../../assets/icons/logo-google.svg';
 
 const { width: windowWidth, height: windowHeight } = Dimensions.get('window');
 
-GoogleSignin.configure();
+console.warn(Config.GOOGLE_CLIENT_ID);
+
+GoogleSignin.configure({
+  webClientId: Config.GOOGLE_CLIENT_ID,
+});
 
 const Login = ({ navigation }) => {
   const { colors } = useTheme();
