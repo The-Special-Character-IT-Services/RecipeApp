@@ -17,7 +17,7 @@ import RAButton from '../../components/RAButton';
 import FoodCourter from '../../assets/images/FoodCourter.png';
 import GoogleLogo from '../../assets/icons/logo-google.svg';
 
-const { width: windowWidth, height: windowHeight } = Dimensions.get('window');
+const { width: windowWidth } = Dimensions.get('window');
 
 const Registration = ({ navigation }) => {
   const { colors } = useTheme();
@@ -27,7 +27,7 @@ const Registration = ({ navigation }) => {
   };
 
   return (
-    <ImageBackground source={LoginImage} style={{ height: windowHeight, width: windowWidth }}>
+    <ImageBackground source={LoginImage} style={{ flex: 1 }}>
       <KeyboardAvoidingView
         behavior="padding"
         keyboardVerticalOffset={40}

@@ -1,21 +1,10 @@
-/* eslint-disable no-console */
-/* eslint-disable react/no-unescaped-entities */
-/* eslint-disable react-native/no-inline-styles */
 import React from 'react';
 import { useTheme } from '@react-navigation/native';
 import PropTypes from 'prop-types';
 import { GoogleSignin, statusCodes } from '@react-native-community/google-signin';
 import { LoginButton, AccessToken } from 'react-native-fbsdk';
 import Config from 'react-native-config';
-
-import {
-  ImageBackground,
-  Dimensions,
-  KeyboardAvoidingView,
-  View,
-  Image,
-  Alert,
-} from 'react-native';
+import { ImageBackground, KeyboardAvoidingView, View, Image, Alert } from 'react-native';
 import Form from '@components/Form';
 import TextEle from '@components/TextEle';
 import RAButton from '@components/RAButton';
@@ -24,7 +13,7 @@ import LoginImage from '../../assets/images/LoginImage.png';
 import FoodCourter from '../../assets/images/FoodCourter.png';
 import GoogleLogo from '../../assets/icons/logo-google.svg';
 
-const { width: windowWidth, height: windowHeight } = Dimensions.get('window');
+// const { width: windowWidth, height: windowHeight } = Dimensions.get('window');
 
 console.warn(Config.GOOGLE_CLIENT_ID);
 
@@ -65,7 +54,7 @@ const Login = ({ navigation }) => {
   };
 
   return (
-    <ImageBackground source={LoginImage} style={{ height: windowHeight, width: windowWidth }}>
+    <ImageBackground source={LoginImage} style={{ flex: 1 }}>
       <KeyboardAvoidingView
         behavior="padding"
         keyboardVerticalOffset={40}
