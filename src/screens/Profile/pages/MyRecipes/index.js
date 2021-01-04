@@ -2,8 +2,8 @@ import React, { useEffect, useState } from 'react';
 import { View, Image } from 'react-native';
 import { useTheme } from '@react-navigation/native';
 import { FlatList } from 'react-native-gesture-handler';
+import TextEle from '@components/TextEle';
 import data from './data';
-import TextEle from '../../../../components/TextEle';
 import StarIcon from '../../../../assets/icons/star-icon.svg';
 
 const MyRecipes = () => {

@@ -1,14 +1,10 @@
-/* eslint-disable no-console */
-/* eslint-disable react/no-unescaped-entities */
-/* eslint-disable react-native/no-inline-styles */
 import React from 'react';
 import { useTheme } from '@react-navigation/native';
 import PropTypes from 'prop-types';
-
 import { ImageBackground, KeyboardAvoidingView, View, Image } from 'react-native';
+import TextEle from '@components/TextEle';
+import RAButton from '@components/RAButton';
 import LoginImage from '../../assets/images/LoginImage.png';
-import TextEle from '../../components/TextEle';
-import RAButton from '../../components/RAButton';
 import FoodCourter from '../../assets/images/FoodCourter.png';
 
 const Initial = ({ navigation }) => {

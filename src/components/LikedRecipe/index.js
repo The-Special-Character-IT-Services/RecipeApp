@@ -7,7 +7,6 @@ import { RectButton } from 'react-native-gesture-handler';
 import { useTheme } from '@react-navigation/native';
 import TextEle from '../TextEle';
 import data from '../Carousal/data';
-// import RecipeDetail from '../../screens/RecipeDetail';
 
 const LikedRecipe = ({ onRecipeDetail }) => {
   const { colors } = useTheme();

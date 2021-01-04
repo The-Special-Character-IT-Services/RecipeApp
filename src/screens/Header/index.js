@@ -6,7 +6,7 @@ import { View, Image } from 'react-native';
 import { useTheme } from '@react-navigation/native';
 import { RectButton } from 'react-native-gesture-handler';
 
-import TextEle from '../../components/TextEle';
+import TextEle from '@components/TextEle';
 
 const Header = ({ onProfilePress }) => {
   const { colors } = useTheme();

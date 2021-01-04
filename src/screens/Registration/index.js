@@ -1,6 +1,3 @@
-/* eslint-disable import/no-named-as-default */
-/* eslint-disable react-native/no-inline-styles */
-/* eslint-disable no-console */
 import React from 'react';
 import { useTheme } from '@react-navigation/native';
 import {
@@ -53,7 +50,7 @@ const Registration = ({ navigation }) => {
           <Form initialValues={initialValues} fields={RegistrationForm} onSubmit={onSubmit} />
         </View>
         <View style={{ width: '100%' }}>
-          <Pressable onPress={() => navigation.navigate('Splash')}>
+          <Pressable onPress={() => navigation.navigate('Verification')}>
             <RAButton style={{ opacity: 0.6, backgroundColor: colors.background }}>
               <TextEle variant="buttonText">Continue</TextEle>
             </RAButton>

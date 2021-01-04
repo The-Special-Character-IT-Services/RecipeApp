@@ -3,18 +3,21 @@ import { useTheme } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import React from 'react';
 import { View } from 'react-native';
-import Login from '../screens/Login';
-import Registration from '../screens/Registration';
-import Home from '../screens/Home';
-import RecipeDetail from '../screens/RecipeDetail';
-import LikeButton from '../components/LikeButton';
-import RecipeVideo from '../screens/RecipeVideo';
-import Splash from '../screens/Splash';
-import Initial from '../screens/Initial';
-import ShareButton from '../components/ShareButton';
-import Profile from '../screens/Profile';
-import PriceTag from '../components/PriceTag';
-import TabSearch from '../screens/TabSearch';
+
+import ShareButton from '@components/ShareButton';
+import LikeButton from '@components/LikeButton';
+import PriceTag from '@components/PriceTag';
+
+import Verification from '@screens/Verification';
+import Login from '@screens/Login';
+import Registration from '@screens/Registration';
+import Home from '@screens/Home';
+import RecipeDetail from '@screens/RecipeDetail';
+import RecipeVideo from '@screens/RecipeVideo';
+import Splash from '@screens/Splash';
+import Initial from '@screens/Initial';
+import Profile from '@screens/Profile';
+import Search from '@screens/Search';
 
 const MainStack = createStackNavigator();
 
@@ -31,6 +34,11 @@ const MainStackScreen = () => {
       <MainStack.Screen name="Splash" component={Splash} />
       <MainStack.Screen name="Initial" component={Initial} />
       <MainStack.Screen
+        name="Verification"
+        component={Verification}
+        options={{ headerShown: true, headerTransparent: true }}
+      />
+      <MainStack.Screen
         name="Login"
         component={Login}
         options={{ headerShown: true, headerTransparent: true }}
@@ -42,8 +50,8 @@ const MainStackScreen = () => {
       />
       <MainStack.Screen name="Home" component={Home} />
       <MainStack.Screen
-        name="TabSearch"
-        component={TabSearch}
+        name="Search"
+        component={Search}
         options={{ headerShown: true, title: 'Search', headerTitleAlign: 'center' }}
       />
       <MainStack.Screen

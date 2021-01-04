@@ -3,7 +3,7 @@ import { createMaterialTopTabNavigator } from '@react-navigation/material-top-ta
 import React from 'react';
 import { Dimensions, View } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
-import TextEle from '../../components/TextEle';
+import TextEle from '@components/TextEle';
 import MyRecipes from './pages/MyRecipes';
 import Settings from './pages/Settings';
 import SavedVideos from './pages/SavedVideos';

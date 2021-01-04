@@ -11,7 +11,7 @@ import TextEle from '../../components/TextEle';
 
 const arr = ['Trending', 'Recently Added ', 'Rice Items', 'Sweets', 'Salads'];
 
-const TabSearch = () => {
+const Search = () => {
   const { colors } = useTheme();
   const insets = useSafeAreaInsets();
   const [text, setText] = useState('');
@@ -83,4 +83,4 @@ const TabSearch = () => {
   );
 };
 
-export default TabSearch;
+export default Search;

@@ -12,6 +12,9 @@ module.exports = {
     'prettier/react',
     'prettier/standard',
     'airbnb',
+    'plugin:import/errors',
+    'plugin:import/warnings',
+    'plugin:jsx-control-statements/recommended',
   ],
   parserOptions: {
     ecmaFeatures: {
@@ -20,7 +23,7 @@ module.exports = {
     ecmaVersion: 12,
     sourceType: 'module',
   },
-  plugins: ['react', 'react-native', 'import', 'jsx-a11y', 'react-hooks', 'prettier'],
+  plugins: ['react', 'react-native', 'import', 'react-hooks', 'prettier', 'jsx-control-statements'],
   rules: {
     'arrow-parens': [1, 'as-needed'],
     'object-curly-newline': 0,
@@ -56,5 +59,37 @@ module.exports = {
 
     // React-Native Plugin
     'react-native/no-inline-styles': 'warn',
+    'react/jsx-no-undef': [2, { allowGlobals: true }],
+  },
+  settings: {
+    'import/resolver': {
+      'babel-module': {
+        extensions: [
+          '.ios.ts',
+          '.android.ts',
+          '.ts',
+          '.ios.tsx',
+          '.android.tsx',
+          '.tsx',
+          '.jsx',
+          '.js',
+          '.json',
+        ],
+      },
+      node: {
+        extensions: [
+          '.ios.ts',
+          '.android.ts',
+          '.ts',
+          '.ios.tsx',
+          '.android.tsx',
+          '.tsx',
+          '.jsx',
+          '.js',
+          '.json',
+        ],
+        paths: ['~'],
+      },
+    },
   },
 };
