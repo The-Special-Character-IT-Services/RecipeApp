@@ -3,10 +3,11 @@ import RATextInput from '@components/RATextInput';
 
 export const RegistrationForm = [
   {
-    name: 'number',
+    name: 'email',
     defaultValue: '',
-    placeholder: 'Phone Number',
+    placeholder: 'Email',
     component: RATextInput,
+    keyboardType: 'email-address',
     validate: value => {
       let error = '';
       if (!value) {
@@ -20,7 +21,7 @@ export const RegistrationForm = [
     name: 'username',
     defaultValue: '',
     component: RATextInput,
-    placeholder: 'Username',
+    placeholder: 'Name',
     validate: value => {
       let error = '';
       if (!value) {

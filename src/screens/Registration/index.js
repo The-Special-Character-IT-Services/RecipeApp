@@ -1,29 +1,29 @@
-import React from 'react';
+import React, { useRef } from 'react';
 import { useTheme } from '@react-navigation/native';
-import {
-  ImageBackground,
-  Dimensions,
-  KeyboardAvoidingView,
-  View,
-  Image,
-  Pressable,
-} from 'react-native';
+import { ImageBackground, Dimensions, KeyboardAvoidingView, View, Image } from 'react-native';
 import PropTypes from 'prop-types';
-import Form from '../../components/Form';
+import Form from '@components/Form';
+import LoginImage from '@assets/images/LoginImage.png';
+import TextEle from '@components/TextEle';
+import RAButton from '@components/RAButton';
+import FoodCourter from '@assets/images/FoodCourter.png';
+import axios from '@utils/axios';
 import { initialValues, RegistrationForm } from './credentials';
-import LoginImage from '../../assets/images/LoginImage.png';
-import TextEle from '../../components/TextEle';
-import RAButton from '../../components/RAButton';
-import FoodCourter from '../../assets/images/FoodCourter.png';
-import GoogleLogo from '../../assets/icons/logo-google.svg';
 
 const { width: windowWidth } = Dimensions.get('window');
 
-const Registration = ({ navigation }) => {
+const Registration = () => {
   const { colors } = useTheme();
+  const formRef = useRef();
 
-  const onSubmit = values => {
-    console.log(values);
+  const onSubmit = async values => {
+    try {
+      const { confirmPassword, ...userData } = values;
+      const user = await axios.post('auth/local/register', userData);
+      console.warn(user);
+    } catch (error) {
+      console.warn(error.message);
+    }
   };
 
   return (
@@ -47,20 +47,19 @@ const Registration = ({ navigation }) => {
             </TextEle>
             <TextEle>Please Enter Your Number</TextEle>
           </View>
-          <Form initialValues={initialValues} fields={RegistrationForm} onSubmit={onSubmit} />
+          <Form
+            ref={formRef}
+            initialValues={initialValues}
+            fields={RegistrationForm}
+            onSubmit={onSubmit}
+          />
         </View>
         <View style={{ width: '100%' }}>
-          <Pressable onPress={() => navigation.navigate('Verification')}>
-            <RAButton style={{ opacity: 0.6, backgroundColor: colors.background }}>
-              <TextEle variant="buttonText">Continue</TextEle>
-            </RAButton>
-          </Pressable>
-          <View>
-            <RAButton style={{ opacity: 1, flexDirection: 'row' }}>
-              <GoogleLogo height={24} width={24} fill={colors.text} style={{ marginRight: 20 }} />
-              <TextEle variant="buttonText">Sign up with google</TextEle>
-            </RAButton>
-          </View>
+          <RAButton
+            style={{ opacity: 0.6, backgroundColor: colors.background }}
+            onPress={() => formRef.current.handleSubmit()}>
+            <TextEle variant="buttonText">Continue</TextEle>
+          </RAButton>
         </View>
       </KeyboardAvoidingView>
     </ImageBackground>

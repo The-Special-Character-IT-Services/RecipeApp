@@ -4,11 +4,14 @@ import { NavigationContainer, DefaultTheme, DarkTheme } from '@react-navigation/
 import analytics from '@react-native-firebase/analytics';
 import { createStackNavigator, CardStyleInterpolators } from '@react-navigation/stack';
 import { KeyboardAvoidingView, StatusBar } from 'react-native';
+import { SWRConfig } from 'swr';
+
 import { useColorScheme } from 'react-native-appearance';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 import SplashScreen from 'react-native-splash-screen';
 import ModalNavigation from '@navigation/ModalNavigation';
 import MasterNavigation from '@navigation/MasterNavigation';
+import fetcher from '@utils/fetcher';
 import { isIOS } from './src/utils';
 
 // import Login from './src/screens/Login/index';
@@ -47,52 +50,57 @@ const App = () => {
         backgroundColor={currentTheme.colors.card}
         barStyle={scheme === 'dark' ? 'light-content' : 'dark-content'}
       />
-      <KeyboardAvoidingView behavior={isIOS ? 'padding' : undefined} style={{ flex: 1 }}>
-        <NavigationContainer
-          ref={navigationRef}
-          theme={currentTheme}
-          onReady={() => {
-            routeNameRef.current = navigationRef.current.getCurrentRoute().name;
-          }}
-          onStateChange={async () => {
-            const previousRouteName = routeNameRef.current;
-            const currentRouteName = navigationRef.current.getCurrentRoute().name;
+      <SWRConfig
+        value={{
+          fetcher,
+        }}>
+        <KeyboardAvoidingView behavior={isIOS ? 'padding' : undefined} style={{ flex: 1 }}>
+          <NavigationContainer
+            ref={navigationRef}
+            theme={currentTheme}
+            onReady={() => {
+              routeNameRef.current = navigationRef.current.getCurrentRoute().name;
+            }}
+            onStateChange={async () => {
+              const previousRouteName = routeNameRef.current;
+              const currentRouteName = navigationRef.current.getCurrentRoute().name;
 
-            if (previousRouteName !== currentRouteName) {
-              // Change this line to use another Mobile analytics SDK
-              await analytics().logScreenView({
-                screen_name: currentRouteName,
-                screen_class: currentRouteName,
-              });
-            }
+              if (previousRouteName !== currentRouteName) {
+                // Change this line to use another Mobile analytics SDK
+                await analytics().logScreenView({
+                  screen_name: currentRouteName,
+                  screen_class: currentRouteName,
+                });
+              }
 
-            // Save the current route name for later comparision
-            routeNameRef.current = currentRouteName;
-          }}>
-          <RootStack.Navigator initialRouteName="Main" mode="modal" headerMode="none">
-            <RootStack.Screen
-              name="Main"
-              component={MasterNavigation}
-              options={{
-                headerShown: true,
-                headerTransparent: 1,
-                headerTintColor: currentTheme.colors.primary,
-                cardStyleInterpolator: CardStyleInterpolators.forFadeFromBottomAndroid,
-              }}
-            />
-            <RootStack.Screen
-              name="Modal"
-              component={ModalNavigation}
-              options={{
-                headerShown: true,
-                headerTransparent: 1,
-                headerTintColor: currentTheme.colors.primary,
-                cardStyleInterpolator: CardStyleInterpolators.forFadeFromBottomAndroid,
-              }}
-            />
-          </RootStack.Navigator>
-        </NavigationContainer>
-      </KeyboardAvoidingView>
+              // Save the current route name for later comparision
+              routeNameRef.current = currentRouteName;
+            }}>
+            <RootStack.Navigator initialRouteName="Main" mode="modal" headerMode="none">
+              <RootStack.Screen
+                name="Main"
+                component={MasterNavigation}
+                options={{
+                  headerShown: true,
+                  headerTransparent: 1,
+                  headerTintColor: currentTheme.colors.primary,
+                  cardStyleInterpolator: CardStyleInterpolators.forFadeFromBottomAndroid,
+                }}
+              />
+              <RootStack.Screen
+                name="Modal"
+                component={ModalNavigation}
+                options={{
+                  headerShown: true,
+                  headerTransparent: 1,
+                  headerTintColor: currentTheme.colors.primary,
+                  cardStyleInterpolator: CardStyleInterpolators.forFadeFromBottomAndroid,
+                }}
+              />
+            </RootStack.Navigator>
+          </NavigationContainer>
+        </KeyboardAvoidingView>
+      </SWRConfig>
     </SafeAreaProvider>
   );
 };

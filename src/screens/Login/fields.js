@@ -3,9 +3,10 @@ import RATextInput from '@components/RATextInput';
 
 export const loginForm = [
   {
-    name: 'number',
+    name: 'identifier',
     defaultValue: '',
-    placeholder: 'Phone Number',
+    placeholder: 'Email Address',
+    keyboardType: 'email-address',
     component: RATextInput,
     validate: value => {
       let error = '';
