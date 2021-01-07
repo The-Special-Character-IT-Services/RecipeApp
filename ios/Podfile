@@ -13,6 +13,8 @@ target 'FoodCouture' do
     # Pods for testing
   end
 
+  pod 'RNInputMask', :path => '../node_modules/react-native-text-input-mask/ios/InputMask'
+
   # Enables Flipper.
   #
   # Note that if you have use_frameworks! enabled, Flipper will not work and

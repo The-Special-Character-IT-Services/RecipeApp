@@ -386,6 +386,9 @@ PODS:
     - React
   - react-native-splash-screen (3.2.0):
     - React
+  - react-native-text-input-mask (2.0.0):
+    - React
+    - RNInputMask
   - react-native-video (5.1.0-alpha8):
     - React
     - react-native-video/Video (= 5.1.0-alpha8)
@@ -483,6 +486,7 @@ PODS:
   - RNGoogleSignin (5.0.0):
     - GoogleSignIn (~> 5.0.0)
     - React-Core
+  - RNInputMask (4.1.0)
   - RNReanimated (2.0.0-rc.1):
     - DoubleConversion
     - FBLazyVector
@@ -571,6 +575,7 @@ DEPENDENCIES:
   - react-native-safe-area-context (from `../node_modules/react-native-safe-area-context`)
   - "react-native-slider (from `../node_modules/@react-native-community/slider`)"
   - react-native-splash-screen (from `../node_modules/react-native-splash-screen`)
+  - react-native-text-input-mask (from `../node_modules/react-native-text-input-mask`)
   - react-native-video (from `../node_modules/react-native-video`)
   - React-RCTActionSheet (from `../node_modules/react-native/Libraries/ActionSheetIOS`)
   - React-RCTAnimation (from `../node_modules/react-native/Libraries/NativeAnimation`)
@@ -593,6 +598,7 @@ DEPENDENCIES:
   - "RNFBCrashlytics (from `../node_modules/@react-native-firebase/crashlytics`)"
   - RNGestureHandler (from `../node_modules/react-native-gesture-handler`)
   - "RNGoogleSignin (from `../node_modules/@react-native-community/google-signin`)"
+  - RNInputMask (from `../node_modules/react-native-text-input-mask/ios/InputMask`)
   - RNReanimated (from `../node_modules/react-native-reanimated`)
   - RNScreens (from `../node_modules/react-native-screens`)
   - RNSVG (from `../node_modules/react-native-svg`)
@@ -682,6 +688,8 @@ EXTERNAL SOURCES:
     :path: "../node_modules/@react-native-community/slider"
   react-native-splash-screen:
     :path: "../node_modules/react-native-splash-screen"
+  react-native-text-input-mask:
+    :path: "../node_modules/react-native-text-input-mask"
   react-native-video:
     :path: "../node_modules/react-native-video"
   React-RCTActionSheet:
@@ -726,6 +734,8 @@ EXTERNAL SOURCES:
     :path: "../node_modules/react-native-gesture-handler"
   RNGoogleSignin:
     :path: "../node_modules/@react-native-community/google-signin"
+  RNInputMask:
+    :path: "../node_modules/react-native-text-input-mask/ios/InputMask"
   RNReanimated:
     :path: "../node_modules/react-native-reanimated"
   RNScreens:
@@ -790,6 +800,7 @@ SPEC CHECKSUMS:
   react-native-safe-area-context: b6e0e284002381d2ff29fa4fff42b4d8282e3c94
   react-native-slider: e99fc201cefe81270fc9d81714a7a0f5e566b168
   react-native-splash-screen: 200d11d188e2e78cea3ad319964f6142b6384865
+  react-native-text-input-mask: 07227297075f9653315f43b0424d596423a01736
   react-native-video: dbb8df4f0bbdf80de6797c90fcad8bc12b19401d
   React-RCTActionSheet: 89a0ca9f4a06c1f93c26067af074ccdce0f40336
   React-RCTAnimation: 1bde3ecc0c104c55df246eda516e0deb03c4e49b
@@ -812,6 +823,7 @@ SPEC CHECKSUMS:
   RNFBCrashlytics: b02cce65e7059e6f7827fa357cd84df79c6fdd74
   RNGestureHandler: 9b7e605a741412e20e13c512738a31bd1611759b
   RNGoogleSignin: ad866d4c4af2651e36801dd3b7771d7715353499
+  RNInputMask: 815461ebdf396beb62cf58916c35cf6930adb991
   RNReanimated: b2d6785c8fc1f61e1c81179c64c9b6b1a00e6ab5
   RNScreens: 45c457af3d2ee9e08fc01e70da87e653d46b1198
   RNSVG: ce9d996113475209013317e48b05c21ee988d42e
@@ -820,6 +832,6 @@ SPEC CHECKSUMS:
   Yoga: 4bd86afe9883422a7c4028c00e34790f560923d6
   YogaKit: f782866e155069a2cca2517aafea43200b01fd5a
 
-PODFILE CHECKSUM: 02e6099de9d5c0f549ab1f5a24822de624029691
+PODFILE CHECKSUM: 89885e28002f56d22b14172d0af11e772e532799
 
 COCOAPODS: 1.10.0

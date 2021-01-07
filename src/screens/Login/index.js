@@ -18,8 +18,6 @@ import { initialValues, loginForm } from './fields';
 
 // const { width: windowWidth, height: windowHeight } = Dimensions.get('window');
 
-console.warn(Config.GOOGLE_CLIENT_ID);
-
 GoogleSignin.configure({
   webClientId: Config.GOOGLE_CLIENT_ID,
   offlineAccess: true,
@@ -43,12 +41,11 @@ const Login = ({ navigation }) => {
     try {
       await GoogleSignin.hasPlayServices();
       const data = await GoogleSignin.signIn();
-      console.warn(data);
       const res = await fetch(
         `http://2917af612e67.ngrok.io/auth/google/callback/?id_token=${data.idToken}`,
       );
       const auth = await res.json();
-      console.warn(auth);
+      console.log(auth);
     } catch (error) {
       switch (error.code) {
         case statusCodes.SIGN_IN_CANCELLED:

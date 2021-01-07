@@ -49,6 +49,7 @@
     "react-native-splash-screen": "^3.2.0",
     "react-native-svg": "^12.1.0",
     "react-native-tab-view": "^2.15.2",
+    "react-native-text-input-mask": "^2.0.0",
     "react-native-video": "^5.1.0-alpha8",
     "swr": "^0.3.11",
     "tailwind-rn": "^3.0.0",

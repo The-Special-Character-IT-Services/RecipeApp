@@ -10,6 +10,7 @@ import RAButton from '@components/RAButton';
 import FoodCourter from '@assets/images/FoodCourter.png';
 import axios from '@utils/axios';
 import { isIOS } from '@utils/index';
+import RAOTPText from '@components/RAOTPText';
 import { initialValues, RegistrationForm } from './credentials';
 
 const { width: windowWidth } = Dimensions.get('window');
@@ -59,7 +60,7 @@ const Registration = ({ navigation }) => {
             </TextEle>
             <TextEle>Please Enter Your Number</TextEle>
           </View>
-
+          <RAOTPText length={4} />
           <Form
             ref={formRef}
             initialValues={initialValues}
