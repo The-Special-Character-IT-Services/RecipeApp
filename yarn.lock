@@ -1187,6 +1187,11 @@
     opencollective-postinstall "^2.0.1"
     superstruct "^0.6.2"
 
+"@react-native-firebase/auth@^10.4.0":
+  version "10.4.0"
+  resolved "https://registry.yarnpkg.com/@react-native-firebase/auth/-/auth-10.4.0.tgz#de7d41936f09ec218f44c5bbcf10ce726b36aea9"
+  integrity sha512-/Cn6obmMz4kRMtaonUf6xiLA/Gd75f+fRxwALPdevJMJgisyyK4P2MiWlP3xKaMGQjy3eUp2xdeXQ6NHSkY3KA==
+
 "@react-native-firebase/crashlytics@^10.4.0":
   version "10.4.0"
   resolved "https://registry.yarnpkg.com/@react-native-firebase/crashlytics/-/crashlytics-10.4.0.tgz#a570e2fb90e4ac459c0bc14f86e5c69751c29189"
@@ -6820,6 +6825,10 @@ react-native-screens@^2.15.0:
   version "2.16.1"
   resolved "https://registry.yarnpkg.com/react-native-screens/-/react-native-screens-2.16.1.tgz#b105a127378d90018a46daf0c2f6518fca60c06f"
   integrity sha512-WZ7m0sBDVaHbBnlHxwQnUlI6KNfQKHq+Unfw+VBuAlnSXvT+aw6Bb/K2bUlHzBgvrPjwY3Spc7ZERFuTwRLLwg==
+
+"react-native-sms-retriever@https://github.com/sarmad1995/react-native-sms-retriever.git":
+  version "1.1.1"
+  resolved "https://github.com/sarmad1995/react-native-sms-retriever.git#cbdb7da205e085a70bcb5238a565cef9f00aa034"
 
 react-native-splash-screen@^3.2.0:
   version "3.2.0"

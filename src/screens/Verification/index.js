@@ -1,11 +1,13 @@
-import React, { useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import { useTheme } from '@react-navigation/native';
+import SmsRetriever from 'react-native-sms-retriever';
 import PropTypes from 'prop-types';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { Dimensions, KeyboardAvoidingView, View, Image, TextInput } from 'react-native';
-import TextEle from '../../components/TextEle';
-import RAButton from '../../components/RAButton';
-import FoodCourter from '../../assets/images/FoodCourter.png';
+import axios from '@utils/axios';
+import TextEle from '@components/TextEle';
+import RAButton from '@components/RAButton';
+import FoodCourter from '@assets/images/FoodCourter.png';
 
 const { width: windowWidth, height: windowHeight } = Dimensions.get('window');
 
@@ -16,6 +18,30 @@ const Verification = ({ navigation }) => {
   const onChangeText = val => {
     setText(val);
   };
+
+  const verifyOTP = useCallback(async otp => {
+    const token = await axios.get(`/auth/sms-confirmation?confirmation=${otp}`);
+    console.warn(token.data);
+  }, []);
+
+  const onSmsListener = useCallback(async () => {
+    try {
+      const registered = await SmsRetriever.startSmsRetriever();
+      if (registered) {
+        SmsRetriever.addSmsListener(event => {
+          SmsRetriever.removeSmsListener();
+          const otp = /(\d{5})/g.exec(event.message)[1];
+          verifyOTP(otp);
+        });
+      }
+    } catch (error) {
+      console.log(JSON.stringify(error));
+    }
+  }, [verifyOTP]);
+
+  useEffect(() => {
+    onSmsListener();
+  }, [onSmsListener]);
 
   return (
     <View style={{ height: windowHeight, width: windowWidth, flex: 1 }}>

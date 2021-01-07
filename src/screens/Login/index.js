@@ -22,6 +22,7 @@ console.warn(Config.GOOGLE_CLIENT_ID);
 
 GoogleSignin.configure({
   webClientId: Config.GOOGLE_CLIENT_ID,
+  offlineAccess: true,
 });
 
 const Login = ({ navigation }) => {
@@ -111,7 +112,7 @@ const Login = ({ navigation }) => {
                 console.log('login is cancelled.');
               } else {
                 AccessToken.getCurrentAccessToken().then(data => {
-                  console.log(data.accessToken.toString());
+                  console.warn(data.accessToken.toString());
                 });
               }
             }}
