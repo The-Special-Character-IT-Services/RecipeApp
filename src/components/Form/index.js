@@ -1,4 +1,4 @@
-import { Field, Formik } from 'formik';
+import { FastField, Formik } from 'formik';
 import PropTypes from 'prop-types';
 
 import React, { forwardRef } from 'react';
@@ -10,7 +10,7 @@ const index = forwardRef(({ fields, ...rest }, ref) => (
     {() => (
       <View style={[styles.container]}>
         {fields.map(x => (
-          <Field key={x.name} {...x} />
+          <FastField key={x.name} {...x} />
         ))}
       </View>
     )}

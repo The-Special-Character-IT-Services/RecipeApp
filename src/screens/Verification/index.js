@@ -21,7 +21,7 @@ const Verification = ({ navigation }) => {
 
   const verifyOTP = useCallback(async otp => {
     const token = await axios.get(`/auth/sms-confirmation?confirmation=${otp}`);
-    console.warn(token.data);
+    console.log(token);
   }, []);
 
   const onSmsListener = useCallback(async () => {

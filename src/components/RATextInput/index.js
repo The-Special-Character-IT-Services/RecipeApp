@@ -4,18 +4,18 @@ import { TextInput } from 'react-native';
 import TextEle from '../TextEle';
 import styles from './styles';
 
-// eslint-disable-next-line react/prop-types
 const RATextInput = ({
-  field,
+  field: { name, value },
   form: { touched, errors, handleBlur, handleChange },
   style,
   ...rest
 }) => (
   <>
     <TextInput
-      {...field}
-      onChangeText={handleChange(field.name)}
-      onBlur={handleBlur(field.name)}
+      name={name}
+      value={value}
+      onChangeText={handleChange(name)}
+      onBlur={handleBlur(name)}
       autoCapitalize="none"
       autoCorrect={false}
       allowFontScaling={false}
@@ -23,13 +23,14 @@ const RATextInput = ({
       placeholderTextColor="white"
       {...rest}
     />
-    {touched[field.name] && errors[field.name] && <TextEle>{errors[field.name]}</TextEle>}
+    {touched[name] && errors[name] && <TextEle>{errors[name]}</TextEle>}
   </>
 );
 
 RATextInput.propTypes = {
   field: PropTypes.shape({
     name: PropTypes.string,
+    value: PropTypes.string,
   }).isRequired,
   form: PropTypes.shape({
     touched: PropTypes.shape({}),
