@@ -1,6 +1,6 @@
 /* eslint-disable react-native/no-inline-styles */
 import React, { useEffect, useRef } from 'react';
-import { NavigationContainer, DefaultTheme, DarkTheme } from '@react-navigation/native';
+import { NavigationContainer } from '@react-navigation/native';
 import analytics from '@react-native-firebase/analytics';
 import { createStackNavigator, CardStyleInterpolators } from '@react-navigation/stack';
 import { KeyboardAvoidingView, StatusBar } from 'react-native';
@@ -11,26 +11,11 @@ import { SafeAreaProvider } from 'react-native-safe-area-context';
 import SplashScreen from 'react-native-splash-screen';
 import ModalNavigation from '@navigation/ModalNavigation';
 import MasterNavigation from '@navigation/MasterNavigation';
+import { RADarkTheme, RALightTheme } from '@theme/index';
 import fetcher from '@utils/fetcher';
 import { isIOS } from './src/utils';
 
 // import Login from './src/screens/Login/index';
-
-const MyDefaultTheme = {
-  ...DefaultTheme,
-  colors: {
-    ...DefaultTheme.colors,
-    primary: '#F6552E',
-  },
-};
-
-const MyDarkTheme = {
-  ...DarkTheme,
-  colors: {
-    ...DarkTheme.colors,
-    primary: '#F6552E',
-  },
-};
 
 const RootStack = createStackNavigator();
 
@@ -39,7 +24,7 @@ const App = () => {
   const routeNameRef = useRef();
   const navigationRef = useRef();
 
-  const currentTheme = scheme === 'dark' ? MyDarkTheme : MyDefaultTheme;
+  const currentTheme = scheme === 'dark' ? RADarkTheme : RALightTheme;
 
   useEffect(() => {
     SplashScreen.hide();

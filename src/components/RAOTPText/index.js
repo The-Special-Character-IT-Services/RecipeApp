@@ -1,16 +1,20 @@
 import PropTypes from 'prop-types';
-import styles from '@components/RATextInput/styles';
-// import TextEle from '@components/TextEle';
-import React, { createRef, useMemo, useState } from 'react';
+import TextEle from '@components/TextEle';
+import React, { createRef, useMemo } from 'react';
 import { View, TextInput, Keyboard } from 'react-native';
 
-const RAOTPText = ({ style, length, ...rest }) => {
-  const [val, setVal] = useState(Array(length).fill(''));
-  const inputRefs = useMemo(() => [...Array(length).keys()].map(() => createRef()), [length]);
+const RAOTPText = ({
+  field: { name, value },
+  form: { touched, errors, handleBlur, setFieldValue },
+  style,
+  ...rest
+}) => {
+  const inputRefs = useMemo(() => [...Array(value.length).keys()].map(() => createRef()), [
+    value.length,
+  ]);
 
-  const onOtpKeyPress = index => ({ nativeEvent: { key: value } }) => {
-    // auto focus to previous InputText if value is blank and existing value is also blank
-    if (value === 'Backspace') {
+  const onOtpKeyPress = index => ({ nativeEvent: { key } }) => {
+    if (key === 'Backspace') {
       if (index === 0) {
         Keyboard.dismiss();
       } else {
@@ -19,10 +23,16 @@ const RAOTPText = ({ style, length, ...rest }) => {
     }
   };
 
-  const onOtpChange = index => value => {
-    setVal(val.map((x, i) => (i === index ? value : x)));
-    if (value !== '') {
-      if (index + 1 >= length) {
+  const onOtpChange = index => txt => {
+    const newValue = value.map((x, i) => {
+      if (i === index) {
+        return txt;
+      }
+      return x;
+    });
+    setFieldValue(name, newValue);
+    if (txt !== '') {
+      if (index + 1 >= value.length) {
         Keyboard.dismiss();
       } else {
         inputRefs[index + 1].current.focus();
@@ -36,14 +46,30 @@ const RAOTPText = ({ style, length, ...rest }) => {
         {inputRefs.map((x, i) => (
           <TextInput
             ref={x}
-            value={val[i] || ''}
+            value={value[i] || ''}
             onKeyPress={onOtpKeyPress(i)}
             onChangeText={onOtpChange(i)}
-            onFocus={() => inputRefs[i].current.clear()}
             autoCapitalize="none"
             autoCorrect={false}
             allowFontScaling={false}
-            style={[styles.textInput, { marginHorizontal: 5, textAlign: 'center' }]}
+            style={[
+              {
+                borderWidth: 2,
+                borderColor: errors[name] && !value[i] ? '#FF6464' : '#D0DBEA',
+                borderRadius: 20,
+                backgroundColor: 'rgba(255, 255, 255, 0.247)',
+              },
+              { marginHorizontal: 5, textAlign: 'center', height: 72, width: 72 },
+              {
+                fontFamily: 'Inter-Bold',
+                fontSize: 34,
+                fontStyle: 'normal',
+                fontWeight: '600',
+                lineHeight: 41,
+                textAlign: 'center',
+                color: 'white',
+              },
+            ]}
             placeholderTextColor="white"
             maxLength={1}
             keyboardType="numeric"
@@ -51,7 +77,7 @@ const RAOTPText = ({ style, length, ...rest }) => {
           />
         ))}
       </View>
-      {/* {touched[name] && errors[name] && <TextEle>{errors[name]}</TextEle>} */}
+      {touched[name] && errors[name] && <TextEle>{errors[name]}</TextEle>}
     </>
   );
 };
@@ -66,6 +92,7 @@ RAOTPText.propTypes = {
     errors: PropTypes.shape({}),
     handleBlur: PropTypes.func,
     handleChange: PropTypes.func,
+    setFieldValue: PropTypes.func,
   }).isRequired,
   length: PropTypes.number.isRequired,
   style: PropTypes.string,

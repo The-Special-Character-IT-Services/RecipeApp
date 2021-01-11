@@ -1,5 +1,6 @@
 /* eslint-disable max-len */
 import RATextInput from '@components/RATextInput';
+import RAOTPTextInput from '@components/RAOTPText';
 
 export const RegistrationForm = [
   {
@@ -16,7 +17,6 @@ export const RegistrationForm = [
       return error;
     },
   },
-
   {
     name: 'username',
     defaultValue: '',
@@ -30,7 +30,6 @@ export const RegistrationForm = [
       return error;
     },
   },
-
   {
     name: 'password',
     defaultValue: '',
@@ -60,6 +59,28 @@ export const RegistrationForm = [
     },
   },
 ];
+
+export const OTPFields = [
+  {
+    name: 'otp',
+    defaultValue: ['', '', '', ''],
+    length: 4,
+    placeholder: '-',
+    component: RAOTPTextInput,
+    validate: value => {
+      let error = '';
+      if (value.some(x => x === '')) {
+        error = 'Required';
+      }
+      return error;
+    },
+  },
+];
+
+export const initialOTPValues = OTPFields.reduce(
+  (p, c) => ({ ...p, [c.name]: c.defaultValue }),
+  {},
+);
 
 export const initialValues = RegistrationForm.reduce(
   (p, c) => ({ ...p, [c.name]: c.defaultValue }),

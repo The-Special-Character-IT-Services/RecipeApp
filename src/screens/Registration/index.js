@@ -1,22 +1,21 @@
 import React, { useRef } from 'react';
 import { useTheme } from '@react-navigation/native';
-import { ImageBackground, Dimensions, KeyboardAvoidingView, View, Image } from 'react-native';
-import SmsRetriever from 'react-native-sms-retriever';
+import { Dimensions, KeyboardAvoidingView, View, Image } from 'react-native';
 import PropTypes from 'prop-types';
 import Form from '@components/Form';
-import LoginImage from '@assets/images/LoginImage.png';
 import TextEle from '@components/TextEle';
 import RAButton from '@components/RAButton';
-import FoodCourter from '@assets/images/FoodCourter.png';
+import { useHeaderHeight } from '@react-navigation/stack';
 import axios from '@utils/axios';
 import { isIOS } from '@utils/index';
-import RAOTPText from '@components/RAOTPText';
+import RAText from '@components/RAText';
 import { initialValues, RegistrationForm } from './credentials';
 
 const { width: windowWidth } = Dimensions.get('window');
 
 const Registration = ({ navigation }) => {
   const { colors } = useTheme();
+  const headerHeight = useHeaderHeight();
   const formRef = useRef();
 
   const onSubmit = async values => {
@@ -41,42 +40,36 @@ const Registration = ({ navigation }) => {
   };
 
   return (
-    <ImageBackground source={LoginImage} style={{ flex: 1 }}>
-      <KeyboardAvoidingView
-        behavior="padding"
-        keyboardVerticalOffset={40}
-        style={{
-          flex: 1,
-          justifyContent: 'space-between',
-          alignItems: 'center',
-          marginBottom: 20,
-        }}>
-        <Image source={FoodCourter} style={{ height: 100, width: 100, marginTop: 20 }} />
-
-        <View style={{ width: windowWidth }}>
-          <View style={{ alignItems: 'center' }}>
-            <TextEle variant="header2" style={{ color: 'white', alignItems: 'center' }}>
-              Welcome!
-            </TextEle>
-            <TextEle>Please Enter Your Number</TextEle>
-          </View>
-          <RAOTPText length={4} />
-          <Form
-            ref={formRef}
-            initialValues={initialValues}
-            fields={RegistrationForm}
-            onSubmit={onSubmit}
-          />
+    <KeyboardAvoidingView
+      behavior="padding"
+      keyboardVerticalOffset={40}
+      style={{
+        flex: 1,
+        justifyContent: 'space-between',
+        alignItems: 'center',
+        marginBottom: 20,
+        paddingTop: headerHeight,
+      }}>
+      <View style={{ width: windowWidth }}>
+        <View style={{ alignItems: 'center' }}>
+          <RAText variant="h1">Welcome!</RAText>
+          <RAText variant="p2">Please enter your account here</RAText>
         </View>
-        <View style={{ width: '100%' }}>
-          <RAButton
-            style={{ opacity: 0.6, backgroundColor: colors.background }}
-            onPress={() => formRef.current.handleSubmit()}>
-            <TextEle variant="buttonText">Continue</TextEle>
-          </RAButton>
-        </View>
-      </KeyboardAvoidingView>
-    </ImageBackground>
+        <Form
+          ref={formRef}
+          initialValues={initialValues}
+          fields={RegistrationForm}
+          onSubmit={onSubmit}
+        />
+      </View>
+      <View style={{ width: '100%' }}>
+        <RAButton
+          style={{ opacity: 0.6, backgroundColor: colors.background }}
+          onPress={() => formRef.current.handleSubmit()}>
+          <TextEle variant="buttonText">Continue</TextEle>
+        </RAButton>
+      </View>
+    </KeyboardAvoidingView>
   );
 };
 
