@@ -5,18 +5,21 @@ import { GoogleSignin, statusCodes } from '@react-native-community/google-signin
 import AsyncStorage from '@react-native-async-storage/async-storage';
 // import { LoginButton, AccessToken } from 'react-native-fbsdk';
 import Config from 'react-native-config';
-import { ImageBackground, KeyboardAvoidingView, View, Image, Alert, Pressable } from 'react-native';
+import { View, Alert, Pressable } from 'react-native';
 import Form from '@components/Form';
 // import TextEle from '@components/TextEle';
 // import RAButton from '@components/RAButton';
 // import LoginImage from '@assets/images/LoginImage.png';
 // import FoodCourter from '@assets/images/FoodCourter.png';
 import GoogleLogo from '@assets/icons/logo-google.svg';
+import FacebookLogo from '@assets/icons/facebook.svg';
 import axios from '@utils/axios';
-import { FOODCOUTURE_TOKEN } from '@constants/index';
+// import { FOODCOUTURE_TOKEN } from '@constants/index';
 import RAText from '@components/RAText';
 import { useHeaderHeight } from '@react-navigation/stack';
 import RAButton1 from '@components/RAButton1';
+import { isIOS } from '@utils/';
+import { AccessToken, LoginManager } from 'react-native-fbsdk';
 import { initialValues, loginForm, formRef } from './fields';
 
 // const { width: windowWidth, height: windowHeight } = Dimensions.get('window');
@@ -41,15 +44,40 @@ const Login = ({ navigation }) => {
     // }
   };
 
-  const signIn = async () => {
+  const signInFacebook = () => {
+    LoginManager.logInWithPermissions(['public_profile']).then(
+      result => {
+        if (result.isCancelled) {
+          console.log('Login cancelled');
+        } else {
+          AccessToken.getCurrentAccessToken().then(data => {
+            axios
+              .get(
+                `https://ca5e9afb56c8.ngrok.io/auth/facebook/callback/?access_token=${data.accessToken}`,
+              )
+              .then(val => {
+                console.log(val);
+              })
+              .catch(err => {
+                console.log(err);
+              });
+          });
+        }
+      },
+      error => {
+        console.log(`Login fail with error: ${error}`);
+      },
+    );
+  };
+
+  const signInGoogle = async () => {
     try {
       await GoogleSignin.hasPlayServices();
       const data = await GoogleSignin.signIn();
-      const res = await fetch(
-        `http://2917af612e67.ngrok.io/auth/google/callback/?id_token=${data.idToken}`,
+      const res = await axios.get(
+        `https://ca5e9afb56c8.ngrok.io/auth/google/callback/?access_token=${data.idToken}`,
       );
-      const auth = await res.json();
-      console.log(auth);
+      console.log(res.data);
     } catch (error) {
       switch (error.code) {
         case statusCodes.SIGN_IN_CANCELLED:
@@ -105,12 +133,21 @@ const Login = ({ navigation }) => {
           <RAText variant="p2" style={{ textAlign: 'center', marginVertical: 8 }}>
             Or continue with
           </RAText>
-          <RAButton1
-            variant="fill"
-            text="Google"
-            onPress={signIn}
-            icon={({ ...rest }) => <GoogleLogo {...rest} fill="#fff" />}
-          />
+          {isIOS ? (
+            <RAButton1
+              variant="fill"
+              text="Facebook"
+              onPress={signInFacebook}
+              icon={({ ...rest }) => <FacebookLogo {...rest} fill="#fff" />}
+            />
+          ) : (
+            <RAButton1
+              variant="fill"
+              text="Google"
+              onPress={signInGoogle}
+              icon={({ ...rest }) => <GoogleLogo {...rest} fill="#fff" />}
+            />
+          )}
           <View style={{ flexDirection: 'row', justifyContent: 'center', marginVertical: 8 }}>
             <RAText variant="p2" style={{ textAlign: 'center', marginHorizontal: 8 }}>
               Don’t have any account?

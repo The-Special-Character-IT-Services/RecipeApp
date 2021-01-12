@@ -23,9 +23,7 @@ const RAButton1 = ({ variant, size, text, icon: Icon, disable, onPress, style })
       onPress={!disable && onPress}>
       <View accessible>
         <View style={[styles.btn, styles.btnContainer]}>
-          {Icon && (
-            <Icon height={24} width={24} stroke={variant === 'fill' ? '#fff' : colors.primary} />
-          )}
+          {Icon && <Icon height={24} width={24} />}
           {text && (
             <RAText variant={size === 'small' ? 'bt2' : 'bt1'} style={styles.text}>
               {text}
