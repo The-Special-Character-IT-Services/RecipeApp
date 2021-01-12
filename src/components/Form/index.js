@@ -3,12 +3,12 @@ import PropTypes from 'prop-types';
 
 import React, { forwardRef } from 'react';
 import { View } from 'react-native';
-import styles from './styles';
+// import styles from './styles';
 
 const index = forwardRef(({ fields, ...rest }, ref) => (
   <Formik innerRef={ref} {...rest}>
     {() => (
-      <View style={[styles.container]}>
+      <View>
         {fields.map(x => (
           <FastField key={x.name} {...x} />
         ))}

@@ -18,6 +18,7 @@ import Splash from '@screens/Splash';
 import Initial from '@screens/Initial';
 import Profile from '@screens/Profile';
 import Search from '@screens/Search';
+import ForgotPassword from '@screens/ForgotPassword';
 
 const MainStack = createStackNavigator();
 
@@ -41,6 +42,11 @@ const MainStackScreen = () => {
       <MainStack.Screen
         name="Login"
         component={Login}
+        options={{ headerShown: true, headerTransparent: true }}
+      />
+      <MainStack.Screen
+        name="ForgotPassword"
+        component={ForgotPassword}
         options={{ headerShown: true, headerTransparent: true }}
       />
       <MainStack.Screen

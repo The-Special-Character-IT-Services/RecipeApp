@@ -16,7 +16,7 @@ const RAText = ({ variant, style, ...rest }) => {
 };
 
 RAText.propTypes = {
-  variant: PropTypes.oneOf(['h1', 'h2', 'h3', 'p1', 'p2', 's']),
+  variant: PropTypes.oneOf(['h1', 'h2', 'h3', 'p1', 'p2', 's', 'bt1', 'bt2']),
   style: Text.propTypes.style,
 };
 

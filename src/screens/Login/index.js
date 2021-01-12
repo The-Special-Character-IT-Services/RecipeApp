@@ -1,20 +1,23 @@
-import React, { useRef } from 'react';
+import React from 'react';
 import { useTheme } from '@react-navigation/native';
 import PropTypes from 'prop-types';
 import { GoogleSignin, statusCodes } from '@react-native-community/google-signin';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import { LoginButton, AccessToken } from 'react-native-fbsdk';
+// import { LoginButton, AccessToken } from 'react-native-fbsdk';
 import Config from 'react-native-config';
-import { ImageBackground, KeyboardAvoidingView, View, Image, Alert } from 'react-native';
+import { ImageBackground, KeyboardAvoidingView, View, Image, Alert, Pressable } from 'react-native';
 import Form from '@components/Form';
-import TextEle from '@components/TextEle';
-import RAButton from '@components/RAButton';
-import LoginImage from '@assets/images/LoginImage.png';
-import FoodCourter from '@assets/images/FoodCourter.png';
+// import TextEle from '@components/TextEle';
+// import RAButton from '@components/RAButton';
+// import LoginImage from '@assets/images/LoginImage.png';
+// import FoodCourter from '@assets/images/FoodCourter.png';
 import GoogleLogo from '@assets/icons/logo-google.svg';
 import axios from '@utils/axios';
 import { FOODCOUTURE_TOKEN } from '@constants/index';
-import { initialValues, loginForm } from './fields';
+import RAText from '@components/RAText';
+import { useHeaderHeight } from '@react-navigation/stack';
+import RAButton1 from '@components/RAButton1';
+import { initialValues, loginForm, formRef } from './fields';
 
 // const { width: windowWidth, height: windowHeight } = Dimensions.get('window');
 
@@ -25,16 +28,17 @@ GoogleSignin.configure({
 
 const Login = ({ navigation }) => {
   const { colors } = useTheme();
-  const formRef = useRef();
+  const headerHight = useHeaderHeight();
 
   const onSubmit = async values => {
-    try {
-      const user = await axios.post('auth/local', values);
-      await AsyncStorage.setItem(FOODCOUTURE_TOKEN, user.data.jwt);
-      navigation.navigate('Home');
-    } catch (error) {
-      console.warn(error.message);
-    }
+    console.log(values);
+    // try {
+    //   const user = await axios.post('auth/local', values);
+    //   await AsyncStorage.setItem(FOODCOUTURE_TOKEN, user.data.jwt);
+    //   navigation.navigate('Home');
+    // } catch (error) {
+    //   console.warn(error.message);
+    // }
   };
 
   const signIn = async () => {
@@ -67,57 +71,59 @@ const Login = ({ navigation }) => {
   };
 
   return (
-    <ImageBackground source={LoginImage} style={{ flex: 1 }}>
-      <KeyboardAvoidingView
-        behavior="padding"
-        keyboardVerticalOffset={40}
+    <View style={{ flex: 1 }}>
+      <View
         style={{
           flex: 1,
-          justifyContent: 'space-between',
-          alignItems: 'center',
+          marginTop: headerHight,
           marginBottom: 20,
+          marginHorizontal: 20,
         }}>
-        <Image source={FoodCourter} style={{ height: 100, width: 100, marginTop: 20 }} />
-        <View>
-          <TextEle variant="header2" style={{ color: 'white', alignItems: 'center' }}>
-            Welcome to Food Courture
-          </TextEle>
+        <View style={{ flex: 3, justifyContent: 'flex-end' }}>
+          <View style={{ alignItems: 'center', marginBottom: 32 }}>
+            <RAText variant="h1" style={{ marginBottom: 8 }}>
+              Welcome Back
+            </RAText>
+            <RAText variant="p2">Please enter your account here</RAText>
+          </View>
           <Form
             ref={formRef}
             initialValues={initialValues}
             fields={loginForm}
             onSubmit={onSubmit}
           />
+          <Pressable
+            onPress={() => navigation.navigate('ForgotPassword')}
+            style={{ marginVertical: 8 }}>
+            <RAText variant="p2" style={{ textAlign: 'right' }}>
+              Forgot password?
+            </RAText>
+          </Pressable>
         </View>
-        <View style={{ width: '100%' }}>
-          <RAButton
-            onPress={() => {
-              formRef.current?.handleSubmit();
-            }}
-            style={{ opacity: 0.6, backgroundColor: colors.background }}>
-            <TextEle variant="buttonText">Continue</TextEle>
-          </RAButton>
-          <RAButton style={{ opacity: 1, flexDirection: 'row' }} onPress={signIn}>
-            <GoogleLogo height={24} width={24} fill={colors.text} style={{ marginRight: 20 }} />
-            <TextEle variant="buttonText">Sign in with google</TextEle>
-          </RAButton>
-          <LoginButton
-            onLoginFinished={(error, result) => {
-              if (error) {
-                console.log(`login has error: ${result.error}`);
-              } else if (result.isCancelled) {
-                console.log('login is cancelled.');
-              } else {
-                AccessToken.getCurrentAccessToken().then(data => {
-                  console.warn(data.accessToken.toString());
-                });
-              }
-            }}
-            onLogoutFinished={() => console.log('logout.')}
+        <View style={{ flex: 2, justifyContent: 'space-evenly' }}>
+          <RAButton1 variant="fill" text="Login" onPress={formRef.current?.handleSubmit} />
+          <RAText variant="p2" style={{ textAlign: 'center', marginVertical: 8 }}>
+            Or continue with
+          </RAText>
+          <RAButton1
+            variant="fill"
+            text="Google"
+            onPress={signIn}
+            icon={({ ...rest }) => <GoogleLogo {...rest} fill="#fff" />}
           />
+          <View style={{ flexDirection: 'row', justifyContent: 'center', marginVertical: 8 }}>
+            <RAText variant="p2" style={{ textAlign: 'center', marginHorizontal: 8 }}>
+              Don’t have any account?
+            </RAText>
+            <Pressable onPress={() => navigation.navigate('Registration')}>
+              <RAText variant="h3" style={{ color: colors.primary }}>
+                Sign Up
+              </RAText>
+            </Pressable>
+          </View>
         </View>
-      </KeyboardAvoidingView>
-    </ImageBackground>
+      </View>
+    </View>
   );
 };
 

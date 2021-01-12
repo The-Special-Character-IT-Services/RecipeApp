@@ -55,6 +55,24 @@ const styles = StyleSheet.create({
     letterSpacing: 0.5,
     color: '#C4C4C4',
   },
+  bt1: {
+    fontFamily: 'Inter-Bold',
+    fontSize: 15,
+    fontStyle: 'normal',
+    fontWeight: '700',
+    lineHeight: 18,
+    letterSpacing: 0.2,
+    textAlign: 'center',
+  },
+  bt2: {
+    fontFamily: 'Inter-Bold',
+    fontSize: 12,
+    fontStyle: 'normal',
+    fontWeight: '700',
+    lineHeight: 15,
+    letterSpacing: 0.2,
+    textAlign: 'center',
+  },
 });
 
 export default styles;

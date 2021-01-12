@@ -1,22 +1,25 @@
-import React, { useRef } from 'react';
+import React, { useState } from 'react';
 import { useTheme } from '@react-navigation/native';
-import { Dimensions, KeyboardAvoidingView, View, Image } from 'react-native';
+import { View } from 'react-native';
 import PropTypes from 'prop-types';
 import Form from '@components/Form';
-import TextEle from '@components/TextEle';
-import RAButton from '@components/RAButton';
 import { useHeaderHeight } from '@react-navigation/stack';
 import axios from '@utils/axios';
 import { isIOS } from '@utils/index';
 import RAText from '@components/RAText';
-import { initialValues, RegistrationForm } from './credentials';
+import RAButton1 from '@components/RAButton1';
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
+import CheckCircleIcon from '@assets/icons/check_circle.svg';
+import UncheckCircleIcon from '@assets/icons/uncheck_circle.svg';
+import { initialValues, registrationForm, formRef } from './credentials';
 
-const { width: windowWidth } = Dimensions.get('window');
+const rn = /\d+/;
 
 const Registration = ({ navigation }) => {
+  const [passwordVal, setPasswordVal] = useState('');
   const { colors } = useTheme();
-  const headerHeight = useHeaderHeight();
-  const formRef = useRef();
+  const headerHight = useHeaderHeight();
+  const insets = useSafeAreaInsets();
 
   const onSubmit = async values => {
     try {
@@ -40,36 +43,62 @@ const Registration = ({ navigation }) => {
   };
 
   return (
-    <KeyboardAvoidingView
-      behavior="padding"
-      keyboardVerticalOffset={40}
-      style={{
-        flex: 1,
-        justifyContent: 'space-between',
-        alignItems: 'center',
-        marginBottom: 20,
-        paddingTop: headerHeight,
-      }}>
-      <View style={{ width: windowWidth }}>
-        <View style={{ alignItems: 'center' }}>
-          <RAText variant="h1">Welcome!</RAText>
-          <RAText variant="p2">Please enter your account here</RAText>
+    <View style={{ flex: 1 }}>
+      <View
+        style={{
+          flex: 1,
+          marginTop: headerHight,
+          marginBottom: 20,
+          marginHorizontal: 20,
+        }}>
+        <View style={{ flex: 3, justifyContent: 'flex-end' }}>
+          <View style={{ alignItems: 'center', marginBottom: 32 }}>
+            <RAText variant="h1">Welcome!</RAText>
+            <RAText variant="p2">Please enter your account here</RAText>
+          </View>
+          <Form
+            validate={values => {
+              setPasswordVal(values.password);
+              return {};
+            }}
+            ref={formRef}
+            initialValues={initialValues}
+            fields={registrationForm}
+            onSubmit={onSubmit}
+          />
+          <View style={{ marginTop: 8 }}>
+            <RAText variant="p1">Your Password must contain:</RAText>
+
+            <View style={{ flexDirection: 'row', alignItems: 'center', paddingVertical: 8 }}>
+              {passwordVal.length >= 6 ? (
+                <CheckCircleIcon height={24} width={24} />
+              ) : (
+                <UncheckCircleIcon height={24} width={24} />
+              )}
+              <RAText variant="p1" style={{ marginHorizontal: 8 }}>
+                Atleast 6 characters
+              </RAText>
+            </View>
+            <View style={{ flexDirection: 'row', alignItems: 'center', paddingVertical: 8 }}>
+              {passwordVal.match(rn) && passwordVal.match(rn)[0].length >= 1 ? (
+                <CheckCircleIcon height={24} width={24} />
+              ) : (
+                <UncheckCircleIcon height={24} width={24} />
+              )}
+              <RAText variant="p1" style={{ marginHorizontal: 8 }}>
+                Contains a number
+              </RAText>
+            </View>
+          </View>
+          <RAButton1
+            style={{ marginVertical: 16 }}
+            variant="fill"
+            text="Submit"
+            onPress={formRef.current?.handleSubmit}
+          />
         </View>
-        <Form
-          ref={formRef}
-          initialValues={initialValues}
-          fields={RegistrationForm}
-          onSubmit={onSubmit}
-        />
       </View>
-      <View style={{ width: '100%' }}>
-        <RAButton
-          style={{ opacity: 0.6, backgroundColor: colors.background }}
-          onPress={() => formRef.current.handleSubmit()}>
-          <TextEle variant="buttonText">Continue</TextEle>
-        </RAButton>
-      </View>
-    </KeyboardAvoidingView>
+    </View>
   );
 };
 
