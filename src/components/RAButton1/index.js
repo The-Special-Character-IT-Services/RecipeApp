@@ -2,32 +2,39 @@ import RAText from '@components/RAText';
 import PropTypes from 'prop-types';
 import { useTheme } from '@react-navigation/native';
 import React, { useMemo } from 'react';
-import { View } from 'react-native';
+import { View, ActivityIndicator, ViewPropTypes } from 'react-native';
 import { RectButton } from 'react-native-gesture-handler';
 import getStyle from './styles';
 
-const RAButton1 = ({ variant, size, text, icon: Icon, disable, onPress, style }) => {
+const RAButton1 = ({ variant, size, text, icon: Icon, disable, onPress, loading, style }) => {
   const { colors } = useTheme();
-  const styles = useMemo(() => getStyle(colors, size, variant, disable), [
+  const styles = useMemo(() => getStyle(colors, size, variant, disable, loading), [
     colors,
     size,
     variant,
     disable,
+    loading,
   ]);
 
   return (
     <RectButton
-      underlayColor={!disable && colors.text}
-      rippleColor={!disable && colors.border}
+      underlayColor={(!disable || loading) && colors.text}
+      rippleColor={(!disable || loading) && colors.border}
       style={[styles.btn, styles[variant], style]}
-      onPress={!disable && onPress}>
+      {...((!disable || loading) && { onPress })}>
       <View accessible>
         <View style={[styles.btn, styles.btnContainer]}>
-          {Icon && <Icon height={24} width={24} />}
-          {text && (
-            <RAText variant={size === 'small' ? 'bt2' : 'bt1'} style={styles.text}>
-              {text}
-            </RAText>
+          {loading ? (
+            <ActivityIndicator size="large" animating color="#fff" />
+          ) : (
+            <>
+              {Icon && <Icon height={24} width={24} />}
+              {text && (
+                <RAText variant={size === 'small' ? 'bt2' : 'bt1'} style={styles.text}>
+                  {text}
+                </RAText>
+              )}
+            </>
           )}
         </View>
       </View>
@@ -38,10 +45,12 @@ const RAButton1 = ({ variant, size, text, icon: Icon, disable, onPress, style })
 RAButton1.propTypes = {
   variant: PropTypes.oneOf(['fill', 'outline']),
   size: PropTypes.oneOf(['default', 'medium', 'small']),
+  style: ViewPropTypes.style.isRequired,
   text: PropTypes.string,
   icon: PropTypes.func,
   disable: PropTypes.bool,
   onPress: PropTypes.func,
+  loading: PropTypes.bool,
 };
 
 RAButton1.defaultProps = {
@@ -50,6 +59,7 @@ RAButton1.defaultProps = {
   text: '',
   icon: null,
   disable: false,
+  loading: false,
   onPress: () => {},
 };
 

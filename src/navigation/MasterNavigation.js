@@ -19,6 +19,7 @@ import Initial from '@screens/Initial';
 import Profile from '@screens/Profile';
 import Search from '@screens/Search';
 import ForgotPassword from '@screens/ForgotPassword';
+import ResetPassword from '@screens/ResetPassword';
 
 const MainStack = createStackNavigator();
 
@@ -37,6 +38,11 @@ const MainStackScreen = () => {
       <MainStack.Screen
         name="Verification"
         component={Verification}
+        options={{ headerShown: true, headerTransparent: true }}
+      />
+      <MainStack.Screen
+        name="ResetPassword"
+        component={ResetPassword}
         options={{ headerShown: true, headerTransparent: true }}
       />
       <MainStack.Screen

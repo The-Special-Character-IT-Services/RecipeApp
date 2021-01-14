@@ -7,7 +7,7 @@ export const formRef = createRef();
 
 export const forgotPasswordForm = [
   {
-    name: 'identifier',
+    name: 'phone',
     defaultValue: '',
     placeholder: 'Phone Number',
     keyboardType: 'phone-pad',
@@ -30,5 +30,5 @@ export const forgotPasswordForm = [
 
 export const initialValues = forgotPasswordForm.reduce(
   (p, c) => ({ ...p, [c.name]: c.defaultValue }),
-  {},
+  { countryCode: '91' },
 );

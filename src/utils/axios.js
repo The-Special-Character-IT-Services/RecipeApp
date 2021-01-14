@@ -1,13 +1,18 @@
 /* eslint-disable */
 import axios from 'axios';
 import Config from 'react-native-config';
+import Toast from 'react-native-toast-message';
 
 const instance = axios.create({
   baseURL: Config.API_URL,
+  timeout: 3000,
+  headers: {
+    'Content-Type': 'application/json',
+  },
 });
 
 // Add a request interceptor
-axios.interceptors.request.use(
+instance.interceptors.request.use(
   function (config) {
     // Do something before request is sent
     return config;
@@ -19,16 +24,44 @@ axios.interceptors.request.use(
 );
 
 // Add a response interceptor
-axios.interceptors.response.use(
+instance.interceptors.response.use(
   function (response) {
     // Any status code that lie within the range of 2xx cause this function to trigger
     // Do something with response data
+    console.log(response);
     return response;
   },
   function (error) {
-    // Any status codes that falls outside the range of 2xx cause this function to trigger
-    // Do something with response error
-    return Promise.reject(error);
+    const { data, status } = error.response;
+    console.log(data);
+    console.log(status);
+    let err;
+    switch (status) {
+      case 400:
+        if (data?.data[0]?.messages[0].message) {
+          err = new Error(data?.data[0]?.messages[0].message);
+        } else {
+          err = new Error('Something went wrong, Try after sometime.');
+        }
+        break;
+      case 401:
+        err = new Error('Please Login to continue.');
+        break;
+      case 404:
+        err = new Error('Server is down. Try After sometime.');
+        break;
+      case 500:
+        err = new Error('Something went wrong, Try after sometime.');
+        break;
+
+      default:
+        err = new Error('Something went wrong, Try after sometime.');
+        break;
+    }
+    // if (error?.response.data?.data[0]?.messages[0].message) {
+    //   err = new Error(error.response.data?.data[0]?.messages[0].message);
+    // }
+    return Promise.reject(err);
   },
 );
 

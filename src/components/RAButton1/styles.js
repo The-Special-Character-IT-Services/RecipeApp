@@ -1,6 +1,6 @@
 import { StyleSheet } from 'react-native';
 
-const getStyle = (colors, size, variant, disable) => {
+const getStyle = (colors, size, variant, disable, loading) => {
   const getVerticalPadding = () => {
     switch (size) {
       case 'small':
@@ -16,7 +16,7 @@ const getStyle = (colors, size, variant, disable) => {
   if (variant === 'outline') {
     viewStyle = {
       borderWidth: 2,
-      borderColor: disable ? colors.border : colors.primary,
+      borderColor: disable || loading ? colors.border : colors.primary,
     };
   }
 
@@ -25,7 +25,7 @@ const getStyle = (colors, size, variant, disable) => {
       borderRadius: 32,
     },
     fill: {
-      backgroundColor: disable ? colors.border : colors.primary,
+      backgroundColor: disable || loading ? colors.border : colors.primary,
     },
     btnContainer: {
       ...viewStyle,

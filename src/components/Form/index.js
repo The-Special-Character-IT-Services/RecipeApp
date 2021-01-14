@@ -5,10 +5,10 @@ import React, { forwardRef } from 'react';
 import { View } from 'react-native';
 // import styles from './styles';
 
-const index = forwardRef(({ fields, ...rest }, ref) => (
+const index = forwardRef(({ fields, formStyle, ...rest }, ref) => (
   <Formik innerRef={ref} {...rest}>
     {() => (
-      <View>
+      <View style={formStyle}>
         {fields.map(x => (
           <FastField key={x.name} {...x} />
         ))}

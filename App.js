@@ -13,6 +13,7 @@ import ModalNavigation from '@navigation/ModalNavigation';
 import MasterNavigation from '@navigation/MasterNavigation';
 import { RADarkTheme, RALightTheme } from '@theme/index';
 import fetcher from '@utils/fetcher';
+import Toast from 'react-native-toast-message';
 import { isIOS } from './src/utils';
 
 // import Login from './src/screens/Login/index';
@@ -39,7 +40,10 @@ const App = () => {
         value={{
           fetcher,
         }}>
-        <KeyboardAvoidingView behavior={isIOS ? 'padding' : undefined} style={{ flex: 1 }}>
+        <KeyboardAvoidingView
+          {...(isIOS && { behavior: 'padding' })}
+          style={{ flex: 1 }}
+          enabled={isIOS}>
           <NavigationContainer
             ref={navigationRef}
             theme={currentTheme}
@@ -86,6 +90,7 @@ const App = () => {
           </NavigationContainer>
         </KeyboardAvoidingView>
       </SWRConfig>
+      <Toast ref={ref => Toast.setRef(ref)} />
     </SafeAreaProvider>
   );
 };

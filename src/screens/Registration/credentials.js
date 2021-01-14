@@ -93,12 +93,7 @@ export const OTPFields = [
   },
 ];
 
-export const initialOTPValues = OTPFields.reduce(
-  (p, c) => ({ ...p, [c.name]: c.defaultValue }),
-  {},
-);
-
 export const initialValues = registrationForm.reduce(
   (p, c) => ({ ...p, [c.name]: c.defaultValue }),
-  {},
+  { countryCode: '91' },
 );
