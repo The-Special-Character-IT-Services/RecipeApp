@@ -8,7 +8,7 @@ import SmsRetriever from 'react-native-sms-retriever';
 import RAButton1 from '@components/RAButton1';
 import { useTheme } from '@react-navigation/native';
 import axios from '@utils/axios';
-import { setToken } from '@utils/index';
+import { loginProcess } from '@utils/index';
 import { initialValues, otpForm, formRef } from './fields';
 
 const RESEND_OTP_TIME_LIMIT = 60; // 30 secs
@@ -72,9 +72,12 @@ const Verification = ({ navigation, route }) => {
   const onSubmit = async values => {
     try {
       if (verify) {
-        const user = await axios.get(`auth/sms-confirmation?confirmation=${values.otp}`);
-        await setToken(user.data);
-        navigation.replace('Home');
+        const res = await axios.get(`auth/sms-confirmation?confirmation=${values.otp}`);
+        await loginProcess(res, 'phone');
+        navigation.reset({
+          index: 0,
+          routes: [{ name: 'Home' }],
+        });
       } else {
         navigation.replace('ResetPassword', {
           code: values.otp,
@@ -148,9 +151,15 @@ const Verification = ({ navigation, route }) => {
 };
 
 Verification.propTypes = {
-  route: PropTypes.shape({}).isRequired,
   navigation: PropTypes.shape({
     navigate: PropTypes.func,
+    reset: PropTypes.func,
+    replace: PropTypes.func,
+  }).isRequired,
+  route: PropTypes.shape({
+    params: PropTypes.shape({
+      verify: PropTypes.bool,
+    }),
   }).isRequired,
 };
 export default Verification;

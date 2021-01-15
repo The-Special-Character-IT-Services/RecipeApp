@@ -8,7 +8,7 @@ import axios from '@utils/axios';
 import RAText from '@components/RAText';
 import { useHeaderHeight } from '@react-navigation/stack';
 import RAButton1 from '@components/RAButton1';
-import { setToken, showErrorToast } from '@utils/index';
+import { loginProcess, showErrorToast } from '@utils/index';
 import { initialValues, resetForm, formRef } from './fields';
 
 GoogleSignin.configure({
@@ -22,9 +22,12 @@ const ResetPassword = ({ navigation, route }) => {
 
   const onSubmit = async values => {
     try {
-      const user = await axios.post('auth/reset-password', { ...values, code });
-      await setToken(user.data);
-      navigation.replace('Home');
+      const res = await axios.post('auth/reset-password', { ...values, code });
+      await loginProcess(res, 'phone');
+      navigation.reset({
+        index: 0,
+        routes: [{ name: 'Home' }],
+      });
     } catch (error) {
       console.log(error);
       showErrorToast(error);
@@ -66,9 +69,14 @@ const ResetPassword = ({ navigation, route }) => {
 };
 
 ResetPassword.propTypes = {
-  route: PropTypes.shape({}).isRequired,
   navigation: PropTypes.shape({
     navigate: PropTypes.func,
+    reset: PropTypes.func,
+  }).isRequired,
+  route: PropTypes.shape({
+    params: PropTypes.shape({
+      code: PropTypes.string,
+    }),
   }).isRequired,
 };
 export default ResetPassword;

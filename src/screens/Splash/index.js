@@ -10,9 +10,12 @@ const Splash = ({ navigation }) => {
     try {
       const value = await AsyncStorage.getItem(FOODCOUTURE_TOKEN);
       if (value !== null) {
-        navigation.navigate('Home');
+        navigation.reset({
+          index: 0,
+          routes: [{ name: 'Home' }],
+        });
       } else {
-        navigation.navigate('Initial');
+        navigation.replace('Initial');
       }
     } catch (e) {
       // error reading value
@@ -29,7 +32,8 @@ const Splash = ({ navigation }) => {
 
 Splash.propTypes = {
   navigation: PropTypes.shape({
-    navigate: PropTypes.func,
+    replace: PropTypes.func,
+    reset: PropTypes.func,
   }).isRequired,
 };
 

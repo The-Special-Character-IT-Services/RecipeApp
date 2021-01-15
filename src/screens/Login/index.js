@@ -12,7 +12,7 @@ import axios from '@utils/axios';
 import RAText from '@components/RAText';
 import { useHeaderHeight } from '@react-navigation/stack';
 import RAButton1 from '@components/RAButton1';
-import { isIOS, setToken, showErrorToast } from '@utils/index';
+import { isIOS, loginProcess, showErrorToast } from '@utils/index';
 import { AccessToken, LoginManager } from 'react-native-fbsdk';
 import { initialValues, loginForm, formRef } from './fields';
 
@@ -42,7 +42,7 @@ const Login = ({ navigation }) => {
   const onSubmit = async values => {
     try {
       setLoading({ ...loading, signIn: true });
-      const user = await axios.post(
+      const res = await axios.post(
         'auth/local',
         {
           identifier: `+${values.countryCode}${values.identifier}`,
@@ -52,8 +52,11 @@ const Login = ({ navigation }) => {
           cancelToken: cancelSource.token,
         },
       );
-      await setToken(user.data);
-      navigation.navigate('Home');
+      await loginProcess(res, 'phone');
+      navigation.reset({
+        index: 0,
+        routes: [{ name: 'Home' }],
+      });
     } catch (error) {
       showErrorToast(error);
     } finally {
@@ -69,11 +72,14 @@ const Login = ({ navigation }) => {
         showErrorToast(new Error('Login cancelled'));
       } else {
         const data = await AccessToken.getCurrentAccessToken();
-        const val = await axios.get(`auth/facebook/callback/?access_token=${data.accessToken}`, {
+        const res = await axios.get(`auth/facebook/callback/?access_token=${data.accessToken}`, {
           cancelToken: cancelSource.token,
         });
-        await setToken(val.data);
-        navigation.navigate('Home');
+        await loginProcess(res, 'facebook');
+        navigation.reset({
+          index: 0,
+          routes: [{ name: 'Home' }],
+        });
       }
     } catch (error) {
       showErrorToast(error);
@@ -90,8 +96,11 @@ const Login = ({ navigation }) => {
       const res = await axios.get(`auth/google/callback/?access_token=${data.idToken}`, {
         cancelToken: cancelSource.token,
       });
-      await setToken(res.data);
-      navigation.navigate('Home');
+      await loginProcess(res, 'facebook');
+      navigation.reset({
+        index: 0,
+        routes: [{ name: 'Home' }],
+      });
     } catch (error) {
       switch (error.code) {
         case statusCodes.SIGN_IN_CANCELLED:
@@ -199,6 +208,7 @@ Login.propTypes = {
   route: PropTypes.shape({}).isRequired,
   navigation: PropTypes.shape({
     navigate: PropTypes.func,
+    reset: PropTypes.func,
   }).isRequired,
 };
 

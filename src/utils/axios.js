@@ -13,7 +13,9 @@ const instance = axios.create({
 
 // Add a request interceptor
 instance.interceptors.request.use(
-  function (config) {
+  async config => {
+    // const token = await getToken();
+    // config.headers.Authorization = token ? `Bearer ${token.jwt}` : '';
     // Do something before request is sent
     return config;
   },
