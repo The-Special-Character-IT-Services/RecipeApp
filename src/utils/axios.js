@@ -1,7 +1,21 @@
 /* eslint-disable */
+import { FOODCOUTURE_TOKEN } from '@constants/';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 import axios from 'axios';
 import Config from 'react-native-config';
 import Toast from 'react-native-toast-message';
+
+const getToken = async () => {
+  try {
+    const value = await AsyncStorage.getItem(FOODCOUTURE_TOKEN);
+    if (value !== null) {
+      return JSON.parse(value);
+    }
+    return null;
+  } catch (error) {
+    throw new Error(error.message);
+  }
+};
 
 const instance = axios.create({
   baseURL: Config.API_URL,
@@ -14,8 +28,8 @@ const instance = axios.create({
 // Add a request interceptor
 instance.interceptors.request.use(
   async config => {
-    // const token = await getToken();
-    // config.headers.Authorization = token ? `Bearer ${token.jwt}` : '';
+    const token = await getToken();
+    config.headers.Authorization = token ? `Bearer ${token.jwt}` : '';
     // Do something before request is sent
     return config;
   },
@@ -30,13 +44,10 @@ instance.interceptors.response.use(
   function (response) {
     // Any status code that lie within the range of 2xx cause this function to trigger
     // Do something with response data
-    console.log(response);
     return response;
   },
   function (error) {
     const { data, status } = error.response;
-    console.log(data);
-    console.log(status);
     let err;
     switch (status) {
       case 400:

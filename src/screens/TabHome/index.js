@@ -8,7 +8,7 @@ import { ScrollView } from 'react-native-gesture-handler';
 import Category from '../../components/Category';
 import SearchBar from '../../components/Search';
 import Header from '../Header';
-import Footer from '../../components/Footer';
+import Cuisines from '../../components/Cuisines';
 import Popular from '../../components/Carousal';
 import UpComingEvent from '../../components/UpComingEvent';
 import TextEle from '../../components/TextEle';
@@ -65,7 +65,7 @@ const TabHome = ({ navigation }) => {
         </TextEle>
       </View>
       <UpComingEvent />
-      <Footer />
+      <Cuisines />
     </ScrollView>
   );
 };

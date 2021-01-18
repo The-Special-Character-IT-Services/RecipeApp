@@ -29,6 +29,7 @@ module.exports = {
           '@theme': './src/theme',
           '@utils': './src/utils',
           '@assets': './src/assets',
+          '@hooks': './src/hooks',
         },
       },
     ],

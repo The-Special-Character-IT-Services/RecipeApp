@@ -4,61 +4,12 @@ import React from 'react';
 import { View } from 'react-native';
 import { ScrollView } from 'react-native-gesture-handler';
 import { useTheme } from '@react-navigation/native';
-import Breakfast from '../../assets/icons/PicBreakfast.svg';
-import Lunch from '../../assets/icons/PicLunch.svg';
-import Dinner from '../../assets/icons/PicDinner.svg';
-import Dessert from '../../assets/icons/PicDessert.svg';
-import Beverage from '../../assets/icons/PicBeverage.svg';
-import Starter from '../../assets/icons/PicStarter.svg';
-import Fastfood from '../../assets/icons/PicFastFood.svg';
+import useCategoriesApi from '../../hooks/useCategoriesApiHook';
 import TextEle from '../TextEle';
-
-const PicCategory = [
-  {
-    id: 1,
-    icon: fill => <Breakfast height={24} width={24} fill={fill} />,
-    text: 'Breakfast',
-  },
-
-  {
-    id: 2,
-    icon: fill => <Lunch height={24} width={24} fill={fill} />,
-    text: 'Lunch',
-  },
-
-  {
-    id: 3,
-    icon: fill => <Dinner height={24} width={24} fill={fill} />,
-    text: 'Dinner',
-  },
-
-  {
-    id: 4,
-    icon: fill => <Dessert height={24} width={24} fill={fill} />,
-    text: 'Dessert',
-  },
-
-  {
-    id: 5,
-    icon: fill => <Beverage height={24} width={24} fill={fill} />,
-    text: 'Beverage',
-  },
-
-  {
-    id: 6,
-    icon: fill => <Starter height={24} width={24} fill={fill} />,
-    text: 'Starter',
-  },
-
-  {
-    id: 7,
-    icon: fill => <Fastfood height={24} width={24} fill={fill} />,
-    text: 'Fastfood',
-  },
-];
 
 const Category = () => {
   const { colors } = useTheme();
+  const { data } = useCategoriesApi();
   return (
     <View>
       <View style={{ flexDirection: 'row', marginVertical: 10, marginHorizontal: 20 }}>
@@ -70,7 +21,7 @@ const Category = () => {
         horizontal
         showsHorizontalScrollIndicator={false}
         contentContainerStyle={{ paddingHorizontal: 20 }}>
-        {PicCategory.map(item => (
+        {data?.categories.map(item => (
           <View key={item.id} style={{ marginHorizontal: 5, alignItems: 'center' }}>
             <View
               style={{
@@ -92,10 +43,10 @@ const Category = () => {
 
                 elevation: 8,
               }}>
-              {item.icon(item.id === 1 ? colors.card : colors.primary)}
+              {/* {item.icon(item.id === 1 ? colors.card : colors.primary)} */}
             </View>
             <View>
-              <TextEle variant="caption">{item.text}</TextEle>
+              <TextEle variant="caption">{item.name}</TextEle>
             </View>
           </View>
         ))}
