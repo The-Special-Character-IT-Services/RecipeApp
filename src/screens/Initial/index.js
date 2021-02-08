@@ -1,7 +1,7 @@
 import React from 'react';
 import { useTheme } from '@react-navigation/native';
 import PropTypes from 'prop-types';
-import { ImageBackground, KeyboardAvoidingView, View, Image } from 'react-native';
+import { ImageBackground, View } from 'react-native';
 import LoginImage from '@assets/images/LoginImage.png';
 import RAText from '@components/RAText';
 import RAButton1 from '@components/RAButton1';

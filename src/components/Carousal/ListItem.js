@@ -1,23 +1,23 @@
 /* eslint-disable react-native/no-inline-styles */
-import React from 'react';
+import React, { useMemo } from 'react';
 import PropTypes from 'prop-types';
 import { ImageBackground, Pressable, View } from 'react-native';
 import { useTheme } from '@react-navigation/native';
-import TimerIcon from '../../assets/icons/Timer-icon.svg';
-import StarIcon from '../../assets/icons/star-icon.svg';
+import Rating from '@components/Rating';
 import TextEle from '../TextEle';
 import LikeButton from '../LikeButton';
-import Lock from '../../assets/icons/lock.svg';
 
 const ListItem = ({ onRecipePress, item, cardWidth }) => {
-  const { colors } = useTheme();
+  const rating = useMemo(() => item.rattings.reduce((p, c, i, a) => p + c.ratting / a.length, 0), [
+    item.rattings,
+  ]);
 
   return (
-    <Pressable onPress={() => onRecipePress(item)} key={item.id} style={{ width: cardWidth }}>
+    <Pressable onPress={() => onRecipePress(item)} key={item.id} style={{ width: cardWidth - 10 }}>
       <ImageBackground
         style={{ height: 225, width: cardWidth - 10 }}
         imageStyle={{ borderRadius: 20 }}
-        source={item.img}>
+        source={{ uri: item.image.url }}>
         <View
           style={{
             flex: 1,
@@ -31,7 +31,7 @@ const ListItem = ({ onRecipePress, item, cardWidth }) => {
             }}>
             <LikeButton />
           </View>
-          {item.id === 3 || item.id === 2 ? (
+          {/* {item.id === 3 || item.id === 2 ? (
             <View
               style={{
                 justifyContent: 'center',
@@ -43,25 +43,32 @@ const ListItem = ({ onRecipePress, item, cardWidth }) => {
             </View>
           ) : (
             <></>
-          )}
+          )} */}
         </View>
       </ImageBackground>
-      <View>
-        <TextEle style={{ paddingTop: 20, paddingBottom: 5 }}>{item.TextHeading}</TextEle>
-        <TextEle
-          style={{ flexWrap: 'wrap', paddingBottom: 10, color: 'gray', fontSize: 12 }}
-          numberOfLines={2}>
-          {item.Description}
-        </TextEle>
-        <View style={{ flexDirection: 'row', alignItems: 'center' }}>
-          <TimerIcon height={24} width={24} fill={colors.text} />
-          <TextEle style={{ marginLeft: 8 }}>{item.time}</TextEle>
-          <View style={{ flexDirection: 'row', paddingLeft: 10, alignItems: 'center' }}>
-            <StarIcon height={24} width={24} fill={colors.text} />
-            <TextEle style={{ marginLeft: 8 }}>{item.rating}</TextEle>
-          </View>
+      <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
+        <View>
+          <TextEle variant="h3">{item.name}</TextEle>
+          <TextEle
+            variant="h2"
+            style={{ flexWrap: 'wrap', color: 'gray', fontSize: 12 }}
+            numberOfLines={2}>
+            {item.caption}
+          </TextEle>
+        </View>
+        <View>
+          <TextEle style={{ padding: 10 }} variant="h3">{`${item.recipes.length} Recipes`}</TextEle>
         </View>
       </View>
+      <Rating rating={rating} length={5} totalRating={item.rattings.length} />
+      <TextEle variant="p1">
+        {new Intl.NumberFormat('en-IN', {
+          style: 'currency',
+          currency: 'INR',
+          maximumFractionDigits: 0,
+          minimumFractionDigits: 0,
+        }).format(item.price)}
+      </TextEle>
     </Pressable>
   );
 };

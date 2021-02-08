@@ -5,8 +5,6 @@ import { GoogleSignin, statusCodes } from '@react-native-community/google-signin
 import Config from 'react-native-config';
 import { View, Pressable } from 'react-native';
 import Form from '@components/Form';
-import GoogleLogo from '@assets/icons/logo-google.svg';
-import FacebookLogo from '@assets/icons/facebook.svg';
 import { CancelToken } from 'axios';
 import axios from '@utils/axios';
 import RAText from '@components/RAText';
@@ -171,7 +169,7 @@ const Login = ({ navigation }) => {
               variant="fill"
               text="Facebook"
               onPress={signInFacebook}
-              icon={({ ...rest }) => <FacebookLogo {...rest} fill="#fff" />}
+              icon="logo-google"
               {...loading}
             />
           ) : (
@@ -181,7 +179,7 @@ const Login = ({ navigation }) => {
               variant="fill"
               text="Google"
               onPress={signInGoogle}
-              icon={({ ...rest }) => <GoogleLogo {...rest} fill="#fff" />}
+              icon="logo-google"
             />
           )}
           <View style={{ flexDirection: 'row', justifyContent: 'center', marginVertical: 8 }}>

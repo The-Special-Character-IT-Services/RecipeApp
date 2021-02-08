@@ -3,7 +3,6 @@
   "version": "0.0.1",
   "private": true,
   "scripts": {
-    "precommit": "lint-staged",
     "publish:android": "react-native run-android --variant=release",
     "android": "react-native run-android",
     "ios": "react-native run-ios",
@@ -14,7 +13,7 @@
     "prettier": "prettier --write src/**/*.js"
   },
   "dependencies": {
-    "@gorhom/bottom-sheet": "3.0.0-alpha.0",
+    "@gorhom/bottom-sheet": "3.2.0",
     "@react-native-async-storage/async-storage": "^1.13.2",
     "@react-native-community/art": "^1.2.0",
     "@react-native-community/clipboard": "^1.5.1",
@@ -35,6 +34,7 @@
     "country-codes-list": "^1.6.8",
     "date-fns": "^2.16.1",
     "formik": "^2.2.6",
+    "intl": "^1.2.5",
     "jail-monkey": "^2.3.3",
     "prop-types": "^15.7.2",
     "react": "16.13.1",
@@ -49,6 +49,8 @@
     "react-native-gesture-handler": "^1.9.0",
     "react-native-modal": "^11.6.1",
     "react-native-orientation-locker": "^1.2.0",
+    "react-native-ratings": "^7.3.0",
+    "react-native-razorpay": "^2.2.2",
     "react-native-reanimated": "^2.0.0-alpha.9.2",
     "react-native-root-toast": "^3.2.1",
     "react-native-safe-area-context": "^3.1.9",
@@ -59,7 +61,11 @@
     "react-native-tab-view": "^2.15.2",
     "react-native-text-input-mask": "^2.0.0",
     "react-native-toast-message": "^1.4.2",
+    "react-native-vector-icons": "^7.1.0",
     "react-native-video": "^5.1.0-alpha8",
+    "react-native-webview": "^11.0.3",
+    "react-native-youtube": "^2.0.1",
+    "react-native-youtube-iframe": "^1.4.1",
     "swr": "^0.3.11",
     "tailwind-rn": "^3.0.0",
     "victory-native": "^35.3.1"
@@ -93,17 +99,5 @@
   },
   "jest": {
     "preset": "react-native"
-  },
-  "husky": {
-    "hooks": {
-      "pre-commit": "lint-staged"
-    }
-  },
-  "lint-staged": {
-    "*.{js,jsx}": [
-      "eslint --fix",
-      "prettier --write",
-      "git add"
-    ]
   }
 }

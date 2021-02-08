@@ -3,10 +3,11 @@ import PropTypes from 'prop-types';
 import { useTheme } from '@react-navigation/native';
 import React, { useMemo } from 'react';
 import { View, ActivityIndicator, ViewPropTypes } from 'react-native';
+import Icon from 'react-native-vector-icons/Ionicons';
 import { RectButton } from 'react-native-gesture-handler';
 import getStyle from './styles';
 
-const RAButton1 = ({ variant, size, text, icon: Icon, disable, onPress, loading, style }) => {
+const RAButton1 = ({ variant, size, text, icon, disable, onPress, loading, style }) => {
   const { colors } = useTheme();
   const styles = useMemo(() => getStyle(colors, size, variant, disable, loading), [
     colors,
@@ -28,7 +29,9 @@ const RAButton1 = ({ variant, size, text, icon: Icon, disable, onPress, loading,
             <ActivityIndicator size="large" animating color="#fff" />
           ) : (
             <>
-              {Icon && <Icon height={24} width={24} />}
+              {icon && (
+                <Icon name={icon} size={24} color={variant === 'fill' ? '#fff' : colors.primary} />
+              )}
               {text && (
                 <RAText variant={size === 'small' ? 'bt2' : 'bt1'} style={styles.text}>
                   {text}

@@ -8,7 +8,6 @@ import useCuisinesApi from '../../hooks/useCuisinesApiHook';
 
 const Cuisine = () => {
   const { data } = useCuisinesApi();
-  console.log(JSON.stringify(data));
   return (
     <View>
       <View style={{ marginVertical: 20, paddingHorizontal: 20 }}>

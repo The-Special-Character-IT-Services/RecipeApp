@@ -1,49 +1,74 @@
 import BottomSheet, { BottomSheetScrollView } from '@gorhom/bottom-sheet';
+import PropTypes from 'prop-types';
 import { useTheme } from '@react-navigation/native';
-import React, { useMemo, useRef } from 'react';
-import { View, Image, Dimensions } from 'react-native';
-import { RectButton } from 'react-native-gesture-handler';
-import TextEle from '../TextEle';
+import React, { useCallback, useMemo, useRef, useState } from 'react';
+import YoutubePlayer from 'react-native-youtube-iframe';
+import { View, StatusBar } from 'react-native';
+import { deviceWidth, deviceHeight } from '@utils/index';
+import RAButton1 from '@components/RAButton1';
+import { useHeaderHeight } from '@react-navigation/stack';
+import TextEle from '../../components/TextEle';
 import data from './data';
-import Pie from '../../assets/images/Pie.jpg';
 import BreadWiches from './BreadWiches';
-
-const { height: windowHeight, width: windowWidth } = Dimensions.get('window');
 
 const subt = `Recipes in this write-up are protected by copyright law. Reproduction and distribution
 of the same without a written consent from Studio D’ Food Couture is prohibited. ©
 Studio De Food Couture `;
 
-const PriceTag = () => {
+const YOUTUBE_VIDEO_HEIGHT = (deviceWidth / 16) * 9;
+
+const CourseDetails = ({ route }) => {
+  const { item } = route.params;
   const { colors } = useTheme();
+  const [playing, setPlaying] = useState(false);
+  const headerHeight = useHeaderHeight();
   const bottomSheetRef = useRef(null);
-  const snapPoints = useMemo(() => [windowHeight * 0.6, '100%'], []);
+  const snapPoints = useMemo(() => [deviceHeight - YOUTUBE_VIDEO_HEIGHT - headerHeight, '100%'], [
+    headerHeight,
+  ]);
+
+  const handleSheetChanges = useCallback(index => {
+    console.log('index', index);
+    setPlaying(index === 0);
+  }, []);
 
   return (
-    <View style={{ flex: 1, justifyContent: 'flex-end' }}>
-      <Image
-        style={{
-          height: windowHeight * 0.5,
-          width: windowWidth,
-          position: 'absolute',
-          top: 0,
-          left: 0,
-        }}
-        source={Pie}
+    <View style={{ flex: 1 }}>
+      <StatusBar hidden />
+      <YoutubePlayer
+        play={playing}
+        height={YOUTUBE_VIDEO_HEIGHT}
+        videoId={item.promoVideoYoutubeId}
       />
       <BottomSheet
         ref={bottomSheetRef}
         initialSnapIndex={0}
         snapPoints={snapPoints}
-        handleComponent={() => null}
-        topInset={60}>
+        handleComponent={() => (
+          <View
+            style={{
+              paddingHorizontal: 16,
+              paddingVertical: 16,
+              backgroundColor: colors.background,
+            }}>
+            <View
+              style={{
+                alignSelf: 'center',
+                width: (8 * deviceWidth) / 100,
+                height: 5,
+                borderRadius: 4,
+                backgroundColor: colors.text,
+              }}
+            />
+          </View>
+        )}
+        onChange={handleSheetChanges}>
         <BottomSheetScrollView
           style={{
             paddingVertical: 10,
             paddingHorizontal: 20,
             flex: 1,
             backgroundColor: colors.background,
-            borderRadius: 20,
           }}>
           <TextEle style={{}} variant="title">
             Key Points:-
@@ -76,21 +101,24 @@ const PriceTag = () => {
           ))}
         </BottomSheetScrollView>
       </BottomSheet>
-      <RectButton
-        style={{
-          marginHorizontal: 40,
-          marginVertical: 50,
-          height: 40,
-          borderRadius: 20,
-          backgroundColor: '#FD6D3B',
-          flexDirection: 'row',
-          justifyContent: 'center',
-          alignItems: 'center',
-        }}>
-        <TextEle style={{ color: 'white', paddingLeft: 10 }}>Buy for Rs.249</TextEle>
-      </RectButton>
+      <RAButton1
+        style={{ position: 'absolute', bottom: 10, width: '100%' }}
+        variant="fill"
+        text="Buy For 249"
+        onPress={() => {}}
+      />
     </View>
   );
 };
 
-export default PriceTag;
+CourseDetails.propTypes = {
+  route: PropTypes.shape({
+    params: PropTypes.shape({
+      item: PropTypes.shape({
+        promoVideoYoutubeId: PropTypes.string,
+      }),
+    }),
+  }).isRequired,
+};
+
+export default CourseDetails;

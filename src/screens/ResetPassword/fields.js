@@ -1,7 +1,6 @@
 /* eslint-disable max-len */
-import React, { createRef } from 'react';
+import { createRef } from 'react';
 import RATextInput from '@components/RATextInput';
-import LockIcon from '@assets/icons/lock.svg';
 
 export const formRef = createRef();
 export const passwordRef = createRef();
@@ -11,7 +10,7 @@ export const resetForm = [
   {
     innerRef: passwordRef,
     name: 'password',
-    leftIcon: ({ ...rest }) => <LockIcon {...rest} />,
+    leftIcon: 'lock-closed-outline',
     defaultValue: '',
     placeholder: 'Password',
     component: RATextInput,
@@ -32,7 +31,7 @@ export const resetForm = [
   {
     innerRef: passwordConfirmationRef,
     name: 'passwordConfirmation',
-    leftIcon: ({ ...rest }) => <LockIcon {...rest} />,
+    leftIcon: 'lock-closed-outline',
     defaultValue: '',
     placeholder: 'Confirm Password',
     component: RATextInput,

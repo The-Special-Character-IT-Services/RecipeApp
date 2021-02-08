@@ -1,8 +1,6 @@
 /* eslint-disable max-len */
-import React, { createRef } from 'react';
+import { createRef } from 'react';
 import RATextInput from '@components/RATextInput';
-import PhoneIcon from '@assets/icons/phone.svg';
-import LockIcon from '@assets/icons/lock.svg';
 
 export const formRef = createRef();
 export const identifierRef = createRef();
@@ -18,7 +16,7 @@ export const loginForm = [
     component: RATextInput,
     autoCompleteType: 'tel',
     returnKeyType: 'next',
-    leftIcon: ({ ...rest }) => <PhoneIcon {...rest} />,
+    leftIcon: 'call-outline',
     validate: value => {
       let error = '';
       if (!value) {
@@ -33,7 +31,7 @@ export const loginForm = [
   {
     innerRef: passwordRef,
     name: 'password',
-    leftIcon: ({ ...rest }) => <LockIcon {...rest} />,
+    leftIcon: 'lock-closed-outline',
     defaultValue: '',
     placeholder: 'Password',
     component: RATextInput,

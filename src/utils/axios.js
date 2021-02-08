@@ -47,29 +47,32 @@ instance.interceptors.response.use(
     return response;
   },
   function (error) {
-    const { data, status } = error.response;
-    let err;
-    switch (status) {
-      case 400:
-        if (data?.data[0]?.messages[0].message) {
-          err = new Error(data?.data[0]?.messages[0].message);
-        } else {
-          err = new Error('Something went wrong, Try after sometime.');
-        }
-        break;
-      case 401:
-        err = new Error('Please Login to continue.');
-        break;
-      case 404:
-        err = new Error('Server is down. Try After sometime.');
-        break;
-      case 500:
-        err = new Error('Something went wrong, Try after sometime.');
-        break;
+    let err = error;
+    if (err.response) {
+      const { data, status } = err.response;
 
-      default:
-        err = new Error('Something went wrong, Try after sometime.');
-        break;
+      switch (status) {
+        case 400:
+          if (data?.data[0]?.messages[0].message) {
+            err = new Error(data?.data[0]?.messages[0].message);
+          } else {
+            err = new Error('Something went wrong, Try after sometime.');
+          }
+          break;
+        case 401:
+          err = new Error('Please Login to continue.');
+          break;
+        case 404:
+          err = new Error('Server is down. Try After sometime.');
+          break;
+        case 500:
+          err = new Error('Something went wrong, Try after sometime.');
+          break;
+
+        default:
+          err = new Error('Something went wrong, Try after sometime.');
+          break;
+      }
     }
     // if (error?.response.data?.data[0]?.messages[0].message) {
     //   err = new Error(error.response.data?.data[0]?.messages[0].message);

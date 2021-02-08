@@ -1,10 +1,7 @@
 /* eslint-disable max-len */
-import React, { createRef } from 'react';
+import { createRef } from 'react';
 import RATextInput from '@components/RATextInput';
 import RAOTPTextInput from '@components/RAOTPText';
-import PhoneIcon from '@assets/icons/phone.svg';
-import LockIcon from '@assets/icons/lock.svg';
-import PersonIcon from '@assets/icons/person.svg';
 
 export const formRef = createRef();
 export const usernameRef = createRef();
@@ -20,7 +17,7 @@ export const registrationForm = [
     placeholder: 'Name',
     autoCompleteType: 'name',
     returnKeyType: 'next',
-    leftIcon: ({ ...rest }) => <PersonIcon {...rest} />,
+    leftIcon: 'person-outline',
     validate: value => {
       let error = '';
       if (!value) {
@@ -41,7 +38,7 @@ export const registrationForm = [
     autoCompleteType: 'tel',
     returnKeyType: 'next',
     component: RATextInput,
-    leftIcon: ({ ...rest }) => <PhoneIcon {...rest} />,
+    leftIcon: 'call-outline',
     validate: value => {
       let error = '';
       if (!value) {
@@ -61,7 +58,7 @@ export const registrationForm = [
     autoCompleteType: 'password',
     returnKeyType: 'done',
     component: RATextInput,
-    leftIcon: ({ ...rest }) => <LockIcon {...rest} />,
+    leftIcon: 'lock-closed-outline',
     secureTextEntry: true,
     validate: value => {
       let error = '';

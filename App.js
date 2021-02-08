@@ -9,12 +9,13 @@ import { SWRConfig } from 'swr';
 import { useColorScheme } from 'react-native-appearance';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 import SplashScreen from 'react-native-splash-screen';
-import ModalNavigation from '@navigation/ModalNavigation';
 import MasterNavigation from '@navigation/MasterNavigation';
 import { RADarkTheme, RALightTheme } from '@theme/index';
 import fetcher from '@utils/fetcher';
+import YoutubeVideo from '@screens/YoutubeVideo';
 import Toast from 'react-native-toast-message';
 import { isIOS } from './src/utils';
+import YoutubeFilter from './src/screens/YoutubeFilter';
 
 // import Login from './src/screens/Login/index';
 
@@ -76,16 +77,8 @@ const App = () => {
                   cardStyleInterpolator: CardStyleInterpolators.forFadeFromBottomAndroid,
                 }}
               />
-              <RootStack.Screen
-                name="Modal"
-                component={ModalNavigation}
-                options={{
-                  headerShown: true,
-                  headerTransparent: 1,
-                  headerTintColor: currentTheme.colors.primary,
-                  cardStyleInterpolator: CardStyleInterpolators.forFadeFromBottomAndroid,
-                }}
-              />
+              <RootStack.Screen name="YoutubeFilter" component={YoutubeFilter} />
+              <RootStack.Screen name="YoutubeVideo" component={YoutubeVideo} />
             </RootStack.Navigator>
           </NavigationContainer>
         </KeyboardAvoidingView>

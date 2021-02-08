@@ -1,8 +1,9 @@
 import React, { useEffect, useRef } from 'react';
 import PropTypes from 'prop-types';
-import { View, Dimensions, Platform } from 'react-native';
+import { View, Dimensions, Platform, Pressable } from 'react-native';
 import { FlatList } from 'react-native-gesture-handler';
-import data from './data';
+import TextEle from '@components/TextEle';
+import { useTheme } from '@react-navigation/native';
 import ListItem from './ListItem';
 
 const { width: windowWidth } = Dimensions.get('window');
@@ -11,7 +12,8 @@ export const CARD_WIDTH = windowWidth * 0.9;
 
 const cardInset = (windowWidth - CARD_WIDTH) / 1.5;
 
-const Popular = ({ onRecipePress }) => {
+const Carousal = ({ onRecipePress, onPressViewAll, data = [] }) => {
+  const { colors } = useTheme();
   const flatListRef = useRef(null);
 
   useEffect(() => {
@@ -46,8 +48,22 @@ const Popular = ({ onRecipePress }) => {
       showsHorizontalScrollIndicator={false}
       renderItem={({ item }) => (
         <View style={{ width: CARD_WIDTH }}>
-          <ListItem item={item} onRecipePress={onRecipePress} cardWidth={CARD_WIDTH} />
+          <ListItem item={item} onRecipePress={() => onRecipePress(item)} cardWidth={CARD_WIDTH} />
         </View>
+      )}
+      ListFooterComponent={() => (
+        <Pressable
+          onPress={onPressViewAll}
+          style={{
+            width: CARD_WIDTH,
+            height: 225,
+            justifyContent: 'center',
+            alignItems: 'center',
+            backgroundColor: colors.card,
+            borderRadius: 20,
+          }}>
+          <TextEle style={{ color: colors.primary }}>View All</TextEle>
+        </Pressable>
       )}
       removeClippedSubviews
       keyExtractor={item => `${item.id}`}
@@ -55,8 +71,8 @@ const Popular = ({ onRecipePress }) => {
   );
 };
 
-Popular.propTypes = {
+Carousal.propTypes = {
   onRecipePress: PropTypes.func.isRequired,
 };
 
-export default Popular;
+export default Carousal;

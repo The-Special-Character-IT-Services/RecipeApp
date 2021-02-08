@@ -2,65 +2,69 @@ import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { useTheme } from '@react-navigation/native';
 import { Pressable, TextInput, TouchableWithoutFeedback, View } from 'react-native';
-import VisibilityIcon from '@assets/icons/visibility.svg';
-import VisibilityOffIcon from '@assets/icons/visibility_off.svg';
-import DropDownIcon from '@assets/icons/arrow_drop_down.svg';
+import Icon from 'react-native-vector-icons/Ionicons';
 import RAText from '@components/RAText';
 import countryCodes from 'country-codes-list';
 import Modal from 'react-native-modal';
 import { FlatList, RectButton } from 'react-native-gesture-handler';
-import { deviceHeight, deviceWidth } from '@utils/index';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import styles from './styles';
 
 const RATextInput = ({
   field: { name, value },
   form: { touched, errors, handleBlur, handleChange, values, setFieldValue },
-  leftIcon: LeftIcon,
-  rightIcon: RightIcon,
+  leftIcon,
+  rightIcon,
   style,
   innerRef,
   ...rest
 }) => {
   const { colors, dark } = useTheme();
   const [secure, setSecure] = useState(!!rest.secureTextEntry);
-  const India = countryCodes.findOne('countryCallingCode', values['countryCode']);
+  const India = countryCodes.findOne('countryCallingCode', values?.countryCode);
   const [selectedCountry, setSelectedCountry] = useState(India);
   const [modalVisible, setModalVisible] = useState(false);
   const insets = useSafeAreaInsets();
+
   return (
     <View style={{ marginVertical: 8 }}>
-      {LeftIcon && (
-        <LeftIcon
-          height={24}
-          width={24}
-          fill="red"
-          style={{ position: 'absolute', left: 24, top: 16 }}
+      {leftIcon && (
+        <Icon
+          name={leftIcon}
+          size={24}
+          color={colors.primary}
+          style={{
+            position: 'absolute',
+            left: 20,
+            top: 16,
+          }}
         />
       )}
-      {RightIcon && (
-        <RightIcon
-          height={24}
-          width={24}
-          fill="red"
-          style={{ position: 'absolute', right: 24, top: 16 }}
+      {rightIcon && (
+        <Icon
+          name={rightIcon}
+          size={24}
+          color={colors.primary}
+          style={{
+            position: 'absolute',
+            right: 20,
+            top: 16,
+          }}
         />
       )}
       {rest.secureTextEntry && (
         <Pressable
-          onPress={() => setSecure(!secure)}
           style={{
             position: 'absolute',
-            right: 24,
-            top: 0,
-            zIndex: 1,
-            paddingVertical: 16,
-            paddingHorizontal: 8,
-          }}>
+            right: 20,
+            top: 16,
+            zIndex: 10,
+          }}
+          onPress={() => setSecure(!secure)}>
           {secure ? (
-            <VisibilityOffIcon height={24} width={24} fill="red" />
+            <Icon name="eye-off-outline" size={24} color={colors.primary} />
           ) : (
-            <VisibilityIcon height={24} width={24} fill="red" />
+            <Icon name="eye-outline" size={24} color={colors.primary} />
           )}
         </Pressable>
       )}
@@ -79,7 +83,7 @@ const RATextInput = ({
               alignItems: 'center',
             }}>
             <RAText>{selectedCountry.flag}</RAText>
-            <DropDownIcon height={24} width={24} fill="black" />
+            <Icon name="caret-down" size={24} color={colors.text} />
           </Pressable>
           <Modal
             onRequestClose={() => setModalVisible(false)}
@@ -128,8 +132,8 @@ const RATextInput = ({
           style,
           {
             color: colors.text,
-            paddingLeft: LeftIcon ? (rest.keyboardType === 'phone-pad' ? 120 : 58) : 24,
-            paddingRight: !!RightIcon || !!rest.secureTextEntry ? 64 : 24,
+            paddingLeft: leftIcon ? (rest.keyboardType === 'phone-pad' ? 120 : 58) : 24,
+            paddingRight: !!rightIcon || !!rest.secureTextEntry ? 64 : 24,
             borderColor: touched[name] && errors[name] ? colors.error : colors.border,
           },
         ]}
@@ -152,7 +156,12 @@ RATextInput.propTypes = {
     errors: PropTypes.shape({}),
     handleBlur: PropTypes.func,
     handleChange: PropTypes.func,
+    values: PropTypes.shape({
+      countryCode: PropTypes.string,
+    }),
+    setFieldValue: PropTypes.func,
   }).isRequired,
+  innerRef: PropTypes.number.isRequired,
   style: PropTypes.string,
   leftIcon: PropTypes.func,
   rightIcon: PropTypes.func,

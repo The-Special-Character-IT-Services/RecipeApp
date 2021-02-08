@@ -6,20 +6,6 @@ import { View } from 'react-native';
 
 import ShareButton from '@components/ShareButton';
 import LikeButton from '@components/LikeButton';
-import PriceTag from '@components/PriceTag';
-
-import Verification from '@screens/Verification';
-import Login from '@screens/Login';
-import Registration from '@screens/Registration';
-import Home from '@screens/Home';
-import RecipeDetail from '@screens/RecipeDetail';
-import RecipeVideo from '@screens/RecipeVideo';
-import Splash from '@screens/Splash';
-import Initial from '@screens/Initial';
-import Profile from '@screens/Profile';
-import Search from '@screens/Search';
-import ForgotPassword from '@screens/ForgotPassword';
-import ResetPassword from '@screens/ResetPassword';
 
 const MainStack = createStackNavigator();
 
@@ -33,47 +19,47 @@ const MainStackScreen = () => {
         headerTintColor: colors.primary,
         title: false,
       }}>
-      <MainStack.Screen name="Splash" component={Splash} />
-      <MainStack.Screen name="Initial" component={Initial} />
+      <MainStack.Screen name="Splash" getComponent={() => require('@screens/Splash').default} />
+      <MainStack.Screen name="Initial" getComponent={() => require('@screens/Initial').default} />
       <MainStack.Screen
         name="Verification"
-        component={Verification}
+        getComponent={() => require('@screens/Verification').default}
         options={{ headerShown: true, headerTransparent: true }}
       />
       <MainStack.Screen
         name="ResetPassword"
-        component={ResetPassword}
+        getComponent={() => require('@screens/ResetPassword').default}
         options={{ headerShown: true, headerTransparent: true }}
       />
       <MainStack.Screen
         name="Login"
-        component={Login}
+        getComponent={() => require('@screens/Login').default}
         options={{ headerShown: true, headerTransparent: true }}
       />
       <MainStack.Screen
         name="ForgotPassword"
-        component={ForgotPassword}
+        getComponent={() => require('@screens/ForgotPassword').default}
         options={{ headerShown: true, headerTransparent: true }}
       />
       <MainStack.Screen
         name="Registration"
-        component={Registration}
+        getComponent={() => require('@screens/Registration').default}
         options={{ headerShown: true, headerTransparent: true }}
       />
-      <MainStack.Screen name="Home" component={Home} />
+      <MainStack.Screen name="Home" getComponent={() => require('@screens/Home').default} />
       <MainStack.Screen
         name="Search"
-        component={Search}
+        getComponent={() => require('@screens/Search').default}
         options={{ headerShown: true, title: 'Search', headerTitleAlign: 'center' }}
       />
       <MainStack.Screen
         name="RecipeVideo"
-        component={RecipeVideo}
+        getComponent={() => require('@screens/RecipeVideo').default}
         options={{ headerShown: true, headerTransparent: true }}
       />
       <MainStack.Screen
         name="Profile"
-        component={Profile}
+        getComponent={() => require('@screens/Profile').default}
         options={{
           headerShown: true,
           title: 'Profile',
@@ -82,7 +68,7 @@ const MainStackScreen = () => {
       />
       <MainStack.Screen
         name="RecipeDetail"
-        component={RecipeDetail}
+        getComponent={() => require('@screens/RecipeDetail').default}
         options={{
           headerRight: () => (
             <View style={{ flexDirection: 'row' }}>
@@ -96,8 +82,8 @@ const MainStackScreen = () => {
         }}
       />
       <MainStack.Screen
-        name="PriceTag"
-        component={PriceTag}
+        name="CourseDetails"
+        getComponent={() => require('@screens/CourseDetails').default}
         options={{
           headerRight: () => (
             <View style={{ flexDirection: 'row' }}>

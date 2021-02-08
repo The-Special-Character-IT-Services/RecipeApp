@@ -3,23 +3,19 @@ import PropTypes from 'prop-types';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { createStackNavigator } from '@react-navigation/stack';
 import { useTheme } from '@react-navigation/native';
+import Icon from 'react-native-vector-icons/Ionicons';
+import { BorderlessButton } from 'react-native-gesture-handler';
 import { View } from 'react-native';
 import TabHome from '../TabHome';
 import TabLikes from '../TabLikes';
 import TabShopPage from '../TabShop';
 import TabEvent from '../TabEvent';
-import HeartOutline from '../../assets/icons/heart-outline.svg';
-import HeartSharp from '../../assets/icons/heart-sharp.svg';
-import HomeOutline from '../../assets/icons/home-outline.svg';
-import HomeSharp from '../../assets/icons/home-sharp.svg';
-import EventOutline from '../../assets/icons/calendar-outline.svg';
-import EventSharp from '../../assets/icons/calendar.svg';
-import ShopSharp from '../../assets/icons/cart-sharp.svg';
-import ShopOutline from '../../assets/icons/cart-outline.svg';
 import CartButton from '../CartButton';
 import CartScreen from '../CartScreen';
+import YoutubeScreen from '../TabYoutube';
 
 const Tab = createBottomTabNavigator();
+
 const TabShopStack = createStackNavigator();
 
 const TabShop = () => {
@@ -52,42 +48,68 @@ const TabShop = () => {
   );
 };
 
+const YoutubeStack = createStackNavigator();
+
+const TabYoutube = () => {
+  const { colors } = useTheme();
+
+  return (
+    <YoutubeStack.Navigator>
+      <YoutubeStack.Screen
+        name="TabShopPage"
+        component={YoutubeScreen}
+        options={({ navigation }) => ({
+          title: 'Recipes',
+          headerShown: true,
+          headerLeft: false,
+          headerTitleAlign: 'center',
+          headerTintColor: colors.primary,
+          headerRight: () => (
+            <BorderlessButton
+              style={{ marginHorizontal: 10 }}
+              onPress={() => navigation.navigate('YoutubeFilter')}>
+              <Icon name="filter" size={24} color={colors.text} />
+            </BorderlessButton>
+          ),
+        })}
+      />
+    </YoutubeStack.Navigator>
+  );
+};
+
 const Home = () => {
   const { colors } = useTheme();
   return (
     <Tab.Navigator
       screenOptions={({ route }) => ({
         // eslint-disable-next-line react/prop-types
-        tabBarIcon: ({ focused, color }) => {
-          console.log(color);
+        tabBarIcon: ({ focused, color, size }) => {
+          let iconName;
           switch (route.name) {
             case 'TabHome':
-              if (focused) {
-                return <HomeSharp height={24} width={24} fill={color} />;
-              }
-              return <HomeOutline height={24} width={24} stroke={color} />;
+              iconName = focused ? 'home' : 'home-outline';
+              break;
 
             case 'TabLikes':
-              if (focused) {
-                return <HeartSharp height={24} width={24} fill={color} />;
-              }
-              return <HeartOutline height={24} width={24} stroke={color} />;
+              iconName = focused ? 'heart' : 'ios-heart-outline';
+              break;
 
             case 'TabEvent':
-              if (focused) {
-                return <EventSharp height={24} width={24} fill={color} />;
-              }
-              return <EventOutline height={24} width={24} stroke={color} />;
+              iconName = focused ? 'calendar' : 'calendar-outline';
+              break;
 
             case 'TabShop':
-              if (focused) {
-                return <ShopSharp height={24} width={24} fill={color} />;
-              }
-              return <ShopOutline height={24} width={24} stroke={color} />;
+              iconName = focused ? 'cart' : 'cart-outline';
+              break;
+
+            case 'TabYoutube':
+              iconName = 'logo-youtube';
+              break;
 
             default:
               return null;
           }
+          return <Icon name={iconName} size={size} color={color} />;
         },
       })}
       tabBarOptions={{
@@ -97,6 +119,7 @@ const Home = () => {
       }}>
       <Tab.Screen name="TabHome" component={TabHome} />
       <Tab.Screen name="TabEvent" component={TabEvent} />
+      <Tab.Screen name="TabYoutube" component={TabYoutube} />
       <Tab.Screen name="TabLikes" component={TabLikes} />
       <Tab.Screen name="TabShop" component={TabShop} />
     </Tab.Navigator>

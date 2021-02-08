@@ -1,20 +1,22 @@
 /* eslint-disable react-native/no-inline-styles */
 /* eslint-disable no-unused-expressions */
-import React, { useState } from 'react';
+import React, { useRef, useState } from 'react';
 import PropTypes from 'prop-types';
-import { Pressable, View } from 'react-native';
+import { Pressable } from 'react-native';
+import useSWR from 'swr';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { ScrollView } from 'react-native-gesture-handler';
-import Category from '../../components/Category';
-import SearchBar from '../../components/Search';
+import Category from '@components/Category';
+import SearchBar from '@components/Search';
+import Cuisines from '@components/Cuisines';
+import { coursesQuery } from '@hooks/useCoursesApiHook';
+import HomeList from '@components/HomeList';
 import Header from '../Header';
-import Cuisines from '../../components/Cuisines';
-import Popular from '../../components/Carousal';
-import UpComingEvent from '../../components/UpComingEvent';
-import TextEle from '../../components/TextEle';
 
 const TabHome = ({ navigation }) => {
+  const playerRef = useRef();
   const insets = useSafeAreaInsets();
+  const { data } = useSWR([coursesQuery(0, 5, 'updated_at:DESC')]);
   const [text, setText] = useState('');
   const onchangeText = val => {
     setText(val);
@@ -26,7 +28,8 @@ const TabHome = ({ navigation }) => {
       showsVerticalScrollIndicator={false}
       contentContainerStyle={{ paddingTop: insets.top, paddingBottom: insets.bottom }}>
       <Header onProfilePress={() => navigation.navigate('Profile')} />
-      <Pressable onPress={() => navigation.navigate('Search')}>
+
+      <Pressable ref={playerRef} onPress={() => navigation.navigate('Search')}>
         <SearchBar
           editable={false}
           selectTextOnFocus={false}
@@ -35,7 +38,12 @@ const TabHome = ({ navigation }) => {
         />
       </Pressable>
       <Category />
-      <View style={{ paddingHorizontal: 30, marginVertical: 20 }}>
+      <HomeList
+        title="New Courses"
+        data={data?.courses || []}
+        onRecipePress={item => navigation.navigate('CourseDetails', { item })}
+      />
+      {/* <View style={{ paddingHorizontal: 30, marginVertical: 20 }}>
         <TextEle variant="body1" style={{ fontSize: 20, fontWeight: 'bold' }}>
           New Videos
         </TextEle>
@@ -46,8 +54,8 @@ const TabHome = ({ navigation }) => {
             ? navigation.navigate('PriceTag')
             : navigation.navigate('RecipeDetail', item);
         }}
-      />
-      <View style={{ paddingHorizontal: 30, marginVertical: 20 }}>
+      /> */}
+      {/* <View style={{ paddingHorizontal: 30, marginVertical: 20 }}>
         <TextEle variant="body1" style={{ fontSize: 20, fontWeight: 'bold' }}>
           Popular
         </TextEle>
@@ -58,13 +66,13 @@ const TabHome = ({ navigation }) => {
             ? navigation.navigate('PriceTag')
             : navigation.navigate('RecipeDetail', item);
         }}
-      />
-      <View style={{ paddingHorizontal: 30, marginVertical: 20 }}>
+      /> */}
+      {/* <View style={{ paddingHorizontal: 30, marginVertical: 20 }}>
         <TextEle variant="body1" style={{ fontSize: 20, fontWeight: 'bold' }}>
           UpComing Events
         </TextEle>
       </View>
-      <UpComingEvent />
+      <UpComingEvent /> */}
       <Cuisines />
     </ScrollView>
   );

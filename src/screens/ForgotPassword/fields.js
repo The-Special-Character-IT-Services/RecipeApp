@@ -1,7 +1,6 @@
 /* eslint-disable max-len */
-import React, { createRef } from 'react';
+import { createRef } from 'react';
 import RATextInput from '@components/RATextInput';
-import PhoneIcon from '@assets/icons/phone.svg';
 
 export const formRef = createRef();
 
@@ -14,7 +13,7 @@ export const forgotPasswordForm = [
     returnKeyType: 'done',
     autoCompleteType: 'tel',
     component: RATextInput,
-    leftIcon: ({ ...rest }) => <PhoneIcon {...rest} />,
+    leftIcon: 'call-outline',
     validate: value => {
       let error = '';
       if (!value) {

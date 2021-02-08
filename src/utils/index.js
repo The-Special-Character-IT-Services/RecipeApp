@@ -1,6 +1,6 @@
 import { FOODCOUTURE_TOKEN, NUMBER_OF_DIVECE_ALLOWED } from '@constants/index';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import { Platform } from 'react-native';
+import { Platform, Dimensions } from 'react-native';
 import Toast from 'react-native-toast-message';
 import analytics from '@react-native-firebase/analytics';
 import {
@@ -16,6 +16,8 @@ import {
   getSystemName,
 } from 'react-native-device-info';
 import axios from '@utils/axios';
+
+export const { height: deviceHeight, width: deviceWidth } = Dimensions.get('window');
 
 export const isIOS = Platform.OS === 'ios';
 
