@@ -17,7 +17,7 @@ const ListItem = ({ onRecipePress, item, cardWidth }) => {
       <ImageBackground
         style={{ height: 225, width: cardWidth - 10 }}
         imageStyle={{ borderRadius: 20 }}
-        source={{ uri: item?.recipeImage?.url }}>
+        source={{ uri: item?.image?.url }}>
         <View
           style={{
             flex: 1,
