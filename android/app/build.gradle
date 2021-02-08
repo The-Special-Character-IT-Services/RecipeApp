@@ -4,7 +4,7 @@ project.ext.envConfigFiles = [
     anothercustombuild: ".env",
 ]
 project.ext.vectoricons = [
-    iconFontNames: [ 'Ionicons.ttf' ] // Name of the font files you want to copy
+    iconFontNames: [ 'Ionicons.ttf', 'MaterialIcons.ttf' ] // Name of the font files you want to copy
 ]
 
 

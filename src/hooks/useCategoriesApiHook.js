@@ -6,9 +6,7 @@ const useCategoriesApi = () => {
     categories {
       id
       name
-      icon {
-        url
-      }
+      iconName
     }
   }
   `;

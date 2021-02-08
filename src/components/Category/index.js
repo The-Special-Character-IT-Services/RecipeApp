@@ -4,6 +4,7 @@ import React from 'react';
 import { View } from 'react-native';
 import { ScrollView } from 'react-native-gesture-handler';
 import { useTheme } from '@react-navigation/native';
+import Icon from 'react-native-vector-icons/MaterialIcons';
 import useCategoriesApi from '../../hooks/useCategoriesApiHook';
 import TextEle from '../TextEle';
 
@@ -50,6 +51,7 @@ const Category = () => {
 
                 elevation: 8,
               }}>
+              <Icon name={item.iconName} size={24} color={colors.card} />
               {/* {item.icon(item.id === 1 ? colors.card : colors.primary)} */}
             </View>
             <View>
