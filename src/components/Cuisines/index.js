@@ -8,6 +8,13 @@ import useCuisinesApi from '../../hooks/useCuisinesApiHook';
 
 const Cuisine = () => {
   const { data } = useCuisinesApi();
+  if (!data?.cuisines) {
+    return (
+      <View>
+        <TextEle>Loading</TextEle>
+      </View>
+    );
+  }
   return (
     <View>
       <View style={{ marginVertical: 20, paddingHorizontal: 20 }}>

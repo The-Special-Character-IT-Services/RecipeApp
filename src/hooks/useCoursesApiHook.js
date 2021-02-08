@@ -1,29 +1,27 @@
 export const coursesQuery = (pageIndex, limit, sort = 'id:ASC') => `{
   courses(start: ${pageIndex * 10}, limit: ${limit}, sort: "${sort}") {
-      id
-      name
-      caption
-      description
-      price
-      totalRecipes
-      validity
-      cookingLevel
-      promoVideoYoutubeId
-      image {
-        url
-      }
-      recipes {
+    id
+    name
+    caption
+    description
+    price
+    validity
+    promoVideoYoutubeId
+    image {
+      url
+    }
+    recipes {
+        name
+        recipeImage {
           name
-          image {
-            name
-            url
-          }
-      }
-      rattings {
-        id
-        ratting
-      }
-      updated_at
+          url
+        }
+    }
+    rattings {
+      id
+      ratting
+    }
+    updated_at
   }
 }`;
 

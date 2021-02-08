@@ -10,6 +10,13 @@ import TextEle from '../TextEle';
 const Category = () => {
   const { colors } = useTheme();
   const { data } = useCategoriesApi();
+  if (!data?.categories) {
+    return (
+      <View>
+        <TextEle>Loading</TextEle>
+      </View>
+    );
+  }
   return (
     <View>
       <View style={{ flexDirection: 'row', marginVertical: 10, marginHorizontal: 20 }}>
