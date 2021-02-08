@@ -48,10 +48,9 @@ const Category = () => {
                 },
                 shadowOpacity: 0.3,
                 shadowRadius: 4.65,
-
                 elevation: 8,
               }}>
-              <Icon name={item.iconName} size={24} color={colors.card} />
+              <Icon name={item.iconName} size={24} color={colors.primary} />
               {/* {item.icon(item.id === 1 ? colors.card : colors.primary)} */}
             </View>
             <View>
