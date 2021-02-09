@@ -36,7 +36,7 @@ const TabHome = ({ navigation }) => {
           value={text}
         />
       </Pressable>
-      <Category />
+      <Category onCategoryDetails={() => navigation.navigate('CuisineList')} />
       <HomeList
         title="New Courses"
         data={data?.courses || []}

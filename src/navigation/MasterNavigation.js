@@ -42,11 +42,6 @@ const MainStackScreen = () => {
         options={{ headerShown: true, headerTransparent: true }}
       />
       <MainStack.Screen
-        name="CategoryDetails"
-        getComponent={() => require('@screens/CategoryDetails').default}
-        options={{ headerShown: true, headerTransparent: true }}
-      />
-      <MainStack.Screen
         name="Registration"
         getComponent={() => require('@screens/Registration').default}
         options={{ headerShown: true, headerTransparent: true }}
@@ -76,7 +71,6 @@ const MainStackScreen = () => {
         getComponent={() => require('@screens/CuisineList').default}
         options={{
           headerShown: true,
-          title: 'CuisineList',
           headerTitleAlign: 'center',
         }}
       />
