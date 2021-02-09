@@ -28,7 +28,6 @@ const TabHome = ({ navigation }) => {
       showsVerticalScrollIndicator={false}
       contentContainerStyle={{ paddingTop: insets.top, paddingBottom: insets.bottom }}>
       <Header onProfilePress={() => navigation.navigate('Profile')} />
-
       <Pressable ref={playerRef} onPress={() => navigation.navigate('Search')}>
         <SearchBar
           editable={false}
@@ -73,7 +72,7 @@ const TabHome = ({ navigation }) => {
         </TextEle>
       </View>
       <UpComingEvent /> */}
-      <Cuisines />
+      <Cuisines onCuisinePress={() => navigation.navigate('CuisineList')} />
     </ScrollView>
   );
 };

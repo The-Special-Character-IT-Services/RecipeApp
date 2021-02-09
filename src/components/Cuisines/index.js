@@ -2,11 +2,12 @@
 /* eslint-disable global-require */
 import React from 'react';
 import { View, Image } from 'react-native';
-import { ScrollView } from 'react-native-gesture-handler';
+import PropTypes from 'prop-types';
+import { RectButton, ScrollView } from 'react-native-gesture-handler';
 import TextEle from '../TextEle';
 import useCuisinesApi from '../../hooks/useCuisinesApiHook';
 
-const Cuisine = () => {
+const Cuisine = ({ onCuisinePress }) => {
   const { data } = useCuisinesApi();
   if (!data?.cuisines) {
     return (
@@ -35,20 +36,26 @@ const Cuisine = () => {
               marginHorizontal: 5,
               alignItems: 'center',
             }}>
-            <Image
-              style={{
-                borderRadius: 5,
-                height: 70,
-                width: 70,
-              }}
-              source={{ uri: item.image.formats.thumbnail.url }}
-            />
+            <RectButton onPress={onCuisinePress}>
+              <Image
+                style={{
+                  borderRadius: 5,
+                  height: 70,
+                  width: 70,
+                }}
+                source={{ uri: item.image.formats.thumbnail.url }}
+              />
+            </RectButton>
             <TextEle variant="caption">{item.name}</TextEle>
           </View>
         ))}
       </ScrollView>
     </View>
   );
+};
+
+Cuisine.propTypes = {
+  onCuisinePress: PropTypes.func.isRequired,
 };
 
 export default Cuisine;
