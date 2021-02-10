@@ -1,22 +1,34 @@
 /* eslint-disable react-native/no-inline-styles */
 /* eslint-disable global-require */
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import { View, Image } from 'react-native';
 import { useTheme } from '@react-navigation/native';
 import { RectButton } from 'react-native-gesture-handler';
 
 import TextEle from '@components/TextEle';
+import { getToken } from '@utils/';
 
 const Header = ({ onProfilePress }) => {
   const { colors } = useTheme();
+  const [name, setName] = useState('');
+  useEffect(() => {
+    const loadToken = async () => {
+      const {
+        user: { username },
+      } = await getToken();
+      setName(username);
+    };
+    loadToken();
+  }, []);
+
   return (
     <View>
       <View style={{ flexDirection: 'row', marginVertical: 20, marginHorizontal: 10 }}>
         <TextEle variant="header1" style={{ paddingLeft: 18, marginTop: 20, flex: 1 }}>
-          {'Hello, '}
+          {'Hello, \n'}
           <TextEle variant="header2" style={{ color: colors.primary }}>
-            Chetna!
+            {name}
           </TextEle>
         </TextEle>
         <RectButton rippleColor={colors.background} onPress={onProfilePress}>
