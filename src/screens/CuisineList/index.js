@@ -7,7 +7,7 @@ import SearchBar from '../../components/Search';
 import Data from '../../components/Carousal/data';
 import TextEle from '../../components/TextEle';
 
-const Search = () => {
+const CuisineList = () => {
   const { colors } = useTheme();
   const insets = useSafeAreaInsets();
   const [text, setText] = useState('');
@@ -56,4 +56,4 @@ const Search = () => {
   );
 };
 
-export default Search;
+export default CuisineList;

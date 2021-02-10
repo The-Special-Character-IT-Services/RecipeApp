@@ -47,7 +47,7 @@ export const courseQuery = (id, userId) => `{
       name
       url
     }
-  	recipes {
+    recipes {
       id
     }
     rattings {
@@ -80,7 +80,7 @@ export const courseQuery = (id, userId) => `{
         id
       }
     }
-  	rattings {
+    rattings {
       ratting
     }
     purchase_details(where: { user_id: { id: ${userId} } }) {

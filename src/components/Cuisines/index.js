@@ -43,7 +43,7 @@ const Cuisine = ({ onCuisinePress }) => {
                   height: 70,
                   width: 70,
                 }}
-                // source={{ uri: item.image.formats.thumbnail.url }}
+                source={{ uri: item.image.formats.thumbnail.url }}
               />
             </RectButton>
             <TextEle variant="caption">{item.name}</TextEle>
