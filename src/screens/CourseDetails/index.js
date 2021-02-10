@@ -10,7 +10,6 @@ import { useHeaderHeight } from '@react-navigation/stack';
 import useSWR from 'swr';
 import { courseQuery } from '@hooks/useCoursesApiHook';
 import TextEle from '../../components/TextEle';
-// import BreadWiches from './BreadWiches';
 
 const subt = `Recipes in this write-up are protected by copyright law. Reproduction and distribution
 of the same without a written consent from Studio D’ Food Couture is prohibited. ©
@@ -50,7 +49,7 @@ const CourseDetails = ({ route }) => {
       <YoutubePlayer
         play={playing}
         height={YOUTUBE_VIDEO_HEIGHT}
-        videoId={item.promoVideoYoutubeId}
+        videoId={data?.course.promoVideoYoutubeId}
       />
       <BottomSheet
         ref={bottomSheetRef}
@@ -86,17 +85,60 @@ const CourseDetails = ({ route }) => {
             Key Points:-
           </TextEle>
           <View>
-            <View key={data?.course.id}>
-              <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
-                <TextEle key={data?.course.id} variant="body2" style={{ paddingVertical: 10 }}>
-                  {data?.course.name}
-                </TextEle>
-                <TextEle variant="body2" style={{ paddingVertical: 10, color: 'gray', width: 120 }}>
-                  {data?.course.launchDate}
-                </TextEle>
-              </View>
-              <View style={{ height: 1, width: 330, backgroundColor: 'gray' }} />
+            <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
+              <TextEle variant="body2" style={{ paddingVertical: 10 }}>
+                Duration
+              </TextEle>
+              <TextEle variant="body2" style={{ paddingVertical: 10, color: 'gray', width: 120 }}>
+                {data?.course.launchDate}
+              </TextEle>
             </View>
+            <View style={{ height: 1, width: 330, backgroundColor: 'gray' }} />
+            <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
+              <TextEle variant="body2" style={{ paddingVertical: 10 }}>
+                Total Recipes covered
+              </TextEle>
+              <TextEle variant="body2" style={{ paddingVertical: 10, color: 'gray', width: 120 }}>
+                {/* {data?.course.recipes} */}
+              </TextEle>
+            </View>
+            <View style={{ height: 1, width: 330, backgroundColor: 'gray' }} />
+            <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
+              <TextEle variant="body2" style={{ paddingVertical: 10 }}>
+                Video Validity
+              </TextEle>
+              <TextEle variant="body2" style={{ paddingVertical: 10, color: 'gray', width: 120 }}>
+                {data?.course.validity}
+              </TextEle>
+            </View>
+            <View style={{ height: 1, width: 330, backgroundColor: 'gray' }} />
+            <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
+              <TextEle variant="body2" style={{ paddingVertical: 10 }}>
+                Written Recipe
+              </TextEle>
+              <TextEle variant="body2" style={{ paddingVertical: 10, color: 'gray', width: 120 }}>
+                {/* {data?.course.recipes} */}
+              </TextEle>
+            </View>
+            <View style={{ height: 1, width: 330, backgroundColor: 'gray' }} />
+            <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
+              <TextEle variant="body2" style={{ paddingVertical: 10 }}>
+                Fees
+              </TextEle>
+              <TextEle variant="body2" style={{ paddingVertical: 10, color: 'gray', width: 120 }}>
+                {data?.course.price}
+              </TextEle>
+            </View>
+            <View style={{ height: 1, width: 330, backgroundColor: 'gray' }} />
+            <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
+              <TextEle variant="body2" style={{ paddingVertical: 10 }}>
+                Cooking Level
+              </TextEle>
+              <TextEle variant="body2" style={{ paddingVertical: 10, color: 'gray', width: 120 }}>
+                {data?.course.cookingLevel}
+              </TextEle>
+            </View>
+            <View style={{ height: 1, width: 330, backgroundColor: 'gray' }} />
             <TextEle variant="caption" style={{ marginVertical: 20 }}>
               {subt}
             </TextEle>
