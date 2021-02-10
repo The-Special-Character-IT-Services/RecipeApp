@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 /* eslint-disable react-native/no-inline-styles */
 import React, { useState } from 'react';
 import { ScrollView, View, Image, KeyboardAvoidingView } from 'react-native';
@@ -55,5 +56,20 @@ const Search = () => {
     </KeyboardAvoidingView>
   );
 };
+=======
+import TextEle from '@components/TextEle';
+import React from 'react';
+import { View } from 'react-native';
+import { ScrollView } from 'react-native-gesture-handler';
+
+const CuisineList = () => (
+  <View>
+    <TextEle>Filter List</TextEle>
+    <ScrollView contentContainerStyle={{ paddingHorizontal: 20 }}>
+      <View></View>
+    </ScrollView>
+  </View>
+);
+>>>>>>> 5d42786d7b0da9714f9cc022123afa39ac94ffcb
 
 export default Search;
