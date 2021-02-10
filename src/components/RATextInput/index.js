@@ -4,9 +4,11 @@ import { useTheme } from '@react-navigation/native';
 import { Pressable, TextInput, TouchableWithoutFeedback, View } from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
 import RAText from '@components/RAText';
+import SearchBar from '@components/Search';
 import countryCodes from 'country-codes-list';
 import Modal from 'react-native-modal';
 import { FlatList, RectButton } from 'react-native-gesture-handler';
+import TextEle from '@components/TextEle';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import styles from './styles';
 
@@ -25,6 +27,10 @@ const RATextInput = ({
   const [selectedCountry, setSelectedCountry] = useState(India);
   const [modalVisible, setModalVisible] = useState(false);
   const insets = useSafeAreaInsets();
+  const [text, setText] = useState('');
+  const onchangeText = val => {
+    setText(val);
+  };
 
   return (
     <View style={{ marginVertical: 8 }}>
@@ -89,6 +95,18 @@ const RATextInput = ({
             onRequestClose={() => setModalVisible(false)}
             isVisible={modalVisible}
             style={{ margin: 0 }}>
+            <View style={{ backgroundColor: '#fff', paddingTop: 20 }}>
+              <View style={{ alignItems: 'center' }}>
+                <TextEle variant="title">Search your Country here</TextEle>
+              </View>
+
+              <SearchBar
+                editable={false}
+                selectTextOnFocus={false}
+                onchangeText={onchangeText}
+                value={text}
+              />
+            </View>
             <FlatList
               data={countryCodes.all()}
               contentContainerStyle={{
@@ -106,7 +124,9 @@ const RATextInput = ({
                   <RectButton>
                     <View accessible style={{ flexDirection: 'row', padding: 10 }}>
                       <RAText>{item.flag}</RAText>
-                      <RAText numberOfLines={1} style={{ flex: 1, paddingHorizontal: 10 }}>
+                      <RAText
+                        numberOfLines={1}
+                        style={{ flex: 1, paddingHorizontal: 10, color: colors.primary }}>
                         {item.countryNameEn}
                       </RAText>
                     </View>

@@ -28,7 +28,6 @@ const TabHome = ({ navigation }) => {
       showsVerticalScrollIndicator={false}
       contentContainerStyle={{ paddingTop: insets.top, paddingBottom: insets.bottom }}>
       <Header onProfilePress={() => navigation.navigate('Profile')} />
-
       <Pressable ref={playerRef} onPress={() => navigation.navigate('Search')}>
         <SearchBar
           editable={false}
@@ -37,11 +36,14 @@ const TabHome = ({ navigation }) => {
           value={text}
         />
       </Pressable>
-      <Category />
+      <Category onCategoryDetails={() => navigation.navigate('CuisineList')} />
       <HomeList
         title="New Courses"
-        data={data?.courses || []}
-        onRecipePress={item => navigation.navigate('CourseDetails', { item })}
+        newData={data?.courses || []}
+        onRecipePress={item => {
+          console.log('Item', item);
+          navigation.navigate('CourseDetails', { item });
+        }}
       />
       {/* <View style={{ paddingHorizontal: 30, marginVertical: 20 }}>
         <TextEle variant="body1" style={{ fontSize: 20, fontWeight: 'bold' }}>
@@ -73,7 +75,7 @@ const TabHome = ({ navigation }) => {
         </TextEle>
       </View>
       <UpComingEvent /> */}
-      <Cuisines />
+      <Cuisines onCuisinePress={() => navigation.navigate('CuisineList')} />
     </ScrollView>
   );
 };

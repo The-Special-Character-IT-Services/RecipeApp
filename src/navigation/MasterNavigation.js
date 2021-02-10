@@ -67,6 +67,14 @@ const MainStackScreen = () => {
         }}
       />
       <MainStack.Screen
+        name="CuisineList"
+        getComponent={() => require('@screens/CuisineList').default}
+        options={{
+          headerShown: true,
+          headerTitleAlign: 'center',
+        }}
+      />
+      <MainStack.Screen
         name="RecipeDetail"
         getComponent={() => require('@screens/RecipeDetail').default}
         options={{

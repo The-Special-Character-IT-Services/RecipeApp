@@ -7,9 +7,10 @@ import { View, StatusBar } from 'react-native';
 import { deviceWidth, deviceHeight } from '@utils/index';
 import RAButton1 from '@components/RAButton1';
 import { useHeaderHeight } from '@react-navigation/stack';
+import useSWR from 'swr';
+import { coursesQuery } from '@hooks/useCoursesApiHook';
 import TextEle from '../../components/TextEle';
-import data from './data';
-import BreadWiches from './BreadWiches';
+// import BreadWiches from './BreadWiches';
 
 const subt = `Recipes in this write-up are protected by copyright law. Reproduction and distribution
 of the same without a written consent from Studio D’ Food Couture is prohibited. ©
@@ -20,6 +21,7 @@ const YOUTUBE_VIDEO_HEIGHT = (deviceWidth / 16) * 9;
 const CourseDetails = ({ route }) => {
   const { item } = route.params;
   const { colors } = useTheme();
+  const { data } = useSWR([coursesQuery(0, 1)]);
   const [playing, setPlaying] = useState(false);
   const headerHeight = useHeaderHeight();
   const bottomSheetRef = useRef(null);
@@ -31,6 +33,14 @@ const CourseDetails = ({ route }) => {
     console.log('index', index);
     setPlaying(index === 0);
   }, []);
+
+  if (!data?.courses) {
+    return (
+      <View>
+        <TextEle>Loading</TextEle>
+      </View>
+    );
+  }
 
   return (
     <View style={{ flex: 1 }}>
@@ -74,16 +84,16 @@ const CourseDetails = ({ route }) => {
             Key Points:-
           </TextEle>
           <View>
-            {data.map(element => (
-              <View>
+            {data?.courses.map(element => (
+              <View key={element.id}>
                 <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
                   <TextEle key={element.id} variant="body2" style={{ paddingVertical: 10 }}>
-                    {element.Sen}
+                    {element.name}
                   </TextEle>
                   <TextEle
                     variant="body2"
                     style={{ paddingVertical: 10, color: 'gray', width: 120 }}>
-                    {element.Sub}
+                    {element.launchDate}
                   </TextEle>
                 </View>
                 <View style={{ height: 1, width: 330, backgroundColor: 'gray' }} />
@@ -94,9 +104,9 @@ const CourseDetails = ({ route }) => {
             </TextEle>
           </View>
           <TextEle>Varieties:-</TextEle>
-          {BreadWiches.map(element => (
+          {data?.courses.map(element => (
             <TextEle variant="body1" style={{ textAlign: 'justify', width: 400 }}>
-              {element.Breadwiches}
+              {element.description}
             </TextEle>
           ))}
         </BottomSheetScrollView>
