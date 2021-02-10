@@ -6,9 +6,11 @@ import YoutubePlayer from 'react-native-youtube-iframe';
 import { View, StatusBar } from 'react-native';
 import { deviceWidth, deviceHeight } from '@utils/index';
 import RAButton1 from '@components/RAButton1';
+// import { format, subDays } from 'date-fns';
 import { useHeaderHeight } from '@react-navigation/stack';
 import useSWR from 'swr';
 import { courseQuery } from '@hooks/useCoursesApiHook';
+import Loading from '@components/loading';
 import TextEle from '../../components/TextEle';
 
 const subt = `Recipes in this write-up are protected by copyright law. Reproduction and distribution
@@ -27,6 +29,7 @@ const CourseDetails = ({ route }) => {
   const snapPoints = useMemo(() => [deviceHeight - YOUTUBE_VIDEO_HEIGHT - headerHeight, '100%'], [
     headerHeight,
   ]);
+  // const today = format(new Date(data?.course.launchDate), 'dd.MM.yyyy');
 
   console.log(data);
 
@@ -36,11 +39,7 @@ const CourseDetails = ({ route }) => {
   }, []);
 
   if (!data?.course) {
-    return (
-      <View>
-        <TextEle>Loading</TextEle>
-      </View>
-    );
+    return <Loading />;
   }
 
   return (
@@ -90,7 +89,7 @@ const CourseDetails = ({ route }) => {
                 Duration
               </TextEle>
               <TextEle variant="body2" style={{ paddingVertical: 10, color: 'gray', width: 120 }}>
-                {data?.course.launchDate}
+                Launching on {data?.course.launchDate}
               </TextEle>
             </View>
             <View style={{ height: 1, width: 330, backgroundColor: 'gray' }} />
@@ -127,15 +126,6 @@ const CourseDetails = ({ route }) => {
               </TextEle>
               <TextEle variant="body2" style={{ paddingVertical: 10, color: 'gray', width: 120 }}>
                 {data?.course.price}
-              </TextEle>
-            </View>
-            <View style={{ height: 1, width: 330, backgroundColor: 'gray' }} />
-            <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
-              <TextEle variant="body2" style={{ paddingVertical: 10 }}>
-                Cooking Level
-              </TextEle>
-              <TextEle variant="body2" style={{ paddingVertical: 10, color: 'gray', width: 120 }}>
-                {data?.course.cookingLevel}
               </TextEle>
             </View>
             <View style={{ height: 1, width: 330, backgroundColor: 'gray' }} />

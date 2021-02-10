@@ -4,17 +4,14 @@ import React from 'react';
 import { View, Image } from 'react-native';
 import PropTypes from 'prop-types';
 import { RectButton, ScrollView } from 'react-native-gesture-handler';
+import Loading from '@components/loading';
 import TextEle from '../TextEle';
 import useCuisinesApi from '../../hooks/useCuisinesApiHook';
 
 const Cuisine = ({ onCuisinePress }) => {
   const { data } = useCuisinesApi();
   if (!data?.cuisines) {
-    return (
-      <View>
-        <TextEle>Loading</TextEle>
-      </View>
-    );
+    return <Loading />;
   }
   return (
     <View>
