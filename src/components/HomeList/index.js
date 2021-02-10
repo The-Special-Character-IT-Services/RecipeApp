@@ -26,13 +26,11 @@ const HomeList = ({ title, onPressViewAll, newData, onRecipePress }) => {
           </TextEle>
         </Pressable>
       </View>
-      {data?.courses.map(item => (
-        <Carousal
-          data={newData}
-          onRecipePress={() => onRecipePress(item)}
-          onPressViewAll={onPressViewAll}
-        />
-      ))}
+      <Carousal
+        data={newData}
+        onRecipePress={item => onRecipePress(item)}
+        onPressViewAll={onPressViewAll}
+      />
     </>
   );
 };
