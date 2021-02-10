@@ -3,25 +3,91 @@ export const coursesQuery = (pageIndex, limit, sort = 'id:ASC') => `{
     id
     name
     caption
-    description
     price
     validity
-    promoVideoYoutubeId
+    launchDate
     image {
       url
     }
     recipes {
-        name
-        recipeImage {
-          name
-          url
-        }
+      id
     }
     rattings {
       id
       ratting
     }
     updated_at
+  }
+}`;
+
+export const courseQuery = (id, userId) => `{
+  course(id: ${id}) {
+    id
+    name
+    description
+    caption
+    price
+    validity
+    promoVideo {
+      name
+      url
+    }
+    promoVideoYoutubeId
+    cuisine {
+      name
+      image {
+        name
+        url
+      }
+    }
+    launchDate
+    
+    launchDate
+    image {
+      name
+      url
+    }
+  	recipes {
+      id
+    }
+    rattings {
+      id
+      ratting
+    }
+    recipes {
+      id
+      name
+      description
+      cookingLevel
+      recipeImage {
+        name
+        url
+      }
+      isIndividual {
+        price
+        validity
+      }
+      categories {
+        id
+        name
+      }
+    }
+    like_event(where: { user: { id: ${userId} } }) {
+      course {
+        id
+      }
+      user {
+        id
+      }
+    }
+  	rattings {
+      ratting
+    }
+    purchase_details(where: { user_id: { id: ${userId} } }) {
+      user_id {
+        id
+      }
+    }
   }
 }`;
 

@@ -1,12 +1,15 @@
 import Carousal from '@components/Carousal';
 import TextEle from '@components/TextEle';
+import { coursesQuery } from '@hooks/useCoursesApiHook';
 import { useTheme } from '@react-navigation/native';
 import PropTypes from 'prop-types';
 import React from 'react';
 import { Pressable, View } from 'react-native';
+import useSWR from 'swr';
 
-const HomeList = ({ title, data, onPressViewAll, onRecipePress }) => {
+const HomeList = ({ title, onPressViewAll, newData, onRecipePress }) => {
   const { colors } = useTheme();
+  const { data } = useSWR([coursesQuery(0, 5, 'updated_at:DESC')]);
   return (
     <>
       <View
@@ -23,14 +26,19 @@ const HomeList = ({ title, data, onPressViewAll, onRecipePress }) => {
           </TextEle>
         </Pressable>
       </View>
-      <Carousal data={data} onRecipePress={onRecipePress} onPressViewAll={onPressViewAll} />
+      {data?.courses.map(item => (
+        <Carousal
+          data={newData}
+          onRecipePress={() => onRecipePress(item)}
+          onPressViewAll={onPressViewAll}
+        />
+      ))}
     </>
   );
 };
 
 HomeList.propTypes = {
   title: PropTypes.string.isRequired,
-  data: PropTypes.arrayOf().isRequired,
   onPressViewAll: PropTypes.func.isRequired,
 };
 

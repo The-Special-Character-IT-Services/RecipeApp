@@ -7,9 +7,10 @@ import { View, StatusBar } from 'react-native';
 import { deviceWidth, deviceHeight } from '@utils/index';
 import RAButton1 from '@components/RAButton1';
 import { useHeaderHeight } from '@react-navigation/stack';
+import useSWR from 'swr';
+import { courseQuery } from '@hooks/useCoursesApiHook';
 import TextEle from '../../components/TextEle';
-import data from './data';
-import BreadWiches from './BreadWiches';
+// import BreadWiches from './BreadWiches';
 
 const subt = `Recipes in this write-up are protected by copyright law. Reproduction and distribution
 of the same without a written consent from Studio D’ Food Couture is prohibited. ©
@@ -18,8 +19,9 @@ Studio De Food Couture `;
 const YOUTUBE_VIDEO_HEIGHT = (deviceWidth / 16) * 9;
 
 const CourseDetails = ({ route }) => {
-  const { item } = route.params;
+  const { id, userId } = route.params;
   const { colors } = useTheme();
+  const { data } = useSWR([courseQuery(id, userId)]);
   const [playing, setPlaying] = useState(false);
   const headerHeight = useHeaderHeight();
   const bottomSheetRef = useRef(null);
@@ -27,10 +29,20 @@ const CourseDetails = ({ route }) => {
     headerHeight,
   ]);
 
+  console.log(data);
+
   const handleSheetChanges = useCallback(index => {
     console.log('index', index);
     setPlaying(index === 0);
   }, []);
+
+  if (!data?.course) {
+    return (
+      <View>
+        <TextEle>Loading</TextEle>
+      </View>
+    );
+  }
 
   return (
     <View style={{ flex: 1 }}>
@@ -74,31 +86,25 @@ const CourseDetails = ({ route }) => {
             Key Points:-
           </TextEle>
           <View>
-            {data.map(element => (
-              <View>
-                <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
-                  <TextEle key={element.id} variant="body2" style={{ paddingVertical: 10 }}>
-                    {element.Sen}
-                  </TextEle>
-                  <TextEle
-                    variant="body2"
-                    style={{ paddingVertical: 10, color: 'gray', width: 120 }}>
-                    {element.Sub}
-                  </TextEle>
-                </View>
-                <View style={{ height: 1, width: 330, backgroundColor: 'gray' }} />
+            <View key={data?.course.id}>
+              <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
+                <TextEle key={data?.course.id} variant="body2" style={{ paddingVertical: 10 }}>
+                  {data?.course.name}
+                </TextEle>
+                <TextEle variant="body2" style={{ paddingVertical: 10, color: 'gray', width: 120 }}>
+                  {data?.course.launchDate}
+                </TextEle>
               </View>
-            ))}
+              <View style={{ height: 1, width: 330, backgroundColor: 'gray' }} />
+            </View>
             <TextEle variant="caption" style={{ marginVertical: 20 }}>
               {subt}
             </TextEle>
           </View>
           <TextEle>Varieties:-</TextEle>
-          {BreadWiches.map(element => (
-            <TextEle variant="body1" style={{ textAlign: 'justify', width: 400 }}>
-              {element.Breadwiches}
-            </TextEle>
-          ))}
+          <TextEle variant="body1" style={{ textAlign: 'justify', width: 400 }}>
+            {data?.course.description}
+          </TextEle>
         </BottomSheetScrollView>
       </BottomSheet>
       <RAButton1
@@ -114,9 +120,8 @@ const CourseDetails = ({ route }) => {
 CourseDetails.propTypes = {
   route: PropTypes.shape({
     params: PropTypes.shape({
-      item: PropTypes.shape({
-        promoVideoYoutubeId: PropTypes.string,
-      }),
+      id: PropTypes.string.isRequired,
+      userId: PropTypes.number.isRequired,
     }),
   }).isRequired,
 };
