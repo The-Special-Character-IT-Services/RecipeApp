@@ -107,6 +107,22 @@ export const coursesSearchQuery = (pageIndex, limit, sort = 'id:ASC') => `{
   }
 }`;
 
+export const coursesCategoryQuery = (pageIndex, limit, sort = 'id:ASC') => `{
+  courses(start: ${pageIndex * 10}, limit: ${limit}, sort: "${sort}") {
+    id
+    name
+    
+  
+    image {
+      url
+    }
+    recipes {
+      id
+    }
+   
+  }
+}`;
+
 const getInfiniteCourses = (pageIndex, previousPageData) => {
   if (previousPageData && !previousPageData.length) return null;
 
