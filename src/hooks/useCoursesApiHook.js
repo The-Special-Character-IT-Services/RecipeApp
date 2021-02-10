@@ -47,7 +47,7 @@ export const courseQuery = (id, userId) => `{
       name
       url
     }
-  	recipes {
+    recipes {
       id
     }
     rattings {
@@ -80,7 +80,7 @@ export const courseQuery = (id, userId) => `{
         id
       }
     }
-  	rattings {
+    rattings {
       ratting
     }
     purchase_details(where: { user_id: { id: ${userId} } }) {
@@ -88,6 +88,38 @@ export const courseQuery = (id, userId) => `{
         id
       }
     }
+  }
+}`;
+
+export const coursesSearchQuery = (pageIndex, limit, sort = 'id:ASC') => `{
+  courses(start: ${pageIndex * 10}, limit: ${limit}, sort: "${sort}") {
+    id
+    name
+    
+  
+    image {
+      url
+    }
+    recipes {
+      id
+    }
+   
+  }
+}`;
+
+export const coursesCategoryQuery = (pageIndex, limit, sort = 'id:ASC') => `{
+  courses(start: ${pageIndex * 10}, limit: ${limit}, sort: "${sort}") {
+    id
+    name
+    
+  
+    image {
+      url
+    }
+    recipes {
+      id
+    }
+   
   }
 }`;
 

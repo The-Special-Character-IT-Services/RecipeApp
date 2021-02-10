@@ -2,11 +2,13 @@
 import React, { useState } from 'react';
 import { ScrollView, View, Image, KeyboardAvoidingView } from 'react-native';
 import { useTheme } from '@react-navigation/native';
+import useSWR from 'swr';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
+import { coursesQuery } from '@hooks/useCoursesApiHook';
 import SearchBar from '../../components/Search';
 import RecentlyAdd from '../../components/RecentlyAdd';
 import SearchCuisine from '../../components/SearchCuisine';
-import Data from '../../components/Carousal/data';
+// import Data from '../../components/Carousal/data';
 import TextEle from '../../components/TextEle';
 
 const arr = ['Trending', 'Recently Added ', 'Rice Items', 'Sweets', 'Salads'];
@@ -14,10 +16,12 @@ const arr = ['Trending', 'Recently Added ', 'Rice Items', 'Sweets', 'Salads'];
 const Search = () => {
   const { colors } = useTheme();
   const insets = useSafeAreaInsets();
+  const { data } = useSWR([coursesQuery(0, 5, 'updated_at:DESC')]);
   const [text, setText] = useState('');
   const onChangeText = val => {
     setText(val);
   };
+  console.log(data);
   return (
     <KeyboardAvoidingView
       style={{
@@ -57,14 +61,17 @@ const Search = () => {
             marginHorizontal: 10,
             flexDirection: 'row',
           }}>
-          {Data.map(item => (
+          {data?.courses.map(item => (
             <View
               style={{
                 flexDirection: 'row',
                 marginVertical: 10,
                 marginHorizontal: 10,
               }}>
-              <Image source={item.img} style={{ height: 50, width: 50, borderRadius: 5 }} />
+              <Image
+                source={{ uri: item.image.url }}
+                style={{ height: 50, width: 50, borderRadius: 5 }}
+              />
               <TextEle
                 variant="body1"
                 style={{
@@ -73,7 +80,7 @@ const Search = () => {
                   marginHorizontal: 10,
                   marginVertical: 3,
                 }}>
-                {item.TextHeading}
+                {item.name}
               </TextEle>
             </View>
           ))}
