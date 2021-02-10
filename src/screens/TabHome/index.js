@@ -39,8 +39,11 @@ const TabHome = ({ navigation }) => {
       <Category onCategoryDetails={() => navigation.navigate('CuisineList')} />
       <HomeList
         title="New Courses"
-        data={data?.courses || []}
-        onRecipePress={item => navigation.navigate('CourseDetails', { item })}
+        newData={data?.courses || []}
+        onRecipePress={item => {
+          console.log('Item', item);
+          navigation.navigate('CourseDetails', { item });
+        }}
       />
       {/* <View style={{ paddingHorizontal: 30, marginVertical: 20 }}>
         <TextEle variant="body1" style={{ fontSize: 20, fontWeight: 'bold' }}>

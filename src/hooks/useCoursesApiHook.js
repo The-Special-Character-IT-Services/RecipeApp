@@ -7,6 +7,7 @@ export const coursesQuery = (pageIndex, limit, sort = 'id:ASC') => `{
     price
     validity
     promoVideoYoutubeId
+    launchDate
     image {
       url
     }
