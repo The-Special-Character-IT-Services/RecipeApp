@@ -28,9 +28,6 @@ const RATextInput = ({
   const [modalVisible, setModalVisible] = useState(false);
   const insets = useSafeAreaInsets();
   const [text, setText] = useState('');
-  const onchangeText = val => {
-    setText(val);
-  };
 
   return (
     <View style={{ marginVertical: 8 }}>
@@ -100,16 +97,16 @@ const RATextInput = ({
                 <TextEle variant="title">Search your Country here</TextEle>
               </View>
 
-              <SearchBar
-                editable={false}
-                selectTextOnFocus={false}
-                onchangeText={onchangeText}
-                value={text}
-              />
+              <SearchBar onChangeText={t => setText(t)} value={text} />
             </View>
             <FlatList
-              data={countryCodes.all()}
+              data={
+                text
+                  ? countryCodes.all().filter(x => x.countryNameEn.includes(text))
+                  : countryCodes.all()
+              }
               contentContainerStyle={{
+                flex: 1,
                 backgroundColor: '#fff',
                 paddingTop: insets.top,
                 paddingBottom: insets.bottom,
@@ -129,6 +126,13 @@ const RATextInput = ({
                         style={{ flex: 1, paddingHorizontal: 10, color: colors.primary }}>
                         {item.countryNameEn}
                       </RAText>
+                      <View>
+                        <RAText
+                          numberOfLines={1}
+                          style={{ flex: 1, paddingHorizontal: 10, color: colors.primary }}>
+                          {`+${item.countryCallingCode}`}
+                        </RAText>
+                      </View>
                     </View>
                   </RectButton>
                 </TouchableWithoutFeedback>
