@@ -70,6 +70,7 @@ const MainStackScreen = () => {
         name="CuisineList"
         getComponent={() => require('@screens/CuisineList').default}
         options={{
+          // title:  ,
           headerShown: true,
           headerTitleAlign: 'center',
         }}
