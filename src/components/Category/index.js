@@ -5,6 +5,7 @@ import { Pressable, View } from 'react-native';
 import { ScrollView } from 'react-native-gesture-handler';
 import { useTheme } from '@react-navigation/native';
 import Icon from 'react-native-vector-icons/MaterialIcons';
+import Loading from '@components/loading';
 import useCategoriesApi from '../../hooks/useCategoriesApiHook';
 import TextEle from '../TextEle';
 
@@ -12,11 +13,7 @@ const Category = ({ onCategoryDetails }) => {
   const { colors } = useTheme();
   const { data } = useCategoriesApi();
   if (!data?.categories) {
-    return (
-      <View>
-        <TextEle>Loading</TextEle>
-      </View>
-    );
+    return <Loading />;
   }
   return (
     <View>

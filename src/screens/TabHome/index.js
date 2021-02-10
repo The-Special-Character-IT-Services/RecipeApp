@@ -41,6 +41,7 @@ const TabHome = ({ navigation }) => {
       <HomeList
         title="New Courses"
         newData={data?.courses || []}
+        onPressViewAll={() => navigation.navigate('CuisineList')}
         onRecipePress={async item => {
           const {
             user: { id: userId },
