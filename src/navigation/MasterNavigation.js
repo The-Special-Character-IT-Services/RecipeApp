@@ -71,6 +71,7 @@ const MainStackScreen = () => {
         getComponent={() => require('@screens/CuisineList').default}
         options={{
           headerShown: true,
+          headerTransparent: true,
           headerTitleAlign: 'center',
         }}
       />
