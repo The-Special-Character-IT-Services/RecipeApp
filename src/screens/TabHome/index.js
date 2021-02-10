@@ -11,6 +11,7 @@ import SearchBar from '@components/Search';
 import Cuisines from '@components/Cuisines';
 import { coursesQuery } from '@hooks/useCoursesApiHook';
 import HomeList from '@components/HomeList';
+import { getToken } from '@utils/index';
 import Header from '../Header';
 
 const TabHome = ({ navigation }) => {
@@ -40,9 +41,11 @@ const TabHome = ({ navigation }) => {
       <HomeList
         title="New Courses"
         newData={data?.courses || []}
-        onRecipePress={item => {
-          console.log('Item', item);
-          navigation.navigate('CourseDetails', { item });
+        onRecipePress={async item => {
+          const {
+            user: { id: userId },
+          } = await getToken();
+          navigation.navigate('CourseDetails', { id: item.id, userId });
         }}
       />
       {/* <View style={{ paddingHorizontal: 30, marginVertical: 20 }}>
