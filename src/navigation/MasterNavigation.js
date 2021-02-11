@@ -46,6 +46,11 @@ const MainStackScreen = () => {
         getComponent={() => require('@screens/Registration').default}
         options={{ headerShown: true, headerTransparent: true }}
       />
+      <MainStack.Screen
+        name="PurchaseUser"
+        getComponent={() => require('@screens/PurchaseUser').default}
+        options={{ headerShown: true, headerTransparent: true }}
+      />
       <MainStack.Screen name="Home" getComponent={() => require('@screens/Home').default} />
       <MainStack.Screen
         name="Search"
