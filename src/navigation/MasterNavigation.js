@@ -35,7 +35,12 @@ const MainStackScreen = () => {
       <MainStack.Screen
         name="YoutubeFilter"
         getComponent={() => require('@screens/YoutubeFilter').default}
-        options={{ headerShown: true, headerTransparent: false }}
+        options={{
+          headerShown: true,
+          headerTransparent: false,
+          title: 'Sort by',
+          headerTitleAlign: 'center',
+        }}
       />
       <MainStack.Screen
         name="Login"
