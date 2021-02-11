@@ -1,10 +1,21 @@
 import React from 'react';
-import { View, Text } from 'react-native';
+import { ImageBackground, View } from 'react-native';
+import ErrorImg from '@assets/images/Error.jpg';
 
-const index = () => (
-  <View>
-    <Text />
+const Error = () => (
+  <View
+    style={{
+      flex: 1,
+      justifyContent: 'center',
+      alignItems: 'center',
+      flexDirection: 'column',
+    }}>
+    <ImageBackground
+      source={ErrorImg}
+      style={{ height: 850, width: 400 }}
+      imageStyle={{ position: 'absolute' }}
+    />
   </View>
 );
 
-export default index;
+export default Error;
