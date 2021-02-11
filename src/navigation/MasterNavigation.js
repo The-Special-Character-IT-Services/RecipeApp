@@ -22,7 +22,7 @@ const MainStackScreen = () => {
       <MainStack.Screen name="Splash" getComponent={() => require('@screens/Splash').default} />
       <MainStack.Screen name="Initial" getComponent={() => require('@screens/Initial').default} />
       <MainStack.Screen
-        name="Verification"
+        name="Verificatiosn"
         getComponent={() => require('@screens/Verification').default}
         options={{ headerShown: true, headerTransparent: true }}
       />
@@ -30,6 +30,11 @@ const MainStackScreen = () => {
         name="ResetPassword"
         getComponent={() => require('@screens/ResetPassword').default}
         options={{ headerShown: true, headerTransparent: true }}
+      />
+      <MainStack.Screen
+        name="YoutubeFilter"
+        getComponent={() => require('@screens/YoutubeFilter').default}
+        options={{ headerShown: true, headerTransparent: false }}
       />
       <MainStack.Screen
         name="Login"
