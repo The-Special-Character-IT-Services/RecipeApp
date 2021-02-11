@@ -20,6 +20,7 @@ const MainStackScreen = () => {
         title: false,
       }}>
       <MainStack.Screen name="Splash" getComponent={() => require('@screens/Splash').default} />
+      <MainStack.Screen name="Error" getComponent={() => require('@screens/Error').default} />
       <MainStack.Screen name="Initial" getComponent={() => require('@screens/Initial').default} />
       <MainStack.Screen
         name="Verificatiosn"
@@ -81,6 +82,7 @@ const MainStackScreen = () => {
         getComponent={() => require('@screens/CuisineList').default}
         options={{
           headerShown: true,
+          title: 'Select Cuisine',
           headerTransparent: true,
           headerTitleAlign: 'center',
         }}
