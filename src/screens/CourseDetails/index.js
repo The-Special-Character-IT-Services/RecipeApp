@@ -1,11 +1,16 @@
 import BottomSheet, { BottomSheetScrollView } from '@gorhom/bottom-sheet';
 import PropTypes from 'prop-types';
 import { useTheme } from '@react-navigation/native';
-import React, { useCallback, useMemo, useRef, useState } from 'react';
+import React, { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import YoutubePlayer from 'react-native-youtube-iframe';
 import { View, StatusBar } from 'react-native';
-import { deviceWidth, deviceHeight } from '@utils/index';
+import { deviceWidth, deviceHeight, showErrorToast } from '@utils/index';
 import RAButton1 from '@components/RAButton1';
+import axios from 'axios';
+import utilsAxios from '@utils/axios';
+import base64 from 'base-64';
+import { addDays, isAfter } from 'date-fns';
+import { v4 as uuidv4 } from 'uuid';
 // import { format, subDays } from 'date-fns';
 import { useHeaderHeight } from '@react-navigation/stack';
 import useSWR from 'swr';
@@ -19,26 +24,132 @@ Studio De Food Couture `;
 
 const YOUTUBE_VIDEO_HEIGHT = (deviceWidth / 16) * 9;
 
-const CourseDetails = ({ route }) => {
+const CourseDetails = ({ route, navigation }) => {
   const { id, userId } = route.params;
   const { colors } = useTheme();
-  const { data } = useSWR([courseQuery(id, userId)]);
+  const { data, isValidating, error } = useSWR([courseQuery(id, userId)]);
   const [playing, setPlaying] = useState(false);
   const headerHeight = useHeaderHeight();
   const bottomSheetRef = useRef(null);
   const snapPoints = useMemo(() => [deviceHeight - YOUTUBE_VIDEO_HEIGHT - headerHeight, '100%'], [
     headerHeight,
   ]);
-  // const today = format(new Date(data?.course.launchDate), 'dd.MM.yyyy');
 
-  console.log(data);
+  useEffect(() => {
+    if (error) {
+      showErrorToast(error);
+    }
+  }, [error]);
 
   const handleSheetChanges = useCallback(index => {
-    console.log('index', index);
     setPlaying(index === 0);
   }, []);
 
-  if (!data?.course) {
+  const createPurchaseOrder = useCallback(async () => {
+    const authHeader = `Basic ${base64.encode('rzp_test_YI9BcxZ3N5ZRSL:gwpwHJWIcCaFYd6mmGdDCUY9')}`;
+    const receipt = uuidv4();
+    const res = await axios.post(
+      'https://api.razorpay.com/v1/orders',
+      {
+        amount: data?.course?.price * 100,
+        currency: data?.course?.currency,
+        receipt,
+      },
+      {
+        headers: { Authorization: authHeader },
+      },
+    );
+    const orderDetails = await utilsAxios.post('purchase-details', {
+      receipt,
+      user_id: userId,
+      course: data?.course?.id,
+      amount: data?.course?.price,
+      validity: data?.course?.validity,
+      currency: res.data.currency,
+      razorpay_order_id: res.data.id,
+      amount_paid: res.data.amount_paid,
+      amount_due: res.data.amount_due,
+      offer_id: res.data.offer_id,
+      status: res.data.status,
+      attempts: res.data.attempts,
+    });
+    navigation.navigate('PurchaseUser', {
+      orderDetails: orderDetails.data,
+    });
+  }, [
+    data?.course?.price,
+    data?.course?.currency,
+    data?.course?.id,
+    data?.course?.validity,
+    userId,
+  ]);
+
+  const updatePurchaseOrder = useCallback(
+    async purchaseId => {
+      const authHeader = `Basic ${base64.encode(
+        'rzp_test_YI9BcxZ3N5ZRSL:gwpwHJWIcCaFYd6mmGdDCUY9',
+      )}`;
+      const receipt = uuidv4();
+      const res = await axios.post(
+        'https://api.razorpay.com/v1/orders',
+        {
+          amount: data?.course?.price * 100,
+          currency: data?.course?.currency,
+          receipt,
+        },
+        {
+          headers: { Authorization: authHeader },
+        },
+      );
+      const orderDetails = await utilsAxios.put(`purchase-details/${purchaseId}`, {
+        receipt,
+        user_id: userId,
+        course: data?.course?.id,
+        amount: data?.course?.price,
+        validity: data?.course?.validity,
+        currency: res.data.currency,
+        razorpay_order_id: res.data.id,
+        amount_paid: res.data.amount_paid,
+        amount_due: res.data.amount_due,
+        offer_id: res.data.offer_id,
+        status: res.data.status,
+        attempts: res.data.attempts,
+      });
+      navigation.navigate('PurchaseUser', {
+        orderDetails: orderDetails.data,
+      });
+    },
+    [data?.course?.price, data?.course?.currency, data?.course?.id, data?.course?.validity, userId],
+  );
+
+  const buyCourse = useCallback(async () => {
+    try {
+      const purchaseRes = await utilsAxios.get(
+        `https://6f057eda63ea.ngrok.io/purchase-details?user_id=${userId}&course=${data?.course?.id}`,
+      );
+
+      if (purchaseRes.data.length === 0) {
+        createPurchaseOrder();
+      } else if (!purchaseRes.data.slice(-1)[0].purchase_date) {
+        updatePurchaseOrder(purchaseRes.data.slice(-1)[0].id);
+      } else if (purchaseRes.data.slice(-1)[0].purchase_date) {
+        const purchaseOverDate = addDays(
+          new Date(purchaseRes.data.slice(-1)[0].purchase_date),
+          purchaseRes.data.slice(-1)[0].validity,
+        );
+        // TODO: Replace with server date
+        if (isAfter(new Date(), purchaseOverDate)) {
+          createPurchaseOrder();
+        } else {
+          showErrorToast(new Error('You Have already Purchased this course'));
+        }
+      }
+    } catch (err) {
+      console.log(err);
+    }
+  }, [createPurchaseOrder, updatePurchaseOrder, userId, data?.course?.id]);
+
+  if (isValidating) {
     return <Loading />;
   }
 
@@ -48,7 +159,7 @@ const CourseDetails = ({ route }) => {
       <YoutubePlayer
         play={playing}
         height={YOUTUBE_VIDEO_HEIGHT}
-        videoId={data?.course.promoVideoYoutubeId}
+        videoId={data?.course?.promoVideoYoutubeId}
       />
       <BottomSheet
         ref={bottomSheetRef}
@@ -89,7 +200,7 @@ const CourseDetails = ({ route }) => {
                 Duration
               </TextEle>
               <TextEle variant="body2" style={{ paddingVertical: 10, color: 'gray', width: 120 }}>
-                Launching on {data?.course.launchDate}
+                Launching on {data?.course?.launchDate}
               </TextEle>
             </View>
             <View style={{ height: 1, width: 330, backgroundColor: 'gray' }} />
@@ -98,7 +209,7 @@ const CourseDetails = ({ route }) => {
                 Total Recipes covered
               </TextEle>
               <TextEle variant="body2" style={{ paddingVertical: 10, color: 'gray', width: 120 }}>
-                {/* {data?.course.recipes} */}
+                {/* {data?.course?.recipes} */}
               </TextEle>
             </View>
             <View style={{ height: 1, width: 330, backgroundColor: 'gray' }} />
@@ -107,7 +218,7 @@ const CourseDetails = ({ route }) => {
                 Video Validity
               </TextEle>
               <TextEle variant="body2" style={{ paddingVertical: 10, color: 'gray', width: 120 }}>
-                {data?.course.validity}
+                {data?.course?.validity}
               </TextEle>
             </View>
             <View style={{ height: 1, width: 330, backgroundColor: 'gray' }} />
@@ -116,7 +227,7 @@ const CourseDetails = ({ route }) => {
                 Written Recipe
               </TextEle>
               <TextEle variant="body2" style={{ paddingVertical: 10, color: 'gray', width: 120 }}>
-                {/* {data?.course.recipes} */}
+                {/* {data?.course?.recipes} */}
               </TextEle>
             </View>
             <View style={{ height: 1, width: 330, backgroundColor: 'gray' }} />
@@ -125,7 +236,7 @@ const CourseDetails = ({ route }) => {
                 Fees
               </TextEle>
               <TextEle variant="body2" style={{ paddingVertical: 10, color: 'gray', width: 120 }}>
-                {data?.course.price}
+                {data?.course?.price}
               </TextEle>
             </View>
             <View style={{ height: 1, width: 330, backgroundColor: 'gray' }} />
@@ -135,15 +246,20 @@ const CourseDetails = ({ route }) => {
           </View>
           <TextEle>Varieties:-</TextEle>
           <TextEle variant="body1" style={{ textAlign: 'justify', width: 400 }}>
-            {data?.course.description}
+            {data?.course?.description}
           </TextEle>
         </BottomSheetScrollView>
       </BottomSheet>
       <RAButton1
         style={{ position: 'absolute', bottom: 10, width: '100%' }}
         variant="fill"
-        text="Buy For 249"
-        onPress={() => {}}
+        text={`Buy For ${new Intl.NumberFormat('en-IN', {
+          style: 'currency',
+          currency: 'INR',
+          maximumFractionDigits: 0,
+          minimumFractionDigits: 0,
+        }).format(data?.course?.price || 0)}`}
+        onPress={buyCourse}
       />
     </View>
   );

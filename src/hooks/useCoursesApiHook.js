@@ -27,6 +27,7 @@ export const courseQuery = (id, userId) => `{
     description
     caption
     price
+    currency
     validity
     promoVideo {
       name

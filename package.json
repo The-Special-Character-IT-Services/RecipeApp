@@ -31,6 +31,7 @@
     "@react-navigation/native": "^5.8.10",
     "@react-navigation/stack": "^5.12.8",
     "axios": "^0.21.1",
+    "base-64": "^1.0.0",
     "country-codes-list": "^1.6.8",
     "date-fns": "^2.17.0",
     "formik": "^2.2.6",
@@ -47,6 +48,7 @@
     "react-native-fast-image": "^8.3.4",
     "react-native-fbsdk": "^3.0.0",
     "react-native-gesture-handler": "^1.9.0",
+    "react-native-get-random-values": "^1.5.1",
     "react-native-modal": "^11.6.1",
     "react-native-orientation-locker": "^1.2.0",
     "react-native-ratings": "^7.3.0",
@@ -68,6 +70,7 @@
     "react-native-youtube-iframe": "^1.4.1",
     "swr": "^0.3.11",
     "tailwind-rn": "^3.0.0",
+    "uuid": "^8.3.2",
     "victory-native": "^35.3.1"
   },
   "devDependencies": {
