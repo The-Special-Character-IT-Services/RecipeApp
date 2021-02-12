@@ -1,10 +1,12 @@
 /* eslint-disable react-native/no-inline-styles */
-import React, { useState } from 'react';
+import React, { useCallback, useState } from 'react';
 import { ScrollView, View, Image, KeyboardAvoidingView } from 'react-native';
 import { useTheme } from '@react-navigation/native';
+import PropTypes from 'prop-types';
 import useSWR from 'swr';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { coursesQuery } from '@hooks/useCoursesApiHook';
+import debounce from 'lodash.debounce';
 import SearchBar from '../../components/Search';
 import RecentlyAdd from '../../components/RecentlyAdd';
 import SearchCuisine from '../../components/SearchCuisine';
@@ -13,15 +15,18 @@ import TextEle from '../../components/TextEle';
 
 const arr = ['Trending', 'Recently Added ', 'Rice Items', 'Sweets', 'Salads'];
 
-const Search = () => {
+const Search = ({ name }) => {
   const { colors } = useTheme();
   const insets = useSafeAreaInsets();
   const { data } = useSWR([coursesQuery(0, 5, 'updated_at:DESC')]);
   const [text, setText] = useState('');
+  const loadSearch = () => {};
+
+  // const handler = useCallback(debounce(loadSearch, 2000), []);
+
   const onChangeText = val => {
     setText(val);
   };
-  console.log(data);
   return (
     <KeyboardAvoidingView
       style={{
@@ -88,6 +93,10 @@ const Search = () => {
       )}
     </KeyboardAvoidingView>
   );
+};
+
+Search.propTypes = {
+  name: PropTypes.string.isRequired,
 };
 
 export default Search;
