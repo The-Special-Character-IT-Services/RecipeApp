@@ -2,7 +2,7 @@
 import { useTheme } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import React from 'react';
-import { View } from 'react-native';
+import { Pressable, View, Text } from 'react-native';
 
 import ShareButton from '@components/ShareButton';
 import LikeButton from '@components/LikeButton';
@@ -20,9 +20,10 @@ const MainStackScreen = () => {
         title: false,
       }}>
       <MainStack.Screen name="Splash" getComponent={() => require('@screens/Splash').default} />
+      <MainStack.Screen name="Error" getComponent={() => require('@screens/Error').default} />
       <MainStack.Screen name="Initial" getComponent={() => require('@screens/Initial').default} />
       <MainStack.Screen
-        name="Verification"
+        name="Verificatiosn"
         getComponent={() => require('@screens/Verification').default}
         options={{ headerShown: true, headerTransparent: true }}
       />
@@ -30,6 +31,25 @@ const MainStackScreen = () => {
         name="ResetPassword"
         getComponent={() => require('@screens/ResetPassword').default}
         options={{ headerShown: true, headerTransparent: true }}
+      />
+      <MainStack.Screen
+        name="YoutubeFilter"
+        getComponent={() => require('@screens/YoutubeFilter').default}
+        options={({ navigation }) => ({
+          headerShown: true,
+          headerTransparent: false,
+          title: 'Sort by',
+          headerTitleAlign: 'center',
+          headerLeft: null,
+          headerTitleStyle: {
+            fontSize: 29,
+          },
+          headerRight: () => (
+            <Pressable onPress={() => navigation.goBack()}>
+              <Text style={{ color: colors.primary, fontSize: 20, marginRight: 10 }}>Done</Text>
+            </Pressable>
+          ),
+        })}
       />
       <MainStack.Screen
         name="Login"
@@ -74,11 +94,11 @@ const MainStackScreen = () => {
       <MainStack.Screen
         name="CuisineList"
         getComponent={() => require('@screens/CuisineList').default}
-        options={{
+        options={({ route }) => ({
+          title: route.params.name,
           headerShown: true,
-          headerTransparent: true,
           headerTitleAlign: 'center',
-        }}
+        })}
       />
       <MainStack.Screen
         name="RecipeDetail"

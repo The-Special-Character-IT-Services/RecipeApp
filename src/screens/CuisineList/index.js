@@ -21,10 +21,7 @@ const CuisineList = () => {
       style={{
         paddingTop: insets.top,
       }}>
-      <View style={{ paddingTop: 15 }}>
-        <View style={{ alignItems: 'center' }}>
-          <TextEle variant="title">Search Category</TextEle>
-        </View>
+      <View style={{ paddingTop: 40 }}>
         <SearchBar onChangeText={onChangeText} text={text} />
       </View>
       <ScrollView

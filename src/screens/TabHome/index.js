@@ -37,11 +37,13 @@ const TabHome = ({ navigation }) => {
           value={text}
         />
       </Pressable>
-      <Category onCategoryDetails={() => navigation.navigate('CuisineList')} />
+      <Category
+        onCategoryDetails={() => navigation.navigate('CuisineList', { name: 'Search Category' })}
+      />
       <HomeList
         title="New Courses"
         newData={data?.courses || []}
-        onPressViewAll={() => navigation.navigate('CuisineList')}
+        onPressViewAll={() => navigation.navigate('CuisineList', { name: 'All Courses' })}
         onRecipePress={async item => {
           const {
             user: { id: userId },
@@ -49,7 +51,39 @@ const TabHome = ({ navigation }) => {
           navigation.navigate('CourseDetails', { id: item.id, userId });
         }}
       />
-      <Cuisines onCuisinePress={() => navigation.navigate('CuisineList')} />
+      {/* <View style={{ paddingHorizontal: 30, marginVertical: 20 }}>
+        <TextEle variant="body1" style={{ fontSize: 20, fontWeight: 'bold' }}>
+          New Videos
+        </TextEle>
+      </View>
+      <Popular
+        onRecipePress={item => {
+          item.id === 3 || item.id === 2
+            ? navigation.navigate('PriceTag')
+            : navigation.navigate('RecipeDetail', item);
+        }}
+      /> */}
+      {/* <View style={{ paddingHorizontal: 30, marginVertical: 20 }}>
+        <TextEle variant="body1" style={{ fontSize: 20, fontWeight: 'bold' }}>
+          Popular
+        </TextEle>
+      </View>
+      <Popular
+        onRecipePress={item => {
+          item.id === 3 || item.id === 2
+            ? navigation.navigate('PriceTag')
+            : navigation.navigate('RecipeDetail', item);
+        }}
+      /> */}
+      {/* <View style={{ paddingHorizontal: 30, marginVertical: 20 }}>
+        <TextEle variant="body1" style={{ fontSize: 20, fontWeight: 'bold' }}>
+          UpComing Events
+        </TextEle>
+      </View>
+      <UpComingEvent /> */}
+      <Cuisines
+        onCuisinePress={() => navigation.navigate('CuisineList', { name: 'Search Cuisine' })}
+      />
     </ScrollView>
   );
 };
