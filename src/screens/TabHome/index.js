@@ -18,6 +18,7 @@ const TabHome = ({ navigation }) => {
   const playerRef = useRef();
   const insets = useSafeAreaInsets();
   const { data } = useSWR([coursesQuery(0, 5, 'updated_at:DESC')]);
+  console.log('🚀 ~ file: index.js ~ line 21 ~ TabHome ~ data', data);
   const [text, setText] = useState('');
   const onchangeText = val => {
     setText(val);
