@@ -37,6 +37,7 @@
     "formik": "^2.2.6",
     "intl": "^1.2.5",
     "jail-monkey": "^2.3.3",
+    "lodash.debounce": "^4.0.8",
     "prop-types": "^15.7.2",
     "react": "16.13.1",
     "react-native": "0.63.4",
