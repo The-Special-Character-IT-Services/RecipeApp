@@ -7,7 +7,7 @@ import Rating from '@components/Rating';
 import TextEle from '../TextEle';
 import LikeButton from '../LikeButton';
 
-const ListItem = ({ onRecipePress, item, cardWidth }) => {
+const ListItem = ({ onRecipePress, item, cardWidth, userId }) => {
   const rating = useMemo(() => item.rattings.reduce((p, c, i, a) => p + c.ratting / a.length, 0), [
     item.rattings,
   ]);
@@ -29,7 +29,7 @@ const ListItem = ({ onRecipePress, item, cardWidth }) => {
               flexDirection: 'row',
               justifyContent: 'flex-end',
             }}>
-            <LikeButton />
+            <LikeButton courseId={item.id} />
           </View>
           {/* {item.id === 3 || item.id === 2 ? (
             <View

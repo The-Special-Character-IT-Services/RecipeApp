@@ -15,71 +15,19 @@ const LikedRecipe = ({ onRecipeDetail }) => {
   const { data } = useSWR([coursesQuery(0, 5, 'updated_at:DESC')]);
 
   // const createLikedCourse = useCallback(async () => {
-  //   const authHeader = `Basic ${base64.encode('rzp_test_YI9BcxZ3N5ZRSL:gwpwHJWIcCaFYd6mmGdDCUY9')}`;
-  //   const receipt = uuidv4();
   //   const res = await axios.post(
   //     `https://6f057eda63ea.ngrok.io/Likes?user_id=${userId}&course=${data?.course?.id}`,
   //     {
-  //       amount: data?.course?.price * 100,
-  //       currency: data?.course?.currency,
-  //       receipt,
   //     },
   //     {
   //       headers: { Authorization: authHeader },
   //     },
   //   );
-  //   const orderDetails = await utilsAxios.post('purchase-details', {
-  //     receipt,
-  //     user_id: userId,
-  //     course: data?.course?.id,
-  //     amount: data?.course?.price,
-  //     validity: data?.course?.validity,
-  //     currency: res.data.currency,
-  //     razorpay_order_id: res.data.id,
-  //     amount_paid: res.data.amount_paid,
-  //     amount_due: res.data.amount_due,
-  //     offer_id: res.data.offer_id,
-  //     status: res.data.status,
-  //     attempts: res.data.attempts,
-  //   });
-  //   navigation.navigate('PurchaseUser', {
-  //     orderDetails: orderDetails.data,
-  //   });
+  //
+  //
   // }, [
-  //   data?.course?.price,
-  //   data?.course?.currency,
-  //   data?.course?.id,
-  //   data?.course?.validity,
-  //   userId,
-  //   navigation,
+  //
   // ]);
-
-  // const likedCourse = useCallback(async () => {
-  //   try {
-  //     const likedRes = await utilsAxios.get(
-  //       `https://6f057eda63ea.ngrok.io/Likes?user_id=${userId}&course=${data?.course?.id}`,
-  //     );
-
-  //     if ( likedRes === 0) {
-  //       createPurchaseOrder();
-  //     } else if (!purchaseRes.data.slice(-1)[0].purchase_date) {
-  //       updatePurchaseOrder(purchaseRes.data.slice(-1)[0].id);
-  //     } else if (purchaseRes.data.slice(-1)[0].purchase_date) {
-  //       const purchaseOverDate = addDays(
-  //         new Date(purchaseRes.data.slice(-1)[0].purchase_date),
-  //         purchaseRes.data.slice(-1)[0].validity,
-  //       );
-  //       // TODO: Replace with server date
-  //       if (isAfter(new Date(), purchaseOverDate)) {
-  //         createPurchaseOrder();
-  //       } else {
-  //         showErrorToast(new Error('You Have already Purchased this course'));
-  //       }
-  //     }
-  //   } catch (err) {
-  //     console.log(err);
-  //   }
-  // }, [createPurchaseOrder, updatePurchaseOrder, userId, data?.course?.id]);
 
   return (
     <BottomSheetView style={{ flex: 1, backgroundColor: colors.background, borderRadius: 20 }}>
