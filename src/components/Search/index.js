@@ -7,7 +7,7 @@ import React from 'react';
 import { Pressable, TextInput, View } from 'react-native';
 // import SearchSharp from '../../assets/icons/search-sharp.svg';
 
-const Search = ({ text, ...rest }) => {
+const Search = ({ text, clearText, ...rest }) => {
   const { colors } = useTheme();
 
   return (
@@ -30,14 +30,17 @@ const Search = ({ text, ...rest }) => {
           {...rest}
         />
 
-        {text ? (
-          <Pressable>
-            <Icon
-              name="close-outline"
-              size={24}
-              fill={colors.text}
-              style={{ position: 'absolute', top: 13, right: 10 }}
-            />
+        {rest.value ? (
+          <Pressable
+            style={{
+              padding: 10,
+              zIndex: 10,
+              position: 'absolute',
+              top: 0,
+              right: 10,
+            }}
+            onPress={clearText}>
+            <Icon name="close-outline" size={24} fill={colors.text} />
           </Pressable>
         ) : (
           <View>
@@ -63,5 +66,6 @@ const Search = ({ text, ...rest }) => {
 Search.propTypes = {
   onchangeText: PropTypes.func.isRequired,
   text: PropTypes.string.isRequired,
+  clearText: PropTypes.func.isRequired,
 };
 export default Search;

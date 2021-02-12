@@ -6,7 +6,6 @@ import PropTypes from 'prop-types';
 import useSWR from 'swr';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { coursesQuery } from '@hooks/useCoursesApiHook';
-import debounce from 'lodash.debounce';
 import SearchBar from '../../components/Search';
 import RecentlyAdd from '../../components/RecentlyAdd';
 import SearchCuisine from '../../components/SearchCuisine';
@@ -20,7 +19,6 @@ const Search = ({ name }) => {
   const insets = useSafeAreaInsets();
   const { data } = useSWR([coursesQuery(0, 5, 'updated_at:DESC')]);
   const [text, setText] = useState('');
-  const loadSearch = () => {};
 
   // const handler = useCallback(debounce(loadSearch, 2000), []);
 
@@ -32,7 +30,7 @@ const Search = ({ name }) => {
       style={{
         paddingTop: insets.top,
       }}>
-      <SearchBar onChangeText={onChangeText} text={text} />
+      <SearchBar onChangeText={onChangeText} value={text} clearText={() => setText('')} />
       <ScrollView
         showsHorizontalScrollIndicator={false}
         contentContainerStyle={{ paddingHorizontal: 15, paddingVertical: 10 }}
