@@ -1,14 +1,21 @@
 import { useTheme } from '@react-navigation/native';
 import React, { useState } from 'react';
 import { Pressable } from 'react-native';
-import HeartSharp from '../../assets/icons/heart-sharp.svg';
+import Icon from 'react-native-vector-icons/Ionicons';
 
 const LikeButton = () => {
   const { colors } = useTheme();
   const [iconSelected, setIconSelected] = useState(false);
+
+  const setIcon = () => setIconSelected(!iconSelected);
+
   return (
-    <Pressable style={{ marginRight: 10 }} onPress={() => setIconSelected(!iconSelected)}>
-      <HeartSharp height={24} width={24} fill={iconSelected ? colors.primary : colors.background} />
+    <Pressable style={{ marginRight: 10 }} onPress={setIcon}>
+      <Icon
+        name="heart-sharp"
+        size={25}
+        color={iconSelected ? colors.primary : colors.background}
+      />
     </Pressable>
   );
 };

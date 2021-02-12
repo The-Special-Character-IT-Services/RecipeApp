@@ -12,7 +12,7 @@ const Error = () => (
     }}>
     <ImageBackground
       source={ErrorImg}
-      style={{ height: 850, width: 400 }}
+      style={{ height: 700, width: 400 }}
       imageStyle={{ position: 'absolute' }}
     />
   </View>
