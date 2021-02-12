@@ -2,7 +2,7 @@
 import { useTheme } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import React from 'react';
-import { View } from 'react-native';
+import { Pressable, View, Text } from 'react-native';
 
 import ShareButton from '@components/ShareButton';
 import LikeButton from '@components/LikeButton';
@@ -35,12 +35,21 @@ const MainStackScreen = () => {
       <MainStack.Screen
         name="YoutubeFilter"
         getComponent={() => require('@screens/YoutubeFilter').default}
-        options={{
+        options={({ navigation }) => ({
           headerShown: true,
           headerTransparent: false,
           title: 'Sort by',
           headerTitleAlign: 'center',
-        }}
+          headerLeft: null,
+          headerTitleStyle: {
+            fontSize: 29,
+          },
+          headerRight: () => (
+            <Pressable onPress={() => navigation.goBack()}>
+              <Text style={{ color: colors.primary, fontSize: 20, marginRight: 10 }}>Done</Text>
+            </Pressable>
+          ),
+        })}
       />
       <MainStack.Screen
         name="Login"
