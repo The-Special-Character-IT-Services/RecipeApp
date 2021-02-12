@@ -1,5 +1,5 @@
-export const coursesQuery = (pageIndex, limit, sort = 'id:ASC') => `{
-  courses(start: ${pageIndex * 10}, limit: ${limit}, sort: "${sort}") {
+export const coursesQuery = (pageIndex, limit, sort = 'id:ASC', where = {}) => `{
+  courses(start: ${pageIndex * 10}, limit: ${limit}, sort: "${sort}", where: ${where}) {
     id
     name
     caption
@@ -92,12 +92,10 @@ export const courseQuery = (id, userId) => `{
   }
 }`;
 
-export const coursesSearchQuery = (pageIndex, limit, sort = 'id:ASC') => `{
-  courses(start: ${pageIndex * 10}, limit: ${limit}, sort: "${sort}") {
+export const coursesSearchQuery = (pageIndex, limit, sort = 'id:ASC', where = {}) => `{
+  courses(start: ${pageIndex * 10}, limit: ${limit}, sort: "${sort}", where: ${where}) {
     id
     name
-    
-  
     image {
       url
     }

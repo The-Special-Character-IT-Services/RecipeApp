@@ -8,7 +8,8 @@ import axios from '@utils/axios';
 import RAText from '@components/RAText';
 import { useHeaderHeight } from '@react-navigation/stack';
 import RAButton1 from '@components/RAButton1';
-import { loginProcess, showErrorToast } from '@utils/index';
+import useLoginHook from '@hooks/useLoginHook';
+import { showErrorToast } from '@utils/index';
 import { initialValues, resetForm, formRef } from './fields';
 
 GoogleSignin.configure({
@@ -18,6 +19,7 @@ GoogleSignin.configure({
 
 const ResetPassword = ({ navigation, route }) => {
   const headerHight = useHeaderHeight();
+  const { loginProcess } = useLoginHook();
   const { code } = route.params;
 
   const onSubmit = async values => {

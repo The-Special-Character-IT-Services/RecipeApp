@@ -7,8 +7,8 @@ import { useHeaderHeight } from '@react-navigation/stack';
 import SmsRetriever from 'react-native-sms-retriever';
 import RAButton1 from '@components/RAButton1';
 import { useTheme } from '@react-navigation/native';
+import useLoginHook from '@hooks/useLoginHook';
 import axios from '@utils/axios';
-import { loginProcess } from '@utils/index';
 import { initialValues, otpForm, formRef } from './fields';
 
 const RESEND_OTP_TIME_LIMIT = 60; // 30 secs
@@ -19,6 +19,7 @@ const Verification = ({ navigation, route }) => {
   const { colors } = useTheme();
   const { verify } = route.params;
   const headerHight = useHeaderHeight();
+  const { loginProcess } = useLoginHook();
   const [activeResend, setActiveResend] = useState(false);
   const [initialValuesState, setinitialValuesState] = useState(initialValues);
   const counterRef = useRef();
