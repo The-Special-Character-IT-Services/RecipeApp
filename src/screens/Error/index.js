@@ -1,22 +1,34 @@
 import React from 'react';
-import { ImageBackground, Text, View } from 'react-native';
-import ErrorImg from '@assets/images/2.0-black-bg.jpg';
+import { View } from 'react-native';
+import ErrorImg from '@assets/icons/3.0.svg';
+import TextEle from '@components/TextEle';
+import { useTheme } from '@react-navigation/native';
 
-const Error = () => (
-  <View
-    style={{
-      flex: 1,
-      justifyContent: 'center',
-      alignItems: 'center',
-      flexDirection: 'column',
-    }}>
-    <ImageBackground
-      source={ErrorImg}
-      style={{ height: 500, width: 400 }}
-      imageStyle={{ position: 'absolute' }}>
-      <Text style={{ color: 'orange', fontWeight: 'bold', fontSize: 25 }}>Error Occurred!</Text>
-    </ImageBackground>
-  </View>
-);
+const Error = () => {
+  const { colors } = useTheme();
+
+  return (
+    <View
+      style={{
+        flex: 1,
+        justifyContent: 'center',
+        alignItems: 'center',
+      }}>
+      <ErrorImg />
+      <View
+        style={{
+          justifyContent: 'center',
+          alignItems: 'center',
+          position: 'absolute',
+          top: 70,
+          left: 20,
+        }}>
+        <TextEle variant="subTitle1" style={{ color: colors.notification }}>
+          Error Occurred! Will fill your plate soon!
+        </TextEle>
+      </View>
+    </View>
+  );
+};
 
 export default Error;
