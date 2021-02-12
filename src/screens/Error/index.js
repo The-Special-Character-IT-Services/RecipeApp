@@ -1,6 +1,6 @@
 import React from 'react';
-import { ImageBackground, View } from 'react-native';
-import ErrorImg from '@assets/images/Error.jpg';
+import { ImageBackground, Text, View } from 'react-native';
+import ErrorImg from '@assets/images/2.0-black-bg.jpg';
 
 const Error = () => (
   <View
@@ -12,9 +12,10 @@ const Error = () => (
     }}>
     <ImageBackground
       source={ErrorImg}
-      style={{ height: 850, width: 400 }}
-      imageStyle={{ position: 'absolute' }}
-    />
+      style={{ height: 500, width: 400 }}
+      imageStyle={{ position: 'absolute' }}>
+      <Text style={{ color: 'orange', fontWeight: 'bold', fontSize: 25 }}>Error Occurred!</Text>
+    </ImageBackground>
   </View>
 );
 

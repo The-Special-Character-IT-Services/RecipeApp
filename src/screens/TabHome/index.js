@@ -37,11 +37,13 @@ const TabHome = ({ navigation }) => {
           value={text}
         />
       </Pressable>
-      <Category onCategoryDetails={() => navigation.navigate('CuisineList')} />
+      <Category
+        onCategoryDetails={() => navigation.navigate('CuisineList', { name: 'Search Category' })}
+      />
       <HomeList
         title="New Courses"
         newData={data?.courses || []}
-        onPressViewAll={() => navigation.navigate('CuisineList')}
+        onPressViewAll={() => navigation.navigate('CuisineList', { name: 'All Courses' })}
         onRecipePress={async item => {
           const {
             user: { id: userId },
@@ -79,7 +81,9 @@ const TabHome = ({ navigation }) => {
         </TextEle>
       </View>
       <UpComingEvent /> */}
-      <Cuisines onCuisinePress={() => navigation.navigate('CuisineList')} />
+      <Cuisines
+        onCuisinePress={() => navigation.navigate('CuisineList', { name: 'Search Cuisine' })}
+      />
     </ScrollView>
   );
 };

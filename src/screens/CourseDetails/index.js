@@ -35,6 +35,8 @@ const CourseDetails = ({ route, navigation }) => {
     headerHeight,
   ]);
 
+  console.log(data?.course);
+
   useEffect(() => {
     if (error) {
       showErrorToast(error);
@@ -82,6 +84,7 @@ const CourseDetails = ({ route, navigation }) => {
     data?.course?.id,
     data?.course?.validity,
     userId,
+    navigation,
   ]);
 
   const updatePurchaseOrder = useCallback(
@@ -119,7 +122,14 @@ const CourseDetails = ({ route, navigation }) => {
         orderDetails: orderDetails.data,
       });
     },
-    [data?.course?.price, data?.course?.currency, data?.course?.id, data?.course?.validity, userId],
+    [
+      data?.course?.price,
+      data?.course?.currency,
+      data?.course?.id,
+      data?.course?.validity,
+      userId,
+      navigation,
+    ],
   );
 
   const buyCourse = useCallback(async () => {

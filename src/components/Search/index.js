@@ -2,13 +2,14 @@
 /* eslint-disable react/no-unused-state */
 import { useTheme } from '@react-navigation/native';
 import PropTypes from 'prop-types';
-
+import Icon from 'react-native-vector-icons/Ionicons';
 import React from 'react';
-import { TextInput, View } from 'react-native';
-import SearchSharp from '../../assets/icons/search-sharp.svg';
+import { Pressable, TextInput, View } from 'react-native';
+// import SearchSharp from '../../assets/icons/search-sharp.svg';
 
-const Search = ({ ...rest }) => {
+const Search = ({ text, ...rest }) => {
   const { colors } = useTheme();
+
   return (
     <View>
       <View style={{ flexDirection: 'row', margin: 20 }}>
@@ -17,7 +18,8 @@ const Search = ({ ...rest }) => {
           placeholderTextColor={colors.text}
           style={{
             flex: 1,
-            fontSize: 18,
+            height: 50,
+            fontSize: 20,
             color: colors.text,
             borderColor: colors.text,
             borderWidth: 1,
@@ -27,12 +29,32 @@ const Search = ({ ...rest }) => {
           }}
           {...rest}
         />
-        <SearchSharp
+
+        {text ? (
+          <Pressable>
+            <Icon
+              name="close-outline"
+              size={24}
+              fill={colors.text}
+              style={{ position: 'absolute', top: 13, right: 10 }}
+            />
+          </Pressable>
+        ) : (
+          <View>
+            <Icon
+              name="search-outline"
+              size={24}
+              fill={colors.text}
+              style={{ position: 'absolute', top: 13, right: 10 }}
+            />
+          </View>
+        )}
+        {/* <SearchSharp
           height={24}
           width={24}
           fill={colors.text}
-          style={{ position: 'absolute', top: 7, right: 10 }}
-        />
+          style={{ position: 'absolute', top: 13, right: 10 }}
+        /> */}
       </View>
     </View>
   );

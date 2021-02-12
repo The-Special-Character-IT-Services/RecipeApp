@@ -94,12 +94,11 @@ const MainStackScreen = () => {
       <MainStack.Screen
         name="CuisineList"
         getComponent={() => require('@screens/CuisineList').default}
-        options={{
+        options={({ route }) => ({
+          title: route.params.name,
           headerShown: true,
-          title: 'Select Cuisine',
-          headerTransparent: true,
           headerTitleAlign: 'center',
-        }}
+        })}
       />
       <MainStack.Screen
         name="RecipeDetail"
