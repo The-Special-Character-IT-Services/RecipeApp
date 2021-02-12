@@ -48,6 +48,7 @@ instance.interceptors.response.use(
   },
   function (error) {
     let err = error;
+    console.log(error);
     if (err.response) {
       const { data, status } = err.response;
 

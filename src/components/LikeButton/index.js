@@ -11,21 +11,17 @@ const LikeButton = ({ courseId }) => {
   const { colors } = useTheme();
   const { user } = useContext(UserContext);
   const { data, mutate } = useSWR([likesQuery(user.id, courseId)]);
-  console.log('🚀 ~ file: index.js ~ line 13 ~ LikeButton ~ data', data);
 
   const onLikePress = async () => {
     try {
-      console.log('data?.courses?.length', data?.courses?.length);
-      if (data?.courses?.length === 0) {
-        const res = await axios.post('likes', {
+      console.log('data?.likes?.length', data?.likes?.length);
+      if (data?.likes?.length === 0) {
+        await axios.post('likes', {
           user: user.id,
           course: courseId,
         });
-        console.log('🚀 ~ file: index.js ~ line 23 ~ onLikePress ~ res', res);
       } else {
-        console.log(`likes/${data.courses[0].id}`);
-        const res = await axios.delete(`likes/${data.courses[0].id}`);
-        console.log('🚀 ~ file: index.js ~ line 28 ~ onLikePress ~ res', res);
+        await axios.delete(`likes/${data.likes[0].id}`);
       }
       mutate([likesQuery(user.id, courseId)]);
     } catch (error) {
@@ -36,7 +32,7 @@ const LikeButton = ({ courseId }) => {
   return (
     <Pressable style={{ padding: 10, zIndex: 10 }} onPress={onLikePress}>
       <Icon
-        name={data?.courses?.length === 0 ? 'heart-outline' : 'heart-sharp'}
+        name={data?.likes?.length === 0 ? 'heart-outline' : 'heart-sharp'}
         size={25}
         color={colors.primary}
       />
