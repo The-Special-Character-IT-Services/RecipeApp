@@ -10,7 +10,8 @@ import axios from '@utils/axios';
 import RAText from '@components/RAText';
 import { useHeaderHeight } from '@react-navigation/stack';
 import RAButton1 from '@components/RAButton1';
-import { isIOS, loginProcess, showErrorToast } from '@utils/index';
+import useLoginHook from '@hooks/useLoginHook';
+import { isIOS, showErrorToast } from '@utils/index';
 import { AccessToken, LoginManager } from 'react-native-fbsdk';
 import { initialValues, loginForm, formRef } from './fields';
 
@@ -22,6 +23,7 @@ GoogleSignin.configure({
 const Login = ({ navigation }) => {
   const { colors } = useTheme();
   const headerHight = useHeaderHeight();
+  const { loginProcess } = useLoginHook();
   const [loading, setLoading] = useState({
     signIn: false,
     google: false,

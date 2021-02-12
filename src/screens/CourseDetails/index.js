@@ -35,6 +35,8 @@ const CourseDetails = ({ route, navigation }) => {
     headerHeight,
   ]);
 
+  console.log(data);
+
   useEffect(() => {
     if (error) {
       showErrorToast(error);

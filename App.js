@@ -13,6 +13,7 @@ import MasterNavigation from '@navigation/MasterNavigation';
 import { RADarkTheme, RALightTheme } from '@theme/index';
 import fetcher from '@utils/fetcher';
 import YoutubeVideo from '@screens/YoutubeVideo';
+import UserProvider from '@context/userContext';
 import Toast from 'react-native-toast-message';
 import { isIOS } from './src/utils';
 import YoutubeFilter from './src/screens/YoutubeFilter';
@@ -41,47 +42,49 @@ const App = () => {
         value={{
           fetcher,
         }}>
-        <KeyboardAvoidingView
-          {...(isIOS && { behavior: 'padding' })}
-          style={{ flex: 1 }}
-          enabled={isIOS}>
-          <NavigationContainer
-            ref={navigationRef}
-            theme={currentTheme}
-            onReady={() => {
-              routeNameRef.current = navigationRef.current.getCurrentRoute().name;
-            }}
-            onStateChange={async () => {
-              const previousRouteName = routeNameRef.current;
-              const currentRouteName = navigationRef.current.getCurrentRoute().name;
+        <UserProvider>
+          <KeyboardAvoidingView
+            {...(isIOS && { behavior: 'padding' })}
+            style={{ flex: 1 }}
+            enabled={isIOS}>
+            <NavigationContainer
+              ref={navigationRef}
+              theme={currentTheme}
+              onReady={() => {
+                routeNameRef.current = navigationRef.current.getCurrentRoute().name;
+              }}
+              onStateChange={async () => {
+                const previousRouteName = routeNameRef.current;
+                const currentRouteName = navigationRef.current.getCurrentRoute().name;
 
-              if (previousRouteName !== currentRouteName) {
-                // Change this line to use another Mobile analytics SDK
-                await analytics().logScreenView({
-                  screen_name: currentRouteName,
-                  screen_class: currentRouteName,
-                });
-              }
+                if (previousRouteName !== currentRouteName) {
+                  // Change this line to use another Mobile analytics SDK
+                  await analytics().logScreenView({
+                    screen_name: currentRouteName,
+                    screen_class: currentRouteName,
+                  });
+                }
 
-              // Save the current route name for later comparision
-              routeNameRef.current = currentRouteName;
-            }}>
-            <RootStack.Navigator initialRouteName="Main" mode="modal" headerMode="none">
-              <RootStack.Screen
-                name="Main"
-                component={MasterNavigation}
-                options={{
-                  headerShown: true,
-                  headerTransparent: 1,
-                  headerTintColor: currentTheme.colors.primary,
-                  cardStyleInterpolator: CardStyleInterpolators.forFadeFromBottomAndroid,
-                }}
-              />
-              <RootStack.Screen name="YoutubeFilter" component={YoutubeFilter} />
-              <RootStack.Screen name="YoutubeVideo" component={YoutubeVideo} />
-            </RootStack.Navigator>
-          </NavigationContainer>
-        </KeyboardAvoidingView>
+                // Save the current route name for later comparision
+                routeNameRef.current = currentRouteName;
+              }}>
+              <RootStack.Navigator initialRouteName="Main" mode="modal" headerMode="none">
+                <RootStack.Screen
+                  name="Main"
+                  component={MasterNavigation}
+                  options={{
+                    headerShown: true,
+                    headerTransparent: 1,
+                    headerTintColor: currentTheme.colors.primary,
+                    cardStyleInterpolator: CardStyleInterpolators.forFadeFromBottomAndroid,
+                  }}
+                />
+                <RootStack.Screen name="YoutubeFilter" component={YoutubeFilter} />
+                <RootStack.Screen name="YoutubeVideo" component={YoutubeVideo} />
+              </RootStack.Navigator>
+            </NavigationContainer>
+          </KeyboardAvoidingView>
+        </UserProvider>
       </SWRConfig>
       <Toast ref={ref => Toast.setRef(ref)} />
     </SafeAreaProvider>

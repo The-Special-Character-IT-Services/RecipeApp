@@ -49,36 +49,6 @@ const TabHome = ({ navigation }) => {
           navigation.navigate('CourseDetails', { id: item.id, userId });
         }}
       />
-      {/* <View style={{ paddingHorizontal: 30, marginVertical: 20 }}>
-        <TextEle variant="body1" style={{ fontSize: 20, fontWeight: 'bold' }}>
-          New Videos
-        </TextEle>
-      </View>
-      <Popular
-        onRecipePress={item => {
-          item.id === 3 || item.id === 2
-            ? navigation.navigate('PriceTag')
-            : navigation.navigate('RecipeDetail', item);
-        }}
-      /> */}
-      {/* <View style={{ paddingHorizontal: 30, marginVertical: 20 }}>
-        <TextEle variant="body1" style={{ fontSize: 20, fontWeight: 'bold' }}>
-          Popular
-        </TextEle>
-      </View>
-      <Popular
-        onRecipePress={item => {
-          item.id === 3 || item.id === 2
-            ? navigation.navigate('PriceTag')
-            : navigation.navigate('RecipeDetail', item);
-        }}
-      /> */}
-      {/* <View style={{ paddingHorizontal: 30, marginVertical: 20 }}>
-        <TextEle variant="body1" style={{ fontSize: 20, fontWeight: 'bold' }}>
-          UpComing Events
-        </TextEle>
-      </View>
-      <UpComingEvent /> */}
       <Cuisines onCuisinePress={() => navigation.navigate('CuisineList')} />
     </ScrollView>
   );
