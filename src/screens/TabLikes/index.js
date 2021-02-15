@@ -1,7 +1,7 @@
 import React, { useEffect, useMemo, useRef } from 'react';
 import PropTypes from 'prop-types';
 import { Dimensions, Image, TextInput, View } from 'react-native';
-import BottomSheet from '@gorhom/bottom-sheet';
+import BottomSheet, { BottomSheetScrollView, BottomSheetView } from '@gorhom/bottom-sheet';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { useTheme } from '@react-navigation/native';
 import { useLayout } from '@react-native-community/hooks';
@@ -21,22 +21,20 @@ const TabLikes = ({ navigation }) => {
     [layout.height, insets.top],
   );
 
-  useEffect(() => {
-    console.log('he;kd;klfa;kf;laskdflas;dklf;asd');
-  }, []);
-
   return (
     <View style={{ flex: 1 }}>
-      <Image
-        style={{
-          height: windowHeight * 0.5,
-          width: windowWidth,
-          position: 'absolute',
-          top: 0,
-          left: 0,
-        }}
-        source={AllFood}
-      />
+      <View>
+        <Image
+          style={{
+            height: windowHeight * 0.5,
+            width: windowWidth,
+            position: 'absolute',
+            top: 0,
+            left: 0,
+          }}
+          source={AllFood}
+        />
+      </View>
       <View onLayout={onLayout} style={{ paddingTop: insets.top, paddingBottom: 30 }}>
         <TextInput
           placeholder="Search your liked recipes"
@@ -52,17 +50,21 @@ const TabLikes = ({ navigation }) => {
           }}
         />
       </View>
-      <BottomSheet
-        ref={bottomSheetRef}
-        snapPoints={snapPoints}
-        handleComponent={() => null}
-        topInset={insets.top}>
-        <LikedRecipe
-          onRecipeDetail={item => {
-            navigation.navigate('RecipeDetail', item);
-          }}
-        />
-      </BottomSheet>
+      <View style={{ height: 700 }}>
+        <BottomSheet
+          style={{ flex: 1 }}
+          onLayout={onLayout}
+          ref={bottomSheetRef}
+          snapPoints={snapPoints}
+          handleComponent={() => null}
+          topInset={insets.top}>
+          <LikedRecipe
+            onRecipeDetail={item => {
+              navigation.navigate('RecipeDetail', item);
+            }}
+          />
+        </BottomSheet>
+      </View>
     </View>
   );
 };

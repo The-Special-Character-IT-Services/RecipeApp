@@ -86,33 +86,35 @@ const TabEvent = () => {
         }}
         source={food1}
       />
-      <BottomSheet
-        ref={bottomSheetRef}
-        initialSnapIndex={0}
-        snapPoints={snapPoints}
-        handleComponent={() => null}
-        topInset={insets.top}>
-        <BottomSheetScrollView>
-          <BottomSheetFlatList
-            data={data?.flat() || []}
-            keyExtractor={keyExtractor}
-            renderItem={renderItem}
-            contentContainerStyle={{
-              flex: 1,
-              backgroundColor: colors.background,
-              borderRadius: 15,
-            }}
-            getItemLayout={getItemLayout}
-            removeClippedSubviews
-            initialNumToRender={5}
-            maxToRenderPerBatch={6}
-            windowSize={10}
-            onEndReached={() => setSize(size + 1)}
-            onEndReachedThreshold={0.5}
-            ListHeaderComponent={ListHeaderComponent}
-          />
-        </BottomSheetScrollView>
-      </BottomSheet>
+      <View style={{ flex: 1 }}>
+        <BottomSheet
+          ref={bottomSheetRef}
+          initialSnapIndex={0}
+          snapPoints={snapPoints}
+          handleComponent={() => null}
+          topInset={insets.top}>
+          <BottomSheetScrollView>
+            <BottomSheetFlatList
+              data={data?.flat() || []}
+              keyExtractor={keyExtractor}
+              renderItem={renderItem}
+              contentContainerStyle={{
+                height: 700,
+                backgroundColor: colors.background,
+                borderRadius: 15,
+              }}
+              getItemLayout={getItemLayout}
+              removeClippedSubviews
+              initialNumToRender={5}
+              maxToRenderPerBatch={6}
+              windowSize={10}
+              onEndReached={() => setSize(size + 1)}
+              onEndReachedThreshold={0.5}
+              ListHeaderComponent={ListHeaderComponent}
+            />
+          </BottomSheetScrollView>
+        </BottomSheet>
+      </View>
     </View>
   );
 };
