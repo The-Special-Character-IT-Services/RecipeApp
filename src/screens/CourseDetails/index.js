@@ -133,7 +133,7 @@ const CourseDetails = ({ route, navigation }) => {
   const buyCourse = useCallback(async () => {
     try {
       const purchaseRes = await utilsAxios.get(
-        `https://6f057eda63ea.ngrok.io/purchase-details?user_id=${userId}&course=${data?.course?.id}`,
+        `https://calm-oasis-43947.herokuapp.com/purchase-details?user_id=${userId}&course=${data?.course?.id}`,
       );
 
       if (purchaseRes.data.length === 0) {
