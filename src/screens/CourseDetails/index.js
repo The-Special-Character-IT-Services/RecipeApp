@@ -1,3 +1,4 @@
+/* eslint-disable react-native/no-inline-styles */
 import BottomSheet, { BottomSheetScrollView } from '@gorhom/bottom-sheet';
 import PropTypes from 'prop-types';
 import { useTheme } from '@react-navigation/native';
@@ -208,10 +209,11 @@ const CourseDetails = ({ route, navigation }) => {
                 Duration
               </TextEle>
               <TextEle variant="body2" style={{ paddingVertical: 10, color: 'gray', width: 120 }}>
-                Launching on {data?.course?.launchDate}
+                Launching on
+                {data?.course?.launchDate}
               </TextEle>
             </View>
-            <View style={{ height: 1, width: 330, backgroundColor: 'gray' }} />
+            <View style={{ height: 1, width: 400, backgroundColor: 'gray' }} />
             <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
               <TextEle variant="body2" style={{ paddingVertical: 10 }}>
                 Total Recipes covered
@@ -220,7 +222,7 @@ const CourseDetails = ({ route, navigation }) => {
                 {/* {data?.course?.recipes} */}
               </TextEle>
             </View>
-            <View style={{ height: 1, width: 330, backgroundColor: 'gray' }} />
+            <View style={{ height: 1, width: 400, backgroundColor: 'gray' }} />
             <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
               <TextEle variant="body2" style={{ paddingVertical: 10 }}>
                 Video Validity
@@ -229,7 +231,7 @@ const CourseDetails = ({ route, navigation }) => {
                 {data?.course?.validity}
               </TextEle>
             </View>
-            <View style={{ height: 1, width: 330, backgroundColor: 'gray' }} />
+            <View style={{ height: 1, width: 400, backgroundColor: 'gray' }} />
             <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
               <TextEle variant="body2" style={{ paddingVertical: 10 }}>
                 Written Recipe
@@ -238,7 +240,7 @@ const CourseDetails = ({ route, navigation }) => {
                 {/* {data?.course?.recipes} */}
               </TextEle>
             </View>
-            <View style={{ height: 1, width: 330, backgroundColor: 'gray' }} />
+            <View style={{ height: 1, width: 400, backgroundColor: 'gray' }} />
             <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
               <TextEle variant="body2" style={{ paddingVertical: 10 }}>
                 Fees
@@ -247,15 +249,17 @@ const CourseDetails = ({ route, navigation }) => {
                 {data?.course?.price}
               </TextEle>
             </View>
-            <View style={{ height: 1, width: 330, backgroundColor: 'gray' }} />
+            <View style={{ height: 1, width: 400, backgroundColor: 'gray' }} />
             <TextEle variant="caption" style={{ marginVertical: 20 }}>
               {subt}
             </TextEle>
           </View>
-          <TextEle>Varieties:-</TextEle>
-          <TextEle variant="body1" style={{ textAlign: 'justify', width: 400 }}>
-            {data?.course?.description}
-          </TextEle>
+          <View style={{ marginBottom: 100 }}>
+            <TextEle>Varieties:-</TextEle>
+            <TextEle variant="body1" style={{ textAlign: 'justify', width: 350 }}>
+              {data?.course?.description}
+            </TextEle>
+          </View>
         </BottomSheetScrollView>
       </BottomSheet>
       <RAButton1
@@ -280,6 +284,7 @@ CourseDetails.propTypes = {
       userId: PropTypes.number.isRequired,
     }),
   }).isRequired,
+  navigation: PropTypes.func.isRequired,
 };
 
 export default CourseDetails;

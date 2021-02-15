@@ -37,13 +37,13 @@ const TabLikes = ({ navigation }) => {
         }}
         source={AllFood}
       />
-      <View onLayout={onLayout} style={{ paddingTop: insets.top, paddingBottom: 30 }}>
+      <View onLayout={onLayout} style={{ paddingTop: insets.top, paddingBottom: 50 }}>
         <TextInput
           placeholder="Search your liked recipes"
           placeholderTextColor={colors.text}
           style={{
             color: colors.text,
-            borderColor: colors.text,
+            borderColor: colors.background,
             borderWidth: 2,
             borderRadius: 20,
             paddingVertical: 10,
