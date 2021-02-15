@@ -1,11 +1,11 @@
 /* eslint-disable react-native/no-inline-styles */
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import analytics from '@react-native-firebase/analytics';
 import { createStackNavigator, CardStyleInterpolators } from '@react-navigation/stack';
 import { KeyboardAvoidingView, StatusBar } from 'react-native';
 import { SWRConfig } from 'swr';
-
+import ErrorScreen from '@screens/Error';
 import { useColorScheme } from 'react-native-appearance';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 import SplashScreen from 'react-native-splash-screen';
@@ -15,6 +15,7 @@ import fetcher from '@utils/fetcher';
 import YoutubeVideo from '@screens/YoutubeVideo';
 import UserProvider from '@context/userContext';
 import Toast from 'react-native-toast-message';
+import NetInfo from '@react-native-community/netinfo';
 import { isIOS } from './src/utils';
 import YoutubeFilter from './src/screens/YoutubeFilter';
 
@@ -28,10 +29,28 @@ const App = () => {
   const navigationRef = useRef();
 
   const currentTheme = scheme === 'dark' ? RADarkTheme : RALightTheme;
+  const [isInternetAvailable, setIsInternetAvailable] = useState(false);
+
+  useEffect(() => {
+    const unsubscribe = NetInfo.addEventListener(state => {
+      console.log('Connection type', state.type);
+      console.log('Is connected?', state.isConnected);
+      console.warn(state.isConnected);
+      setIsInternetAvailable(state.isConnected);
+    });
+    return () => {
+      unsubscribe();
+    };
+  }, []);
 
   useEffect(() => {
     SplashScreen.hide();
   }, []);
+
+  if (!isInternetAvailable) {
+    return <ErrorScreen />;
+  }
+
   return (
     <SafeAreaProvider>
       <StatusBar
