@@ -22,9 +22,10 @@ const Error = () => {
           position: 'absolute',
           bottom: 80,
           left: 20,
+          backgroundColor: colors.card,
         }}>
-        <TextEle variant="subTitle1" style={{ color: colors.notification }}>
-          Error Occurred! Will fill your plate soon!
+        <TextEle variant="subTitle2" style={{ color: colors.notification }}>
+          Error Occurred! Check your internet connection. Will fill your plate soon!
         </TextEle>
       </View>
     </View>
