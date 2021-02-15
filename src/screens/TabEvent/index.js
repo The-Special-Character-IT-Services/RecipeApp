@@ -1,4 +1,4 @@
-import BottomSheet, { BottomSheetFlatList } from '@gorhom/bottom-sheet';
+import BottomSheet, { BottomSheetFlatList, BottomSheetScrollView } from '@gorhom/bottom-sheet';
 import { useTheme } from '@react-navigation/native';
 import React, { useCallback, useMemo, useRef } from 'react';
 import PropTypes from 'prop-types';
@@ -38,11 +38,9 @@ const TabEvent = () => {
           source={{
             uri: item.image.url,
           }}
-          style={{
-            aspectRatio: 16 / 9,
-          }}
+          style={{ height: 200, width: 410, borderRadius: 20 }}
         />
-        <View style={{ paddingHorizontal: 10, flex: 1 }}>
+        <View style={{ paddingHorizontal: 10, paddingVertical: 10, flex: 1 }}>
           <TextEle style={{ fontWeight: 'bold', fontSize: 20 }}>{item.name}</TextEle>
           <TextEle style={{ fontWeight: 'bold', fontSize: 20 }}>{item.caption}</TextEle>
         </View>
@@ -94,20 +92,26 @@ const TabEvent = () => {
         snapPoints={snapPoints}
         handleComponent={() => null}
         topInset={insets.top}>
-        <BottomSheetFlatList
-          data={data?.flat() || []}
-          keyExtractor={keyExtractor}
-          renderItem={renderItem}
-          contentContainerStyle={{ flex: 1, backgroundColor: colors.background, borderRadius: 15 }}
-          getItemLayout={getItemLayout}
-          removeClippedSubviews
-          initialNumToRender={5}
-          maxToRenderPerBatch={6}
-          windowSize={10}
-          onEndReached={() => setSize(size + 1)}
-          onEndReachedThreshold={0.5}
-          ListHeaderComponent={ListHeaderComponent}
-        />
+        <BottomSheetScrollView>
+          <BottomSheetFlatList
+            data={data?.flat() || []}
+            keyExtractor={keyExtractor}
+            renderItem={renderItem}
+            contentContainerStyle={{
+              flex: 1,
+              backgroundColor: colors.background,
+              borderRadius: 15,
+            }}
+            getItemLayout={getItemLayout}
+            removeClippedSubviews
+            initialNumToRender={5}
+            maxToRenderPerBatch={6}
+            windowSize={10}
+            onEndReached={() => setSize(size + 1)}
+            onEndReachedThreshold={0.5}
+            ListHeaderComponent={ListHeaderComponent}
+          />
+        </BottomSheetScrollView>
       </BottomSheet>
     </View>
   );
