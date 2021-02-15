@@ -9,7 +9,7 @@ import useSWR from 'swr';
 
 const HomeList = ({ title, onPressViewAll, newData, onRecipePress }) => {
   const { colors } = useTheme();
-  const { data } = useSWR([coursesQuery(0, 5, 'updated_at:DESC')]);
+  const { data } = useSWR([coursesQuery({ pageIndex: 0, limit: 5, sort: 'updated_at:DESC' })]);
   return (
     <>
       <View

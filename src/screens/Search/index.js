@@ -1,11 +1,12 @@
 /* eslint-disable react-native/no-inline-styles */
-import React, { useCallback, useState } from 'react';
+import React, { useContext, useState } from 'react';
 import { ScrollView, View, Image, KeyboardAvoidingView } from 'react-native';
 import { useTheme } from '@react-navigation/native';
 import PropTypes from 'prop-types';
 import useSWR from 'swr';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { coursesQuery } from '@hooks/useCoursesApiHook';
+import { UserContext } from '@context/userContext';
 import SearchBar from '../../components/Search';
 import RecentlyAdd from '../../components/RecentlyAdd';
 import SearchCuisine from '../../components/SearchCuisine';
@@ -17,7 +18,15 @@ const arr = ['Trending', 'Recently Added ', 'Rice Items', 'Sweets', 'Salads'];
 const Search = ({ name }) => {
   const { colors } = useTheme();
   const insets = useSafeAreaInsets();
-  const { data } = useSWR([coursesQuery(0, 5, 'updated_at:DESC')]);
+  const { user } = useContext(UserContext);
+  const { data } = useSWR([
+    coursesQuery({
+      pageIndex: 0,
+      limit: 5,
+      sort: 'updated_at:DESC',
+      userId: user?.id,
+    }),
+  ]);
   const [text, setText] = useState('');
 
   // const handler = useCallback(debounce(loadSearch, 2000), []);

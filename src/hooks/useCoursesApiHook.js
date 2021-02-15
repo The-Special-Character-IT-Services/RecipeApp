@@ -1,4 +1,4 @@
-export const coursesQuery = (pageIndex, limit, sort = 'id:ASC', where = '{}') => `{
+export const coursesQuery = ({ pageIndex, limit, sort = 'id:ASC', where = '{}', userId }) => `{
   courses(
     start: ${pageIndex * 10},
      limit: ${limit},
@@ -19,6 +19,11 @@ export const coursesQuery = (pageIndex, limit, sort = 'id:ASC', where = '{}') =>
     rattings {
       id
       ratting
+    }
+    purchase_details(where: { user_id: { id: ${userId} } }) {
+      user_id {
+        id
+      }
     }
     updated_at
   }
@@ -114,8 +119,6 @@ export const coursesCategoryQuery = (pageIndex, limit, sort = 'id:ASC') => `{
   courses(start: ${pageIndex * 10}, limit: ${limit}, sort: "${sort}") {
     id
     name
-    
-  
     image {
       url
     }
@@ -129,7 +132,7 @@ export const coursesCategoryQuery = (pageIndex, limit, sort = 'id:ASC') => `{
 const getInfiniteCourses = (pageIndex, previousPageData) => {
   if (previousPageData && !previousPageData.length) return null;
 
-  return [coursesQuery(pageIndex, 10), null, 'courses'];
+  return [coursesQuery({ pageIndex, limit: 10 }), null, 'courses'];
 };
 
 export default getInfiniteCourses;
