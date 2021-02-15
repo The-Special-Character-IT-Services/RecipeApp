@@ -1,2 +1,2 @@
 export const FOODCOUTURE_TOKEN = '@foodCouture_token';
-export const NUMBER_OF_DIVECE_ALLOWED = 10;
+export const NUMBER_OF_DIVECE_ALLOWED = 15;

@@ -22,7 +22,7 @@ const TabShop = () => {
   const { colors } = useTheme();
 
   return (
-    <TabShopStack.Navigator>
+    <TabShopStack.Navigator detachInactiveScreens>
       <TabShopStack.Screen
         name="TabShopPage"
         component={TabShopPage}

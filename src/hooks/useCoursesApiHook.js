@@ -1,4 +1,4 @@
-export const coursesQuery = (pageIndex, limit, sort = 'id:ASC', where = JSON.stringify({})) => `{
+export const coursesQuery = (pageIndex, limit, sort = 'id:ASC', where = '{}') => `{
   courses(
     start: ${pageIndex * 10},
      limit: ${limit},

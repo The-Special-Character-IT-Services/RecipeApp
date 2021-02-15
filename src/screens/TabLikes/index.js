@@ -1,4 +1,4 @@
-import React, { useMemo, useRef } from 'react';
+import React, { useEffect, useMemo, useRef } from 'react';
 import PropTypes from 'prop-types';
 import { Dimensions, Image, TextInput, View } from 'react-native';
 import BottomSheet from '@gorhom/bottom-sheet';
@@ -20,6 +20,10 @@ const TabLikes = ({ navigation }) => {
     () => [windowHeight * 0.6, windowHeight - layout.height - insets.top],
     [layout.height, insets.top],
   );
+
+  useEffect(() => {
+    console.log('he;kd;klfa;kf;laskdflas;dklf;asd');
+  }, []);
 
   return (
     <View style={{ flex: 1 }}>

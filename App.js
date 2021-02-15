@@ -5,7 +5,7 @@ import analytics from '@react-native-firebase/analytics';
 import { createStackNavigator, CardStyleInterpolators } from '@react-navigation/stack';
 import { KeyboardAvoidingView, StatusBar } from 'react-native';
 import { SWRConfig } from 'swr';
-
+import { enableScreens } from 'react-native-screens';
 import { useColorScheme } from 'react-native-appearance';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 import SplashScreen from 'react-native-splash-screen';
@@ -19,6 +19,8 @@ import { isIOS } from './src/utils';
 import YoutubeFilter from './src/screens/YoutubeFilter';
 
 // import Login from './src/screens/Login/index';
+
+enableScreens();
 
 const RootStack = createStackNavigator();
 
@@ -68,7 +70,11 @@ const App = () => {
                 // Save the current route name for later comparision
                 routeNameRef.current = currentRouteName;
               }}>
-              <RootStack.Navigator initialRouteName="Main" mode="modal" headerMode="none">
+              <RootStack.Navigator
+                initialRouteName="Main"
+                mode="modal"
+                headerMode="none"
+                detachInactiveScreens>
                 <RootStack.Screen
                   name="Main"
                   component={MasterNavigation}

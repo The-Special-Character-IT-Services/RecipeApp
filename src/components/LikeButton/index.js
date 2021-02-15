@@ -10,7 +10,7 @@ import axios from '../../utils/axios';
 const LikeButton = ({ courseId }) => {
   const { colors } = useTheme();
   const { user } = useContext(UserContext);
-  const { data, mutate } = useSWR([likesQuery(user.id, courseId)]);
+  const { data, mutate } = useSWR([likesQuery(user?.id, courseId)]);
 
   const onLikePress = async () => {
     try {
