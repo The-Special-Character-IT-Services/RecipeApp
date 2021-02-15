@@ -1,6 +1,6 @@
 /* eslint-disable react-native/no-inline-styles */
 /* eslint-disable no-unused-expressions */
-import React, { useRef, useState } from 'react';
+import React, { useContext, useRef, useState } from 'react';
 import PropTypes from 'prop-types';
 import { Pressable } from 'react-native';
 import useSWR from 'swr';
@@ -11,14 +11,22 @@ import SearchBar from '@components/Search';
 import Cuisines from '@components/Cuisines';
 import { coursesQuery } from '@hooks/useCoursesApiHook';
 import HomeList from '@components/HomeList';
-import { getToken } from '@utils/index';
+import { UserContext } from '@context/userContext';
 import Header from '../Header';
 
 const TabHome = ({ navigation }) => {
   const playerRef = useRef();
   const insets = useSafeAreaInsets();
-  const { data } = useSWR([coursesQuery(0, 5, 'updated_at:DESC')]);
-  console.log('🚀 ~ file: index.js ~ line 21 ~ TabHome ~ data', data);
+  const { user } = useContext(UserContext);
+  const { data } = useSWR([
+    coursesQuery({
+      pageIndex: 0,
+      limit: 5,
+      sort: 'updated_at:DESC',
+      userId: user?.id,
+    }),
+  ]);
+
   const [text, setText] = useState('');
   const onchangeText = val => {
     setText(val);
@@ -46,42 +54,9 @@ const TabHome = ({ navigation }) => {
         newData={data?.courses || []}
         onPressViewAll={() => navigation.navigate('CuisineList', { name: 'All Courses' })}
         onRecipePress={async item => {
-          const {
-            user: { id: userId },
-          } = await getToken();
-          navigation.navigate('CourseDetails', { id: item.id, userId });
+          navigation.navigate('CourseDetails', { id: item.id, userId: user.id });
         }}
       />
-      {/* <View style={{ paddingHorizontal: 30, marginVertical: 20 }}>
-        <TextEle variant="body1" style={{ fontSize: 20, fontWeight: 'bold' }}>
-          New Videos
-        </TextEle>
-      </View>
-      <Popular
-        onRecipePress={item => {
-          item.id === 3 || item.id === 2
-            ? navigation.navigate('PriceTag')
-            : navigation.navigate('RecipeDetail', item);
-        }}
-      /> */}
-      {/* <View style={{ paddingHorizontal: 30, marginVertical: 20 }}>
-        <TextEle variant="body1" style={{ fontSize: 20, fontWeight: 'bold' }}>
-          Popular
-        </TextEle>
-      </View>
-      <Popular
-        onRecipePress={item => {
-          item.id === 3 || item.id === 2
-            ? navigation.navigate('PriceTag')
-            : navigation.navigate('RecipeDetail', item);
-        }}
-      /> */}
-      {/* <View style={{ paddingHorizontal: 30, marginVertical: 20 }}>
-        <TextEle variant="body1" style={{ fontSize: 20, fontWeight: 'bold' }}>
-          UpComing Events
-        </TextEle>
-      </View>
-      <UpComingEvent /> */}
       <Cuisines
         onCuisinePress={() => navigation.navigate('CuisineList', { name: 'Search Cuisine' })}
       />

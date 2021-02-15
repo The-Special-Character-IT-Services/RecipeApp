@@ -14,7 +14,13 @@ const LikedRecipe = ({ onRecipeDetail }) => {
   const { colors } = useTheme();
   const { user } = useContext(UserContext);
   const { data } = useSWR([
-    coursesQuery(0, 5, 'updated_at:DESC', `{like_event:{user:${user?.id}}}`),
+    coursesQuery({
+      pageIndex: 0,
+      limit: 5,
+      sort: 'updated_at:DESC',
+      where: `{like_event:{user:${user?.id}}}`,
+      userId: user?.id,
+    }),
   ]);
   console.log('🚀 ~ file: index.js ~ line 16 ~ LikedRecipe ~ data', data);
 
