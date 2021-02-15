@@ -1,7 +1,7 @@
-import React, { useEffect, useMemo, useRef } from 'react';
+import React, { useMemo, useRef } from 'react';
 import PropTypes from 'prop-types';
 import { Dimensions, Image, TextInput, View } from 'react-native';
-import BottomSheet, { BottomSheetScrollView, BottomSheetView } from '@gorhom/bottom-sheet';
+import BottomSheet from '@gorhom/bottom-sheet';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { useTheme } from '@react-navigation/native';
 import { useLayout } from '@react-native-community/hooks';
@@ -41,7 +41,7 @@ const TabLikes = ({ navigation }) => {
           placeholderTextColor={colors.text}
           style={{
             color: colors.text,
-            borderColor: colors.text,
+            borderColor: colors.background,
             borderWidth: 2,
             borderRadius: 20,
             paddingVertical: 10,
