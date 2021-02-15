@@ -24,11 +24,11 @@ const TabShop = () => {
   return (
     <TabShopStack.Navigator detachInactiveScreens>
       <TabShopStack.Screen
-        name="TabShopPage"
+        name=" "
         component={TabShopPage}
         options={({ navigation }) => ({
           title: 'Order Now',
-          headerShown: true,
+          headerShown: false,
           headerLeft: false,
           headerTitleAlign: 'center',
           headerTintColor: colors.primary,

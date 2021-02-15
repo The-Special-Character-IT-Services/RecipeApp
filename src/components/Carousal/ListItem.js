@@ -48,27 +48,31 @@ const ListItem = ({ onRecipePress, item, cardWidth, userId }) => {
       </ImageBackground>
       <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
         <View>
-          <TextEle variant="h3">{item.name}</TextEle>
-          <TextEle
+          <TextEle style={{ paddingTop: 10 }} variant="h3">
+            {item.name}
+          </TextEle>
+          {/* <TextEle
             variant="h2"
             style={{ flexWrap: 'wrap', color: 'gray', fontSize: 12 }}
             numberOfLines={2}>
             {item.caption}
-          </TextEle>
+          </TextEle> */}
         </View>
         <View>
           <TextEle style={{ padding: 10 }} variant="h3">{`${item.recipes.length} Recipes`}</TextEle>
         </View>
       </View>
-      <Rating rating={rating} length={5} totalRating={item.rattings.length} />
-      <TextEle variant="p1">
-        {new Intl.NumberFormat('en-IN', {
-          style: 'currency',
-          currency: 'INR',
-          maximumFractionDigits: 0,
-          minimumFractionDigits: 0,
-        }).format(item.price)}
-      </TextEle>
+      <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
+        <Rating rating={rating} length={5} totalRating={item.rattings.length} />
+        <TextEle style={{ marginRight: 10 }} variant="p1">
+          {new Intl.NumberFormat('en-IN', {
+            style: 'currency',
+            currency: 'INR',
+            maximumFractionDigits: 0,
+            minimumFractionDigits: 0,
+          }).format(item.price)}
+        </TextEle>
+      </View>
     </Pressable>
   );
 };
