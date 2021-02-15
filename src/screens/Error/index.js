@@ -20,7 +20,7 @@ const Error = () => {
           justifyContent: 'center',
           alignItems: 'center',
           position: 'absolute',
-          top: 70,
+          bottom: 80,
           left: 20,
         }}>
         <TextEle variant="subTitle1" style={{ color: colors.notification }}>
