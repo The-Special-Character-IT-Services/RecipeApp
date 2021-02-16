@@ -32,7 +32,7 @@ const App = () => {
   const navigationRef = useRef();
 
   const currentTheme = scheme === 'dark' ? RADarkTheme : RALightTheme;
-  const [isInternetAvailable, setIsInternetAvailable] = useState(false);
+  const [isInternetAvailable, setIsInternetAvailable] = useState(true);
 
   useEffect(() => {
     const unsubscribe = NetInfo.addEventListener(state => {
@@ -89,11 +89,7 @@ const App = () => {
                 // Save the current route name for later comparision
                 routeNameRef.current = currentRouteName;
               }}>
-              <RootStack.Navigator
-                initialRouteName="Main"
-                mode="modal"
-                headerMode="none"
-                detachInactiveScreens>
+              <RootStack.Navigator initialRouteName="Main" mode="modal" headerMode="none">
                 <RootStack.Screen
                   name="Main"
                   component={MasterNavigation}
