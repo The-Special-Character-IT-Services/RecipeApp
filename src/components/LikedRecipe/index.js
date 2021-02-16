@@ -1,10 +1,10 @@
 /* eslint-disable react-native/no-inline-styles */
-import React, { useContext, useEffect } from 'react';
+import React, { useCallback, useContext } from 'react';
 import PropTypes from 'prop-types';
 import { BottomSheetScrollView, BottomSheetView } from '@gorhom/bottom-sheet';
 import { View, Image } from 'react-native';
 import { RectButton } from 'react-native-gesture-handler';
-import { useTheme } from '@react-navigation/native';
+import { useFocusEffect, useTheme } from '@react-navigation/native';
 import useSWR from 'swr';
 import { UserContext } from '@context/userContext';
 import { coursesQuery } from '@hooks/useCoursesApiHook';
@@ -13,7 +13,7 @@ import TextEle from '../TextEle';
 const LikedRecipe = ({ onRecipeDetail }) => {
   const { colors } = useTheme();
   const { user } = useContext(UserContext);
-  const { data } = useSWR([
+  const { data, mutate } = useSWR([
     coursesQuery({
       pageIndex: 0,
       limit: 5,
@@ -22,11 +22,12 @@ const LikedRecipe = ({ onRecipeDetail }) => {
       userId: user?.id,
     }),
   ]);
-  console.log('🚀 ~ file: index.js ~ line 16 ~ LikedRecipe ~ data', data);
 
-  useEffect(() => {
-    console.log('hello');
-  }, []);
+  useFocusEffect(
+    useCallback(() => {
+      mutate();
+    }, [mutate]),
+  );
 
   return (
     <BottomSheetView style={{ flex: 1, backgroundColor: colors.background, borderRadius: 20 }}>

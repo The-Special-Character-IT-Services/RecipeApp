@@ -13,7 +13,7 @@ import SplashScreen from 'react-native-splash-screen';
 import MasterNavigation from '@navigation/MasterNavigation';
 import { RADarkTheme, RALightTheme } from '@theme/index';
 import fetcher from '@utils/fetcher';
-import YoutubeVideo from '@screens/YoutubeVideo';
+// import YoutubeVideo from '@screens/YoutubeVideo';
 import UserProvider from '@context/userContext';
 import Toast from 'react-native-toast-message';
 import NetInfo from '@react-native-community/netinfo';
@@ -32,7 +32,7 @@ const App = () => {
   const navigationRef = useRef();
 
   const currentTheme = scheme === 'dark' ? RADarkTheme : RALightTheme;
-  const [isInternetAvailable, setIsInternetAvailable] = useState(false);
+  const [isInternetAvailable, setIsInternetAvailable] = useState(true);
 
   useEffect(() => {
     const unsubscribe = NetInfo.addEventListener(state => {
@@ -89,11 +89,7 @@ const App = () => {
                 // Save the current route name for later comparision
                 routeNameRef.current = currentRouteName;
               }}>
-              <RootStack.Navigator
-                initialRouteName="Main"
-                mode="modal"
-                headerMode="none"
-                detachInactiveScreens>
+              <RootStack.Navigator initialRouteName="Main" mode="modal" headerMode="none">
                 <RootStack.Screen
                   name="Main"
                   component={MasterNavigation}
@@ -105,7 +101,11 @@ const App = () => {
                   }}
                 />
                 <RootStack.Screen name="YoutubeFilter" component={YoutubeFilter} />
-                <RootStack.Screen name="YoutubeVideo" component={YoutubeVideo} />
+                {/* <RootStack.Screen
+                  name="YoutubeVideo"
+                  component={YoutubeVideo}
+                  options={{ headerShown: true, headerTransparent: true }}
+                /> */}
               </RootStack.Navigator>
             </NavigationContainer>
           </KeyboardAvoidingView>
