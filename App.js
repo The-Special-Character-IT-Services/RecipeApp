@@ -13,7 +13,7 @@ import SplashScreen from 'react-native-splash-screen';
 import MasterNavigation from '@navigation/MasterNavigation';
 import { RADarkTheme, RALightTheme } from '@theme/index';
 import fetcher from '@utils/fetcher';
-import YoutubeVideo from '@screens/YoutubeVideo';
+// import YoutubeVideo from '@screens/YoutubeVideo';
 import UserProvider from '@context/userContext';
 import Toast from 'react-native-toast-message';
 import NetInfo from '@react-native-community/netinfo';
@@ -105,7 +105,11 @@ const App = () => {
                   }}
                 />
                 <RootStack.Screen name="YoutubeFilter" component={YoutubeFilter} />
-                <RootStack.Screen name="YoutubeVideo" component={YoutubeVideo} />
+                {/* <RootStack.Screen
+                  name="YoutubeVideo"
+                  component={YoutubeVideo}
+                  options={{ headerShown: true, headerTransparent: true }}
+                /> */}
               </RootStack.Navigator>
             </NavigationContainer>
           </KeyboardAvoidingView>
