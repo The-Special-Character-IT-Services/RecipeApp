@@ -4,11 +4,10 @@ import { useTheme } from '@react-navigation/native';
 import React, { useContext, useEffect, useRef } from 'react';
 import LottieView from 'lottie-react-native';
 import { Pressable } from 'react-native';
-import Icon from 'react-native-vector-icons/Ionicons';
 import useSWR from 'swr';
 import axios from '../../utils/axios';
 
-const LikeButton = ({ courseId, withBackground = false }) => {
+const LikeButton = ({ courseId, withBackground = true }) => {
   const { colors } = useTheme();
   const { user } = useContext(UserContext);
   const { data, mutate } = useSWR([likesQuery(user?.id, courseId)]);
@@ -52,10 +51,10 @@ const LikeButton = ({ courseId, withBackground = false }) => {
     <Pressable
       style={
         withBackground && {
-          height: 50,
-          width: 50,
+          height: 40,
+          width: 40,
           borderRadius: 45,
-          backgroundColor: 'black',
+          backgroundColor: colors.background,
           justifyContent: 'center',
           alignItems: 'center',
         }
