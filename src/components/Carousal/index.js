@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { View, Dimensions, Platform, Pressable } from 'react-native';
 import { FlatList } from 'react-native-gesture-handler';
 import TextEle from '@components/TextEle';
+import Loading from '@components/loading';
 import { useTheme } from '@react-navigation/native';
 import ListItem from './ListItem';
 
@@ -14,6 +15,9 @@ const cardInset = (windowWidth - CARD_WIDTH) / 1.5;
 
 const Carousal = ({ onRecipePress, onPressViewAll, data = [] }) => {
   const { colors } = useTheme();
+  if (!data) {
+    return <Loading />;
+  }
   const flatListRef = useRef(null);
 
   useEffect(() => {
