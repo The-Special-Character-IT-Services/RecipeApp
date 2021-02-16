@@ -7,6 +7,7 @@ import { RectButton } from 'react-native-gesture-handler';
 import { useFocusEffect, useTheme } from '@react-navigation/native';
 import useSWR from 'swr';
 import { UserContext } from '@context/userContext';
+import Loading from '@components/loading';
 import { coursesQuery } from '@hooks/useCoursesApiHook';
 import TextEle from '../TextEle';
 
@@ -22,12 +23,14 @@ const LikedRecipe = ({ onRecipeDetail }) => {
       userId: user?.id,
     }),
   ]);
-
-  useFocusEffect(
-    useCallback(() => {
-      mutate();
-    }, [mutate]),
-  );
+  if (!data) {
+    return <Loading />;
+  }
+  // useFocusEffect(
+  //   useCallback(() => {
+  //     mutate();
+  //   }, [mutate]),
+  // );
 
   return (
     <BottomSheetView style={{ flex: 1, backgroundColor: colors.background, borderRadius: 20 }}>
