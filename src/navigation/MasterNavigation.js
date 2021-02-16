@@ -6,6 +6,7 @@ import { Pressable, View, Text } from 'react-native';
 
 import ShareButton from '@components/ShareButton';
 import LikeButton from '@components/LikeButton';
+import YoutubeVideo from '@screens/YoutubeVideo';
 
 const MainStack = createStackNavigator();
 
@@ -51,6 +52,12 @@ const MainStackScreen = () => {
           ),
         })}
       />
+      <MainStack.Screen
+        name="YoutubeVideo"
+        component={YoutubeVideo}
+        options={{ headerShown: true, headerTransparent: true }}
+      />
+
       <MainStack.Screen
         name="Login"
         getComponent={() => require('@screens/Login').default}

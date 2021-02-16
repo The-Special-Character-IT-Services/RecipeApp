@@ -17,7 +17,7 @@ const ListButton = ({ label, isVisibleIcon, onPress }) => {
   return (
     <RectButton onPress={onButtonPress}>
       <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
-        <TextEle style={{ paddingVertical: 20, fontSize: 18, color: 'white' }}>{label}</TextEle>
+        <TextEle style={{ paddingVertical: 20, fontSize: 18 }}>{label}</TextEle>
         {isVisibleIcon && (
           <Icon
             name={icon}
