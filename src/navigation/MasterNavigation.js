@@ -126,11 +126,6 @@ const MainStackScreen = () => {
         name="CourseDetails"
         getComponent={() => require('@screens/CourseDetails').default}
         options={({ route }) => ({
-          headerRight: () => (
-            <View style={{ flexDirection: 'row', paddingHorizontal: 10 }}>
-              <LikeButton courseId={route.params?.id} withBackground={false} />
-            </View>
-          ),
           headerShown: true,
           headerTransparent: 1,
           headerTintColor: colors.primary,
