@@ -108,6 +108,14 @@ const App = () => {
                     headerTransparent: true,
                   }}
                 />
+                <RootStack.Screen
+                  name="PaymentUnsuccessfull"
+                  getComponent={() => require('@screens/PaymentUnsuccessfull').default}
+                  options={{
+                    headerShown: true,
+                    headerTransparent: true,
+                  }}
+                />
                 <RootStack.Screen name="YoutubeFilter" component={YoutubeFilter} />
                 {/* <RootStack.Screen
                   name="YoutubeVideo"

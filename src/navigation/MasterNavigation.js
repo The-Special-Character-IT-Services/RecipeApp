@@ -128,7 +128,7 @@ const MainStackScreen = () => {
         options={({ route }) => ({
           headerRight: () => (
             <View style={{ flexDirection: 'row', paddingHorizontal: 10 }}>
-              <LikeButton courseId={route.params?.id} />
+              <LikeButton courseId={route.params?.id} withBackground={false} />
             </View>
           ),
           headerShown: true,
@@ -142,7 +142,7 @@ const MainStackScreen = () => {
         options={({ route }) => ({
           headerRight: () => (
             <View style={{ flexDirection: 'row', paddingHorizontal: 10 }}>
-              <LikeButton courseId={route.params?.id} />
+              <LikeButton courseId={route.params?.id} withBackground={false} />
             </View>
           ),
           headerShown: true,

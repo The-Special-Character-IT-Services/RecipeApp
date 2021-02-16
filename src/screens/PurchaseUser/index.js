@@ -77,6 +77,7 @@ const PurchaseUser = ({ route, navigation }) => {
           fail: true,
           error: error.description,
         });
+        navigation.navigate('PaymentSuccess');
       });
   };
 
