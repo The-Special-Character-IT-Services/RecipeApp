@@ -11,14 +11,7 @@ const ModalStackScreen = () => (
       headerShown: false,
     }}>
     <ModalStack.Screen name="LoginModal" component={Login} />
-    <ModalStack.Screen
-      name="PaymentSuccess"
-      getComponent={() => require('@screens/PaymentSuccess').default}
-      options={{
-        headerShown: true,
-        headerTransparent: true,
-      }}
-    />
+    
     <ModalStack.Screen name="RegistrationModal" component={Registration} />
   </ModalStack.Navigator>
 );

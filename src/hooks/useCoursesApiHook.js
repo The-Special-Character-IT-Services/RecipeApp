@@ -21,9 +21,11 @@ export const coursesQuery = ({ pageIndex, limit, sort = 'id:ASC', where = '{}', 
       ratting
     }
     purchase_details(where: { user_id: { id: ${userId} } }) {
-      user_id {
+      id
+      course {
         id
       }
+      status
     }
     updated_at
   }
