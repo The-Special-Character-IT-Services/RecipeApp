@@ -30,7 +30,7 @@ const TabEvent = () => {
       pageIndex: 0,
       limit: 7,
       sort: 'updated_at:DESC',
-      // where: `{like_event:{user:${user?.id}}}`,
+      where: `{like_event:{user:${user?.id}}}`,
       userId: user?.id,
     }),
   ]);
@@ -47,8 +47,8 @@ const TabEvent = () => {
         onPress={onEventPress}
         key={item.id}
         style={{
-          marginVertical: 10,
-          backgroundColor: colors.card,
+          marginVertical: 5,
+          backgroundColor: colors.background,
         }}>
         <Image
           source={{
@@ -56,9 +56,9 @@ const TabEvent = () => {
           }}
           style={{ height: 200, width: 320, borderRadius: 20 }}
         />
-        <View style={{ paddingHorizontal: 10, paddingVertical: 10, flex: 1 }}>
+        <View style={{ paddingHorizontal: 10, paddingVertical: 5, flex: 1 }}>
           <TextEle style={{ fontWeight: 'bold', fontSize: 20 }}>{item.name}</TextEle>
-          <TextEle style={{ fontWeight: 'bold', fontSize: 20 }}>{item.caption}</TextEle>
+          {/* <TextEle style={{ fontWeight: 'bold', fontSize: 20 }}>{item.caption}</TextEle> */}
         </View>
       </RectButton>
     ),
@@ -113,6 +113,7 @@ const TabEvent = () => {
             </TextEle>
             {/* </BottomSheetView> */}
             <BottomSheetScrollView
+              showsVerticalScrollIndicator={false}
               style={{
                 flex: 1,
               }}>
@@ -121,7 +122,6 @@ const TabEvent = () => {
                 keyExtractor={keyExtractor}
                 renderItem={renderItem}
                 contentContainerStyle={{
-                  height: 700,
                   backgroundColor: colors.background,
                   borderRadius: 15,
                 }}
@@ -132,7 +132,6 @@ const TabEvent = () => {
                 windowSize={10}
                 onEndReached={() => setSize(size + 1)}
                 onEndReachedThreshold={0.5}
-                // ListHeaderComponent={ListHeaderComponent}
               />
             </BottomSheetScrollView>
           </BottomSheetView>
