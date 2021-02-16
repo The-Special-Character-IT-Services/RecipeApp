@@ -1,13 +1,18 @@
-import BottomSheet, { BottomSheetFlatList, BottomSheetScrollView } from '@gorhom/bottom-sheet';
+import BottomSheet, {
+  BottomSheetFlatList,
+  BottomSheetScrollView,
+  BottomSheetView,
+} from '@gorhom/bottom-sheet';
 import { useTheme } from '@react-navigation/native';
-import React, { useCallback, useMemo, useRef } from 'react';
+import React, { useCallback, useContext, useMemo, useRef } from 'react';
 import PropTypes from 'prop-types';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
+import getCoursesApi, { coursesQuery } from '@hooks/useCoursesApiHook';
 import Image from 'react-native-fast-image';
-import { useSWRInfinite } from 'swr';
+import useSWR, { useSWRInfinite } from 'swr';
 import { View, Dimensions } from 'react-native';
-import getCoursesApi from '@hooks/useCoursesApiHook';
-import { RectButton } from 'react-native-gesture-handler';
+import { UserContext } from '@context/userContext';
+import { FlatList, RectButton } from 'react-native-gesture-handler';
 import TextEle from '@components/TextEle';
 import food1 from '../../assets/images/food1.jpg';
 
@@ -17,8 +22,19 @@ const ITEM_HEIGHT = 100;
 
 const TabEvent = () => {
   const { colors } = useTheme();
+  const { user } = useContext(UserContext);
+
   const insets = useSafeAreaInsets();
-  const { data, size, setSize } = useSWRInfinite(getCoursesApi);
+  const { data } = useSWR([
+    coursesQuery({
+      pageIndex: 0,
+      limit: 7,
+      sort: 'updated_at:DESC',
+      // where: `{like_event:{user:${user?.id}}}`,
+      userId: user?.id,
+    }),
+  ]);
+  const { size, setSize } = useSWRInfinite(getCoursesApi);
   const bottomSheetRef = useRef(null);
   const snapPoints = useMemo(() => [windowHeight * 0.6, '80%'], []);
 
@@ -27,7 +43,7 @@ const TabEvent = () => {
   const renderItem = useCallback(
     ({ item }) => (
       <RectButton
-        rippleColor={colors.text}
+        rippleColor={colors.card}
         onPress={onEventPress}
         key={item.id}
         style={{
@@ -38,7 +54,7 @@ const TabEvent = () => {
           source={{
             uri: item.image.url,
           }}
-          style={{ height: 200, width: 410, borderRadius: 20 }}
+          style={{ height: 200, width: 320, borderRadius: 20 }}
         />
         <View style={{ paddingHorizontal: 10, paddingVertical: 10, flex: 1 }}>
           <TextEle style={{ fontWeight: 'bold', fontSize: 20 }}>{item.name}</TextEle>
@@ -60,22 +76,8 @@ const TabEvent = () => {
 
   const keyExtractor = useCallback(item => `${item?.id}`, []);
 
-  const ListHeaderComponent = () => (
-    <View style={{ flexDirection: 'row', paddingHorizontal: 20 }}>
-      <TextEle
-        style={{
-          fontSize: 27,
-          fontWeight: 'bold',
-          flex: 1,
-          marginVertical: 20,
-        }}>
-        Buy Online Classes
-      </TextEle>
-    </View>
-  );
-
   return (
-    <View style={{ flex: 1, justifyContent: 'flex-end' }}>
+    <View style={{ justifyContent: 'flex-end' }}>
       <Image
         style={{
           height: windowHeight * 0.5,
@@ -93,26 +95,47 @@ const TabEvent = () => {
           snapPoints={snapPoints}
           handleComponent={() => null}
           topInset={insets.top}>
-          <BottomSheetScrollView>
-            <BottomSheetFlatList
-              data={data?.flat() || []}
-              keyExtractor={keyExtractor}
-              renderItem={renderItem}
-              contentContainerStyle={{
-                height: 700,
-                backgroundColor: colors.background,
-                borderRadius: 15,
-              }}
-              getItemLayout={getItemLayout}
-              removeClippedSubviews
-              initialNumToRender={5}
-              maxToRenderPerBatch={6}
-              windowSize={10}
-              onEndReached={() => setSize(size + 1)}
-              onEndReachedThreshold={0.5}
-              ListHeaderComponent={ListHeaderComponent}
-            />
-          </BottomSheetScrollView>
+          <BottomSheetView
+            style={{
+              flex: 1,
+              // flexDirection: 'row',
+              paddingHorizontal: 20,
+              backgroundColor: colors.background,
+            }}>
+            <TextEle
+              style={{
+                fontSize: 27,
+                fontWeight: 'bold',
+                // flex: 1,
+                marginVertical: 20,
+              }}>
+              Buy Online Classes
+            </TextEle>
+            {/* </BottomSheetView> */}
+            <BottomSheetScrollView
+              style={{
+                flex: 1,
+              }}>
+              <FlatList
+                data={data?.courses || []}
+                keyExtractor={keyExtractor}
+                renderItem={renderItem}
+                contentContainerStyle={{
+                  height: 700,
+                  backgroundColor: colors.background,
+                  borderRadius: 15,
+                }}
+                getItemLayout={getItemLayout}
+                removeClippedSubviews
+                initialNumToRender={5}
+                maxToRenderPerBatch={6}
+                windowSize={10}
+                onEndReached={() => setSize(size + 1)}
+                onEndReachedThreshold={0.5}
+                // ListHeaderComponent={ListHeaderComponent}
+              />
+            </BottomSheetScrollView>
+          </BottomSheetView>
         </BottomSheet>
       </View>
     </View>

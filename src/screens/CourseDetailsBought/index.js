@@ -80,7 +80,6 @@ const CourseDetailsBought = ({ route }) => {
           }}>
           <View style={{ marginBottom: 100 }}>
             <TextEle>Recipes:-</TextEle>
-            console.log(data?.course);
           </View>
           <FlatList
             data={data?.course}
