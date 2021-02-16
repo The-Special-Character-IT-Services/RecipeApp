@@ -8,7 +8,7 @@ import Icon from 'react-native-vector-icons/Ionicons';
 import useSWR from 'swr';
 import axios from '../../utils/axios';
 
-const LikeButton = ({ courseId }) => {
+const LikeButton = ({ courseId, withBackground = false }) => {
   const { colors } = useTheme();
   const { user } = useContext(UserContext);
   const { data, mutate } = useSWR([likesQuery(user?.id, courseId)]);
@@ -50,14 +50,16 @@ const LikeButton = ({ courseId }) => {
 
   return (
     <Pressable
-      style={{
-        height: 50,
-        width: 50,
-        borderRadius: 45,
-        backgroundColor: 'black',
-        justifyContent: 'center',
-        alignItems: 'center',
-      }}
+      style={
+        withBackground && {
+          height: 50,
+          width: 50,
+          borderRadius: 45,
+          backgroundColor: 'black',
+          justifyContent: 'center',
+          alignItems: 'center',
+        }
+      }
       onPress={onLikePress}>
       {/* <Icon
         name={data?.likes?.length === 0 ? 'heart-outline' : 'heart-sharp'}
