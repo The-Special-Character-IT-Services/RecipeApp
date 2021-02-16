@@ -55,8 +55,9 @@ const TabHome = ({ navigation }) => {
         onPressViewAll={() => navigation.navigate('CuisineList', { name: 'All Courses' })}
         onRecipePress={async item => {
           if (data?.courses?.purchase_details && data?.courses?.purchase_details > 0) {
-          } else {
             navigation.navigate('CourseDetails', { id: item.id, userId: user.id });
+          } else {
+            navigation.navigate('CourseDetailsBought', { id: item.id, userId: user.id });
           }
         }}
       />
