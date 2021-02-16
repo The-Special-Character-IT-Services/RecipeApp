@@ -129,6 +129,20 @@ const MainStackScreen = () => {
           headerTintColor: colors.primary,
         })}
       />
+      <MainStack.Screen
+        name="CourseDetailsBought"
+        getComponent={() => require('@screens/CourseDetailsBought').default}
+        options={({ route }) => ({
+          headerRight: () => (
+            <View style={{ flexDirection: 'row', paddingHorizontal: 10 }}>
+              <LikeButton courseId={route.params?.id} />
+            </View>
+          ),
+          headerShown: true,
+          headerTransparent: 1,
+          headerTintColor: colors.primary,
+        })}
+      />
     </MainStack.Navigator>
   );
 };
