@@ -9,9 +9,10 @@ import RAButton1 from '@components/RAButton1';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { TouchableWithoutFeedback } from 'react-native-gesture-handler';
 import RazorpayCheckout from 'react-native-razorpay';
+import axios from '@utils/axios';
 import { initialValues, purchaseUserForm, formRef } from './fields';
 
-const PurchaseUser = ({ route }) => {
+const PurchaseUser = ({ route, navigation }) => {
   const { orderDetails } = route.params;
   const [passwordVal, setPasswordVal] = useState('');
   const [loading, setLoading] = useState(false);
@@ -36,20 +37,46 @@ const PurchaseUser = ({ route }) => {
       name: 'Acme Corp',
       order_id: orderDetails.razorpay_order_id,
       prefill: {
+        ...orderDetails,
         email: values.email,
         contact: values.phone,
         name: values.name,
       },
       theme: { color: '#53a20e' },
     };
+    await axios.put(`purchase-details/${orderDetails.id}`, {
+      ...orderDetails,
+      email: values.email,
+      contact: values.phone,
+      name: values.name,
+    });
     RazorpayCheckout.open(options)
-      .then(data => {
+      .then(async data => {
         // handle success
-        alert(`Success: ${data.razorpay_payment_id}`);
+        await axios.put(`purchase-details/${orderDetails.id}`, {
+          ...orderDetails,
+          email: values.email,
+          contact: values.phone,
+          name: values.name,
+          razorpay_payment_id: data.razorpay_payment_id,
+          razorpay_order_id: data.razorpay_order_id,
+          razorpay_signature: data.razorpay_signature,
+          status: 'purchased',
+          purchase_date: new Date(),
+          amount_paid: orderDetails.amount_due,
+          amount_due: orderDetails.amount_paid,
+          fail: false,
+          error: '',
+        });
+        navigation.navigate('PaymentSuccess');
       })
-      .catch(error => {
+      .catch(async error => {
         // handle failure
-        alert(`Error: ${error.code} | ${error.description}`);
+        await axios.put(`purchase-details/${orderDetails.id}`, {
+          ...orderDetails,
+          fail: true,
+          error: error.description,
+        });
       });
   };
 
