@@ -100,6 +100,14 @@ const App = () => {
                     cardStyleInterpolator: CardStyleInterpolators.forFadeFromBottomAndroid,
                   }}
                 />
+                <RootStack.Screen
+                  name="PaymentSuccess"
+                  getComponent={() => require('@screens/PaymentSuccess').default}
+                  options={{
+                    headerShown: true,
+                    headerTransparent: true,
+                  }}
+                />
                 <RootStack.Screen name="YoutubeFilter" component={YoutubeFilter} />
                 {/* <RootStack.Screen
                   name="YoutubeVideo"
