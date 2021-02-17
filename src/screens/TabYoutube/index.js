@@ -1,7 +1,7 @@
 // import { useTheme } from '@react-navigation/native';
 import React, { useCallback, useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
-import { FlatList, View } from 'react-native';
+import { ActivityIndicator, FlatList, View } from 'react-native';
 import Image from 'react-native-fast-image';
 import axios from 'axios';
 import Config from 'react-native-config';
@@ -10,6 +10,7 @@ import { RectButton } from 'react-native-gesture-handler';
 import { deviceWidth } from '@utils/index';
 import Form from '@components/Form';
 import Loading from '@components/loading';
+import { useTheme } from '@react-navigation/native';
 import { initialValues, youtubeSearchForm } from './fields';
 
 const YOUTUBE_API_PART = 'snippet,id';
@@ -19,9 +20,12 @@ const ITEM_HEIGHT = (deviceWidth / 16) * 9 + 60;
 const TabYoutube = ({ navigation }) => {
   //   const { colors } = useTheme();
   const [youtubeData, setYoutubeData] = useState(null);
+  const [loading, setLoading] = useState(false);
+  const { colors } = useTheme();
 
   const loadData = useCallback(async ({ pageToken, search, order = 'date' }) => {
     try {
+      setLoading(true);
       let query = `part=${YOUTUBE_API_PART}&maxResults=${YOUTUBE_MAX_RESULTS}&key=${Config.YOUTUBE_API_KEY}&channelId=${Config.YOUTUBE_CHANNEL_ID}&order=${order}`;
       if (pageToken) {
         query += `&pageToken=${pageToken}`;
@@ -36,6 +40,8 @@ const TabYoutube = ({ navigation }) => {
       }));
     } catch (error) {
       console.log(error);
+    } finally {
+      setLoading(false);
     }
   }, []);
 
@@ -106,9 +112,15 @@ const TabYoutube = ({ navigation }) => {
         removeClippedSubviews
         initialNumToRender={5}
         maxToRenderPerBatch={5}
-        windowSize={10}
+        windowSize={11}
         onEndReached={loadMore}
         onEndReachedThreshold={0.5}
+        ListFooterComponent={() => {
+          if (loading) {
+            return <ActivityIndicator animating size="large" color={colors.pr} />;
+          }
+          return null;
+        }}
       />
     </View>
   );

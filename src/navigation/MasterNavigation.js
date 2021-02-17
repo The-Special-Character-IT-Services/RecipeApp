@@ -24,7 +24,7 @@ const MainStackScreen = () => {
       <MainStack.Screen name="Error" getComponent={() => require('@screens/Error').default} />
       <MainStack.Screen name="Initial" getComponent={() => require('@screens/Initial').default} />
       <MainStack.Screen
-        name="Verificatiosn"
+        name="Verification"
         getComponent={() => require('@screens/Verification').default}
         options={{ headerShown: true, headerTransparent: true }}
       />
