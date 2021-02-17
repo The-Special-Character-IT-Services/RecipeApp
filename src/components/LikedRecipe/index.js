@@ -1,10 +1,10 @@
 /* eslint-disable react-native/no-inline-styles */
-import React, { useCallback, useContext } from 'react';
+import React, { useContext } from 'react';
 import PropTypes from 'prop-types';
 import { BottomSheetScrollView, BottomSheetView } from '@gorhom/bottom-sheet';
 import { View, Image } from 'react-native';
 import { RectButton } from 'react-native-gesture-handler';
-import { useFocusEffect, useTheme } from '@react-navigation/native';
+import { useTheme } from '@react-navigation/native';
 import useSWR from 'swr';
 import { UserContext } from '@context/userContext';
 import Loading from '@components/loading';
@@ -14,7 +14,7 @@ import TextEle from '../TextEle';
 const LikedRecipe = ({ onRecipeDetail }) => {
   const { colors } = useTheme();
   const { user } = useContext(UserContext);
-  const { data, mutate } = useSWR([
+  const { data } = useSWR([
     coursesQuery({
       pageIndex: 0,
       limit: 5,
