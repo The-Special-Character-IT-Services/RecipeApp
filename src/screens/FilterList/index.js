@@ -1,15 +1,16 @@
 /* eslint-disable react/prop-types */
 /* eslint-disable react-native/no-inline-styles */
 import React, { useState } from 'react';
-import { ScrollView, View, KeyboardAvoidingView, Image } from 'react-native';
+import { ScrollView, View, KeyboardAvoidingView } from 'react-native';
 import { useTheme } from '@react-navigation/native';
 import useSWR from 'swr';
 import { coursesCategoryQuery } from '@hooks/useCoursesApiHook';
+import Image from 'react-native-fast-image';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import SearchBar from '../../components/Search';
 import TextEle from '../../components/TextEle';
 
-const CuisineList = ({ route }) => {
+const FilterList = ({ route }) => {
   const { where } = route.params;
   const insets = useSafeAreaInsets();
   const { data } = useSWR([coursesCategoryQuery(0, 5, 'updated_at:DESC', where)]);
@@ -23,7 +24,7 @@ const CuisineList = ({ route }) => {
       style={{
         paddingTop: insets.top,
       }}>
-      <View style={{ paddingTop: 40 }}>
+      <View style={{ paddingTop: 10 }}>
         <SearchBar onChangeText={onChangeText} text={text} />
       </View>
       <ScrollView
@@ -71,4 +72,4 @@ const CuisineList = ({ route }) => {
   );
 };
 
-export default CuisineList;
+export default FilterList;

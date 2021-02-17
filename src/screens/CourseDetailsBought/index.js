@@ -13,6 +13,7 @@ import useSWR from 'swr';
 import Icon from 'react-native-vector-icons/Ionicons';
 import { RectButton } from 'react-native-gesture-handler';
 import { courseQuery } from '@hooks/useCoursesApiHook';
+import { BorderlessButton } from 'react-native-gesture-handler';
 import Loading from '@components/loading';
 import TextEle from '../../components/TextEle';
 
@@ -48,6 +49,7 @@ const CourseDetailsBought = ({ route, navigation }) => {
       key={item?.id}
       style={{
         flexDirection: 'row',
+        alignItems: 'center',
         marginVertical: 10,
         marginHorizontal: 10,
       }}>
@@ -55,14 +57,13 @@ const CourseDetailsBought = ({ route, navigation }) => {
         source={{ uri: item.recipeImage.url }}
         style={{ height: 80, width: 100, borderRadius: 10 }}
       />
-      <View style={{ flex: 1 }}>
+      <View style={{ flex: 1, height: '100%', paddingHorizontal: 12 }}>
         <TextEle
           variant="body1"
           style={{
             color: colors.text,
             flexDirection: 'row',
-            marginHorizontal: 10,
-            marginVertical: 3,
+            marginVertical: 4,
           }}>
           {item.name}
         </TextEle>
@@ -71,26 +72,24 @@ const CourseDetailsBought = ({ route, navigation }) => {
           style={{
             color: 'gray',
             flexDirection: 'row',
-            marginHorizontal: 10,
-            marginVertical: 3,
+            marginVertical: 4,
           }}>
           {item.cookingLevel}
         </TextEle>
       </View>
 
-      <RectButton
+      <BorderlessButton
         style={{
           justifyContent: 'center',
           alignItems: 'center',
           backgroundColor: colors.primary,
           borderRadius: 20,
-          height: 35,
-          width: 50,
-          marginVertical: 10,
+          height: 40,
+          width: 40,
         }}
         onPress={() => navigation.navigate('RecipeDetail', item)}>
         <Icon name="play-outline" size={24} color={colors.background} />
-      </RectButton>
+      </BorderlessButton>
     </View>
   );
 

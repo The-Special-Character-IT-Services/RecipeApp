@@ -9,6 +9,7 @@ import { UserContext } from '@context/userContext';
 import { FlatList, RectButton } from 'react-native-gesture-handler';
 import TextEle from '@components/TextEle';
 import SearchBar from '../../components/Search';
+import Loading from '@components/loading';
 
 // const ITEM_HEIGHT = 100;
 
@@ -70,7 +71,9 @@ const TabEvent = () => {
   // );
 
   const keyExtractor = useCallback(item => `${item?.id}`, []);
-
+  if (!data) {
+    return <Loading />;
+  }
   return (
     <View
       style={{
