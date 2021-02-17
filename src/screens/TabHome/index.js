@@ -49,12 +49,12 @@ const TabHome = ({ navigation }) => {
         />
       </Pressable>
       <Category
-        onCategoryDetails={() => navigation.navigate('CuisineList', { name: 'Search Category' })}
+        onCategoryDetails={() => navigation.navigate('FilterList', { name: 'Search Category' })}
       />
       <HomeList
         title="New Courses"
         newData={data?.courses || []}
-        onPressViewAll={() => navigation.navigate('CuisineList', { name: 'All Courses' })}
+        onPressViewAll={() => navigation.navigate('FilterList', { name: 'All Courses' })}
         onRecipePress={async item => {
           if (item.purchase_details && item.purchase_details.length > 0) {
             if (
@@ -71,7 +71,7 @@ const TabHome = ({ navigation }) => {
       />
       <Cuisines
         onCuisinePress={item =>
-          navigation.navigate('CuisineList', {
+          navigation.navigate('FilterList', {
             name: 'Search Cuisine',
             where: `{cuisine:{id: ${item.id}}}`,
           })
