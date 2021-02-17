@@ -38,11 +38,11 @@ const CuisineList = ({ route }) => {
             style={{
               flexDirection: 'row',
               marginVertical: 10,
-              marginHorizontal: 10,
+              marginHorizontal: 5,
             }}>
             <Image
               source={{ uri: item.image.url }}
-              style={{ height: 50, width: 50, borderRadius: 5 }}
+              style={{ height: 60, width: 60, borderRadius: 5 }}
             />
             <TextEle
               variant="body1"

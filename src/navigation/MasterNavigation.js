@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 /* eslint-disable react-native/no-inline-styles */
 import { useTheme } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
@@ -10,7 +11,7 @@ import YoutubeVideo from '@screens/YoutubeVideo';
 
 const MainStack = createStackNavigator();
 
-const MainStackScreen = () => {
+const MainStackScreen = ({ navigation }) => {
   const { colors } = useTheme();
   return (
     <MainStack.Navigator
@@ -86,15 +87,22 @@ const MainStackScreen = () => {
         getComponent={() => require('@screens/RecipeVideo').default}
         options={{ headerShown: true, headerTransparent: true }}
       />
-      <MainStack.Screen
+      {/* <MainStack.Screen
         name="Profile"
-        getComponent={() => require('@screens/Profile').default}
+        getComponent={() => require('@screens/TabProfile').default}
         options={{
           headerShown: true,
+          headerRight: () => (
+            <View style={{ flexDirection: 'row' }}>
+              <Pressable onPress={() => navigation.navigate('Login')}>
+                <Text style={{ color: colors.primary, fontSize: 17, marginRight: 20 }}>Logout</Text>
+              </Pressable>
+            </View>
+          ),
           title: 'Profile',
           headerTitleAlign: 'center',
         }}
-      />
+      /> */}
       <MainStack.Screen
         name="CuisineList"
         getComponent={() => require('@screens/FilterList').default}
