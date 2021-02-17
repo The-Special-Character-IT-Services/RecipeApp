@@ -9,7 +9,7 @@ import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import SearchBar from '../../components/Search';
 import TextEle from '../../components/TextEle';
 
-const CuisineList = ({ route }) => {
+const FilterList = ({ route }) => {
   const { where } = route.params;
   const insets = useSafeAreaInsets();
   const { data } = useSWR([coursesCategoryQuery(0, 5, 'updated_at:DESC', where)]);
@@ -71,4 +71,4 @@ const CuisineList = ({ route }) => {
   );
 };
 
-export default CuisineList;
+export default FilterList;

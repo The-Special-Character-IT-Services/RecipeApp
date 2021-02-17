@@ -1,30 +1,21 @@
-import BottomSheet, {
-  BottomSheetFlatList,
-  BottomSheetScrollView,
-  BottomSheetView,
-} from '@gorhom/bottom-sheet';
 import { useTheme } from '@react-navigation/native';
-import React, { useCallback, useContext, useMemo, useRef } from 'react';
+import React, { useCallback, useContext, useState } from 'react';
 import PropTypes from 'prop-types';
-import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import getCoursesApi, { coursesQuery } from '@hooks/useCoursesApiHook';
 import Image from 'react-native-fast-image';
 import useSWR, { useSWRInfinite } from 'swr';
-import { View, Dimensions } from 'react-native';
+import { View, ScrollView } from 'react-native';
 import { UserContext } from '@context/userContext';
 import { FlatList, RectButton } from 'react-native-gesture-handler';
 import TextEle from '@components/TextEle';
-import food1 from '../../assets/images/food1.jpg';
+import SearchBar from '../../components/Search';
 
-const { height: windowHeight, width: windowWidth } = Dimensions.get('window');
-
-const ITEM_HEIGHT = 100;
+// const ITEM_HEIGHT = 100;
 
 const TabEvent = () => {
   const { colors } = useTheme();
   const { user } = useContext(UserContext);
 
-  const insets = useSafeAreaInsets();
   const { data } = useSWR([
     coursesQuery({
       pageIndex: 0,
@@ -35,10 +26,14 @@ const TabEvent = () => {
     }),
   ]);
   const { size, setSize } = useSWRInfinite(getCoursesApi);
-  const bottomSheetRef = useRef(null);
-  const snapPoints = useMemo(() => [windowHeight * 0.6, '80%'], []);
 
   const onEventPress = useCallback(() => {}, []);
+
+  const [text, setText] = useState('');
+
+  const onChangeText = val => {
+    setText(val);
+  };
 
   const renderItem = useCallback(
     ({ item }) => (
@@ -65,78 +60,48 @@ const TabEvent = () => {
     [onEventPress, colors],
   );
 
-  const getItemLayout = useCallback(
-    (_, index) => ({
-      length: ITEM_HEIGHT,
-      offset: ITEM_HEIGHT * index,
-      index,
-    }),
-    [],
-  );
+  // const getItemLayout = useCallback(
+  //   (_, index) => ({
+  //     length: ITEM_HEIGHT,
+  //     offset: ITEM_HEIGHT * index,
+  //     index,
+  //   }),
+  //   [],
+  // );
 
   const keyExtractor = useCallback(item => `${item?.id}`, []);
 
   return (
-    <View style={{ justifyContent: 'flex-end' }}>
-      <Image
-        style={{
-          height: windowHeight * 0.5,
-          width: windowWidth,
-          position: 'absolute',
-          top: 0,
-          left: 0,
-        }}
-        source={food1}
-      />
-      <View style={{ flex: 1 }}>
-        <BottomSheet
-          ref={bottomSheetRef}
-          initialSnapIndex={0}
-          snapPoints={snapPoints}
-          handleComponent={() => null}
-          topInset={insets.top}>
-          <BottomSheetView
-            style={{
-              flex: 1,
-              // flexDirection: 'row',
-              paddingHorizontal: 20,
-              backgroundColor: colors.background,
-            }}>
-            <TextEle
-              style={{
-                fontSize: 27,
-                fontWeight: 'bold',
-                // flex: 1,
-                marginVertical: 20,
-              }}>
-              Buy Online Classes
-            </TextEle>
-            {/* </BottomSheetView> */}
-            <BottomSheetScrollView
-              showsVerticalScrollIndicator={false}
-              style={{
-                flex: 1,
-              }}>
-              <FlatList
-                data={data?.courses || []}
-                keyExtractor={keyExtractor}
-                renderItem={renderItem}
-                contentContainerStyle={{
-                  backgroundColor: colors.background,
-                  borderRadius: 15,
-                }}
-                getItemLayout={getItemLayout}
-                removeClippedSubviews
-                initialNumToRender={5}
-                maxToRenderPerBatch={6}
-                windowSize={10}
-                onEndReached={() => setSize(size + 1)}
-                onEndReachedThreshold={0.5}
-              />
-            </BottomSheetScrollView>
-          </BottomSheetView>
-        </BottomSheet>
+    <View
+      style={{
+        flex: 1,
+        // paddingHorizontal: 20,
+        backgroundColor: colors.background,
+        marginVertical: 10,
+      }}>
+      <View style={{}}>
+        <SearchBar onChangeText={onChangeText} value={text} clearText={() => setText('')} />
       </View>
+      <ScrollView
+        showsVerticalScrollIndicator={false}
+        contentContainerStyle={{ alignItems: 'center' }}>
+        <FlatList
+          data={data?.courses || []}
+          keyExtractor={keyExtractor}
+          renderItem={renderItem}
+          contentContainerStyle={{
+            backgroundColor: colors.background,
+            borderRadius: 15,
+          }}
+          // getItemLayout={getItemLayout}
+          removeClippedSubviews
+          initialNumToRender={5}
+          maxToRenderPerBatch={6}
+          // windowSize={10}
+          onEndReached={() => setSize(size + 1)}
+          onEndReachedThreshold={0.5}
+        />
+      </ScrollView>
     </View>
   );
 };

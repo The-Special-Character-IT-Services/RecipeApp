@@ -28,6 +28,7 @@ const YOUTUBE_VIDEO_HEIGHT = (deviceWidth / 16) * 9;
 const CourseDetails = ({ route, navigation }) => {
   const { id, userId } = route.params;
   const { colors } = useTheme();
+  const [loading, setLoading] = useState(false);
   const { data, isValidating, error } = useSWR([courseQuery(id, userId)]);
   const [playing, setPlaying] = useState(false);
   const headerHeight = useHeaderHeight();
@@ -133,6 +134,7 @@ const CourseDetails = ({ route, navigation }) => {
 
   const buyCourse = useCallback(async () => {
     try {
+      setLoading(true);
       const purchaseRes = await utilsAxios.get(
         `https://calm-oasis-43947.herokuapp.com/purchase-details?user_id=${userId}&course=${data?.course?.id}`,
       );
@@ -154,7 +156,9 @@ const CourseDetails = ({ route, navigation }) => {
         }
       }
     } catch (err) {
-      console.log(err);
+      showErrorToast(err);
+    } finally {
+      setLoading(false);
     }
   }, [createPurchaseOrder, updatePurchaseOrder, userId, data?.course?.id]);
 
@@ -278,6 +282,8 @@ const CourseDetails = ({ route, navigation }) => {
           minimumFractionDigits: 0,
         }).format(data?.course?.price || 0)}`}
         onPress={buyCourse}
+        disable={loading}
+        loading={loading}
       />
     </View>
   );
