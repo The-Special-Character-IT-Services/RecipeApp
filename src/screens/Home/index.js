@@ -7,26 +7,17 @@ import Icon from 'react-native-vector-icons/Ionicons';
 import { BorderlessButton } from 'react-native-gesture-handler';
 import { Pressable, View } from 'react-native';
 import TabHome from '../TabHome';
-<<<<<<< HEAD
 import TabLikes from '../TabLikes';
 import TabProfile from '../TabProfile';
 import TabEvent from '../TabEvent';
 // import CartButton from '../CartButton';
 // import CartScreen from '../CartScreen';
-=======
-import LikesScreen from '../TabLikes';
-import TabShopPage from '../TabShop';
-import EventScreen from '../TabEvent';
-import CartButton from '../CartButton';
-import CartScreen from '../CartScreen';
->>>>>>> 104bd3838328fc8e7318b3d66feb679af69956b6
 import YoutubeScreen from '../TabYoutube';
 
 const Tab = createBottomTabNavigator();
 
-<<<<<<< HEAD
 const { TabProfileStack } = createStackNavigator();
-=======
+
 const TabEventStack = createStackNavigator();
 
 const TabEvent = () => {
@@ -70,23 +61,15 @@ const TabLikes = () => {
 };
 
 const TabShopStack = createStackNavigator();
->>>>>>> 104bd3838328fc8e7318b3d66feb679af69956b6
 
 const TabShop = () => {
   const { colors } = useTheme();
 
   return (
-<<<<<<< HEAD
     <TabProfileStack.Navigator>
       <TabProfileStack.Screen
         name="Profile"
         component={TabProfile}
-=======
-    <TabShopStack.Navigator>
-      <TabShopStack.Screen
-        name=" "
-        component={TabShopPage}
->>>>>>> 104bd3838328fc8e7318b3d66feb679af69956b6
         options={({ navigation }) => ({
           headerShown: true,
           headerRight: () => (
