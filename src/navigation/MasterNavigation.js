@@ -42,9 +42,6 @@ const MainStackScreen = () => {
           title: 'Sort by',
           headerTitleAlign: 'center',
           headerLeft: null,
-          headerTitleStyle: {
-            fontSize: 29,
-          },
           headerRight: () => (
             <Pressable onPress={() => navigation.goBack()}>
               <Text style={{ color: colors.primary, fontSize: 20, marginRight: 10 }}>Done</Text>
@@ -100,7 +97,7 @@ const MainStackScreen = () => {
       />
       <MainStack.Screen
         name="CuisineList"
-        getComponent={() => require('@screens/CuisineList').default}
+        getComponent={() => require('@screens/FilterList').default}
         options={({ route }) => ({
           title: route.params.name,
           headerShown: true,
@@ -126,11 +123,6 @@ const MainStackScreen = () => {
         name="CourseDetails"
         getComponent={() => require('@screens/CourseDetails').default}
         options={({ route }) => ({
-          headerRight: () => (
-            <View style={{ flexDirection: 'row', paddingHorizontal: 10 }}>
-              <LikeButton courseId={route.params?.id} withBackground={false} />
-            </View>
-          ),
           headerShown: true,
           headerTransparent: 1,
           headerTintColor: colors.primary,

@@ -1,8 +1,8 @@
 /* eslint-disable react-native/no-inline-styles */
 import React, { useContext } from 'react';
 import PropTypes from 'prop-types';
-import { View, Image } from 'react-native';
-import { RectButton, ScrollView } from 'react-native-gesture-handler';
+import { View, Image, ScrollView } from 'react-native';
+import { RectButton } from 'react-native-gesture-handler';
 import { useTheme } from '@react-navigation/native';
 import useSWR from 'swr';
 import { UserContext } from '@context/userContext';

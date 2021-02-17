@@ -1,6 +1,7 @@
+/* eslint-disable react/prop-types */
 /* eslint-disable react-native/no-inline-styles */
 import React, { useState } from 'react';
-import { ScrollView, View, Image, KeyboardAvoidingView } from 'react-native';
+import { ScrollView, View, KeyboardAvoidingView, Image } from 'react-native';
 import { useTheme } from '@react-navigation/native';
 import useSWR from 'swr';
 import { coursesCategoryQuery } from '@hooks/useCoursesApiHook';
@@ -8,10 +9,11 @@ import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import SearchBar from '../../components/Search';
 import TextEle from '../../components/TextEle';
 
-const CuisineList = () => {
-  const { colors } = useTheme();
+const CuisineList = ({ route }) => {
+  const { where } = route.params;
   const insets = useSafeAreaInsets();
-  const { data } = useSWR([coursesCategoryQuery(0, 5, 'updated_at:DESC')]);
+  const { data } = useSWR([coursesCategoryQuery(0, 5, 'updated_at:DESC', where)]);
+  const { colors } = useTheme();
   const [text, setText] = useState('');
   const onChangeText = val => {
     setText(val);
@@ -32,6 +34,7 @@ const CuisineList = () => {
         }}>
         {data?.courses.map(item => (
           <View
+            key={item.id}
             style={{
               flexDirection: 'row',
               marginVertical: 10,
@@ -50,6 +53,16 @@ const CuisineList = () => {
                 marginVertical: 3,
               }}>
               {item.name}
+            </TextEle>
+            <TextEle
+              variant="body1"
+              style={{
+                color: colors.text,
+                flexDirection: 'row',
+                marginHorizontal: 10,
+                marginVertical: 3,
+              }}>
+              {item.caption}
             </TextEle>
           </View>
         ))}
