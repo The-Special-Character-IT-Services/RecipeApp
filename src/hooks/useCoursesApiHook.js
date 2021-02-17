@@ -20,6 +20,10 @@ export const coursesQuery = ({ pageIndex, limit, sort = 'id:ASC', where = '{}', 
       id
       ratting
     }
+    cuisine{
+      id
+      name
+    }
     purchase_details(where: { user_id: { id: ${userId} } }) {
       id
       course {
@@ -54,13 +58,9 @@ export const courseQuery = (id, userId) => `{
     }
     launchDate
     
-    launchDate
     image {
       name
       url
-    }
-    recipes {
-      id
     }
     rattings {
       id
@@ -117,12 +117,19 @@ export const coursesSearchQuery = (pageIndex, limit, sort = 'id:ASC', where = {}
   }
 }`;
 
-export const coursesCategoryQuery = (pageIndex, limit, sort = 'id:ASC') => `{
-  courses(start: ${pageIndex * 10}, limit: ${limit}, sort: "${sort}") {
+export const coursesCategoryQuery = (pageIndex, limit, sort = 'id:ASC', where = '{}') => `{
+  courses(start: ${pageIndex * 10}, limit: ${limit}, sort: "${sort}", where: ${where}){
     id
     name
     image {
       url
+    }
+    cuisine{
+      id
+      name
+      image{
+        url
+      }
     }
     recipes {
       id

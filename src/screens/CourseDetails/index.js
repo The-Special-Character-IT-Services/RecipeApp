@@ -10,7 +10,7 @@ import RAButton1 from '@components/RAButton1';
 import axios from 'axios';
 import utilsAxios from '@utils/axios';
 import base64 from 'base-64';
-import { addDays, isAfter } from 'date-fns';
+import { addDays, isAfter, format } from 'date-fns';
 import { v4 as uuidv4 } from 'uuid';
 // import { format, subDays } from 'date-fns';
 import { useHeaderHeight } from '@react-navigation/stack';
@@ -200,9 +200,12 @@ const CourseDetails = ({ route, navigation }) => {
             flex: 1,
             backgroundColor: colors.background,
           }}>
-          <TextEle style={{}} variant="title">
-            Key Points:-
-          </TextEle>
+          <View style={{ justifyContent: 'center', alignItems: 'center', marginBottom: 20 }}>
+            <TextEle variant="header1" style={{ marginBottom: 10 }}>
+              Key Points
+            </TextEle>
+            <View style={{ height: 2, width: 100, backgroundColor: colors.text }} />
+          </View>
           <View>
             <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
               <TextEle variant="body2" style={{ paddingVertical: 10 }}>
@@ -210,7 +213,10 @@ const CourseDetails = ({ route, navigation }) => {
               </TextEle>
               <TextEle variant="body2" style={{ paddingVertical: 10, color: 'gray', width: 120 }}>
                 Launching on
-                {data?.course?.launchDate}
+                {'  '}
+                {data?.course?.launchDate
+                  ? format(new Date(data?.course?.launchDate), 'yyyy-MM-dd HH:mm')
+                  : data?.course?.launchDate}
               </TextEle>
             </View>
             <View style={{ height: 1, width: 400, backgroundColor: 'gray' }} />
@@ -237,7 +243,7 @@ const CourseDetails = ({ route, navigation }) => {
                 Written Recipe
               </TextEle>
               <TextEle variant="body2" style={{ paddingVertical: 10, color: 'gray', width: 120 }}>
-                {/* {data?.course?.recipes} */}
+                Available
               </TextEle>
             </View>
             <View style={{ height: 1, width: 400, backgroundColor: 'gray' }} />

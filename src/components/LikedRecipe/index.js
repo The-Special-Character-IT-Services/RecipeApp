@@ -1,10 +1,9 @@
 /* eslint-disable react-native/no-inline-styles */
-import React, { useCallback, useContext } from 'react';
+import React, { useContext } from 'react';
 import PropTypes from 'prop-types';
-import { BottomSheetScrollView, BottomSheetView } from '@gorhom/bottom-sheet';
-import { View, Image } from 'react-native';
+import { View, Image, ScrollView } from 'react-native';
 import { RectButton } from 'react-native-gesture-handler';
-import { useFocusEffect, useTheme } from '@react-navigation/native';
+import { useTheme } from '@react-navigation/native';
 import useSWR from 'swr';
 import { UserContext } from '@context/userContext';
 import Loading from '@components/loading';
@@ -14,7 +13,7 @@ import TextEle from '../TextEle';
 const LikedRecipe = ({ onRecipeDetail }) => {
   const { colors } = useTheme();
   const { user } = useContext(UserContext);
-  const { data, mutate } = useSWR([
+  const { data } = useSWR([
     coursesQuery({
       pageIndex: 0,
       limit: 5,
@@ -33,20 +32,11 @@ const LikedRecipe = ({ onRecipeDetail }) => {
   // );
 
   return (
-    <BottomSheetView style={{ flex: 1, backgroundColor: colors.background, borderRadius: 20 }}>
+    <View style={{ flex: 1, backgroundColor: colors.background, borderRadius: 20 }}>
       <View style={{ flexDirection: 'row', paddingHorizontal: 20 }}>
-        <TextEle
-          style={{
-            fontSize: 20,
-            fontWeight: 'bold',
-            flex: 1,
-            marginVertical: 15,
-          }}>
-          Liked Recipes
-        </TextEle>
         <View style={{ paddingTop: 5, flexDirection: 'row', alignItems: 'center' }} />
       </View>
-      <BottomSheetScrollView contentContainerStyle={{ paddingVertical: 10, paddingHorizontal: 20 }}>
+      <ScrollView contentContainerStyle={{ paddingVertical: 10, paddingHorizontal: 20 }}>
         {data?.courses.map(item => (
           <View
             key={item.id}
@@ -71,8 +61,8 @@ const LikedRecipe = ({ onRecipeDetail }) => {
             </RectButton>
           </View>
         ))}
-      </BottomSheetScrollView>
-    </BottomSheetView>
+      </ScrollView>
+    </View>
   );
 };
 

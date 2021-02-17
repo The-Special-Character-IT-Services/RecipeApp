@@ -7,14 +7,56 @@ import Icon from 'react-native-vector-icons/Ionicons';
 import { BorderlessButton } from 'react-native-gesture-handler';
 import { View } from 'react-native';
 import TabHome from '../TabHome';
-import TabLikes from '../TabLikes';
+import LikesScreen from '../TabLikes';
 import TabShopPage from '../TabShop';
-import TabEvent from '../TabEvent';
+import EventScreen from '../TabEvent';
 import CartButton from '../CartButton';
 import CartScreen from '../CartScreen';
 import YoutubeScreen from '../TabYoutube';
 
 const Tab = createBottomTabNavigator();
+
+const TabEventStack = createStackNavigator();
+
+const TabEvent = () => {
+  const { colors } = useTheme();
+  return (
+    <TabEventStack.Navigator>
+      <TabEventStack.Screen
+        name="TabEventPage"
+        component={EventScreen}
+        options={() => ({
+          title: 'UpComing Events',
+          headerShown: true,
+          headerLeft: false,
+          headerTitleAlign: 'center',
+          headerTintColor: colors.primary,
+        })}
+      />
+    </TabEventStack.Navigator>
+  );
+};
+
+const TabLikesStack = createStackNavigator();
+
+const TabLikes = () => {
+  const { colors } = useTheme();
+  return (
+    <TabLikesStack.Navigator>
+      <TabLikesStack.Screen
+        name="TabLikesPage"
+        component={LikesScreen}
+        options={() => ({
+          title: 'Liked Recipes',
+          headerShown: true,
+          headerLeft: false,
+          headerTitleAlign: 'center',
+          headerTintColor: colors.primary,
+        })}
+      />
+    </TabLikesStack.Navigator>
+  );
+};
 
 const TabShopStack = createStackNavigator();
 
@@ -22,7 +64,7 @@ const TabShop = () => {
   const { colors } = useTheme();
 
   return (
-    <TabShopStack.Navigator detachInactiveScreens>
+    <TabShopStack.Navigator>
       <TabShopStack.Screen
         name=" "
         component={TabShopPage}

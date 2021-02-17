@@ -33,7 +33,7 @@ const Cuisine = ({ onCuisinePress }) => {
               marginHorizontal: 5,
               alignItems: 'center',
             }}>
-            <RectButton onPress={onCuisinePress}>
+            <RectButton onPress={() => onCuisinePress(item)}>
               <Image
                 style={{
                   borderRadius: 5,
