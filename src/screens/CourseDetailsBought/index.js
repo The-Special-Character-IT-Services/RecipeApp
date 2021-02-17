@@ -4,16 +4,17 @@ import PropTypes from 'prop-types';
 import { useTheme } from '@react-navigation/native';
 import React, { useMemo, useRef, useState } from 'react';
 import YoutubePlayer from 'react-native-youtube-iframe';
-import { View, StatusBar, Dimensions, FlatList, Image } from 'react-native';
+import { View, StatusBar, Dimensions } from 'react-native';
+import Image from 'react-native-fast-image';
 import { deviceWidth, deviceHeight } from '@utils/index';
 // import { format, subDays } from 'date-fns';
 import { useHeaderHeight } from '@react-navigation/stack';
 import useSWR from 'swr';
 import Icon from 'react-native-vector-icons/Ionicons';
+import { RectButton } from 'react-native-gesture-handler';
 import { courseQuery } from '@hooks/useCoursesApiHook';
 import Loading from '@components/loading';
 import TextEle from '../../components/TextEle';
-import { RectButton } from 'react-native-gesture-handler';
 
 const subt = `Recipes in this write-up are protected by copyright law. Reproduction and distribution
 of the same without a written consent from Studio D’ Food Couture is prohibited. ©

@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
-import { View, Image } from 'react-native';
+import { View } from 'react-native';
+import Image from 'react-native-fast-image';
 import { useTheme } from '@react-navigation/native';
 import { FlatList } from 'react-native-gesture-handler';
 import TextEle from '@components/TextEle';

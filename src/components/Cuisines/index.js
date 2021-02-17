@@ -1,7 +1,8 @@
 /* eslint-disable react-native/no-inline-styles */
 /* eslint-disable global-require */
 import React from 'react';
-import { View, Image } from 'react-native';
+import { View } from 'react-native';
+import Image from 'react-native-fast-image';
 import PropTypes from 'prop-types';
 import { RectButton, ScrollView } from 'react-native-gesture-handler';
 import Loading from '@components/loading';
