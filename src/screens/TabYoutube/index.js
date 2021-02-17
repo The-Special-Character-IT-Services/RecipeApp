@@ -9,6 +9,7 @@ import TextEle from '@components/TextEle';
 import { RectButton } from 'react-native-gesture-handler';
 import { deviceWidth } from '@utils/index';
 import Form from '@components/Form';
+import Loading from '@components/loading';
 import { initialValues, youtubeSearchForm } from './fields';
 
 const YOUTUBE_API_PART = 'snippet,id';
@@ -89,6 +90,10 @@ const TabYoutube = ({ navigation }) => {
     },
     [loadData],
   );
+
+  if (!youtubeData) {
+    <Loading />;
+  }
 
   return (
     <View style={{ flex: 1, margin: 10 }}>

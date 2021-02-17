@@ -96,8 +96,8 @@ const MainStackScreen = () => {
         }}
       />
       <MainStack.Screen
-        name="CuisineList"
-        getComponent={() => require('@screens/FilterList').default}
+        name="FilterList"
+        getComponent={() => require('../screens/FilterList').default}
         options={({ route }) => ({
           title: route.params.name,
           headerShown: true,
@@ -132,11 +132,6 @@ const MainStackScreen = () => {
         name="CourseDetailsBought"
         getComponent={() => require('@screens/CourseDetailsBought').default}
         options={({ route }) => ({
-          headerRight: () => (
-            <View style={{ flexDirection: 'row', paddingHorizontal: 10 }}>
-              <LikeButton courseId={route.params?.id} withBackground={false} />
-            </View>
-          ),
           headerShown: true,
           headerTransparent: 1,
           headerTintColor: colors.primary,
