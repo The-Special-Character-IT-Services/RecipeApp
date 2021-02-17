@@ -42,9 +42,6 @@ const MainStackScreen = () => {
           title: 'Sort by',
           headerTitleAlign: 'center',
           headerLeft: null,
-          headerTitleStyle: {
-            fontSize: 29,
-          },
           headerRight: () => (
             <Pressable onPress={() => navigation.goBack()}>
               <Text style={{ color: colors.primary, fontSize: 20, marginRight: 10 }}>Done</Text>
