@@ -1,7 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { useTheme } from '@react-navigation/native';
-import { View, Image } from 'react-native';
+import { View } from 'react-native';
+import Image from 'react-native-fast-image';
 import TextEle from '../TextEle';
 
 const ListItem = ({ item, cardWidth }) => {

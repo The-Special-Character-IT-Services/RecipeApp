@@ -118,11 +118,12 @@ export const coursesSearchQuery = (pageIndex, limit, sort = 'id:ASC', where = {}
 }`;
 
 export const coursesCategoryQuery = (pageIndex, limit, sort = 'id:ASC', where = '{}') => `{
-  courses(start: ${pageIndex * 10}, limit: ${limit}, sort: "${sort}", where: ${where}){
+  courses(start: ${pageIndex * limit}, limit: ${limit}, sort: "${sort}", where: ${where}){
     id
     name
     image {
       url
+      formats
     }
     cuisine{
       id
@@ -142,6 +143,14 @@ const getInfiniteCourses = (pageIndex, previousPageData) => {
   if (previousPageData && !previousPageData.length) return null;
 
   return [coursesQuery({ pageIndex, limit: 10 }), null, 'courses'];
+};
+
+export const getInfiniteFilteredCourses = (pageIndex, previousPageData) => {
+  console.log(previousPageData);
+  if (pageIndex === 0 || previousPageData?.courses?.length > 0) {
+    return coursesCategoryQuery(pageIndex, 2, 'updated_at:DESC');
+  }
+  return null;
 };
 
 export default getInfiniteCourses;
