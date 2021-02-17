@@ -1,3 +1,5 @@
+/* eslint-disable implicit-arrow-linebreak */
+/* eslint-disable react/jsx-curly-newline */
 /* eslint-disable react-native/no-inline-styles */
 /* eslint-disable no-unused-expressions */
 import React, { useContext, useRef, useState } from 'react';
@@ -68,7 +70,12 @@ const TabHome = ({ navigation }) => {
         }}
       />
       <Cuisines
-        onCuisinePress={() => navigation.navigate('CuisineList', { name: 'Search Cuisine' })}
+        onCuisinePress={item =>
+          navigation.navigate('CuisineList', {
+            name: 'Search Cuisine',
+            where: `{cuisine:{id: ${item.id}}}`,
+          })
+        }
       />
     </ScrollView>
   );

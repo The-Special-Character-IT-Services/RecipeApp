@@ -100,7 +100,7 @@ const MainStackScreen = () => {
       />
       <MainStack.Screen
         name="CuisineList"
-        getComponent={() => require('@screens/CuisineList').default}
+        getComponent={() => require('@screens/FilterList').default}
         options={({ route }) => ({
           title: route.params.name,
           headerShown: true,
