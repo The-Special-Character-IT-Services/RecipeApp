@@ -1,18 +1,19 @@
 /* eslint-disable react-native/no-inline-styles */
-import BottomSheet, { BottomSheetScrollView } from '@gorhom/bottom-sheet';
+import BottomSheet, { BottomSheetFlatList, BottomSheetScrollView } from '@gorhom/bottom-sheet';
 import PropTypes from 'prop-types';
 import { useTheme } from '@react-navigation/native';
 import React, { useMemo, useRef, useState } from 'react';
 import YoutubePlayer from 'react-native-youtube-iframe';
-import { View, StatusBar, Dimensions, Platform } from 'react-native';
+import { View, StatusBar, Dimensions, FlatList, Image } from 'react-native';
 import { deviceWidth, deviceHeight } from '@utils/index';
 // import { format, subDays } from 'date-fns';
 import { useHeaderHeight } from '@react-navigation/stack';
-import { FlatList } from 'react-native-gesture-handler';
 import useSWR from 'swr';
+import Icon from 'react-native-vector-icons/Ionicons';
 import { courseQuery } from '@hooks/useCoursesApiHook';
 import Loading from '@components/loading';
 import TextEle from '../../components/TextEle';
+import { RectButton } from 'react-native-gesture-handler';
 
 const subt = `Recipes in this write-up are protected by copyright law. Reproduction and distribution
 of the same without a written consent from Studio D’ Food Couture is prohibited. ©
@@ -26,7 +27,7 @@ export const CARD_WIDTH = windowWidth * 0.9;
 
 const cardInset = (windowWidth - CARD_WIDTH) / 1.5;
 
-const CourseDetailsBought = ({ route }) => {
+const CourseDetailsBought = ({ route, navigation }) => {
   const { id, userId } = route.params;
   const { colors } = useTheme();
   const { data, isValidating } = useSWR([courseQuery(id, userId)]);
@@ -40,6 +41,57 @@ const CourseDetailsBought = ({ route }) => {
   if (isValidating) {
     return <Loading />;
   }
+
+  const renderItem = ({ item }) => (
+    <View
+      key={item?.id}
+      style={{
+        flexDirection: 'row',
+        marginVertical: 10,
+        marginHorizontal: 10,
+      }}>
+      <Image
+        source={{ uri: item.recipeImage.url }}
+        style={{ height: 80, width: 100, borderRadius: 10 }}
+      />
+      <View style={{ flex: 1 }}>
+        <TextEle
+          variant="body1"
+          style={{
+            color: colors.text,
+            flexDirection: 'row',
+            marginHorizontal: 10,
+            marginVertical: 3,
+          }}>
+          {item.name}
+        </TextEle>
+        <TextEle
+          variant="caption"
+          style={{
+            color: 'gray',
+            flexDirection: 'row',
+            marginHorizontal: 10,
+            marginVertical: 3,
+          }}>
+          {item.cookingLevel}
+        </TextEle>
+      </View>
+
+      <RectButton
+        style={{
+          justifyContent: 'center',
+          alignItems: 'center',
+          backgroundColor: colors.primary,
+          borderRadius: 20,
+          height: 35,
+          width: 50,
+          marginVertical: 10,
+        }}
+        onPress={() => navigation.navigate('RecipeDetail', item)}>
+        <Icon name="play-outline" size={24} color={colors.background} />
+      </RectButton>
+    </View>
+  );
 
   return (
     <View style={{ flex: 1 }}>
@@ -79,52 +131,19 @@ const CourseDetailsBought = ({ route }) => {
             backgroundColor: colors.background,
           }}>
           <View style={{ marginBottom: 100 }}>
-            <TextEle>Recipes:-</TextEle>
+            <View style={{ justifyContent: 'center', alignItems: 'center', marginBottom: 20 }}>
+              <TextEle variant="header1" style={{ marginBottom: 10 }}>
+                Recipes
+              </TextEle>
+              <View style={{ height: 2, width: 100, backgroundColor: colors.text }} />
+            </View>
+            <BottomSheetFlatList
+              data={data?.course?.recipes || []}
+              showsVerticalScrollIndicator={false}
+              renderItem={renderItem}
+              keyExtractor={item => `${item?.id}`}
+            />
           </View>
-          <FlatList
-            data={data?.course}
-            pagingEnabled
-            snapToAlignment="center"
-            decelerationRate="fast"
-            scrollEventThrottle={16}
-            snapToInterval={CARD_WIDTH}
-            renderToHardwareTextureAndroid
-            contentContainerStyle={[
-              {
-                paddingHorizontal: Platform.OS === 'android' ? cardInset : 0,
-              },
-            ]}
-            showsVerticalScrollIndicator={false}
-            renderItem={({ item }) => {
-              console.log(item);
-              return (
-                <View
-                  key={item.id}
-                  style={{
-                    flexDirection: 'row',
-                    marginVertical: 10,
-                    marginHorizontal: 10,
-                  }}>
-                  <Image
-                    source={{ uri: item.image.url }}
-                    style={{ height: 50, width: 50, borderRadius: 5 }}
-                  />
-                  <TextEle
-                    variant="body1"
-                    style={{
-                      color: colors.text,
-                      flexDirection: 'row',
-                      marginHorizontal: 10,
-                      marginVertical: 3,
-                    }}>
-                    {item?.name}
-                  </TextEle>
-                </View>
-              );
-            }}
-            removeClippedSubviews
-            keyExtractor={item => `${item?.id}`}
-          />
         </BottomSheetScrollView>
       </BottomSheet>
     </View>

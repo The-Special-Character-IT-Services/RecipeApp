@@ -62,9 +62,6 @@ export const courseQuery = (id, userId) => `{
       name
       url
     }
-    recipes {
-      id
-    }
     rattings {
       id
       ratting
