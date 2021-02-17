@@ -53,14 +53,9 @@ export const courseQuery = (id, userId) => `{
       }
     }
     launchDate
-    
-    launchDate
     image {
       name
       url
-    }
-    recipes {
-      id
     }
     rattings {
       id

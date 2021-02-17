@@ -6,10 +6,11 @@ import LottieView from 'lottie-react-native';
 // import Advertisement from '../../components/Advertisement';
 import { View } from 'react-native';
 import TextEle from '@components/TextEle';
-import { useFocusEffect } from '@react-navigation/native';
+import { useFocusEffect, useTheme } from '@react-navigation/native';
 
 const TabShop = () => {
   const animation = useRef(null);
+  const { colors } = useTheme();
   useFocusEffect(
     useCallback(() => {
       animation.current.play();
@@ -32,6 +33,7 @@ const TabShop = () => {
         loop={false}
       />
       <TextEle variant="header1">Coming Soon</TextEle>
+      <View style={{ height: 2, width: 100, backgroundColor: colors.text, marginVertical: 10 }} />
     </View>
   );
 };
