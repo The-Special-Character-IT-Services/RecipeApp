@@ -5,46 +5,46 @@ import { createStackNavigator } from '@react-navigation/stack';
 import { useTheme } from '@react-navigation/native';
 import Icon from 'react-native-vector-icons/Ionicons';
 import { BorderlessButton } from 'react-native-gesture-handler';
-import { View } from 'react-native';
+import { Pressable, View } from 'react-native';
 import TabHome from '../TabHome';
 import TabLikes from '../TabLikes';
-import TabShopPage from '../TabShop';
+import TabProfile from '../TabProfile';
 import TabEvent from '../TabEvent';
-import CartButton from '../CartButton';
-import CartScreen from '../CartScreen';
+// import CartButton from '../CartButton';
+// import CartScreen from '../CartScreen';
 import YoutubeScreen from '../TabYoutube';
 
 const Tab = createBottomTabNavigator();
 
-const TabShopStack = createStackNavigator();
+const { TabProfileStack } = createStackNavigator();
 
 const TabShop = () => {
   const { colors } = useTheme();
 
   return (
-    <TabShopStack.Navigator detachInactiveScreens>
-      <TabShopStack.Screen
-        name=" "
-        component={TabShopPage}
+    <TabProfileStack.Navigator>
+      <TabProfileStack.Screen
+        name="Profile"
+        component={TabProfile}
         options={({ navigation }) => ({
-          title: 'Order Now',
-          headerShown: false,
-          headerLeft: false,
-          headerTitleAlign: 'center',
-          headerTintColor: colors.primary,
+          headerShown: true,
           headerRight: () => (
             <View>
-              <CartButton onCartPress={() => navigation.navigate('CartScreen')} />
+              <Pressable onPress={() => navigation.navigate('Login')}>
+                <Text style={{ color: colors.primary, fontSize: 17, marginRight: 20 }}>Logout</Text>
+              </Pressable>
             </View>
           ),
+          title: 'Profile',
+          headerTitleAlign: 'center',
         })}
       />
-      <TabShopStack.Screen
+      {/* <TabShopStack.Screen
         name="CartScreen"
         component={CartScreen}
         options={{ headerTintColor: colors.primary }}
-      />
-    </TabShopStack.Navigator>
+      /> */}
+    </TabProfileStack.Navigator>
   );
 };
 
@@ -98,8 +98,8 @@ const Home = () => {
               iconName = focused ? 'calendar' : 'calendar-outline';
               break;
 
-            case 'TabShop':
-              iconName = focused ? 'cart' : 'cart-outline';
+            case 'TabProfile':
+              iconName = focused ? 'person' : 'person-outline';
               break;
 
             case 'TabYoutube':
@@ -121,7 +121,7 @@ const Home = () => {
       <Tab.Screen name="TabEvent" component={TabEvent} />
       <Tab.Screen name="TabYoutube" component={TabYoutube} />
       <Tab.Screen name="TabLikes" component={TabLikes} />
-      <Tab.Screen name="TabShop" component={TabShop} />
+      <Tab.Screen name="TabProfile" component={TabProfile} />
     </Tab.Navigator>
   );
 };

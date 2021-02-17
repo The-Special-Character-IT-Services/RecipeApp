@@ -4,12 +4,11 @@ import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import { View, Image } from 'react-native';
 import { useTheme } from '@react-navigation/native';
-import { RectButton } from 'react-native-gesture-handler';
 
 import TextEle from '@components/TextEle';
 import { getToken } from '@utils/';
 
-const Header = ({ onProfilePress }) => {
+const Header = () => {
   const { colors } = useTheme();
   const [name, setName] = useState('');
   useEffect(() => {
@@ -31,12 +30,10 @@ const Header = ({ onProfilePress }) => {
             {name}
           </TextEle>
         </TextEle>
-        <RectButton rippleColor={colors.background} onPress={onProfilePress}>
-          <Image
-            style={{ height: 80, width: 80, borderRadius: 10 }}
-            source={require('../../assets/images/profilelogo.png')}
-          />
-        </RectButton>
+        <Image
+          style={{ height: 80, width: 80, borderRadius: 10 }}
+          source={require('../../assets/images/profilelogo.png')}
+        />
       </View>
     </View>
   );
