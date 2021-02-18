@@ -36,8 +36,6 @@ const App = () => {
 
   useEffect(() => {
     const unsubscribe = NetInfo.addEventListener(state => {
-      console.log('Connection type', state.type);
-      console.log('Is connected?', state.isConnected);
       setIsInternetAvailable(state.isConnected);
     });
     return () => {
@@ -62,6 +60,7 @@ const App = () => {
       <SWRConfig
         value={{
           fetcher,
+          errorRetryCount: 3,
         }}>
         <UserProvider>
           <KeyboardAvoidingView

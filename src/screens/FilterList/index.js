@@ -1,9 +1,9 @@
 /* eslint-disable react/prop-types */
 /* eslint-disable react-native/no-inline-styles */
 import React, { useCallback, useState } from 'react';
-import { ScrollView, View, ActivityIndicator, FlatList } from 'react-native';
+import { View, ActivityIndicator, FlatList } from 'react-native';
 import { useTheme } from '@react-navigation/native';
-import useSWR, { useSWRInfinite } from 'swr';
+import { useSWRInfinite } from 'swr';
 import { getInfiniteFilteredCourses } from '@hooks/useCoursesApiHook';
 import Image from 'react-native-fast-image';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
@@ -13,9 +13,10 @@ import TextEle from '../../components/TextEle';
 const ITEM_HEIGHT = 100;
 
 const FilterList = ({ route }) => {
-  const { where } = route.params;
-  const insets = useSafeAreaInsets();
-  const { data, isValidating, mutate, size, setSize } = useSWRInfinite(getInfiniteFilteredCourses);
+  const { where, userId } = route.params;
+  const { data, isValidating, size, setSize } = useSWRInfinite((...props) =>
+    getInfiniteFilteredCourses(...props, where, userId),
+  );
 
   // const { data, isValidating } = useSWR([coursesCategoryQuery(0, 5, 'updated_at:DESC', where)]);
   const { colors } = useTheme();
@@ -65,7 +66,7 @@ const FilterList = ({ route }) => {
   // }, [size, setSize]);
 
   return (
-    <View>
+    <View style={{ flex: 1 }}>
       <View style={{ paddingTop: 10 }}>
         <SearchBar onChangeText={onChangeText} text={text} />
       </View>
@@ -93,8 +94,11 @@ const FilterList = ({ route }) => {
             }}
           />
         )}
-        // onEndReached={loadMore}
-        // onEndReachedThreshold={0.5}
+        onEndReached={({ distanceFromEnd }) => {
+          if (distanceFromEnd < 0) return;
+          setSize(size + 1);
+        }}
+        onEndReachedThreshold={0.5}
       />
     </View>
   );

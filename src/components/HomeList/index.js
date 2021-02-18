@@ -7,9 +7,16 @@ import React from 'react';
 import { Pressable, View } from 'react-native';
 import useSWR from 'swr';
 
-const HomeList = ({ title, onPressViewAll, newData, onRecipePress }) => {
+const HomeList = ({ title, onPressViewAll, onRecipePress, userId }) => {
   const { colors } = useTheme();
-  const { data } = useSWR([coursesQuery({ pageIndex: 0, limit: 5, sort: 'updated_at:DESC' })]);
+  const { data } = useSWR([
+    coursesQuery({
+      pageIndex: 0,
+      limit: 5,
+      sort: 'updated_at:DESC',
+      userId,
+    }),
+  ]);
   return (
     <>
       <View
@@ -27,7 +34,7 @@ const HomeList = ({ title, onPressViewAll, newData, onRecipePress }) => {
         </Pressable>
       </View>
       <Carousal
-        data={newData}
+        data={data?.courses || []}
         onRecipePress={item => onRecipePress(item)}
         onPressViewAll={onPressViewAll}
       />
@@ -38,6 +45,8 @@ const HomeList = ({ title, onPressViewAll, newData, onRecipePress }) => {
 HomeList.propTypes = {
   title: PropTypes.string.isRequired,
   onPressViewAll: PropTypes.func.isRequired,
+  onRecipePress: PropTypes.func.isRequired,
+  userId: PropTypes.number.isRequired,
 };
 
 export default HomeList;

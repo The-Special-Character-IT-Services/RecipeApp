@@ -14,7 +14,6 @@ const LikeButton = ({ courseId, withBackground = true }) => {
 
   const onLikePress = async () => {
     try {
-      console.log('data?.likes?.length', data?.likes?.length);
       if (data?.likes?.length === 0) {
         await axios.post('likes', {
           user: user.id,
@@ -25,7 +24,7 @@ const LikeButton = ({ courseId, withBackground = true }) => {
       }
       mutate([likesQuery(user.id, courseId)]);
     } catch (error) {
-      console.log('🚀 ~ file: index.js ~ line 28 ~ onLikePress ~ error', error);
+      console.error(error);
     }
   };
 

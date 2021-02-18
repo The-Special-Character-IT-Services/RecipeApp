@@ -52,7 +52,7 @@ const Verification = ({ navigation, route }) => {
         });
       }
     } catch (error) {
-      console.log(JSON.stringify(error));
+      console.error(JSON.stringify(error));
     }
   }, []);
 
@@ -85,7 +85,7 @@ const Verification = ({ navigation, route }) => {
         });
       }
     } catch (error) {
-      console.log(error);
+      console.error(error);
     }
   };
 

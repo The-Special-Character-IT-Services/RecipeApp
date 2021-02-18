@@ -5,13 +5,11 @@
 import React, { useContext, useRef, useState } from 'react';
 import PropTypes from 'prop-types';
 import { Pressable } from 'react-native';
-import useSWR from 'swr';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { ScrollView } from 'react-native-gesture-handler';
 import Category from '@components/Category';
 import SearchBar from '@components/Search';
 import Cuisines from '@components/Cuisines';
-import { coursesQuery } from '@hooks/useCoursesApiHook';
 import HomeList from '@components/HomeList';
 import { UserContext } from '@context/userContext';
 import Header from '../Header';
@@ -20,15 +18,6 @@ const TabHome = ({ navigation }) => {
   const playerRef = useRef();
   const insets = useSafeAreaInsets();
   const { user } = useContext(UserContext);
-  const { data } = useSWR([
-    coursesQuery({
-      pageIndex: 0,
-      limit: 5,
-      sort: 'updated_at:DESC',
-      userId: user?.id,
-    }),
-  ]);
-
   const [text, setText] = useState('');
   const onchangeText = val => {
     setText(val);
@@ -51,29 +40,32 @@ const TabHome = ({ navigation }) => {
       <Category
         onCategoryDetails={() => navigation.navigate('FilterList', { name: 'Search Category' })}
       />
-      <HomeList
-        title="New Courses"
-        newData={data?.courses || []}
-        onPressViewAll={() => navigation.navigate('FilterList', { name: 'All Courses' })}
-        onRecipePress={async item => {
-          if (item.purchase_details && item.purchase_details.length > 0) {
-            if (
-              item.purchase_details.some(x => x.course.id === item.id && x.status === 'purchased')
-            ) {
-              navigation.navigate('CourseDetailsBought', { id: item.id, userId: user.id });
+      {!!user?.id && (
+        <HomeList
+          title="New Courses"
+          userId={user.id}
+          onPressViewAll={() => navigation.navigate('FilterList', { name: 'All Courses' })}
+          onRecipePress={async item => {
+            if (item.purchase_details && item.purchase_details.length > 0) {
+              if (
+                item.purchase_details.some(x => x.course.id === item.id && x.status === 'purchased')
+              ) {
+                navigation.navigate('CourseDetailsBought', { id: item.id, userId: user.id });
+              } else {
+                navigation.navigate('CourseDetails', { id: item.id, userId: user.id });
+              }
             } else {
               navigation.navigate('CourseDetails', { id: item.id, userId: user.id });
             }
-          } else {
-            navigation.navigate('CourseDetails', { id: item.id, userId: user.id });
-          }
-        }}
-      />
+          }}
+        />
+      )}
       <Cuisines
         onCuisinePress={item =>
           navigation.navigate('FilterList', {
             name: 'Search Cuisine',
             where: `{cuisine:{id: ${item.id}}}`,
+            userId: user.id,
           })
         }
       />

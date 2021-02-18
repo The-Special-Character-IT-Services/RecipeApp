@@ -18,10 +18,9 @@ const YoutubeVideo = ({ route }) => {
     try {
       const query = `part=${YOUTUBE_API_PART}&key=${Config.YOUTUBE_API_KEY}&id=${videoId}`;
       const res = await axios.get(`${Config.YOUTUBE_VIDEO_API}/videos?${query}`);
-      console.log(`${Config.YOUTUBE_VIDEO_API}/videos?${query}`);
       setYoutubeData(res.data);
     } catch (error) {
-      console.log(error);
+      console.error(error);
     }
   }, [videoId]);
 
