@@ -6,7 +6,6 @@ import { useTheme } from '@react-navigation/native';
 import { useSWRInfinite } from 'swr';
 import { getInfiniteFilteredCourses } from '@hooks/useCoursesApiHook';
 import Image from 'react-native-fast-image';
-import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import SearchBar from '../../components/Search';
 import TextEle from '../../components/TextEle';
 
