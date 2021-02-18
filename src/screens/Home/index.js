@@ -5,18 +5,16 @@ import { createStackNavigator } from '@react-navigation/stack';
 import { useTheme } from '@react-navigation/native';
 import Icon from 'react-native-vector-icons/Ionicons';
 import { BorderlessButton } from 'react-native-gesture-handler';
-import { Pressable, View } from 'react-native';
+import { Pressable, View, Text } from 'react-native';
 import TabHome from '../TabHome';
 import LikesScreen from '../TabLikes';
-import TabProfile from '../TabProfile';
+import ProfileScreen from '../TabProfile';
 import EventScreen from '../TabEvent';
 // import CartButton from '../CartButton';
 // import CartScreen from '../CartScreen';
 import YoutubeScreen from '../TabYoutube';
 
 const Tab = createBottomTabNavigator();
-
-const { TabProfileStack } = createStackNavigator();
 
 const TabEventStack = createStackNavigator();
 
@@ -61,33 +59,30 @@ const TabLikes = () => {
 };
 
 // const TabShopStack = createStackNavigator();
+const TabProfileStack = createStackNavigator();
 
-const TabShop = () => {
+const TabProfile = () => {
   const { colors } = useTheme();
-
   return (
     <TabProfileStack.Navigator>
       <TabProfileStack.Screen
-        name="Profile"
-        component={TabProfile}
+        name="TabLikesPage"
+        component={ProfileScreen}
         options={({ navigation }) => ({
+          title: 'Profile',
           headerShown: true,
+          headerLeft: false,
           headerRight: () => (
-            <View>
+            <View style={{ flexDirection: 'row' }}>
               <Pressable onPress={() => navigation.navigate('Login')}>
                 <Text style={{ color: colors.primary, fontSize: 17, marginRight: 20 }}>Logout</Text>
               </Pressable>
             </View>
           ),
-          title: 'Profile',
           headerTitleAlign: 'center',
+          headerTintColor: colors.primary,
         })}
       />
-      {/* <TabShopStack.Screen
-        name="CartScreen"
-        component={CartScreen}
-        options={{ headerTintColor: colors.primary }}
-      /> */}
     </TabProfileStack.Navigator>
   );
 };
@@ -169,7 +164,7 @@ const Home = () => {
     </Tab.Navigator>
   );
 };
-TabShop.propTypes = {
+ProfileScreen.propTypes = {
   navigation: PropTypes.shape({
     navigate: PropTypes.func,
   }).isRequired,
