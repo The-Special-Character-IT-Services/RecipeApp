@@ -20,7 +20,7 @@ const Rating = ({ rating, length, totalRating }) => {
           )}
         </View>
       ))}
-      <TextEle>{`${rating} (${totalRating})`}</TextEle>
+      <TextEle>{`${rating} `}</TextEle>
     </View>
   );
 };

@@ -12,6 +12,10 @@ const ListItem = ({ onRecipePress, item, cardWidth, userId }) => {
     item.rattings,
   ]);
 
+  const isPurchased = item.purchase_details.some(
+    x => x.course.id === item.id && x.status === 'purchased',
+  );
+
   return (
     <Pressable onPress={() => onRecipePress(item)} key={item.id} style={{ width: cardWidth - 10 }}>
       <ImageBackground
@@ -27,9 +31,14 @@ const ListItem = ({ onRecipePress, item, cardWidth, userId }) => {
           <View
             style={{
               flexDirection: 'row',
-              justifyContent: 'flex-end',
+              position: 'absolute',
+              right: 5,
+              top: 5,
+              backgroundColor: 'white',
+              borderRadius: 10,
+              padding: 2,
             }}>
-            <LikeButton courseId={item.id} />
+            <Rating rating={rating} length={1} totalRating={item.rattings.length} />
           </View>
           {/* {item.id === 3 || item.id === 2 ? (
             <View
@@ -46,33 +55,26 @@ const ListItem = ({ onRecipePress, item, cardWidth, userId }) => {
           )} */}
         </View>
       </ImageBackground>
-      <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
-        <View>
-          <TextEle style={{ paddingTop: 10 }} variant="h3">
+      <View style={{ flexDirection: 'row', flex: 1 }}>
+        <View style={{ flexDirection: 'column', flex: 1, paddingRight: 20 }}>
+          <TextEle style={{ paddingTop: 10 }} numberOfLines={1} variant="h1">
             {item.name}
           </TextEle>
-          {/* <TextEle
-            variant="h2"
-            style={{ flexWrap: 'wrap', color: 'gray', fontSize: 12 }}
-            numberOfLines={2}>
-            {item.caption}
-          </TextEle> */}
+          <TextEle variant="p1">
+            {new Intl.NumberFormat('en-IN', {
+              style: 'currency',
+              currency: 'INR',
+              maximumFractionDigits: 0,
+              minimumFractionDigits: 0,
+            }).format(item.price)}
+          </TextEle>
         </View>
-        <View>
-          <TextEle style={{ padding: 10 }} variant="h3">{`${item.recipes.length} Recipes`}</TextEle>
-        </View>
+        <LikeButton courseId={item.id} />
       </View>
-      <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
-        <Rating rating={rating} length={5} totalRating={item.rattings.length} />
-        <TextEle style={{ marginRight: 10 }} variant="p1">
-          {new Intl.NumberFormat('en-IN', {
-            style: 'currency',
-            currency: 'INR',
-            maximumFractionDigits: 0,
-            minimumFractionDigits: 0,
-          }).format(item.price)}
-        </TextEle>
-      </View>
+      {/* <TextEle variant="h3" style={{ flexWrap: 'wrap', color: 'gray' }} numberOfLines={2}>
+          {item.caption}
+        </TextEle> */}
+      {/* <TextEle variant="h3">{`${item.recipes.length} Recipes`}</TextEle> */}
     </Pressable>
   );
 };
@@ -83,8 +85,9 @@ ListItem.propTypes = {
     Description: PropTypes.string,
     img: PropTypes.number,
     TextHeading: PropTypes.string,
-    rating: PropTypes.string,
     time: PropTypes.string,
+    rating: PropTypes.string,
+    rattings: PropTypes.string,
   }).isRequired,
   onRecipePress: PropTypes.func.isRequired,
   cardWidth: PropTypes.number.isRequired,
