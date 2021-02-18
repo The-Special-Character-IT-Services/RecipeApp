@@ -4,14 +4,14 @@ import PropTypes from 'prop-types';
 import getCoursesApi, { coursesQuery } from '@hooks/useCoursesApiHook';
 import Image from 'react-native-fast-image';
 import useSWR, { useSWRInfinite } from 'swr';
-import { View, ScrollView } from 'react-native';
+import { View } from 'react-native';
 import { UserContext } from '@context/userContext';
+import Loading from '@components/loading';
 import { FlatList, RectButton } from 'react-native-gesture-handler';
 import TextEle from '@components/TextEle';
 import SearchBar from '../../components/Search';
-import Loading from '@components/loading';
 
-// const ITEM_HEIGHT = 100;
+const ITEM_HEIGHT = 200;
 
 const TabEvent = () => {
   const { colors } = useTheme();
@@ -50,7 +50,7 @@ const TabEvent = () => {
           source={{
             uri: item.image.url,
           }}
-          style={{ height: 200, width: 320, borderRadius: 20 }}
+          style={{ height: ITEM_HEIGHT, width: ITEM_HEIGHT * 1.4, borderRadius: 5 }}
         />
         <View style={{ paddingHorizontal: 10, paddingVertical: 5, flex: 1 }}>
           <TextEle style={{ fontWeight: 'bold', fontSize: 20 }}>{item.name}</TextEle>
@@ -61,14 +61,14 @@ const TabEvent = () => {
     [onEventPress, colors],
   );
 
-  // const getItemLayout = useCallback(
-  //   (_, index) => ({
-  //     length: ITEM_HEIGHT,
-  //     offset: ITEM_HEIGHT * index,
-  //     index,
-  //   }),
-  //   [],
-  // );
+  const getItemLayout = useCallback(
+    (_, index) => ({
+      length: ITEM_HEIGHT,
+      offset: ITEM_HEIGHT * index,
+      index,
+    }),
+    [],
+  );
 
   const keyExtractor = useCallback(item => `${item?.id}`, []);
   if (!data) {
@@ -85,26 +85,23 @@ const TabEvent = () => {
       <View style={{}}>
         <SearchBar onChangeText={onChangeText} value={text} clearText={() => setText('')} />
       </View>
-      <ScrollView
-        showsVerticalScrollIndicator={false}
-        contentContainerStyle={{ alignItems: 'center' }}>
-        <FlatList
-          data={data?.courses || []}
-          keyExtractor={keyExtractor}
-          renderItem={renderItem}
-          contentContainerStyle={{
-            backgroundColor: colors.background,
-            borderRadius: 15,
-          }}
-          // getItemLayout={getItemLayout}
-          removeClippedSubviews
-          initialNumToRender={5}
-          maxToRenderPerBatch={6}
-          // windowSize={10}
-          onEndReached={() => setSize(size + 1)}
-          onEndReachedThreshold={0.5}
-        />
-      </ScrollView>
+      <FlatList
+        data={data?.courses || []}
+        keyExtractor={keyExtractor}
+        renderItem={renderItem}
+        contentContainerStyle={{
+          backgroundColor: colors.background,
+          alignItems: 'center',
+          borderRadius: 15,
+        }}
+        getItemLayout={getItemLayout}
+        removeClippedSubviews
+        initialNumToRender={5}
+        maxToRenderPerBatch={6}
+        // windowSize={10}
+        onEndReached={() => setSize(size + 1)}
+        onEndReachedThreshold={0.5}
+      />
     </View>
   );
 };
