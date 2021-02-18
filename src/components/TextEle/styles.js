@@ -24,6 +24,7 @@ const styles = StyleSheet.create({
   subTitle2: {
     fontSize: 20,
     fontWeight: '500',
+    lineHeight: 28,
   },
   body1: {
     fontSize: 18,
@@ -37,6 +38,7 @@ const styles = StyleSheet.create({
     fontSize: 14,
     fontWeight: '500',
     color: 'gray',
+    lineHeight: 20,
   },
   buttonText: {
     fontSize: 18,
