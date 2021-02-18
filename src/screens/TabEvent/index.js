@@ -43,16 +43,15 @@ const TabEvent = () => {
         onPress={onEventPress}
         key={item.id}
         style={{
-          marginVertical: 5,
           backgroundColor: colors.background,
         }}>
         <Image
           source={{
             uri: item.image.url,
           }}
-          style={{ height: ITEM_HEIGHT, width: ITEM_HEIGHT * 1.4, borderRadius: 5 }}
+          style={{ aspectRatio: 16 / 9, borderRadius: 20 }}
         />
-        <View style={{ paddingHorizontal: 10, paddingVertical: 5, flex: 1 }}>
+        <View style={{ paddingHorizontal: 10, paddingVertical: 15, flex: 1 }}>
           <TextEle style={{ fontWeight: 'bold', fontSize: 20 }}>{item.name}</TextEle>
           {/* <TextEle style={{ fontWeight: 'bold', fontSize: 20 }}>{item.caption}</TextEle> */}
         </View>
@@ -79,8 +78,6 @@ const TabEvent = () => {
       style={{
         flex: 1,
         // paddingHorizontal: 20,
-        backgroundColor: colors.background,
-        marginVertical: 10,
       }}>
       <View style={{}}>
         <SearchBar onChangeText={onChangeText} value={text} clearText={() => setText('')} />
@@ -91,8 +88,7 @@ const TabEvent = () => {
         renderItem={renderItem}
         contentContainerStyle={{
           backgroundColor: colors.background,
-          alignItems: 'center',
-          borderRadius: 15,
+          marginHorizontal: 10,
         }}
         getItemLayout={getItemLayout}
         removeClippedSubviews
