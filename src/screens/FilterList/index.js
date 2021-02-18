@@ -61,10 +61,6 @@ const FilterList = ({ route }) => {
     [],
   );
 
-  // const loadMore = useCallback(() => {
-  //   setSize(size + 1);
-  // }, [size, setSize]);
-
   return (
     <View style={{ flex: 1 }}>
       <View style={{ paddingTop: 10 }}>

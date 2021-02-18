@@ -146,10 +146,8 @@ const getInfiniteCourses = (pageIndex, previousPageData) => {
 };
 
 export const getInfiniteFilteredCourses = (index, previousPageData, where, userId) => {
-  if (false) {
-    return coursesQuery({ pageIndex: index, limit: 5, sort: 'updated_at:DESC', where, userId });
-  }
-  return null;
+  if (previousPageData && !previousPageData.courses.length) return null;
+  return coursesQuery({ pageIndex: index, limit: 5, sort: 'updated_at:DESC', where, userId });
 };
 
 export default getInfiniteCourses;
