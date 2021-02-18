@@ -7,9 +7,9 @@ import Icon from 'react-native-vector-icons/Ionicons';
 import { BorderlessButton } from 'react-native-gesture-handler';
 import { Pressable, View } from 'react-native';
 import TabHome from '../TabHome';
-import TabLikes from '../TabLikes';
+import LikesScreen from '../TabLikes';
 import TabProfile from '../TabProfile';
-import TabEvent from '../TabEvent';
+import EventScreen from '../TabEvent';
 // import CartButton from '../CartButton';
 // import CartScreen from '../CartScreen';
 import YoutubeScreen from '../TabYoutube';
@@ -60,7 +60,7 @@ const TabLikes = () => {
   );
 };
 
-const TabShopStack = createStackNavigator();
+// const TabShopStack = createStackNavigator();
 
 const TabShop = () => {
   const { colors } = useTheme();
