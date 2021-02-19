@@ -24,7 +24,7 @@ const RecipeDetail = ({ route, navigation }) => {
   const snapPoints = useMemo(() => [windowHeight * 0.6, '100%'], []);
 
   return (
-    <ScrollView>
+    <ScrollView showsVerticalScrollIndicator={false}>
       <View style={{}}>
         <Image
           style={{
@@ -36,7 +36,11 @@ const RecipeDetail = ({ route, navigation }) => {
           source={{ uri: item?.recipeImage?.formats.medium.url }}
         />
         <View
-          style={{ flex: 1, alignItems: 'center', justifyContent: 'center', marginVertical: 10 }}>
+          style={{
+            justifyContent: 'center',
+            alignItems: 'center',
+            padding: 10,
+          }}>
           <TextEle variant="header1" style={{ fontWeight: 'bold' }}>
             {item.name}
           </TextEle>
@@ -44,7 +48,6 @@ const RecipeDetail = ({ route, navigation }) => {
         </View>
         <View
           style={{
-            flex: 1,
             borderRadius: 16,
             backgroundColor: colors.background,
           }}>

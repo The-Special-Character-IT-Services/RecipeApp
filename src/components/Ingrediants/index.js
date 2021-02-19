@@ -24,18 +24,32 @@ const Ingrediants = ({ ingredients }) => {
     {
       id: 1,
       img: require('../../assets/images/EroticSandwich.png'),
+      TextHeading: 'Lip Smacking Soup',
     },
     {
       id: 2,
       img: require('../../assets/images/pulavspecial.png'),
+      TextHeading: 'Lip Smacking Soup',
     },
     {
       id: 3,
       img: require('../../assets/images/WinterSpecialVasana.png'),
+      TextHeading: 'Lip Smacking Soup',
     },
     {
       id: 4,
-      img: require('../../assets/images/lipsmackingsoup.png'),
+      img: require('../../assets/images/WinterSpecialVasana.png'),
+      TextHeading: 'Lip Smacking Soup',
+    },
+    {
+      id: 5,
+      img: require('../../assets/images/WinterSpecialVasana.png'),
+      TextHeading: 'Lip Smacking Soup',
+    },
+    {
+      id: 6,
+      img: require('../../assets/images/WinterSpecialVasana.png'),
+      TextHeading: 'Lip Smacking Soup',
     },
   ];
 
@@ -43,23 +57,22 @@ const Ingrediants = ({ ingredients }) => {
 
   return (
     <>
-      <View
-        style={{
-          marginVertical: 10,
-        }}>
+      <View style={{ flex: 1 }}>
         <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
-          <TextEle variant="subTitle1" style={{ paddingHorizontal: 30, marginVertical: 10 }}>
+          <TextEle variant="subTitle1" style={{ paddingHorizontal: 30, marginVertical: 20 }}>
             Ingrediants
           </TextEle>
         </View>
         <FlatList
           ref={flatListRef}
-          data={ingredients}
+          data={image}
+          contentContainerStyle={{ marginHorizontal: 15 }}
           horizontal
+          showsHorizontalScrollIndicator={false}
           renderItem={({ item }) => (
             <View style={{ marginHorizontal: 5 }}>
               <Image
-                source={{ uri: image.img }}
+                source={item.img}
                 style={{
                   height: 100,
                   width: 100,
@@ -67,7 +80,8 @@ const Ingrediants = ({ ingredients }) => {
                 }}
               />
               <TextEle variant="caption" style={{ color: colors.text, marginTop: 20 }}>
-                {item?.ingredient?.name}
+                {/* {item?.ingredient?.name} */}
+                {item.TextHeading}
               </TextEle>
             </View>
           )}

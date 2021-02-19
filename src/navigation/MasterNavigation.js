@@ -93,8 +93,7 @@ const MainStackScreen = ({ route }) => {
             options={{
               headerRight: () => (
                 <View style={{ flexDirection: 'row' }}>
-                  <ShareButton />
-                  <LikeButton />
+                  <LikeButton withBackground={false} />
                 </View>
               ),
               headerShown: true,

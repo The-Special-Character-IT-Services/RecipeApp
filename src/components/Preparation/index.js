@@ -39,35 +39,37 @@ const Preparation = ({ preparation }) => {
             <TextEle style={{ alignItems: 'center', paddingRight: 20 }}> 35` </TextEle>
           </View>
         </View>
-        <FlatList
-          ref={flatListRef}
-          data={preparation}
-          pagingEnabled
-          snapToAlignment="center"
-          decelerationRate="fast"
-          scrollEventThrottle={16}
-          snapToInterval={CARD_WIDTH}
-          renderToHardwareTextureAndroid
-          contentInset={{
-            top: 0,
-            left: cardInset,
-            bottom: 0,
-            right: cardInset,
-          }}
-          contentContainerStyle={[
-            {
-              paddingHorizontal: Platform.OS === 'android' ? cardInset : 0,
-            },
-          ]}
-          showsVerticalScrollIndicatorr={false}
-          renderItem={({ item }) => (
-            <View style={{ width: CARD_WIDTH }}>
-              <ListItem item={item} cardWidth={CARD_WIDTH} />
-            </View>
-          )}
-          removeClippedSubviews
-          keyExtractor={item => `${item.id}`}
-        />
+        <View>
+          <FlatList
+            ref={flatListRef}
+            data={preparation}
+            pagingEnabled
+            snapToAlignment="center"
+            decelerationRate="fast"
+            scrollEventThrottle={16}
+            snapToInterval={CARD_WIDTH}
+            renderToHardwareTextureAndroid
+            contentInset={{
+              top: 0,
+              left: cardInset,
+              bottom: 0,
+              right: cardInset,
+            }}
+            contentContainerStyle={[
+              {
+                paddingHorizontal: Platform.OS === 'android' ? cardInset : 0,
+              },
+            ]}
+            showsVerticalScrollIndicatorr={false}
+            renderItem={({ item }) => (
+              <View style={{ width: CARD_WIDTH }}>
+                <ListItem item={item} cardWidth={CARD_WIDTH} />
+              </View>
+            )}
+            removeClippedSubviews
+            keyExtractor={item => `${item.id}`}
+          />
+        </View>
       </View>
     </>
   );

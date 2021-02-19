@@ -8,21 +8,33 @@ import TextEle from '../TextEle';
 const ListItem = ({ item, cardWidth }) => {
   const { colors } = useTheme();
   return (
-    <View key={item.id} style={{ width: cardWidth }}>
-      <View style={{ marginHorizontal: 5 }}>
-        <Image
-          source={{ uri: item?.image?.url }}
-          style={{
-            height: 230,
-            width: 330,
-            borderRadius: 20,
-          }}
-        />
-        <TextEle variant="caption" style={{ color: colors.text, marginTop: 20 }}>
-          {item?.description}
-        </TextEle>
-      </View>
-    </View>
+    <>
+      {item?.image?.url ? (
+        <View key={item.id} style={{ width: cardWidth }}>
+          <View style={{ marginHorizontal: 5 }}>
+            <Image
+              source={{ uri: item?.image?.url }}
+              style={{
+                height: 230,
+                width: 330,
+                borderRadius: 20,
+              }}
+            />
+            <TextEle variant="caption" style={{ color: colors.text, marginTop: 20 }}>
+              {item?.description}
+            </TextEle>
+          </View>
+        </View>
+      ) : (
+        <View key={item.id} style={{ width: cardWidth }}>
+          <View style={{ marginHorizontal: 5 }}>
+            <TextEle variant="caption" style={{ color: colors.text, marginTop: 20 }}>
+              {item?.description}
+            </TextEle>
+          </View>
+        </View>
+      )}
+    </>
   );
 };
 
