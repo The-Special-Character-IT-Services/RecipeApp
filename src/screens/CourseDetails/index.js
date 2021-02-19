@@ -14,12 +14,12 @@ import base64 from 'base-64';
 import { addDays, isAfter, format } from 'date-fns';
 import { v4 as uuidv4 } from 'uuid';
 // import { format, subDays } from 'date-fns';
+import useMarkdownRules from '@hooks/useMarkdownRules';
 import { useHeaderHeight } from '@react-navigation/stack';
 import useSWR from 'swr';
 import { courseQuery } from '@hooks/useCoursesApiHook';
 import Loading from '@components/loading';
 import TextEle from '../../components/TextEle';
-import useMarkdownRules from '@hooks/useMarkdownRules';
 
 const subt = `Recipes in this write-up are protected by copyright law. Reproduction and distribution
 of the same without a written consent from Studio D’ Food Couture is prohibited. ©
@@ -29,9 +29,9 @@ const YOUTUBE_VIDEO_HEIGHT = (deviceWidth / 16) * 9;
 
 const styles = StyleSheet.create({
   text: {
-    color: '#fff'
-  }
-})
+    color: '#fff',
+  },
+});
 
 const CourseDetails = ({ route, navigation }) => {
   const { id, userId } = route.params;

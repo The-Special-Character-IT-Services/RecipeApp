@@ -1,6 +1,7 @@
 import React from 'react';
 import { View } from 'react-native';
 import LottieView from 'lottie-react-native';
+import PropTypes from 'prop-types';
 import TextEle from '@components/TextEle';
 import RAButton1 from '@components/RAButton1';
 
@@ -21,5 +22,11 @@ const PaymentUnsuccessfull = ({ navigation }) => (
     />
   </View>
 );
+
+PaymentUnsuccessfull.propTypes = {
+  navigation: PropTypes.shape({
+    navigate: PropTypes.string,
+  }).isRequired,
+};
 
 export default PaymentUnsuccessfull;
