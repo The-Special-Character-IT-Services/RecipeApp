@@ -40,6 +40,7 @@
     "prop-types": "^15.7.2",
     "react": "16.13.1",
     "react-native": "0.63.4",
+    "react-native-action-button": "^2.8.5",
     "react-native-appearance": "^0.3.4",
     "react-native-config": "^1.4.1",
     "react-native-confirmation-code-field": "^7.0.0",

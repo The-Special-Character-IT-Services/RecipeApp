@@ -2,12 +2,14 @@
 import React, { useMemo } from 'react';
 import PropTypes from 'prop-types';
 import { ImageBackground, Pressable, View } from 'react-native';
-import { useTheme } from '@react-navigation/native';
+import Icon from 'react-native-vector-icons/Ionicons';
 import Rating from '@components/Rating';
 import TextEle from '../TextEle';
 import LikeButton from '../LikeButton';
+import { Colors } from 'react-native/Libraries/NewAppScreen';
+import { useTheme } from '@react-navigation/native';
 
-const ListItem = ({ onRecipePress, item, cardWidth, userId }) => {
+const ListItem = ({ onRecipePress, item, cardWidth }) => {
   const rating = useMemo(() => item.rattings.reduce((p, c, i, a) => p + c.ratting / a.length, 0), [
     item.rattings,
   ]);
@@ -15,6 +17,8 @@ const ListItem = ({ onRecipePress, item, cardWidth, userId }) => {
   const isPurchased = item.purchase_details.some(
     x => x.course.id === item.id && x.status === 'purchased',
   );
+
+  const { colors } = useTheme();
 
   return (
     <Pressable onPress={() => onRecipePress(item)} key={item.id} style={{ width: cardWidth - 10 }}>
@@ -40,12 +44,28 @@ const ListItem = ({ onRecipePress, item, cardWidth, userId }) => {
             }}>
             <Rating rating={rating} length={1} totalRating={item.rattings.length} />
           </View>
+          {isPurchased && (
+            <View
+              style={{
+                alignItems: 'center',
+                justifyContent: 'center',
+                position: 'absolute',
+                height: 40,
+                width: 40,
+                left: 5,
+                top: 3,
+                backgroundColor: colors.card,
+                borderRadius: 20,
+              }}>
+              <Icon name="lock-closed" size={24} color={colors.primary} />
+            </View>
+          )}
           {/* {item.id === 3 || item.id === 2 ? (
             <View
               style={{
                 justifyContent: 'center',
                 alignItems: 'center',
-                opacity: 0.7,
+                opacity: 1,
                 marginVertical: 20,
               }}>
               <Lock height={100} width={100} fill="black" />
@@ -69,7 +89,9 @@ const ListItem = ({ onRecipePress, item, cardWidth, userId }) => {
             }).format(item.price)}
           </TextEle>
         </View>
-        <LikeButton courseId={item.id} />
+        <View style={{ marginVertical: 10 }}>
+          <LikeButton courseId={item.id} />
+        </View>
       </View>
       {/* <TextEle variant="h3" style={{ flexWrap: 'wrap', color: 'gray' }} numberOfLines={2}>
           {item.caption}
@@ -81,9 +103,14 @@ const ListItem = ({ onRecipePress, item, cardWidth, userId }) => {
 
 ListItem.propTypes = {
   item: PropTypes.shape({
+    purchase_details: PropTypes.shape({
+      some: PropTypes.number,
+    }).isRequired,
     id: PropTypes.number,
+    name: PropTypes.string,
     Description: PropTypes.string,
-    img: PropTypes.number,
+    image: PropTypes.number,
+    price: PropTypes.number,
     TextHeading: PropTypes.string,
     time: PropTypes.string,
     rating: PropTypes.string,

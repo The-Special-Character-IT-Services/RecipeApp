@@ -20,7 +20,7 @@ const Rating = ({ rating, length, totalRating, onPress }) => {
           )}
         </Pressable>
       ))}
-      <TextEle>{`${rating} `}</TextEle>
+      <TextEle style={{ color: colors.text }}>{`${rating} `}</TextEle>
     </View>
   );
 };

@@ -10,6 +10,7 @@ import Loading from '@components/loading';
 import { FlatList, RectButton } from 'react-native-gesture-handler';
 import TextEle from '@components/TextEle';
 import SearchBar from '../../components/Search';
+import LikeButton from '@components/LikeButton';
 
 const ITEM_HEIGHT = 200;
 
@@ -44,6 +45,7 @@ const TabEvent = () => {
         key={item.id}
         style={{
           backgroundColor: colors.background,
+          margin: 5,
         }}>
         <Image
           source={{
@@ -51,9 +53,21 @@ const TabEvent = () => {
           }}
           style={{ aspectRatio: 16 / 9, borderRadius: 20 }}
         />
-        <View style={{ paddingHorizontal: 10, paddingVertical: 15, flex: 1 }}>
-          <TextEle style={{ fontWeight: 'bold', fontSize: 20 }}>{item.name}</TextEle>
-          {/* <TextEle style={{ fontWeight: 'bold', fontSize: 20 }}>{item.caption}</TextEle> */}
+        <View style={{ flexDirection: 'row', flex: 1 }}>
+          <View style={{ flexDirection: 'column', flex: 1, paddingRight: 20 }}>
+            <TextEle style={{ paddingTop: 10 }} numberOfLines={1} variant="h1">
+              {item.name}
+            </TextEle>
+            <TextEle variant="p1">
+              {new Intl.NumberFormat('en-IN', {
+                style: 'currency',
+                currency: 'INR',
+                maximumFractionDigits: 0,
+                minimumFractionDigits: 0,
+              }).format(item.price)}
+            </TextEle>
+          </View>
+          <LikeButton courseId={item.id} />
         </View>
       </RectButton>
     ),

@@ -9,6 +9,16 @@ const styles = StyleSheet.create({
     fontSize: 30,
     fontWeight: 'bold',
   },
+  error: {
+    fontSize: 28,
+    fontWeight: 'bold',
+    fontFamily: 'inter',
+  },
+  error1: {
+    fontSize: 20,
+    fontWeight: '500',
+    fontFamily: 'Roboto',
+  },
   title: {
     fontSize: 24,
     fontWeight: '600',
