@@ -10,6 +10,7 @@ import { UserContext } from '@context/userContext';
 import Loading from '@components/loading';
 import { coursesQuery } from '@hooks/useCoursesApiHook';
 import TextEle from '../TextEle';
+import LikeButton from '@components/LikeButton';
 
 const LikedRecipe = ({ onRecipeDetail }) => {
   const { colors } = useTheme();
@@ -60,6 +61,9 @@ const LikedRecipe = ({ onRecipeDetail }) => {
                 <TextEle style={{ color: 'gray' }}>{item.caption}</TextEle>
               </View>
             </RectButton>
+            <View style={{ position: 'absolute', top: 25, right: 5 }}>
+              <LikeButton courseId={item.id} />
+            </View>
           </View>
         ))}
       </ScrollView>

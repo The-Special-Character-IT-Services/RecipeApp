@@ -20,7 +20,7 @@ const Rating = ({ rating, length, totalRating }) => {
           )}
         </View>
       ))}
-      <TextEle>{`${rating} `}</TextEle>
+      <TextEle style={{ color: colors.card }}>{`${rating} `}</TextEle>
     </View>
   );
 };
