@@ -53,7 +53,7 @@ const LikeButton = ({ courseId, withBackground = true }) => {
           height: 40,
           width: 40,
           borderRadius: 45,
-          backgroundColor: colors.card,
+          // backgroundColor: colors.card,
           justifyContent: 'center',
           alignItems: 'center',
         }
