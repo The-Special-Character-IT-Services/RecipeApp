@@ -14,6 +14,7 @@ import base64 from 'base-64';
 import { addDays, isAfter, format } from 'date-fns';
 import { v4 as uuidv4 } from 'uuid';
 // import { format, subDays } from 'date-fns';
+import useMarkdownRules from '@hooks/useMarkdownRules';
 import { useHeaderHeight } from '@react-navigation/stack';
 import useSWR from 'swr';
 import ActionButton from '@components/ActionButton';

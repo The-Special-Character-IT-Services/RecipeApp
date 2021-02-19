@@ -12,9 +12,10 @@ import { useHeaderHeight } from '@react-navigation/stack';
 import useSWR from 'swr';
 import Icon from 'react-native-vector-icons/Ionicons';
 import Rating from '@components/Rating';
-import { RectButton } from 'react-native-gesture-handler';
+import axios from '@utils/axios';
+import { RectButton, BorderlessButton } from 'react-native-gesture-handler';
 import { courseQuery } from '@hooks/useCoursesApiHook';
-import { BorderlessButton } from 'react-native-gesture-handler';
+
 import Loading from '@components/loading';
 import TextEle from '../../components/TextEle';
 
@@ -44,6 +45,23 @@ const CourseDetailsBought = ({ route, navigation, item }) => {
     () => (courseDetail?.rattings || []).reduce((p, c, i, a) => p + c.ratting / a.length, 0),
     [courseDetail?.rattings],
   );
+
+  const onRatingpress = async rattings => {
+    try {
+      if (data?.likes?.length === 0) {
+        await axios.post('rattings', {
+          user: userId,
+          course: id,
+          rattings,
+        });
+      } else {
+        await axios.delete(`likes/${data.likes[0].id}`);
+      }
+      mutate([likesQuery(user.id, courseId)]);
+    } catch (error) {
+      console.error(error);
+    }
+  };
 
   if (isValidating) {
     return <Loading />;
@@ -145,6 +163,7 @@ const CourseDetailsBought = ({ route, navigation, item }) => {
                 <TextEle variant="caption">{courseDetail?.course?.cuisine?.name}</TextEle>
                 <View style={{ alignItems: 'flex-start' }}>
                   <Rating
+                    onPress={onRatingpress}
                     rating={rating}
                     length={5}
                     totalRating={courseDetail?.rattings?.length || 0}
