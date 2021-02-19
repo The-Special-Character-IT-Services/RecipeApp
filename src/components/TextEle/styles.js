@@ -9,6 +9,16 @@ const styles = StyleSheet.create({
     fontSize: 30,
     fontWeight: 'bold',
   },
+  error: {
+    fontSize: 28,
+    fontWeight: 'bold',
+    fontFamily: 'inter',
+  },
+  error1: {
+    fontSize: 20,
+    fontWeight: '500',
+    fontFamily: 'Roboto',
+  },
   title: {
     fontSize: 24,
     fontWeight: '600',
@@ -24,6 +34,7 @@ const styles = StyleSheet.create({
   subTitle2: {
     fontSize: 20,
     fontWeight: '500',
+    lineHeight: 28,
   },
   body1: {
     fontSize: 18,
@@ -37,6 +48,7 @@ const styles = StyleSheet.create({
     fontSize: 14,
     fontWeight: '500',
     color: 'gray',
+    lineHeight: 20,
   },
   buttonText: {
     fontSize: 18,

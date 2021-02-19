@@ -5,12 +5,12 @@ import { View, Text, Pressable } from 'react-native';
 import { color } from 'react-native-reanimated';
 import Icon from 'react-native-vector-icons/Ionicons';
 
-const Rating = ({ rating, length, totalRating }) => {
+const Rating = ({ rating, length, totalRating, onPress }) => {
   const { colors } = useTheme();
   return (
     <View style={{ flexDirection: 'row', alignItems: 'center' }}>
       {[...Array(length)].map((_, i) => (
-        <View style={{ marginHorizontal: 5 }} key={i}>
+        <Pressable style={{ paddingHorizontal: 5 }} key={i} onPress={() => onPress(i + 1)}>
           {i + 1 <= rating ? (
             <Icon name="star" size={24} color={colors.primary} />
           ) : i < rating ? (
@@ -18,9 +18,9 @@ const Rating = ({ rating, length, totalRating }) => {
           ) : (
             <Icon name="star-outline" size={24} color={colors.primary} />
           )}
-        </View>
+        </Pressable>
       ))}
-      <TextEle>{`${rating} (${totalRating})`}</TextEle>
+      <TextEle style={{ color: colors.text }}>{`${rating} `}</TextEle>
     </View>
   );
 };

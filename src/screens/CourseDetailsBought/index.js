@@ -11,6 +11,8 @@ import { deviceWidth, deviceHeight } from '@utils/index';
 import { useHeaderHeight } from '@react-navigation/stack';
 import useSWR from 'swr';
 import Icon from 'react-native-vector-icons/Ionicons';
+import Rating from '@components/Rating';
+import axios from '@utils/axios';
 import { RectButton, BorderlessButton } from 'react-native-gesture-handler';
 import { courseQuery } from '@hooks/useCoursesApiHook';
 
@@ -29,20 +31,43 @@ export const CARD_WIDTH = windowWidth * 0.9;
 
 const cardInset = (windowWidth - CARD_WIDTH) / 1.5;
 
-const CourseDetailsBought = ({ route, navigation }) => {
+const CourseDetailsBought = ({ route, navigation, item }) => {
   const { id, userId } = route.params;
   const { colors } = useTheme();
-  const { data, isValidating } = useSWR([courseQuery(id, userId)]);
+  const { data: courseDetail, isValidating } = useSWR([courseQuery(id, userId)]);
   const [playing, setPlaying] = useState(false);
   const headerHeight = useHeaderHeight();
   const bottomSheetRef = useRef(null);
   const snapPoints = useMemo(() => [deviceHeight - YOUTUBE_VIDEO_HEIGHT - headerHeight, '100%'], [
     headerHeight,
   ]);
+  const rating = useMemo(
+    () => (courseDetail?.rattings || []).reduce((p, c, i, a) => p + c.ratting / a.length, 0),
+    [courseDetail?.rattings],
+  );
+
+  const onRatingpress = async rattings => {
+    try {
+      if (data?.likes?.length === 0) {
+        await axios.post('rattings', {
+          user: userId,
+          course: id,
+          rattings,
+        });
+      } else {
+        await axios.delete(`likes/${data.likes[0].id}`);
+      }
+      mutate([likesQuery(user.id, courseId)]);
+    } catch (error) {
+      console.error(error);
+    }
+  };
 
   if (isValidating) {
     return <Loading />;
   }
+
+  console.log(courseDetail);
 
   const renderItem = ({ item }) => (
     <View
@@ -99,7 +124,7 @@ const CourseDetailsBought = ({ route, navigation }) => {
       <YoutubePlayer
         play={playing}
         height={YOUTUBE_VIDEO_HEIGHT}
-        videoId={data?.course?.promoVideoYoutubeId}
+        videoId={courseDetail?.course?.promoVideoYoutubeId}
       />
       <BottomSheet
         ref={bottomSheetRef}
@@ -131,14 +156,35 @@ const CourseDetailsBought = ({ route, navigation }) => {
             backgroundColor: colors.background,
           }}>
           <View style={{ marginBottom: 100 }}>
-            <View style={{ justifyContent: 'center', alignItems: 'center', marginBottom: 20 }}>
-              <TextEle variant="header1" style={{ marginBottom: 10 }}>
+            <View>
+              <TextEle variant="subTitle2">Gujarati Farsaan </TextEle>
+              <TextEle variant="caption">Gujarati</TextEle>
+              <View>
+                <TextEle variant="caption">{courseDetail?.course?.cuisine?.name}</TextEle>
+                <View style={{ alignItems: 'flex-start' }}>
+                  <Rating
+                    onPress={onRatingpress}
+                    rating={rating}
+                    length={5}
+                    totalRating={courseDetail?.rattings?.length || 0}
+                  />
+                </View>
+              </View>
+            </View>
+            <View
+              style={{
+                justifyContent: 'center',
+                alignItems: 'flex-start',
+                marginBottom: 20,
+                paddingVertical: 10,
+              }}>
+              <TextEle variant="title" style={{ marginBottom: 10 }}>
                 Recipes
               </TextEle>
               <View style={{ height: 2, width: 100, backgroundColor: colors.text }} />
             </View>
             <BottomSheetFlatList
-              data={data?.course?.recipes || []}
+              data={courseDetail?.course?.recipes || []}
               showsVerticalScrollIndicator={false}
               renderItem={renderItem}
               keyExtractor={item => `${item?.id}`}

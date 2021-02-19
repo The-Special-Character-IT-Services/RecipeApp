@@ -10,6 +10,7 @@ import { UserContext } from '@context/userContext';
 import Loading from '@components/loading';
 import { coursesQuery } from '@hooks/useCoursesApiHook';
 import TextEle from '../TextEle';
+import LikeButton from '@components/LikeButton';
 
 const LikedRecipe = ({ onRecipeDetail }) => {
   const { colors } = useTheme();
@@ -39,25 +40,36 @@ const LikedRecipe = ({ onRecipeDetail }) => {
       </View>
       <ScrollView contentContainerStyle={{ paddingVertical: 10, paddingHorizontal: 20 }}>
         {data?.courses.map(item => (
-          <View
-            key={item.id}
-            style={{ flex: 1, flexDirection: 'row', marginVertical: 5, height: 100 }}>
-            <Image
-              style={{ height: 100, width: 100, borderRadius: 20 }}
-              source={{ uri: item?.image?.url }}
-            />
+          <View>
             <RectButton
-              rippleColor="#D3D3D3"
-              style={{ flex: 1 }}
-              onPress={() => onRecipeDetail(item)}>
-              <View
-                style={{
-                  flex: 1,
-                  paddingLeft: 15,
-                  justifyContent: 'center',
-                }}>
-                <TextEle style={{ fontWeight: 'bold', fontSize: 17 }}>{item.name}</TextEle>
-                <TextEle style={{ color: 'gray' }}>{item.caption}</TextEle>
+              rippleColor={colors.card}
+              onPress={() => onRecipeDetail(item)}
+              key={item.id}
+              style={{
+                backgroundColor: colors.background,
+                margin: 5,
+              }}>
+              <Image
+                source={{
+                  uri: item.image.url,
+                }}
+                style={{ aspectRatio: 16 / 9, borderRadius: 20 }}
+              />
+              <View style={{ flexDirection: 'row', flex: 1 }}>
+                <View style={{ flexDirection: 'column', flex: 1, paddingRight: 20 }}>
+                  <TextEle style={{ paddingTop: 10 }} numberOfLines={1} variant="h1">
+                    {item.name}
+                  </TextEle>
+                  <TextEle variant="p1">
+                    {new Intl.NumberFormat('en-IN', {
+                      style: 'currency',
+                      currency: 'INR',
+                      maximumFractionDigits: 0,
+                      minimumFractionDigits: 0,
+                    }).format(item.price)}
+                  </TextEle>
+                </View>
+                <LikeButton courseId={item.id} />
               </View>
             </RectButton>
           </View>

@@ -4,7 +4,8 @@ import PropTypes from 'prop-types';
 import { useTheme } from '@react-navigation/native';
 import React, { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import YoutubePlayer from 'react-native-youtube-iframe';
-import { View, StatusBar } from 'react-native';
+import { View, StatusBar, StyleSheet } from 'react-native';
+import Markdown from 'react-native-markdown-renderer';
 import { deviceWidth, deviceHeight, showErrorToast } from '@utils/index';
 import RAButton1 from '@components/RAButton1';
 import axios from 'axios';
@@ -13,8 +14,10 @@ import base64 from 'base-64';
 import { addDays, isAfter, format } from 'date-fns';
 import { v4 as uuidv4 } from 'uuid';
 // import { format, subDays } from 'date-fns';
+import useMarkdownRules from '@hooks/useMarkdownRules';
 import { useHeaderHeight } from '@react-navigation/stack';
 import useSWR from 'swr';
+import ActionButton from '@components/ActionButton';
 import { courseQuery } from '@hooks/useCoursesApiHook';
 import Loading from '@components/loading';
 import TextEle from '../../components/TextEle';
@@ -24,6 +27,12 @@ of the same without a written consent from Studio D’ Food Couture is prohibite
 Studio De Food Couture `;
 
 const YOUTUBE_VIDEO_HEIGHT = (deviceWidth / 16) * 9;
+
+const styles = StyleSheet.create({
+  text: {
+    color: '#fff',
+  },
+});
 
 const CourseDetails = ({ route, navigation }) => {
   const { id, userId } = route.params;
@@ -36,6 +45,8 @@ const CourseDetails = ({ route, navigation }) => {
   const snapPoints = useMemo(() => [deviceHeight - YOUTUBE_VIDEO_HEIGHT - headerHeight, '100%'], [
     headerHeight,
   ]);
+
+  const rules = useMarkdownRules();
 
   useEffect(() => {
     if (error) {
@@ -217,7 +228,6 @@ const CourseDetails = ({ route, navigation }) => {
               </TextEle>
               <TextEle variant="body2" style={{ paddingVertical: 10, color: 'gray', width: 120 }}>
                 Launching on
-                {'  '}
                 {data?.course?.launchDate
                   ? format(new Date(data?.course?.launchDate), 'yyyy-MM-dd HH:mm')
                   : data?.course?.launchDate}
@@ -266,12 +276,13 @@ const CourseDetails = ({ route, navigation }) => {
           </View>
           <View style={{ marginBottom: 100 }}>
             <TextEle>Varieties:-</TextEle>
-            <TextEle variant="body1" style={{ textAlign: 'justify', width: 350 }}>
-              {data?.course?.description}
-            </TextEle>
+            <Markdown rules={rules}>{data?.course?.description}</Markdown>
           </View>
         </BottomSheetScrollView>
       </BottomSheet>
+      <View style={{ position: 'absolute', left: 400, top: 640 }}>
+        <ActionButton />
+      </View>
       <RAButton1
         style={{ position: 'absolute', bottom: 10, width: '100%' }}
         variant="fill"

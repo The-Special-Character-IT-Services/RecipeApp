@@ -6,6 +6,9 @@ import { useTheme } from '@react-navigation/native';
 
 const Error = () => {
   const { colors } = useTheme();
+  const errMsg = `Sorry ! Something went wrong. 
+Please wait your plate will be filled
+up soon.`;
 
   return (
     <View
@@ -19,13 +22,14 @@ const Error = () => {
         style={{
           justifyContent: 'center',
           alignItems: 'center',
-          position: 'absolute',
-          bottom: 80,
-          left: 20,
-          backgroundColor: colors.card,
+          backgroundColor: colors.background,
+          bottom: 240,
         }}>
-        <TextEle variant="subTitle2" style={{ color: colors.notification }}>
-          Error Occurred! Check your internet connection. Will fill your plate soon!
+        <TextEle variant="error" style={{ color: '#ff7f00', textAlign: 'center' }}>
+          OOPS!!
+        </TextEle>
+        <TextEle variant="error1" style={{ color: '#ff7f00', textAlign: 'center' }}>
+          {errMsg}
         </TextEle>
       </View>
     </View>
