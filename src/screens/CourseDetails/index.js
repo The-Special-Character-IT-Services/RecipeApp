@@ -16,6 +16,7 @@ import { v4 as uuidv4 } from 'uuid';
 // import { format, subDays } from 'date-fns';
 import { useHeaderHeight } from '@react-navigation/stack';
 import useSWR from 'swr';
+import ActionButton from '@components/ActionButton';
 import { courseQuery } from '@hooks/useCoursesApiHook';
 import Loading from '@components/loading';
 import TextEle from '../../components/TextEle';
@@ -29,9 +30,9 @@ const YOUTUBE_VIDEO_HEIGHT = (deviceWidth / 16) * 9;
 
 const styles = StyleSheet.create({
   text: {
-    color: '#fff'
-  }
-})
+    color: '#fff',
+  },
+});
 
 const CourseDetails = ({ route, navigation }) => {
   const { id, userId } = route.params;
@@ -280,6 +281,9 @@ const CourseDetails = ({ route, navigation }) => {
           </View>
         </BottomSheetScrollView>
       </BottomSheet>
+      <View style={{ position: 'absolute', left: 400, top: 640 }}>
+        <ActionButton />
+      </View>
       <RAButton1
         style={{ position: 'absolute', bottom: 10, width: '100%' }}
         variant="fill"
