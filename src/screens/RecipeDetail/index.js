@@ -1,17 +1,12 @@
-import BottomSheet, { BottomSheetScrollView, BottomSheetView } from '@gorhom/bottom-sheet';
 import { useTheme } from '@react-navigation/native';
-import { useHeaderHeight } from '@react-navigation/stack';
 import PropTypes from 'prop-types';
-import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
-import React, { useMemo, useRef } from 'react';
-import { View, Dimensions, ScrollView, Text } from 'react-native';
+import React from 'react';
+import { View, Dimensions, ScrollView } from 'react-native';
 import Image from 'react-native-fast-image';
 import { RectButton } from 'react-native-gesture-handler';
 import Ingrediants from '@components/Ingrediants';
 import TextEle from '@components/TextEle';
 import Preparation from '@components/Preparation';
-import { courseQuery } from '@hooks/useCoursesApiHook';
-import useSWR from 'swr';
 import Play from '../../assets/icons/play.svg';
 
 const { height: windowHeight, width: windowWidth } = Dimensions.get('window');
@@ -19,13 +14,10 @@ const { height: windowHeight, width: windowWidth } = Dimensions.get('window');
 const RecipeDetail = ({ route, navigation }) => {
   const { colors } = useTheme();
   const { item } = route.params;
-  const headerHeight = useHeaderHeight();
-  const bottomSheetRef = useRef(null);
-  const snapPoints = useMemo(() => [windowHeight * 0.6, '100%'], []);
 
   return (
     <ScrollView showsVerticalScrollIndicator={false} style={{ flex: 1 }}>
-      <View style={{}}>
+      <View>
         <Image
           style={{
             borderBottomLeftRadius: 30,
@@ -39,11 +31,13 @@ const RecipeDetail = ({ route, navigation }) => {
           style={{
             justifyContent: 'center',
             alignItems: 'center',
-            padding: 10,
+            padding: 20,
+            marginBottom: 10,
           }}>
-          <TextEle variant="header1" style={{ fontWeight: 'bold' }}>
+          <TextEle variant="header1" style={{ marginBottom: 10 }}>
             {item.name}
           </TextEle>
+          <View style={{ height: 2, width: 150, backgroundColor: colors.text }} />
           {/* <Text style={{fontWeight:'bold'}}>{item.name}</Text> */}
         </View>
         <View
