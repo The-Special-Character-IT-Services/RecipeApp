@@ -18,9 +18,9 @@ import { useHeaderHeight } from '@react-navigation/stack';
 import useSWR from 'swr';
 import ActionButton from '@components/ActionButton';
 import { courseQuery } from '@hooks/useCoursesApiHook';
+import useMarkdownRules from '@hooks/useMarkdownRules';
 import Loading from '@components/loading';
 import TextEle from '../../components/TextEle';
-import useMarkdownRules from '@hooks/useMarkdownRules';
 
 const subt = `Recipes in this write-up are protected by copyright law. Reproduction and distribution
 of the same without a written consent from Studio D’ Food Couture is prohibited. ©
@@ -228,7 +228,6 @@ const CourseDetails = ({ route, navigation }) => {
               </TextEle>
               <TextEle variant="body2" style={{ paddingVertical: 10, color: 'gray', width: 120 }}>
                 Launching on
-                {'  '}
                 {data?.course?.launchDate
                   ? format(new Date(data?.course?.launchDate), 'yyyy-MM-dd HH:mm')
                   : data?.course?.launchDate}

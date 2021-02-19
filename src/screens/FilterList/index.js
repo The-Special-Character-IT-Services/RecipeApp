@@ -1,10 +1,11 @@
 /* eslint-disable react/prop-types */
 /* eslint-disable react-native/no-inline-styles */
-import React, { useCallback, useState } from 'react';
+import React, { useCallback, useRef, useState } from 'react';
 import { View, ActivityIndicator, FlatList } from 'react-native';
 import { useTheme } from '@react-navigation/native';
 import { useSWRInfinite } from 'swr';
 import { getInfiniteFilteredCourses } from '@hooks/useCoursesApiHook';
+import LottieView from 'lottie-react-native';
 import Image from 'react-native-fast-image';
 import SearchBar from '../../components/Search';
 import TextEle from '../../components/TextEle';
@@ -12,6 +13,8 @@ import TextEle from '../../components/TextEle';
 const ITEM_HEIGHT = 100;
 
 const FilterList = ({ route }) => {
+  const animation = useRef(null);
+
   const { where, userId } = route.params;
   const { data, isValidating, size, setSize } = useSWRInfinite((...props) =>
     getInfiniteFilteredCourses(...props, where, userId),
@@ -25,6 +28,8 @@ const FilterList = ({ route }) => {
   };
 
   const keyExtractor = useCallback(item => `${item?.id}`, []);
+
+  // console.log(data[1].courses.length);
 
   const renderItem = useCallback(
     ({ item }) => (
@@ -60,6 +65,24 @@ const FilterList = ({ route }) => {
     [],
   );
 
+  console.log(data?.reduce((p, c) => [...p, ...c.courses], []).length === 0);
+
+  if (data?.reduce((p, c) => [...p, ...c.courses], []).length === 0) {
+    return (
+      <View style={{ alignItems: 'center' }}>
+        <LottieView
+          ref={animation}
+          source={require('@assets/lottie/9923-box-empty.json')}
+          style={{ height: 600, width: 600 }}
+          autoPlay
+          loop
+        />
+        <TextEle variant="error" style={{ color: colors.primary }}>
+          Sorry! no data available
+        </TextEle>
+      </View>
+    );
+  }
   return (
     <View style={{ flex: 1 }}>
       <View style={{ paddingTop: 10 }}>
