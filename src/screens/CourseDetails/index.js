@@ -30,9 +30,9 @@ const YOUTUBE_VIDEO_HEIGHT = (deviceWidth / 16) * 9;
 
 const styles = StyleSheet.create({
   text: {
-    color: '#fff'
-  }
-})
+    color: '#fff',
+  },
+});
 
 const CourseDetails = ({ route, navigation }) => {
   const { id, userId } = route.params;
@@ -281,7 +281,7 @@ const CourseDetails = ({ route, navigation }) => {
           </View>
         </BottomSheetScrollView>
       </BottomSheet>
-      <View style={{ position: 'absolute', left: 370, top: 560 }}>
+      <View style={{ position: 'absolute', left: 400, top: 640 }}>
         <ActionButton />
       </View>
       <RAButton1
