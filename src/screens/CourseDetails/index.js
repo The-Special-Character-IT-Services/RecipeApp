@@ -4,7 +4,8 @@ import PropTypes from 'prop-types';
 import { useTheme } from '@react-navigation/native';
 import React, { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import YoutubePlayer from 'react-native-youtube-iframe';
-import { View, StatusBar } from 'react-native';
+import { View, StatusBar, StyleSheet } from 'react-native';
+import Markdown from 'react-native-markdown-renderer';
 import { deviceWidth, deviceHeight, showErrorToast } from '@utils/index';
 import RAButton1 from '@components/RAButton1';
 import axios from 'axios';
@@ -18,12 +19,19 @@ import useSWR from 'swr';
 import { courseQuery } from '@hooks/useCoursesApiHook';
 import Loading from '@components/loading';
 import TextEle from '../../components/TextEle';
+import useMarkdownRules from '@hooks/useMarkdownRules';
 
 const subt = `Recipes in this write-up are protected by copyright law. Reproduction and distribution
 of the same without a written consent from Studio D’ Food Couture is prohibited. ©
 Studio De Food Couture `;
 
 const YOUTUBE_VIDEO_HEIGHT = (deviceWidth / 16) * 9;
+
+const styles = StyleSheet.create({
+  text: {
+    color: '#fff'
+  }
+})
 
 const CourseDetails = ({ route, navigation }) => {
   const { id, userId } = route.params;
@@ -36,6 +44,8 @@ const CourseDetails = ({ route, navigation }) => {
   const snapPoints = useMemo(() => [deviceHeight - YOUTUBE_VIDEO_HEIGHT - headerHeight, '100%'], [
     headerHeight,
   ]);
+
+  const rules = useMarkdownRules();
 
   useEffect(() => {
     if (error) {
@@ -266,9 +276,7 @@ const CourseDetails = ({ route, navigation }) => {
           </View>
           <View style={{ marginBottom: 100 }}>
             <TextEle>Varieties:-</TextEle>
-            <TextEle variant="body1" style={{ textAlign: 'justify', width: 350 }}>
-              {data?.course?.description}
-            </TextEle>
+            <Markdown rules={rules}>{data?.course?.description}</Markdown>
           </View>
         </BottomSheetScrollView>
       </BottomSheet>
