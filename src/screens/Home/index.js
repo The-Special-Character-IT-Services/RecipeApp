@@ -13,6 +13,7 @@ import EventScreen from '../TabEvent';
 // import CartButton from '../CartButton';
 // import CartScreen from '../CartScreen';
 import YoutubeScreen from '../TabYoutube';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const Tab = createBottomTabNavigator();
 
@@ -73,9 +74,9 @@ const TabProfile = () => {
           headerShown: true,
           headerLeft: false,
           headerRight: () => (
-            <View style={{ flexDirection: 'row' }}>
-              <Pressable onPress={() => navigation.navigate('Login')}>
-                <Text style={{ color: colors.primary, fontSize: 17, marginRight: 20 }}>Logout</Text>
+            <View style={{ flexDirection: 'row', marginRight: 20 }}>
+              <Pressable onPress={() => navigation.navigate('Login', AsyncStorage.clear())}>
+                <Icon name="log-out-outline" color={colors.primary} size={24} />
               </Pressable>
             </View>
           ),

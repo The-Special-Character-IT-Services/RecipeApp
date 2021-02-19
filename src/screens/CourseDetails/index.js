@@ -15,6 +15,7 @@ import { v4 as uuidv4 } from 'uuid';
 // import { format, subDays } from 'date-fns';
 import { useHeaderHeight } from '@react-navigation/stack';
 import useSWR from 'swr';
+import ActionButton from '@components/ActionButton';
 import { courseQuery } from '@hooks/useCoursesApiHook';
 import Loading from '@components/loading';
 import TextEle from '../../components/TextEle';
@@ -272,6 +273,9 @@ const CourseDetails = ({ route, navigation }) => {
           </View>
         </BottomSheetScrollView>
       </BottomSheet>
+      <View style={{ position: 'absolute', left: 370, top: 560 }}>
+        <ActionButton />
+      </View>
       <RAButton1
         style={{ position: 'absolute', bottom: 10, width: '100%' }}
         variant="fill"
