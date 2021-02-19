@@ -14,10 +14,10 @@ export const CARD_WIDTH = windowWidth * 0.9;
 
 const cardInset = (windowWidth - CARD_WIDTH) / 1.4;
 
-const Preparation = () => {
+const Preparation = ({ preparation }) => {
   const { colors } = useTheme();
   const flatListRef = useRef(null);
-
+  console.log(preparation);
   useEffect(() => {
     flatListRef.current.scrollToOffset({
       animated: false,
@@ -26,12 +26,6 @@ const Preparation = () => {
   }, []);
   return (
     <>
-      <View style={{ marginHorizontal: 30, marginTop: 20 }}>
-        <TextEle variant="header2">Maxican Salad</TextEle>
-        <TextEle variant="caption" numberOfLines={2} style={{ color: 'gray' }}>
-          Get ready for a healthy and tasty tour of Maxican Salad
-        </TextEle>
-      </View>
       <View
         style={{
           marginVertical: 10,
@@ -47,8 +41,7 @@ const Preparation = () => {
         </View>
         <FlatList
           ref={flatListRef}
-          data={data}
-          horizontal
+          data={preparation}
           pagingEnabled
           snapToAlignment="center"
           decelerationRate="fast"
@@ -66,7 +59,7 @@ const Preparation = () => {
               paddingHorizontal: Platform.OS === 'android' ? cardInset : 0,
             },
           ]}
-          showsHorizontalScrollIndicator={false}
+          showsVerticalScrollIndicatorr={false}
           renderItem={({ item }) => (
             <View style={{ width: CARD_WIDTH }}>
               <ListItem item={item} cardWidth={CARD_WIDTH} />

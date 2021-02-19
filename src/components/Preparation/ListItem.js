@@ -11,7 +11,7 @@ const ListItem = ({ item, cardWidth }) => {
     <View key={item.id} style={{ width: cardWidth }}>
       <View style={{ marginHorizontal: 5 }}>
         <Image
-          source={item.img}
+          source={{ uri: item?.image?.url }}
           style={{
             height: 230,
             width: 330,
@@ -19,7 +19,7 @@ const ListItem = ({ item, cardWidth }) => {
           }}
         />
         <TextEle variant="caption" style={{ color: colors.text, marginTop: 20 }}>
-          {item.text}
+          {item?.description}
         </TextEle>
       </View>
     </View>

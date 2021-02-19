@@ -2,7 +2,7 @@
 import BottomSheet, { BottomSheetFlatList, BottomSheetScrollView } from '@gorhom/bottom-sheet';
 import PropTypes from 'prop-types';
 import { useTheme } from '@react-navigation/native';
-import React, { useMemo, useRef, useState } from 'react';
+import React, { useContext, useMemo, useRef, useState } from 'react';
 import YoutubePlayer from 'react-native-youtube-iframe';
 import { View, StatusBar, Dimensions } from 'react-native';
 import Image from 'react-native-fast-image';
@@ -11,9 +11,9 @@ import { deviceWidth, deviceHeight } from '@utils/index';
 import { useHeaderHeight } from '@react-navigation/stack';
 import useSWR from 'swr';
 import Icon from 'react-native-vector-icons/Ionicons';
-import { RectButton } from 'react-native-gesture-handler';
+import { RectButton, BorderlessButton } from 'react-native-gesture-handler';
 import { courseQuery } from '@hooks/useCoursesApiHook';
-import { BorderlessButton } from 'react-native-gesture-handler';
+
 import Loading from '@components/loading';
 import TextEle from '../../components/TextEle';
 
@@ -87,7 +87,7 @@ const CourseDetailsBought = ({ route, navigation }) => {
           height: 40,
           width: 40,
         }}
-        onPress={() => navigation.navigate('RecipeDetail', item)}>
+        onPress={() => navigation.navigate('RecipeDetail', { item })}>
         <Icon name="play-outline" size={24} color={colors.background} />
       </BorderlessButton>
     </View>

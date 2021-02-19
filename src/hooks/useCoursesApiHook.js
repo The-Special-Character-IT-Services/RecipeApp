@@ -74,6 +74,7 @@ export const courseQuery = (id, userId) => `{
       recipeImage {
         name
         url
+        formats
       }
       isIndividual {
         price
@@ -82,6 +83,23 @@ export const courseQuery = (id, userId) => `{
       categories {
         id
         name
+      }
+      ingredients {
+        id
+        ingredient {
+          name
+          image {
+            url
+          }
+        }
+      }
+      steps {
+        id
+        description
+        image {
+          id
+          formats
+        }
       }
     }
     like_event(where: { user: { id: ${userId} } }) {

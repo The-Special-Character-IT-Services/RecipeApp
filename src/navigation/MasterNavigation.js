@@ -118,8 +118,7 @@ const MainStackScreen = ({ navigation }) => {
         options={{
           headerRight: () => (
             <View style={{ flexDirection: 'row' }}>
-              <ShareButton />
-              <LikeButton />
+              <LikeButton withBackground={false} />
             </View>
           ),
           headerShown: true,
