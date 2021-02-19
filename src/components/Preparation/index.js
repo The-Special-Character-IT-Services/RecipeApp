@@ -12,18 +12,10 @@ const { width: windowWidth } = Dimensions.get('window');
 
 export const CARD_WIDTH = windowWidth * 0.9;
 
-const cardInset = (windowWidth - CARD_WIDTH) / 1.4;
-
 const Preparation = ({ preparation }) => {
   const { colors } = useTheme();
   const flatListRef = useRef(null);
-  console.log(preparation);
-  useEffect(() => {
-    flatListRef.current.scrollToOffset({
-      animated: false,
-      offset: -cardInset,
-    });
-  }, []);
+
   return (
     <>
       <View
@@ -31,7 +23,7 @@ const Preparation = ({ preparation }) => {
           marginVertical: 10,
         }}>
         <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
-          <TextEle variant="subTitle1" style={{ paddingHorizontal: 30, marginVertical: 10 }}>
+          <TextEle variant="subTitle1" style={{ margin: 20 }}>
             Preparation
           </TextEle>
           <View style={{ flexDirection: 'row', alignItems: 'center', padding: 1 }}>
@@ -39,27 +31,10 @@ const Preparation = ({ preparation }) => {
             <TextEle style={{ alignItems: 'center', paddingRight: 20 }}> 35` </TextEle>
           </View>
         </View>
-        <View>
+        <View style={{ marginHorizontal: 15 }}>
           <FlatList
             ref={flatListRef}
             data={preparation}
-            pagingEnabled
-            snapToAlignment="center"
-            decelerationRate="fast"
-            scrollEventThrottle={16}
-            snapToInterval={CARD_WIDTH}
-            renderToHardwareTextureAndroid
-            contentInset={{
-              top: 0,
-              left: cardInset,
-              bottom: 0,
-              right: cardInset,
-            }}
-            contentContainerStyle={[
-              {
-                paddingHorizontal: Platform.OS === 'android' ? cardInset : 0,
-              },
-            ]}
             showsVerticalScrollIndicatorr={false}
             renderItem={({ item }) => (
               <View style={{ width: CARD_WIDTH }}>

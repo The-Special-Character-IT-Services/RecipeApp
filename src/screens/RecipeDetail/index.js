@@ -24,7 +24,7 @@ const RecipeDetail = ({ route, navigation }) => {
   const snapPoints = useMemo(() => [windowHeight * 0.6, '100%'], []);
 
   return (
-    <ScrollView showsVerticalScrollIndicator={false}>
+    <ScrollView showsVerticalScrollIndicator={false} style={{ flex: 1 }}>
       <View style={{}}>
         <Image
           style={{

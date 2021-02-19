@@ -24,32 +24,32 @@ const Ingrediants = ({ ingredients }) => {
     {
       id: 1,
       img: require('../../assets/images/EroticSandwich.png'),
-      TextHeading: 'Lip Smacking Soup',
+      TextHeading: 'Tomato',
     },
     {
       id: 2,
       img: require('../../assets/images/pulavspecial.png'),
-      TextHeading: 'Lip Smacking Soup',
+      TextHeading: 'Lemon',
     },
     {
       id: 3,
       img: require('../../assets/images/WinterSpecialVasana.png'),
-      TextHeading: 'Lip Smacking Soup',
+      TextHeading: 'Onion',
     },
     {
       id: 4,
       img: require('../../assets/images/WinterSpecialVasana.png'),
-      TextHeading: 'Lip Smacking Soup',
+      TextHeading: 'Cheese',
     },
     {
       id: 5,
       img: require('../../assets/images/WinterSpecialVasana.png'),
-      TextHeading: 'Lip Smacking Soup',
+      TextHeading: 'Salt',
     },
     {
       id: 6,
       img: require('../../assets/images/WinterSpecialVasana.png'),
-      TextHeading: 'Lip Smacking Soup',
+      TextHeading: 'Garlic',
     },
   ];
 
@@ -59,35 +59,37 @@ const Ingrediants = ({ ingredients }) => {
     <>
       <View style={{ flex: 1 }}>
         <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
-          <TextEle variant="subTitle1" style={{ paddingHorizontal: 30, marginVertical: 20 }}>
+          <TextEle variant="subTitle1" style={{ margin: 20 }}>
             Ingrediants
           </TextEle>
         </View>
-        <FlatList
-          ref={flatListRef}
-          data={image}
-          contentContainerStyle={{ marginHorizontal: 15 }}
-          horizontal
-          showsHorizontalScrollIndicator={false}
-          renderItem={({ item }) => (
-            <View style={{ marginHorizontal: 5 }}>
-              <Image
-                source={item.img}
-                style={{
-                  height: 100,
-                  width: 100,
-                  borderRadius: 20,
-                }}
-              />
-              <TextEle variant="caption" style={{ color: colors.text, marginTop: 20 }}>
-                {/* {item?.ingredient?.name} */}
-                {item.TextHeading}
-              </TextEle>
-            </View>
-          )}
-          removeClippedSubviews
-          keyExtractor={item => `${item.id}`}
-        />
+        <View style={{}}>
+          <FlatList
+            ref={flatListRef}
+            data={image}
+            contentContainerStyle={{ paddingHorizontal: 15 }}
+            horizontal
+            showsHorizontalScrollIndicator={false}
+            renderItem={({ item }) => (
+              <View style={{ paddingHorizontal: 5, alignItems: 'center' }}>
+                <Image
+                  source={item.img}
+                  style={{
+                    height: 100,
+                    width: 100,
+                    borderRadius: 20,
+                  }}
+                />
+                <TextEle variant="caption" style={{ color: colors.text, marginTop: 20 }}>
+                  {/* {item?.ingredient?.name} */}
+                  {item.TextHeading}
+                </TextEle>
+              </View>
+            )}
+            removeClippedSubviews
+            keyExtractor={item => `${item.id}`}
+          />
+        </View>
       </View>
     </>
   );
