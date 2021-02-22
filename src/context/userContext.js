@@ -9,9 +9,7 @@ const UserProvider = ({ children }) => {
   useEffect(() => {
     const loadUser = async () => {
       const token = await getToken();
-      if (token) {
-        setUser(token.user);
-      }
+      setUser(token?.user);
     };
     loadUser();
   }, []);

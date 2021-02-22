@@ -17,8 +17,6 @@ import fetcher from '@utils/fetcher';
 import UserProvider from '@context/userContext';
 import Toast from 'react-native-toast-message';
 import NetInfo from '@react-native-community/netinfo';
-import AsyncStorage from '@react-native-async-storage/async-storage';
-import { FOODCOUTURE_TOKEN } from '@constants/';
 import { isIOS } from './src/utils';
 import YoutubeFilter from './src/screens/YoutubeFilter';
 
@@ -35,19 +33,8 @@ const App = () => {
 
   const currentTheme = scheme === 'dark' ? RADarkTheme : RALightTheme;
   const [isInternetAvailable, setIsInternetAvailable] = useState(true);
-  const [isAuth, setIsAuth] = useState(false);
 
   useEffect(() => {
-    const checkAuth = async () => {
-      const value = await AsyncStorage.getItem(FOODCOUTURE_TOKEN);
-      if (value === null) {
-        setIsAuth(false);
-      } else {
-        setIsAuth(true);
-      }
-    };
-
-    checkAuth();
     SplashScreen.hide();
 
     const unsubscribe = NetInfo.addEventListener(state => {
@@ -109,7 +96,6 @@ const App = () => {
                     headerTintColor: currentTheme.colors.primary,
                     cardStyleInterpolator: CardStyleInterpolators.forFadeFromBottomAndroid,
                   }}
-                  initialParams={{ isAuth }}
                 />
                 <RootStack.Screen
                   name="PaymentSuccess"
