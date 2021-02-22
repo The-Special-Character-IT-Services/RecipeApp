@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import PropTypes from 'prop-types';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { createStackNavigator } from '@react-navigation/stack';
@@ -6,6 +6,8 @@ import { useTheme } from '@react-navigation/native';
 import Icon from 'react-native-vector-icons/Ionicons';
 import { BorderlessButton } from 'react-native-gesture-handler';
 import { Pressable, View, Text } from 'react-native';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import { UserContext } from '@context/userContext';
 import TabHome from '../TabHome';
 import LikesScreen from '../TabLikes';
 import ProfileScreen from '../TabProfile';
@@ -13,7 +15,6 @@ import EventScreen from '../TabEvent';
 // import CartButton from '../CartButton';
 // import CartScreen from '../CartScreen';
 import YoutubeScreen from '../TabYoutube';
-import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const Tab = createBottomTabNavigator();
 
@@ -73,13 +74,20 @@ const TabProfile = () => {
           title: 'Profile',
           headerShown: true,
           headerLeft: false,
-          headerRight: () => (
-            <View style={{ flexDirection: 'row', marginRight: 20 }}>
-              <Pressable onPress={() => navigation.navigate('Login', AsyncStorage.clear())}>
-                <Icon name="log-out-outline" color={colors.primary} size={24} />
-              </Pressable>
-            </View>
-          ),
+          headerRight: () => {
+            const { setUser } = useContext(UserContext);
+            return (
+              <View style={{ flexDirection: 'row', marginRight: 20 }}>
+                <Pressable
+                  onPress={() => {
+                    AsyncStorage.clear();
+                    setUser(null);
+                  }}>
+                  <Icon name="log-out-outline" color={colors.primary} size={24} />
+                </Pressable>
+              </View>
+            );
+          },
           headerTitleAlign: 'center',
           headerTintColor: colors.primary,
         })}

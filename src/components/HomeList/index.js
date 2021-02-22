@@ -1,4 +1,5 @@
 import Carousal from '@components/Carousal';
+import Loading from '@components/loading';
 import TextEle from '@components/TextEle';
 import { coursesQuery } from '@hooks/useCoursesApiHook';
 import { useTheme } from '@react-navigation/native';
@@ -6,6 +7,7 @@ import PropTypes from 'prop-types';
 import React from 'react';
 import { Pressable, View } from 'react-native';
 import useSWR from 'swr';
+import ListItem from './ListItem';
 
 const HomeList = ({ title, onPressViewAll, onRecipePress, userId }) => {
   const { colors } = useTheme();
@@ -17,6 +19,10 @@ const HomeList = ({ title, onPressViewAll, onRecipePress, userId }) => {
       userId,
     }),
   ]);
+
+  if (!data) {
+    return <Loading />;
+  }
   return (
     <>
       <View
@@ -35,8 +41,24 @@ const HomeList = ({ title, onPressViewAll, onRecipePress, userId }) => {
       </View>
       <Carousal
         data={data?.courses || []}
-        onRecipePress={item => onRecipePress(item)}
-        onPressViewAll={onPressViewAll}
+        renderItem={(item, cardWidth) => (
+          <ListItem item={item} onRecipePress={() => onRecipePress(item)} cardWidth={cardWidth} />
+        )}
+        ListFooterComponent={cardWidth => (
+          <Pressable
+            onPress={onPressViewAll}
+            style={{
+              width: cardWidth,
+              height: 225,
+              justifyContent: 'center',
+              alignItems: 'center',
+              backgroundColor: colors.card,
+              borderRadius: 20,
+            }}>
+            <TextEle style={{ color: colors.primary }}>View All</TextEle>
+          </Pressable>
+        )}
+        keyExtractor={item => `${item.id}`}
       />
     </>
   );

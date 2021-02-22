@@ -2,7 +2,7 @@
 /* eslint-disable react/jsx-curly-newline */
 /* eslint-disable react-native/no-inline-styles */
 /* eslint-disable no-unused-expressions */
-import React, { useContext, useRef, useState } from 'react';
+import React, { useCallback, useContext, useRef, useState } from 'react';
 import PropTypes from 'prop-types';
 import { Pressable } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
@@ -12,6 +12,7 @@ import SearchBar from '@components/Search';
 import Cuisines from '@components/Cuisines';
 import HomeList from '@components/HomeList';
 import { UserContext } from '@context/userContext';
+import debounce from 'lodash.debounce';
 import Header from '../Header';
 
 const TabHome = ({ navigation }) => {
@@ -19,9 +20,12 @@ const TabHome = ({ navigation }) => {
   const insets = useSafeAreaInsets();
   const { user } = useContext(UserContext);
   const [text, setText] = useState('');
-  const onchangeText = val => {
-    setText(val);
-  };
+  const handler = useCallback(
+    debounce(val => {
+      setText(val);
+    }, 2000),
+    [],
+  );
 
   return (
     <ScrollView
@@ -30,12 +34,7 @@ const TabHome = ({ navigation }) => {
       contentContainerStyle={{ paddingTop: insets.top, paddingBottom: insets.bottom }}>
       <Header onProfilePress={() => navigation.navigate('Profile')} />
       <Pressable ref={playerRef} onPress={() => navigation.navigate('Search')}>
-        <SearchBar
-          editable={false}
-          selectTextOnFocus={false}
-          onchangeText={onchangeText}
-          value={text}
-        />
+        <SearchBar editable={false} selectTextOnFocus={false} onchangeText={handler} value={text} />
       </Pressable>
       <Category
         onCategoryDetails={() => navigation.navigate('FilterList', { name: 'Search Category' })}

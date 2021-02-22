@@ -2,18 +2,19 @@
 /* eslint-disable react-native/no-inline-styles */
 import { useTheme } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
-import React from 'react';
+import React, { useContext } from 'react';
 import { Pressable, View, Text } from 'react-native';
 
 import ShareButton from '@components/ShareButton';
 import LikeButton from '@components/LikeButton';
 import YoutubeVideo from '@screens/YoutubeVideo';
+import { UserContext } from '@context/userContext';
 
 const MainStack = createStackNavigator();
 
 const MainStackScreen = ({ route }) => {
   const { colors } = useTheme();
-  const { isAuth } = route.params;
+  const { user } = useContext(UserContext);
 
   return (
     <MainStack.Navigator
@@ -22,7 +23,7 @@ const MainStackScreen = ({ route }) => {
         headerTintColor: colors.primary,
         title: false,
       }}>
-      {isAuth ? (
+      {user ? (
         <>
           <MainStack.Screen name="Home" getComponent={() => require('@screens/Home').default} />
           <MainStack.Screen
