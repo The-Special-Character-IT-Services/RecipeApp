@@ -63,33 +63,31 @@ const Ingrediants = ({ ingredients }) => {
             Ingrediants
           </TextEle>
         </View>
-        <View style={{}}>
-          <FlatList
-            ref={flatListRef}
-            data={image}
-            contentContainerStyle={{ paddingHorizontal: 15 }}
-            horizontal
-            showsHorizontalScrollIndicator={false}
-            renderItem={({ item }) => (
-              <View style={{ paddingHorizontal: 5, alignItems: 'center' }}>
-                <Image
-                  source={item.img}
-                  style={{
-                    height: 100,
-                    width: 100,
-                    borderRadius: 20,
-                  }}
-                />
-                <TextEle variant="caption" style={{ color: colors.text, marginTop: 20 }}>
-                  {/* {item?.ingredient?.name} */}
-                  {item.TextHeading}
-                </TextEle>
-              </View>
-            )}
-            removeClippedSubviews
-            keyExtractor={item => `${item.id}`}
-          />
-        </View>
+        <FlatList
+          ref={flatListRef}
+          data={ingredients}
+          contentContainerStyle={{ paddingHorizontal: 15 }}
+          horizontal
+          showsHorizontalScrollIndicator={false}
+          renderItem={({ item }) => (
+            <View style={{ paddingHorizontal: 5, alignItems: 'center' }}>
+              <Image
+                source={require('../../assets/images/noImage2.png')}
+                style={{
+                  height: 100,
+                  width: 100,
+                  borderRadius: 20,
+                }}
+              />
+              <TextEle variant="caption" style={{ color: colors.text, marginTop: 20 }}>
+                {item?.ingredient?.name}
+                {/* {item.TextHeading} */}
+              </TextEle>
+            </View>
+          )}
+          removeClippedSubviews
+          keyExtractor={item => `${item.id}`}
+        />
       </View>
     </>
   );

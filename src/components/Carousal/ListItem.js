@@ -44,7 +44,7 @@ const ListItem = ({ onRecipePress, item, cardWidth }) => {
             }}>
             <Rating rating={rating} length={1} totalRating={item.rattings.length} />
           </View>
-          {isPurchased && (
+          {!isPurchased && (
             <View
               style={{
                 alignItems: 'center',
