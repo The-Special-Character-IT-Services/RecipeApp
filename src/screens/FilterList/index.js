@@ -77,9 +77,20 @@ const FilterList = ({ route }) => {
           autoPlay
           loop
         />
-        <TextEle variant="error" style={{ color: colors.primary }}>
-          Sorry! no data available
-        </TextEle>
+        <View
+          style={{
+            justifyContent: 'center',
+            alignItems: 'center',
+            backgroundColor: colors.background,
+            bottom: 240,
+          }}>
+          <TextEle variant="error" style={{ color: '#ff7f00', textAlign: 'center' }}>
+            Sorry!!
+          </TextEle>
+          <TextEle variant="error1" style={{ color: '#ff7f00', textAlign: 'center' }}>
+            No data available
+          </TextEle>
+        </View>
       </View>
     );
   }
