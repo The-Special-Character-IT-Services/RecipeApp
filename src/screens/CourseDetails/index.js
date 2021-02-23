@@ -28,11 +28,11 @@ Studio De Food Couture `;
 
 const YOUTUBE_VIDEO_HEIGHT = (deviceWidth / 16) * 9;
 
-const styles = StyleSheet.create({
-  text: {
-    color: '#fff',
-  },
-});
+// const styles = StyleSheet.create({
+//   text: {
+//     color: '#fff',
+//   },
+// });
 
 const CourseDetails = ({ route, navigation }) => {
   const { id, userId } = route.params;

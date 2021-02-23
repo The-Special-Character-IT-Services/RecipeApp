@@ -6,6 +6,7 @@ import LottieView from 'lottie-react-native';
 import { Pressable } from 'react-native';
 import useSWR from 'swr';
 import axios from '../../utils/axios';
+import { showErrorToast } from '@utils/';
 
 const LikeButton = ({ courseId, withBackground = true }) => {
   const { colors } = useTheme();
@@ -24,7 +25,7 @@ const LikeButton = ({ courseId, withBackground = true }) => {
       }
       mutate([likesQuery(user.id, courseId)]);
     } catch (error) {
-      console.error(error);
+      showErrorToast(error);
     }
   };
 

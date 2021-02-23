@@ -33,8 +33,6 @@ const cardInset = (windowWidth - CARD_WIDTH) / 1.5;
 
 const CourseDetailsBought = ({ route, navigation, item }) => {
   const { id, userId } = route.params;
-  console.log('id', id);
-  console.log('userId', userId);
   const { colors } = useTheme();
   const { data: courseDetail, mutate } = useSWR([courseQuery(id, userId)]);
   const [playing, setPlaying] = useState(false);
@@ -49,8 +47,6 @@ const CourseDetailsBought = ({ route, navigation, item }) => {
       (courseDetail?.course?.rattings || []).reduce((p, c, i, a) => p + c.ratting / a.length, 0),
     [courseDetail?.course?.rattings],
   );
-
-  console.log('courseDetail', courseDetail?.course?.rattings);
 
   const onRatingpress = async ratting => {
     try {

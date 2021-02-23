@@ -28,6 +28,12 @@ TextEle.propTypes = {
     'caption',
     'buttonText',
     'overlineText',
+    'h1',
+    'h2',
+    'h3',
+    'p1',
+    'p2',
+    's',
   ]),
   style: Text.propTypes.style,
 };

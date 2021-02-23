@@ -32,9 +32,9 @@ const HomeList = ({ title, onPressViewAll, onRecipePress, userId }) => {
           marginHorizontal: 20,
           marginVertical: 10,
         }}>
-        <TextEle variant="h1">{title}</TextEle>
+        <TextEle variant="header1">{title}</TextEle>
         <Pressable onPress={onPressViewAll}>
-          <TextEle variant="h2" style={{ color: colors.primary }}>
+          <TextEle variant="header2" style={{ color: colors.primary }}>
             View All
           </TextEle>
         </Pressable>
