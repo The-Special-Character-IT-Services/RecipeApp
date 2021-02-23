@@ -239,7 +239,7 @@ const CourseDetails = ({ route, navigation }) => {
                 Total Recipes covered
               </TextEle>
               <TextEle variant="body2" style={{ paddingVertical: 10, color: 'gray', width: 120 }}>
-                {/* {data?.course?.recipes} */}
+                {data?.course?.recipes.length}
               </TextEle>
             </View>
             <View style={{ height: 1, width: 400, backgroundColor: 'gray' }} />

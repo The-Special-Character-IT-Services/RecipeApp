@@ -92,11 +92,6 @@ const MainStackScreen = ({ route }) => {
             name="RecipeDetail"
             getComponent={() => require('@screens/RecipeDetail').default}
             options={{
-              headerRight: () => (
-                <View style={{ flexDirection: 'row' }}>
-                  <LikeButton withBackground={false} />
-                </View>
-              ),
               headerShown: true,
               headerTransparent: 1,
               headerTintColor: colors.primary,

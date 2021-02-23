@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import { useTheme } from '@react-navigation/native';
 import React, { useContext, useMemo, useRef, useState } from 'react';
 import YoutubePlayer from 'react-native-youtube-iframe';
-import { View, StatusBar, Dimensions } from 'react-native';
+import { View, StatusBar, Dimensions, Pressable } from 'react-native';
 import Image from 'react-native-fast-image';
 import { deviceWidth, deviceHeight } from '@utils/index';
 // import { format, subDays } from 'date-fns';
@@ -18,6 +18,7 @@ import { courseQuery } from '@hooks/useCoursesApiHook';
 
 import Loading from '@components/loading';
 import TextEle from '../../components/TextEle';
+import { likesQuery } from '@hooks/useLikesApiHook';
 
 const subt = `Recipes in this write-up are protected by copyright law. Reproduction and distribution
 of the same without a written consent from Studio D’ Food Couture is prohibited. ©
@@ -34,7 +35,7 @@ const cardInset = (windowWidth - CARD_WIDTH) / 1.5;
 const CourseDetailsBought = ({ route, navigation, item }) => {
   const { id, userId } = route.params;
   const { colors } = useTheme();
-  const { data: courseDetail, isValidating } = useSWR([courseQuery(id, userId)]);
+  const { data: courseDetail, isValidating, mutate } = useSWR([courseQuery(id, userId)]);
   const [playing, setPlaying] = useState(false);
   const headerHeight = useHeaderHeight();
   const bottomSheetRef = useRef(null);
@@ -46,18 +47,21 @@ const CourseDetailsBought = ({ route, navigation, item }) => {
     [courseDetail?.rattings],
   );
 
+  console.log(courseDetail?.course?.rattings);
+
   const onRatingpress = async rattings => {
     try {
-      if (data?.likes?.length === 0) {
+      console.log(courseDetail?.rattings);
+      if (courseDetail?.rattings?.length === 0) {
         await axios.post('rattings', {
           user: userId,
           course: id,
           rattings,
         });
       } else {
-        await axios.delete(`likes/${data.likes[0].id}`);
+        await axios.delete(`likes/${courseDetail?.rattings?.ratting?.id}`);
       }
-      mutate([likesQuery(user.id, courseId)]);
+      mutate([courseQuery(id, userId)]);
     } catch (error) {
       console.error(error);
     }
@@ -70,16 +74,17 @@ const CourseDetailsBought = ({ route, navigation, item }) => {
   console.log(courseDetail);
 
   const renderItem = ({ item }) => (
-    <View
+    <Pressable
       key={item?.id}
       style={{
-        flexDirection: 'row',
-        alignItems: 'center',
         marginVertical: 10,
         marginHorizontal: 10,
-      }}>
+        alignItems: 'center',
+        flexDirection: 'row',
+      }}
+      onPress={() => navigation.navigate('RecipeDetail', { item })}>
       <Image
-        source={{ uri: item.recipeImage.url }}
+        source={{ uri: item?.recipeImage?.url }}
         style={{ height: 80, width: 100, borderRadius: 10 }}
       />
       <View style={{ flex: 1, height: '100%', paddingHorizontal: 12 }}>
@@ -102,20 +107,18 @@ const CourseDetailsBought = ({ route, navigation, item }) => {
           {item.cookingLevel}
         </TextEle>
       </View>
-
-      <BorderlessButton
+      <View
         style={{
+          backgroundColor: colors.primary,
+          borderRadius: 24,
           justifyContent: 'center',
           alignItems: 'center',
-          backgroundColor: colors.primary,
-          borderRadius: 20,
           height: 40,
           width: 40,
-        }}
-        onPress={() => navigation.navigate('RecipeDetail', { item })}>
+        }}>
         <Icon name="play-outline" size={24} color={colors.background} />
-      </BorderlessButton>
-    </View>
+      </View>
+    </Pressable>
   );
 
   return (
@@ -157,8 +160,8 @@ const CourseDetailsBought = ({ route, navigation, item }) => {
           }}>
           <View style={{ marginBottom: 100 }}>
             <View>
-              <TextEle variant="subTitle2">Gujarati Farsaan </TextEle>
-              <TextEle variant="caption">Gujarati</TextEle>
+              <TextEle variant="subTitle2">{courseDetail?.course?.name}</TextEle>
+              <TextEle variant="caption">{courseDetail?.course?.caption}</TextEle>
               <View>
                 <TextEle variant="caption">{courseDetail?.course?.cuisine?.name}</TextEle>
                 <View style={{ alignItems: 'flex-start' }}>
