@@ -16,7 +16,7 @@
 		2D02E4BD1E0B4A84006451C7 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB51A68108700A75B9A /* Images.xcassets */; };
 		2D02E4BF1E0B4AB3006451C7 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB71A68108700A75B9A /* main.m */; };
 		2DCD954D1E0B4F2C00145EB5 /* FoodCoutureTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 00E356F21AD99517003FC87E /* FoodCoutureTests.m */; };
-		3157C8C125A1A2B20065672C /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3157C8C025A1A2B20065672C /* GoogleService-Info.plist */; };
+		3164410425E5105F001A646E /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3164410325E5105F001A646E /* GoogleService-Info.plist */; };
 		31C53D9025A1C9CF00478AD0 /* File.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31C53D8F25A1C9CF00478AD0 /* File.swift */; };
 		33592F7053DC40D4B2CD919A /* Inter-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 96021E3B1291493D83B90A7D /* Inter-Bold.ttf */; };
 		33FD81CD01404454B3753E0F /* Inter-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = D6F825241FA640988D611F81 /* Inter-Regular.ttf */; };
@@ -60,26 +60,26 @@
 		13B07FB51A68108700A75B9A /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Images.xcassets; path = FoodCouture/Images.xcassets; sourceTree = "<group>"; };
 		13B07FB61A68108700A75B9A /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Info.plist; path = FoodCouture/Info.plist; sourceTree = "<group>"; };
 		13B07FB71A68108700A75B9A /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = main.m; path = FoodCouture/main.m; sourceTree = "<group>"; };
-		2AA75608AB0D4A1FBCBE7AB5 /* Inter-SemiBold.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = "Inter-SemiBold.ttf"; path = "../assets/fonts/Inter-SemiBold.ttf"; sourceTree = "<group>"; };
+		2AA75608AB0D4A1FBCBE7AB5 /* Inter-SemiBold.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Inter-SemiBold.ttf"; path = "../assets/fonts/Inter-SemiBold.ttf"; sourceTree = "<group>"; };
 		2D02E47B1E0B4A5D006451C7 /* FoodCouture-tvOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "FoodCouture-tvOS.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		2D02E4901E0B4A5D006451C7 /* FoodCouture-tvOSTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "FoodCouture-tvOSTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
-		3157C8C025A1A2B20065672C /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../../../Downloads/GoogleService-Info.plist"; sourceTree = "<group>"; };
 		3157C92525A1A9F90065672C /* FoodCouture.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; name = FoodCouture.entitlements; path = FoodCouture/FoodCouture.entitlements; sourceTree = "<group>"; };
-		31A2100BFC59457F84A64D5E /* Inter-Black.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = "Inter-Black.ttf"; path = "../assets/fonts/Inter-Black.ttf"; sourceTree = "<group>"; };
+		3164410325E5105F001A646E /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		31A2100BFC59457F84A64D5E /* Inter-Black.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Inter-Black.ttf"; path = "../assets/fonts/Inter-Black.ttf"; sourceTree = "<group>"; };
 		31C53D8A25A1C94400478AD0 /* FoodCouture-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "FoodCouture-Bridging-Header.h"; sourceTree = "<group>"; };
 		31C53D8F25A1C9CF00478AD0 /* File.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = File.swift; path = FoodCouture/File.swift; sourceTree = "<group>"; };
-		482733B52FC74B5AB1AF99CF /* Inter-ExtraLight.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = "Inter-ExtraLight.ttf"; path = "../assets/fonts/Inter-ExtraLight.ttf"; sourceTree = "<group>"; };
-		4FCD7E2A5E3446E7B44A6C23 /* Inter-Light.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = "Inter-Light.ttf"; path = "../assets/fonts/Inter-Light.ttf"; sourceTree = "<group>"; };
-		51387A3F371C4560B6D44570 /* Inter-ExtraBold.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = "Inter-ExtraBold.ttf"; path = "../assets/fonts/Inter-ExtraBold.ttf"; sourceTree = "<group>"; };
+		482733B52FC74B5AB1AF99CF /* Inter-ExtraLight.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Inter-ExtraLight.ttf"; path = "../assets/fonts/Inter-ExtraLight.ttf"; sourceTree = "<group>"; };
+		4FCD7E2A5E3446E7B44A6C23 /* Inter-Light.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Inter-Light.ttf"; path = "../assets/fonts/Inter-Light.ttf"; sourceTree = "<group>"; };
+		51387A3F371C4560B6D44570 /* Inter-ExtraBold.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Inter-ExtraBold.ttf"; path = "../assets/fonts/Inter-ExtraBold.ttf"; sourceTree = "<group>"; };
 		6EFDE0D55C5D1DADBA82996C /* Pods-FoodCouture.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FoodCouture.release.xcconfig"; path = "Target Support Files/Pods-FoodCouture/Pods-FoodCouture.release.xcconfig"; sourceTree = "<group>"; };
 		78E32710788A6D0ADCF1D29A /* Pods-FoodCouture-FoodCoutureTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FoodCouture-FoodCoutureTests.release.xcconfig"; path = "Target Support Files/Pods-FoodCouture-FoodCoutureTests/Pods-FoodCouture-FoodCoutureTests.release.xcconfig"; sourceTree = "<group>"; };
 		81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = LaunchScreen.storyboard; path = FoodCouture/LaunchScreen.storyboard; sourceTree = "<group>"; };
-		96021E3B1291493D83B90A7D /* Inter-Bold.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = "Inter-Bold.ttf"; path = "../assets/fonts/Inter-Bold.ttf"; sourceTree = "<group>"; };
+		96021E3B1291493D83B90A7D /* Inter-Bold.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Inter-Bold.ttf"; path = "../assets/fonts/Inter-Bold.ttf"; sourceTree = "<group>"; };
 		A8A7ABED3AF64BDA8A6314F7 /* Pods-FoodCouture-FoodCoutureTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FoodCouture-FoodCoutureTests.debug.xcconfig"; path = "Target Support Files/Pods-FoodCouture-FoodCoutureTests/Pods-FoodCouture-FoodCoutureTests.debug.xcconfig"; sourceTree = "<group>"; };
 		AA25D048D73F113E821CBD91 /* libPods-FoodCouture-FoodCoutureTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-FoodCouture-FoodCoutureTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
-		D6F825241FA640988D611F81 /* Inter-Regular.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = "Inter-Regular.ttf"; path = "../assets/fonts/Inter-Regular.ttf"; sourceTree = "<group>"; };
-		DF48303FE91C4B43B01E9EC1 /* Inter-Medium.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = "Inter-Medium.ttf"; path = "../assets/fonts/Inter-Medium.ttf"; sourceTree = "<group>"; };
-		E2CFD9AB58604878860666A7 /* Inter-Thin.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = "Inter-Thin.ttf"; path = "../assets/fonts/Inter-Thin.ttf"; sourceTree = "<group>"; };
+		D6F825241FA640988D611F81 /* Inter-Regular.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Inter-Regular.ttf"; path = "../assets/fonts/Inter-Regular.ttf"; sourceTree = "<group>"; };
+		DF48303FE91C4B43B01E9EC1 /* Inter-Medium.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Inter-Medium.ttf"; path = "../assets/fonts/Inter-Medium.ttf"; sourceTree = "<group>"; };
+		E2CFD9AB58604878860666A7 /* Inter-Thin.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Inter-Thin.ttf"; path = "../assets/fonts/Inter-Thin.ttf"; sourceTree = "<group>"; };
 		E6102A57E7AFA74CA0C187E1 /* libPods-FoodCouture.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-FoodCouture.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		ED297162215061F000B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = System/Library/Frameworks/JavaScriptCore.framework; sourceTree = SDKROOT; };
 		ED2971642150620600B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = Platforms/AppleTVOS.platform/Developer/SDKs/AppleTVOS12.0.sdk/System/Library/Frameworks/JavaScriptCore.framework; sourceTree = DEVELOPER_DIR; };
@@ -139,8 +139,8 @@
 		13B07FAE1A68108700A75B9A /* FoodCouture */ = {
 			isa = PBXGroup;
 			children = (
+				3164410325E5105F001A646E /* GoogleService-Info.plist */,
 				3157C92525A1A9F90065672C /* FoodCouture.entitlements */,
-				3157C8C025A1A2B20065672C /* GoogleService-Info.plist */,
 				008F07F21AC5B25A0029DE68 /* main.jsbundle */,
 				13B07FAF1A68108700A75B9A /* AppDelegate.h */,
 				13B07FB01A68108700A75B9A /* AppDelegate.m */,
@@ -224,7 +224,6 @@
 				E2CFD9AB58604878860666A7 /* Inter-Thin.ttf */,
 			);
 			name = Resources;
-			path = "";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -374,10 +373,10 @@
 			files = (
 				81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */,
 				13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */,
-				3157C8C125A1A2B20065672C /* GoogleService-Info.plist in Resources */,
 				C1E063489AA542BE9BC87F0E /* Inter-Black.ttf in Resources */,
 				33592F7053DC40D4B2CD919A /* Inter-Bold.ttf in Resources */,
 				AD59870D50994EBCADCF0178 /* Inter-ExtraBold.ttf in Resources */,
+				3164410425E5105F001A646E /* GoogleService-Info.plist in Resources */,
 				CDE11C963EEA4A3784221208 /* Inter-ExtraLight.ttf in Resources */,
 				1A915D44C0864E63B245D41E /* Inter-Light.ttf in Resources */,
 				B48734B5E15D41D6A90D29B9 /* Inter-Medium.ttf in Resources */,
