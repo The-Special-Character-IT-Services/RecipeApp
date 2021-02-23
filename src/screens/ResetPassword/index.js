@@ -31,7 +31,6 @@ const ResetPassword = ({ navigation, route }) => {
         routes: [{ name: 'Home' }],
       });
     } catch (error) {
-      console.error(error);
       showErrorToast(error);
     }
   };

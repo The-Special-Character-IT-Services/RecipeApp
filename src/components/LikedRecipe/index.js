@@ -7,10 +7,10 @@ import { RectButton } from 'react-native-gesture-handler';
 import { useTheme } from '@react-navigation/native';
 import useSWR from 'swr';
 import { UserContext } from '@context/userContext';
+import LikeButton from '@components/LikeButton';
 import Loading from '@components/loading';
 import { coursesQuery } from '@hooks/useCoursesApiHook';
 import TextEle from '../TextEle';
-import LikeButton from '@components/LikeButton';
 
 const LikedRecipe = ({ onRecipeDetail }) => {
   const { colors } = useTheme();
@@ -36,9 +36,9 @@ const LikedRecipe = ({ onRecipeDetail }) => {
   return (
     <View style={{ flex: 1, backgroundColor: colors.background, borderRadius: 20 }}>
       <View style={{ flexDirection: 'row', paddingHorizontal: 20 }}>
-        <View style={{ paddingTop: 5, flexDirection: 'row', alignItems: 'center' }} />
+        <View style={{ flexDirection: 'row', alignItems: 'center' }} />
       </View>
-      <ScrollView contentContainerStyle={{ paddingVertical: 10, paddingHorizontal: 20 }}>
+      <ScrollView contentContainerStyle={{ paddingVertical: 5, paddingHorizontal: 15 }}>
         {data?.courses.map(item => (
           <View>
             <RectButton
@@ -47,7 +47,6 @@ const LikedRecipe = ({ onRecipeDetail }) => {
               key={item.id}
               style={{
                 backgroundColor: colors.background,
-                margin: 5,
               }}>
               <Image
                 source={{
@@ -56,7 +55,8 @@ const LikedRecipe = ({ onRecipeDetail }) => {
                 style={{ aspectRatio: 16 / 9, borderRadius: 20 }}
               />
               <View style={{ flexDirection: 'row', flex: 1 }}>
-                <View style={{ flexDirection: 'column', flex: 1, paddingRight: 20 }}>
+                <View
+                  style={{ flexDirection: 'column', flex: 1, paddingRight: 20, paddingBottom: 10 }}>
                   <TextEle style={{ paddingTop: 10 }} numberOfLines={1} variant="h1">
                     {item.name}
                   </TextEle>

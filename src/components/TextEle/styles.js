@@ -17,7 +17,6 @@ const styles = StyleSheet.create({
   error1: {
     fontSize: 20,
     fontWeight: '500',
-    fontFamily: 'Roboto',
   },
   title: {
     fontSize: 24,

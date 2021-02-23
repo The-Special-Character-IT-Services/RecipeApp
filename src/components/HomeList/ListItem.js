@@ -103,9 +103,7 @@ const ListItem = ({ onRecipePress, item, cardWidth }) => {
 
 ListItem.propTypes = {
   item: PropTypes.shape({
-    purchase_details: PropTypes.shape({
-      some: PropTypes.number,
-    }).isRequired,
+    purchase_details: PropTypes.arrayOf(PropTypes.object).isRequired,
     id: PropTypes.number,
     name: PropTypes.string,
     Description: PropTypes.string,

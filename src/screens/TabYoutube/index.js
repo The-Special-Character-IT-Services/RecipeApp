@@ -7,7 +7,7 @@ import axios from 'axios';
 import Config from 'react-native-config';
 import TextEle from '@components/TextEle';
 import { RectButton } from 'react-native-gesture-handler';
-import { deviceWidth } from '@utils/index';
+import { deviceWidth, showErrorToast } from '@utils/index';
 import Form from '@components/Form';
 import Loading from '@components/loading';
 import { useTheme } from '@react-navigation/native';
@@ -39,7 +39,7 @@ const TabYoutube = ({ navigation }) => {
         items: [...(prevYoutubeData?.items || []), ...res.data.items],
       }));
     } catch (error) {
-      console.error(error);
+      showErrorToast(error);
     } finally {
       setLoading(false);
     }

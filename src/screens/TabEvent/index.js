@@ -8,9 +8,9 @@ import { View } from 'react-native';
 import { UserContext } from '@context/userContext';
 import Loading from '@components/loading';
 import { FlatList, RectButton } from 'react-native-gesture-handler';
+import LikeButton from '@components/LikeButton';
 import TextEle from '@components/TextEle';
 import SearchBar from '../../components/Search';
-import LikeButton from '@components/LikeButton';
 
 const ITEM_HEIGHT = 200;
 
