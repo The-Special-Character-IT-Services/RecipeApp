@@ -2,11 +2,11 @@
 import BottomSheet, { BottomSheetFlatList, BottomSheetScrollView } from '@gorhom/bottom-sheet';
 import PropTypes from 'prop-types';
 import { useTheme } from '@react-navigation/native';
-import React, { useContext, useMemo, useRef, useState } from 'react';
+import React, { useMemo, useRef, useState } from 'react';
 import YoutubePlayer from 'react-native-youtube-iframe';
 import { View, StatusBar, Dimensions } from 'react-native';
 import Image from 'react-native-fast-image';
-import { deviceWidth, deviceHeight } from '@utils/index';
+import { deviceWidth, deviceHeight, showErrorToast } from '@utils/index';
 // import { format, subDays } from 'date-fns';
 import { useHeaderHeight } from '@react-navigation/stack';
 import useSWR from 'swr';
@@ -33,41 +33,50 @@ const cardInset = (windowWidth - CARD_WIDTH) / 1.5;
 
 const CourseDetailsBought = ({ route, navigation, item }) => {
   const { id, userId } = route.params;
+  console.log('id', id);
+  console.log('userId', userId);
   const { colors } = useTheme();
-  const { data: courseDetail, isValidating } = useSWR([courseQuery(id, userId)]);
+  const { data: courseDetail, mutate } = useSWR([courseQuery(id, userId)]);
   const [playing, setPlaying] = useState(false);
   const headerHeight = useHeaderHeight();
   const bottomSheetRef = useRef(null);
   const snapPoints = useMemo(() => [deviceHeight - YOUTUBE_VIDEO_HEIGHT - headerHeight, '100%'], [
     headerHeight,
   ]);
+
   const rating = useMemo(
-    () => (courseDetail?.rattings || []).reduce((p, c, i, a) => p + c.ratting / a.length, 0),
-    [courseDetail?.rattings],
+    () =>
+      (courseDetail?.course?.rattings || []).reduce((p, c, i, a) => p + c.ratting / a.length, 0),
+    [courseDetail?.course?.rattings],
   );
 
-  const onRatingpress = async rattings => {
+  console.log('courseDetail', courseDetail?.course?.rattings);
+
+  const onRatingpress = async ratting => {
     try {
-      if (data?.likes?.length === 0) {
+      const ratt = courseDetail?.course?.rattings.find(x => Number(x.user.id) === Number(userId));
+      if (ratt) {
+        await axios.put(`rattings/${ratt.id}`, {
+          user: userId,
+          course: id,
+          ratting,
+        });
+      } else {
         await axios.post('rattings', {
           user: userId,
           course: id,
-          rattings,
+          ratting,
         });
-      } else {
-        await axios.delete(`likes/${data.likes[0].id}`);
       }
-      mutate([likesQuery(user.id, courseId)]);
+      mutate();
     } catch (error) {
-      console.error(error);
+      showErrorToast(error);
     }
   };
 
-  if (isValidating) {
+  if (!courseDetail?.course) {
     return <Loading />;
   }
-
-  console.log(courseDetail);
 
   const renderItem = ({ item }) => (
     <View

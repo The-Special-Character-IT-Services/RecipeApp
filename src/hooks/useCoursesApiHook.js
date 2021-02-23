@@ -111,7 +111,11 @@ export const courseQuery = (id, userId) => `{
       }
     }
     rattings {
+      id
       ratting
+      user {
+        id
+      }
     }
     purchase_details(where: { user_id: { id: ${userId} } }) {
       user_id {
