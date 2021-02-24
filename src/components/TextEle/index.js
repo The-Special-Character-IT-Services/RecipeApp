@@ -34,6 +34,8 @@ TextEle.propTypes = {
     'p1',
     'p2',
     's',
+    'error',
+    'error1',
   ]),
   style: Text.propTypes.style,
 };

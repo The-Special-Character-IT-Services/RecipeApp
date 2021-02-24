@@ -39,11 +39,4 @@ const Header = () => {
   );
 };
 
-Header.propTypes = {
-  navigation: PropTypes.shape({
-    navigate: PropTypes.func,
-  }).isRequired,
-  onProfilePress: PropTypes.func.isRequired,
-};
-
 export default Header;

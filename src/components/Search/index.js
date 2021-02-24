@@ -65,7 +65,5 @@ const Search = ({ text, clearText, ...rest }) => {
 
 Search.propTypes = {
   onchangeText: PropTypes.func.isRequired,
-  text: PropTypes.string.isRequired,
-  clearText: PropTypes.func.isRequired,
 };
 export default Search;

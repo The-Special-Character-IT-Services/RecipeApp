@@ -9,7 +9,7 @@ export const CARD_WIDTH = windowWidth * 0.9;
 
 const cardInset = (windowWidth - CARD_WIDTH) / 1.5;
 
-const Carousal = ({ renderItem, ListFooterComponent, ...rest }) => {
+const Carousal = ({ renderItem, ListFooterComponent, onRecipePress, ...rest }) => {
   const flatListRef = useRef(null);
   useEffect(() => {
     flatListRef.current.scrollToOffset({
@@ -51,7 +51,8 @@ const Carousal = ({ renderItem, ListFooterComponent, ...rest }) => {
 };
 
 Carousal.propTypes = {
-  onRecipePress: PropTypes.func.isRequired,
+  ListFooterComponent: PropTypes.func.isRequired,
+  renderItem: PropTypes.func.isRequired,
 };
 
 export default Carousal;
