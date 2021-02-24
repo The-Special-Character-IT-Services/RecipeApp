@@ -9,6 +9,7 @@ import { coursesQuery } from '@hooks/useCoursesApiHook';
 import MyRecipes from './pages/MyRecipes';
 import Settings from './pages/Settings';
 import SavedVideos from './pages/SavedVideos';
+import { lastItem } from 'country-codes-list/countriesData';
 
 const { width: windowWidth } = Dimensions.get('window');
 const Tab = createMaterialTopTabNavigator();
@@ -59,7 +60,7 @@ const Profile = () => {
             {data?.courses?.map((x, i) => (
               <>
                 {i !== 0 && i !== 3 && (
-                  <View style={{ height: 40, width: 1, backgroundColor: 'gray' }} />
+                  <View key={x.id} style={{ height: 40, width: 1, backgroundColor: 'gray' }} />
                 )}
                 <View
                   key={x.text}
