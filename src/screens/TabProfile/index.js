@@ -1,9 +1,11 @@
 import { useTheme } from '@react-navigation/native';
 import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
-import React from 'react';
+import React, { useContext } from 'react';
 import { Dimensions, View } from 'react-native';
-import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import TextEle from '@components/TextEle';
+import { UserContext } from '@context/userContext';
+import useSWR from 'swr';
+import { coursesQuery } from '@hooks/useCoursesApiHook';
 import MyRecipes from './pages/MyRecipes';
 import Settings from './pages/Settings';
 import SavedVideos from './pages/SavedVideos';
@@ -11,27 +13,26 @@ import SavedVideos from './pages/SavedVideos';
 const { width: windowWidth } = Dimensions.get('window');
 const Tab = createMaterialTopTabNavigator();
 
-const data = [
-  {
-    text: 'Recipes',
-    value: 43,
-  },
-  {
-    text: 'Liked',
-    value: 12,
-  },
-  {
-    text: 'Saves',
-    value: 10,
-  },
-];
+// const data = [
+//   {
+//     text: 'Liked',
+//     value: 12,
+//   },
+//   {
+//     text: 'Saves',
+//     value: 0,
+//   },
+// ];
 
 const Profile = () => {
   const { colors } = useTheme();
-  const insets = useSafeAreaInsets();
+  const { user } = useContext(UserContext);
+  const { data } = useSWR([
+    coursesQuery({ pageIndex: 0, limit: 5, sort: 'updated_at:ASC', userId: user?.id }),
+  ]);
 
   return (
-    <View style={{ flex: 1, paddingTop: insets.top }}>
+    <View style={{ flex: 1 }}>
       <View
         style={{
           borderBottomEndRadius: 30,
@@ -55,9 +56,11 @@ const Profile = () => {
               height: 100,
               marginVertical: 20,
             }}>
-            {data.map((x, i) => (
+            {data?.courses?.map((x, i) => (
               <>
-                {i !== 0 && <View style={{ height: 40, width: 1, backgroundColor: 'gray' }} />}
+                {i !== 0 && i !== 3 && (
+                  <View style={{ height: 40, width: 1, backgroundColor: 'gray' }} />
+                )}
                 <View
                   key={x.text}
                   style={{
@@ -65,9 +68,15 @@ const Profile = () => {
                     alignItems: 'center',
                     flexDirection: 'column',
                   }}>
-                  <TextEle variant="header2">{x.value}</TextEle>
+                  <TextEle variant="header2" style={{ color: colors.text }}>
+                    {i === 0 && x?.purchase_details?.length}
+                    {i === 1 && x?.like_event?.length}
+                    {i === 2 && 0}
+                  </TextEle>
                   <TextEle variant="body2" style={{ color: colors.text }}>
-                    {x.text}
+                    {i === 0 && 'Courses'}
+                    {i === 1 && 'liked'}
+                    {i === 2 && 'Saved'}
                   </TextEle>
                 </View>
               </>

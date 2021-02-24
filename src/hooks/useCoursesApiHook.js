@@ -1,9 +1,9 @@
 export const coursesQuery = ({ pageIndex, limit, sort = 'id:ASC', where = '{}', userId }) => `{
   courses(
     start: ${pageIndex * 10},
-     limit: ${limit},
-      sort: "${sort}",
-       where: ${where}) {
+    limit: ${limit},
+    sort: "${sort}",
+    where: ${where}) {
     id
     name
     caption
@@ -12,9 +12,22 @@ export const coursesQuery = ({ pageIndex, limit, sort = 'id:ASC', where = '{}', 
     launchDate
     image {
       url
+      formats
     }
-    recipes {
+    recipes{
       id
+      name
+      recipeImage{
+        url
+      }
+    }
+    like_event(where: { user: { id: ${userId} } }) {
+      course {
+        id
+      }
+      user {
+        id
+      }
     }
     rattings {
       id

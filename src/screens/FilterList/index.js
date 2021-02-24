@@ -82,7 +82,7 @@ const FilterList = ({ route }) => {
             justifyContent: 'center',
             alignItems: 'center',
             backgroundColor: colors.background,
-            bottom: 240,
+            bottom: 150,
           }}>
           <TextEle variant="error" style={{ color: '#ff7f00', textAlign: 'center' }}>
             Sorry!!
