@@ -13,7 +13,7 @@ const Category = ({ onCategoryDetails }) => {
   const { colors } = useTheme();
   const { data } = useCategoriesApi();
   if (!data?.categories) {
-    return <Loading />;
+    return <Loading style={{ flex: 1, height: 100 }} />;
   }
   return (
     <View>

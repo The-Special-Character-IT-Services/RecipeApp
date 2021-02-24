@@ -54,16 +54,8 @@ const RecipeDetail = ({ route, navigation }) => {
           </View>
         </View>
       </ScrollView>
-      <View>
+      <View style={{ marginVertical: 20, marginHorizontal: 15 }}>
         <RAButton1
-          style={{
-            position: 'absolute',
-            bottom: 10,
-            justifyContent: 'center',
-            marginVertical: 20,
-            height: 55,
-            width: '100%',
-          }}
           variant="fill"
           text="Watch Video"
           icon="play"

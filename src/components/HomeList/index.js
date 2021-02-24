@@ -21,7 +21,11 @@ const HomeList = ({ title, onPressViewAll, onRecipePress, userId }) => {
   ]);
 
   if (!data) {
-    return <Loading />;
+    return (
+      <View style={{ flex: 1, height: 400 }}>
+        <Loading />
+      </View>
+    );
   }
   return (
     <>

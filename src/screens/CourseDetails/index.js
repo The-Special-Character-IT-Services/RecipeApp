@@ -178,7 +178,7 @@ const CourseDetails = ({ route, navigation }) => {
   }
 
   return (
-    <View style={{ flex: 1 }}>
+    <View style={{ flex: 1, padding: 16 }}>
       <StatusBar hidden />
       <YoutubePlayer
         play={playing}
@@ -212,7 +212,6 @@ const CourseDetails = ({ route, navigation }) => {
           style={{
             paddingVertical: 10,
             paddingHorizontal: 20,
-            flex: 1,
             backgroundColor: colors.background,
           }}>
           <View style={{ justifyContent: 'center', alignItems: 'center', marginBottom: 20 }}>
@@ -226,7 +225,7 @@ const CourseDetails = ({ route, navigation }) => {
               <TextEle variant="body2" style={{ paddingVertical: 10 }}>
                 Duration
               </TextEle>
-              <TextEle variant="body2" style={{ paddingVertical: 10, color: 'gray', width: 120 }}>
+              <TextEle variant="body2" style={{ paddingVertical: 10, color: 'gray', width: 100 }}>
                 Launching on
                 {data?.course?.launchDate
                   ? format(new Date(data?.course?.launchDate), 'yyyy-MM-dd HH:mm')
@@ -238,7 +237,7 @@ const CourseDetails = ({ route, navigation }) => {
               <TextEle variant="body2" style={{ paddingVertical: 10 }}>
                 Total Recipes covered
               </TextEle>
-              <TextEle variant="body2" style={{ paddingVertical: 10, color: 'gray', width: 120 }}>
+              <TextEle variant="body2" style={{ paddingVertical: 10, color: 'gray', width: 100 }}>
                 {data?.course?.recipes.length}
               </TextEle>
             </View>
@@ -247,7 +246,7 @@ const CourseDetails = ({ route, navigation }) => {
               <TextEle variant="body2" style={{ paddingVertical: 10 }}>
                 Video Validity
               </TextEle>
-              <TextEle variant="body2" style={{ paddingVertical: 10, color: 'gray', width: 120 }}>
+              <TextEle variant="body2" style={{ paddingVertical: 10, color: 'gray', width: 100 }}>
                 {data?.course?.validity}
               </TextEle>
             </View>
@@ -256,7 +255,7 @@ const CourseDetails = ({ route, navigation }) => {
               <TextEle variant="body2" style={{ paddingVertical: 10 }}>
                 Written Recipe
               </TextEle>
-              <TextEle variant="body2" style={{ paddingVertical: 10, color: 'gray', width: 120 }}>
+              <TextEle variant="body2" style={{ paddingVertical: 10, color: 'gray', width: 100 }}>
                 Available
               </TextEle>
             </View>
@@ -283,19 +282,27 @@ const CourseDetails = ({ route, navigation }) => {
       {/* <View style={{ position: 'absolute', left: 400, top: 640 }}>
         <ActionButton />
       </View> */}
-      <RAButton1
-        style={{ position: 'absolute', bottom: 10, width: '100%' }}
-        variant="fill"
-        text={`Buy For ${new Intl.NumberFormat('en-IN', {
-          style: 'currency',
-          currency: 'INR',
-          maximumFractionDigits: 0,
-          minimumFractionDigits: 0,
-        }).format(data?.course?.price || 0)}`}
-        onPress={buyCourse}
-        disable={loading}
-        loading={loading}
-      />
+      <View
+        style={{
+          position: 'absolute',
+          bottom: 10,
+          width: '100%',
+          justifyContent: 'center',
+          // margin: 20,
+        }}>
+        <RAButton1
+          variant="fill"
+          text={`Buy For ${new Intl.NumberFormat('en-IN', {
+            style: 'currency',
+            currency: 'INR',
+            maximumFractionDigits: 0,
+            minimumFractionDigits: 0,
+          }).format(data?.course?.price || 0)}`}
+          onPress={buyCourse}
+          disable={loading}
+          loading={loading}
+        />
+      </View>
     </View>
   );
 };
