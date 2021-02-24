@@ -28,11 +28,11 @@ Studio De Food Couture `;
 
 const YOUTUBE_VIDEO_HEIGHT = (deviceWidth / 16) * 9;
 
-const styles = StyleSheet.create({
-  text: {
-    color: '#fff',
-  },
-});
+// const styles = StyleSheet.create({
+//   text: {
+//     color: '#fff',
+//   },
+// });
 
 const CourseDetails = ({ route, navigation }) => {
   const { id, userId } = route.params;
@@ -239,7 +239,7 @@ const CourseDetails = ({ route, navigation }) => {
                 Total Recipes covered
               </TextEle>
               <TextEle variant="body2" style={{ paddingVertical: 10, color: 'gray', width: 120 }}>
-                {/* {data?.course?.recipes} */}
+                {data?.course?.recipes.length}
               </TextEle>
             </View>
             <View style={{ height: 1, width: 400, backgroundColor: 'gray' }} />

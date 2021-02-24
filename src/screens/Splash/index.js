@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 import SplashScreen from 'react-native-splash-screen';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { FOODCOUTURE_TOKEN } from '@constants/index';
+import { showErrorToast } from '@utils/';
 
 const Splash = ({ navigation }) => {
   const checkAuth = useCallback(async () => {
@@ -18,7 +19,7 @@ const Splash = ({ navigation }) => {
         navigation.replace('Initial');
       }
     } catch (e) {
-      // error reading value
+      showErrorToast(e);
     }
   }, [navigation]);
 

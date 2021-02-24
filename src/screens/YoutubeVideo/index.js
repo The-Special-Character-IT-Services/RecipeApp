@@ -5,6 +5,7 @@ import YoutubePlayer from 'react-native-youtube-iframe';
 import Config from 'react-native-config';
 import axios from 'axios';
 import TextEle from '@components/TextEle';
+import { showErrorToast } from '@utils/';
 
 const { width: deviceWidth } = Dimensions.get('window');
 
@@ -20,7 +21,7 @@ const YoutubeVideo = ({ route }) => {
       const res = await axios.get(`${Config.YOUTUBE_VIDEO_API}/videos?${query}`);
       setYoutubeData(res.data);
     } catch (error) {
-      console.error(error);
+      showErrorToast(error);
     }
   }, [videoId]);
 

@@ -53,8 +53,6 @@ const Ingrediants = ({ ingredients }) => {
     },
   ];
 
-  console.log(ingredients);
-
   return (
     <>
       <View style={{ flex: 1 }}>

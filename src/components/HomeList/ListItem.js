@@ -15,13 +15,13 @@ const ListItem = ({ onRecipePress, item, cardWidth }) => {
   ]);
 
   const isPurchased = item.purchase_details.some(
-    x => x.course.id === item.id && x.status === 'purchased',
+    x => x.course.id === item?.id && x.status === 'purchased',
   );
 
   const { colors } = useTheme();
 
   return (
-    <Pressable onPress={() => onRecipePress(item)} key={item.id} style={{ width: cardWidth - 10 }}>
+    <Pressable onPress={() => onRecipePress(item)} key={item?.id} style={{ width: cardWidth - 10 }}>
       <ImageBackground
         style={{ height: 225, width: cardWidth - 10 }}
         imageStyle={{ borderRadius: 20 }}
@@ -42,7 +42,7 @@ const ListItem = ({ onRecipePress, item, cardWidth }) => {
               borderRadius: 10,
               padding: 2,
             }}>
-            <Rating rating={rating} length={1} totalRating={item.rattings.length} />
+            <Rating rating={rating} length={1} totalRating={item?.rattings?.length} />
           </View>
           {!isPurchased && (
             <View
@@ -78,7 +78,7 @@ const ListItem = ({ onRecipePress, item, cardWidth }) => {
       <View style={{ flexDirection: 'row', flex: 1 }}>
         <View style={{ flexDirection: 'column', flex: 1, paddingRight: 20 }}>
           <TextEle style={{ paddingTop: 10 }} numberOfLines={1} variant="h1">
-            {item.name}
+            {item?.name}
           </TextEle>
           <TextEle variant="p1">
             {new Intl.NumberFormat('en-IN', {
@@ -86,11 +86,11 @@ const ListItem = ({ onRecipePress, item, cardWidth }) => {
               currency: 'INR',
               maximumFractionDigits: 0,
               minimumFractionDigits: 0,
-            }).format(item.price)}
+            }).format(item?.price)}
           </TextEle>
         </View>
         <View style={{ marginVertical: 10 }}>
-          <LikeButton courseId={item.id} />
+          <LikeButton courseId={item?.id} />
         </View>
       </View>
       {/* <TextEle variant="h3" style={{ flexWrap: 'wrap', color: 'gray' }} numberOfLines={2}>
@@ -103,18 +103,17 @@ const ListItem = ({ onRecipePress, item, cardWidth }) => {
 
 ListItem.propTypes = {
   item: PropTypes.shape({
-    purchase_details: PropTypes.shape({
-      some: PropTypes.number,
-    }).isRequired,
-    id: PropTypes.number,
+    purchase_details: PropTypes.arrayOf(PropTypes.object).isRequired,
+    id: PropTypes.string,
     name: PropTypes.string,
     Description: PropTypes.string,
-    image: PropTypes.number,
+    image: PropTypes.shape({
+      url: PropTypes.string,
+    }).isRequired,
     price: PropTypes.number,
-    TextHeading: PropTypes.string,
     time: PropTypes.string,
     rating: PropTypes.string,
-    rattings: PropTypes.string,
+    rattings: PropTypes.arrayOf.isRequired,
   }).isRequired,
   onRecipePress: PropTypes.func.isRequired,
   cardWidth: PropTypes.number.isRequired,

@@ -29,8 +29,6 @@ const FilterList = ({ route }) => {
 
   const keyExtractor = useCallback(item => `${item?.id}`, []);
 
-  // console.log(data[1].courses.length);
-
   const renderItem = useCallback(
     ({ item }) => (
       <View
@@ -64,8 +62,6 @@ const FilterList = ({ route }) => {
     }),
     [],
   );
-
-  console.log(data?.reduce((p, c) => [...p, ...c.courses], []).length === 0);
 
   if (data?.reduce((p, c) => [...p, ...c.courses], []).length === 0) {
     return (

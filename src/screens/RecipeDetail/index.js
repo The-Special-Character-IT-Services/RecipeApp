@@ -3,11 +3,10 @@ import PropTypes from 'prop-types';
 import React from 'react';
 import { View, Dimensions, ScrollView } from 'react-native';
 import Image from 'react-native-fast-image';
-import { RectButton } from 'react-native-gesture-handler';
 import Ingrediants from '@components/Ingrediants';
 import TextEle from '@components/TextEle';
 import Preparation from '@components/Preparation';
-import Play from '../../assets/icons/play.svg';
+import RAButton1 from '@components/RAButton1';
 
 const { height: windowHeight, width: windowWidth } = Dimensions.get('window');
 
@@ -25,7 +24,11 @@ const RecipeDetail = ({ route, navigation }) => {
             height: windowHeight * 0.5,
             width: windowWidth,
           }}
-          source={{ uri: item?.recipeImage?.formats.medium.url }}
+          source={
+            item?.recipeImage?.formats?.medium?.url
+              ? { uri: item?.recipeImage?.formats?.medium?.url }
+              : require('../../assets/images/noImage2.png')
+          }
         />
         <View
           style={{
@@ -35,7 +38,7 @@ const RecipeDetail = ({ route, navigation }) => {
             marginBottom: 10,
           }}>
           <TextEle variant="header1" style={{ marginBottom: 10 }}>
-            {item.name}
+            {item?.name}
           </TextEle>
           <View style={{ height: 2, width: 150, backgroundColor: colors.text }} />
           {/* <Text style={{fontWeight:'bold'}}>{item.name}</Text> */}
@@ -45,10 +48,17 @@ const RecipeDetail = ({ route, navigation }) => {
             borderRadius: 16,
             backgroundColor: colors.background,
           }}>
-          <Ingrediants ingredients={item.ingredients} />
-          <Preparation preparation={item.steps} />
+          <Ingrediants ingredients={item?.ingredients} />
+          <Preparation preparation={item?.steps} />
         </View>
-        <RectButton
+        <RAButton1
+          style={{ marginHorizontal: 40, marginVertical: 20, height: 60 }}
+          variant="fill"
+          text="Watch Video"
+          icon="play"
+          onPress={() => navigation.navigate('RecipeVideo', { TextHeading, Description })}
+        />
+        {/* <RectButton
           onPress={() => navigation.navigate('RecipeVideo', { TextHeading, Description })}
           style={{
             marginHorizontal: 40,
@@ -59,10 +69,10 @@ const RecipeDetail = ({ route, navigation }) => {
             flexDirection: 'row',
             justifyContent: 'center',
             alignItems: 'center',
-          }}>
-          <Play height={24} width={24} fill="white" />
+          }}> */
+        /* <Play height={24} width={24} fill="white" />
           <TextEle style={{ color: 'white', paddingLeft: 10 }}>Watch Video</TextEle>
-        </RectButton>
+        </RectButton> */}
       </View>
     </ScrollView>
   );
