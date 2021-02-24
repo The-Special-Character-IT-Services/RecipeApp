@@ -15,50 +15,62 @@ const RecipeDetail = ({ route, navigation }) => {
   const { item } = route.params;
 
   return (
-    <ScrollView showsVerticalScrollIndicator={false} style={{ flex: 1 }}>
+    <>
+      <ScrollView showsVerticalScrollIndicator={false} style={{ flex: 1 }}>
+        <View>
+          <Image
+            style={{
+              borderBottomLeftRadius: 30,
+              borderBottomRightRadius: 30,
+              height: windowHeight * 0.5,
+              width: windowWidth,
+            }}
+            source={
+              item?.recipeImage?.formats?.medium?.url
+                ? { uri: item?.recipeImage?.formats?.medium?.url }
+                : require('../../assets/images/noImage2.png')
+            }
+          />
+          <View
+            style={{
+              justifyContent: 'center',
+              alignItems: 'center',
+              padding: 20,
+            }}>
+            <TextEle variant="title1" style={{ marginBottom: 10 }}>
+              {item?.name}
+            </TextEle>
+            <View style={{ height: 2, width: 150, backgroundColor: colors.text }} />
+            {/* <Text style={{fontWeight:'bold'}}>{item.name}</Text> */}
+          </View>
+          <View
+            style={{
+              borderRadius: 16,
+              marginBottom: 100,
+              backgroundColor: colors.background,
+            }}>
+            <Ingrediants ingredients={item?.ingredients} />
+            <Preparation preparation={item?.steps} />
+          </View>
+        </View>
+      </ScrollView>
       <View>
-        <Image
-          style={{
-            borderBottomLeftRadius: 30,
-            borderBottomRightRadius: 30,
-            height: windowHeight * 0.5,
-            width: windowWidth,
-          }}
-          source={
-            item?.recipeImage?.formats?.medium?.url
-              ? { uri: item?.recipeImage?.formats?.medium?.url }
-              : require('../../assets/images/noImage2.png')
-          }
-        />
-        <View
-          style={{
-            justifyContent: 'center',
-            alignItems: 'center',
-            padding: 20,
-            marginBottom: 10,
-          }}>
-          <TextEle variant="header1" style={{ marginBottom: 10 }}>
-            {item?.name}
-          </TextEle>
-          <View style={{ height: 2, width: 150, backgroundColor: colors.text }} />
-          {/* <Text style={{fontWeight:'bold'}}>{item.name}</Text> */}
-        </View>
-        <View
-          style={{
-            borderRadius: 16,
-            backgroundColor: colors.background,
-          }}>
-          <Ingrediants ingredients={item?.ingredients} />
-          <Preparation preparation={item?.steps} />
-        </View>
         <RAButton1
-          style={{ marginHorizontal: 40, marginVertical: 20, height: 60 }}
+          style={{
+            position: 'absolute',
+            bottom: 10,
+            justifyContent: 'center',
+            marginVertical: 20,
+            height: 55,
+            width: '100%',
+          }}
           variant="fill"
           text="Watch Video"
           icon="play"
-          onPress={() => navigation.navigate('RecipeVideo', { TextHeading, Description })}
+          onPress={() => navigation.navigate('RecipeVideo')}
         />
-        {/* <RectButton
+      </View>
+      {/* <RectButton
           onPress={() => navigation.navigate('RecipeVideo', { TextHeading, Description })}
           style={{
             marginHorizontal: 40,
@@ -70,11 +82,10 @@ const RecipeDetail = ({ route, navigation }) => {
             justifyContent: 'center',
             alignItems: 'center',
           }}> */
-        /* <Play height={24} width={24} fill="white" />
+      /* <Play height={24} width={24} fill="white" />
           <TextEle style={{ color: 'white', paddingLeft: 10 }}>Watch Video</TextEle>
         </RectButton> */}
-      </View>
-    </ScrollView>
+    </>
   );
 };
 

@@ -24,76 +24,72 @@ const chartData = [
   { nutriText: 'Vitamins', color: 'cyan', weight: 20, unit: 'g', id: 4 },
   { nutriText: 'Fibers', color: 'navy', weight: 20, unit: 'g', id: 5 },
 ];
-const RecipeVideo = ({ route }) => {
-  const { TextHeading, Description } = route.params;
-  return (
-    <View style={{ flex: 1, backgroundColor: '#ebebeb' }}>
-      <Video
-        paused
-        source={{
-          uri: 'http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4',
-        }}
-        style={{
-          width: Dimensions.get('window').width,
-          height: Dimensions.get('window').width * (9 / 16),
-          backgroundColor: 'black',
-        }}
-        controls
-        resizeMode="cover"
-      />
-      <ScrollView style={{ flex: 1, margin: 15 }}>
-        <View style={{ paddingVertical: 10 }}>
-          <Text style={{ fontSize: 25, fontWeight: 'bold' }}>{TextHeading}</Text>
-          <Text style={{ fontSize: 20 }}>{Description}</Text>
+const RecipeVideo = () => (
+  <View style={{ flex: 1, backgroundColor: '#ebebeb' }}>
+    <Video
+      paused
+      source={{
+        uri: 'http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4',
+      }}
+      style={{
+        width: Dimensions.get('window').width,
+        height: Dimensions.get('window').width * (9 / 16),
+        backgroundColor: 'black',
+      }}
+      controls
+      resizeMode="contain"
+    />
+    <ScrollView style={{ flex: 1, margin: 15 }}>
+      <View style={{ paddingVertical: 10 }}>
+        {/* <Text style={{ fontSize: 25, fontWeight: 'bold' }}>{TextHeading}</Text>
+          <Text style={{ fontSize: 20 }}>{Description}</Text> */}
+      </View>
+      <Text style={{ fontSize: 20, fontWeight: 'bold' }}>Nutritional Info.</Text>
+      <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between' }}>
+        <Svg viewBox="0 0 200 200" height={200} width={200}>
+          <VictoryPie
+            labels={() => null}
+            colorScale={chartData.map(x => x.color)}
+            width={200}
+            height={200}
+            innerRadius={60}
+            data={chartData.map(x => ({ x: x.nutriText, y: x.weight }))}
+          />
+          <VictoryLabel
+            textAnchor="middle"
+            verticalAnchor="middle"
+            x={100}
+            y={100}
+            style={{ fontSize: 14 }}
+            text="71 Cal"
+          />
+        </Svg>
+        <View>
+          {chartData.map(item => (
+            <View style={{ flexDirection: 'row', paddingVertical: 5, alignItems: 'center' }}>
+              <View
+                style={{
+                  height: 10,
+                  width: 30,
+                  backgroundColor: item.color,
+                  borderRadius: 5,
+                  marginRight: 10,
+                }}
+              />
+              <Text>{`${item.weight}${item.unit}`}</Text>
+              <Text style={{ color: 'gray', marginLeft: 10 }}>{item.nutriText}</Text>
+            </View>
+          ))}
         </View>
-        <Text style={{ fontSize: 20, fontWeight: 'bold' }}>Nutritional Info.</Text>
-        <View
-          style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between' }}>
-          <Svg viewBox="0 0 200 200" height={200} width={200}>
-            <VictoryPie
-              labels={() => null}
-              colorScale={chartData.map(x => x.color)}
-              width={200}
-              height={200}
-              innerRadius={60}
-              data={chartData.map(x => ({ x: x.nutriText, y: x.weight }))}
-            />
-            <VictoryLabel
-              textAnchor="middle"
-              verticalAnchor="middle"
-              x={100}
-              y={100}
-              style={{ fontSize: 14 }}
-              text="71 Cal"
-            />
-          </Svg>
-          <View>
-            {chartData.map(item => (
-              <View style={{ flexDirection: 'row', paddingVertical: 5, alignItems: 'center' }}>
-                <View
-                  style={{
-                    height: 10,
-                    width: 30,
-                    backgroundColor: item.color,
-                    borderRadius: 5,
-                    marginRight: 10,
-                  }}
-                />
-                <Text>{`${item.weight}${item.unit}`}</Text>
-                <Text style={{ color: 'gray', marginLeft: 10 }}>{item.nutriText}</Text>
-              </View>
-            ))}
-          </View>
-        </View>
-        <View style={{ height: 1, width: 370, backgroundColor: 'gray' }} />
-        <Text style={{ fontSize: 20, fontWeight: 'bold', marginVertical: 10 }}>
-          Generally, nutrients are divided into two classes:
-        </Text>
-        <Text style={{ fontSize: 15, textAlign: 'justify' }}>{summary}</Text>
-      </ScrollView>
-    </View>
-  );
-};
+      </View>
+      <View style={{ height: 1, width: 370, backgroundColor: 'gray' }} />
+      <Text style={{ fontSize: 20, fontWeight: 'bold', marginVertical: 10 }}>
+        Generally, nutrients are divided into two classes:
+      </Text>
+      <Text style={{ fontSize: 15, textAlign: 'justify' }}>{summary}</Text>
+    </ScrollView>
+  </View>
+);
 
 RecipeVideo.propTypes = {
   route: PropTypes.shape({
