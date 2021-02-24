@@ -4,10 +4,10 @@ import PropTypes from 'prop-types';
 import { ImageBackground, Pressable, View } from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
 import Rating from '@components/Rating';
-import TextEle from '../TextEle';
-import LikeButton from '../LikeButton';
 import { Colors } from 'react-native/Libraries/NewAppScreen';
 import { useTheme } from '@react-navigation/native';
+import TextEle from '../TextEle';
+import LikeButton from '../LikeButton';
 
 const ListItem = ({ onRecipePress, item, cardWidth }) => {
   const rating = useMemo(() => item.rattings.reduce((p, c, i, a) => p + c.ratting / a.length, 0), [
