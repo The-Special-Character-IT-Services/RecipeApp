@@ -24,7 +24,7 @@ const Search = ({ text, clearText, ...rest }) => {
             borderColor: colors.text,
             borderWidth: 1,
             borderRadius: 20,
-            paddingVertical: 5,
+            // paddingVertical: 5,
             paddingHorizontal: 20,
           }}
           {...rest}
@@ -40,15 +40,14 @@ const Search = ({ text, clearText, ...rest }) => {
               right: 10,
             }}
             onPress={clearText}>
-            <Icon name="close-outline" size={24} fill={colors.text} />
+            <Icon name="close-outline" size={30} style={{ color: colors.text }} />
           </Pressable>
         ) : (
           <View>
             <Icon
               name="search-outline"
               size={24}
-              fill={colors.text}
-              style={{ position: 'absolute', top: 13, right: 10 }}
+              style={{ position: 'absolute', color: colors.text, top: 13, right: 13 }}
             />
           </View>
         )}
@@ -61,6 +60,11 @@ const Search = ({ text, clearText, ...rest }) => {
       </View>
     </View>
   );
+};
+
+Search.propTypes = {
+  text: PropTypes.string.isRequired,
+  clearText: PropTypes.string.isRequired,
 };
 
 export default Search;
