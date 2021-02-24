@@ -93,7 +93,7 @@ const TabEvent = () => {
         flex: 1,
         // paddingHorizontal: 20,
       }}>
-      <View style={{}}>
+      <View>
         <SearchBar onChangeText={onChangeText} value={text} clearText={() => setText('')} />
       </View>
       <FlatList

@@ -48,9 +48,7 @@ const RAButton1 = ({ variant, size, text, icon, disable, onPress, loading, style
 RAButton1.propTypes = {
   variant: PropTypes.oneOf(['fill', 'outline']),
   size: PropTypes.oneOf(['default', 'medium', 'small']),
-  style: ViewPropTypes.style.isRequired,
   text: PropTypes.string,
-  icon: PropTypes.func,
   disable: PropTypes.bool,
   onPress: PropTypes.func,
   loading: PropTypes.bool,
