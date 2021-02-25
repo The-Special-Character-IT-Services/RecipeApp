@@ -210,7 +210,7 @@ const CourseDetails = ({ route, navigation }) => {
         onChange={handleSheetChanges}>
         <BottomSheetScrollView
           style={{
-            paddingVertical: 10,
+            paddingVertical: 20,
             paddingHorizontal: 20,
             flex: 1,
             backgroundColor: colors.background,
@@ -227,10 +227,11 @@ const CourseDetails = ({ route, navigation }) => {
                 Duration
               </TextEle>
               <TextEle variant="body2" style={{ paddingVertical: 10, color: 'gray', width: 120 }}>
-                Launching on
-                {data?.course?.launchDate
-                  ? format(new Date(data?.course?.launchDate), 'yyyy-MM-dd HH:mm')
-                  : data?.course?.launchDate}
+                {`Launching on ${
+                  data?.course?.launchDate
+                    ? format(new Date(data?.course?.launchDate), 'yyyy-MM-dd HH:mm')
+                    : data?.course?.launchDate
+                }`}
               </TextEle>
             </View>
             <View style={{ height: 1, width: 400, backgroundColor: 'gray' }} />
@@ -276,26 +277,38 @@ const CourseDetails = ({ route, navigation }) => {
           </View>
           <View style={{ marginBottom: 100 }}>
             <TextEle>Varieties:-</TextEle>
-            <Markdown rules={rules}>{data?.course?.description}</Markdown>
+            <View style={{ flex: 1 }}>
+              <Markdown style={{ margin: 20 }} rules={rules}>
+                {data?.course?.description}
+              </Markdown>
+            </View>
           </View>
         </BottomSheetScrollView>
       </BottomSheet>
       {/* <View style={{ position: 'absolute', left: 400, top: 640 }}>
         <ActionButton />
       </View> */}
-      <RAButton1
-        style={{ position: 'absolute', bottom: 10, width: '100%' }}
-        variant="fill"
-        text={`Buy For ${new Intl.NumberFormat('en-IN', {
-          style: 'currency',
-          currency: 'INR',
-          maximumFractionDigits: 0,
-          minimumFractionDigits: 0,
-        }).format(data?.course?.price || 0)}`}
-        onPress={buyCourse}
-        disable={loading}
-        loading={loading}
-      />
+      <View
+        style={{
+          position: 'absolute',
+          bottom: 10,
+          width: '100%',
+          justifyContent: 'center',
+          // marginHorizontal: 20,
+        }}>
+        <RAButton1
+          variant="fill"
+          text={`Buy For ${new Intl.NumberFormat('en-IN', {
+            style: 'currency',
+            currency: 'INR',
+            maximumFractionDigits: 0,
+            minimumFractionDigits: 0,
+          }).format(data?.course?.price || 0)}`}
+          onPress={buyCourse}
+          disable={loading}
+          loading={loading}
+        />
+      </View>
     </View>
   );
 };

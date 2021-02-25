@@ -183,7 +183,7 @@ const CourseDetailsBought = ({ route, navigation, item }) => {
                 marginBottom: 20,
                 paddingVertical: 10,
               }}>
-              <TextEle variant="title" style={{ marginBottom: 10 }}>
+              <TextEle variant="header1" style={{ marginBottom: 10 }}>
                 Recipes
               </TextEle>
               <View style={{ height: 2, width: 100, backgroundColor: colors.text }} />

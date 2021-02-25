@@ -12,7 +12,11 @@ import useCuisinesApi from '../../hooks/useCuisinesApiHook';
 const Cuisine = ({ onCuisinePress }) => {
   const { data } = useCuisinesApi();
   if (!data?.cuisines) {
-    return <Loading />;
+    return (
+      <View style={{ flex: 1, marginTop: 10 }}>
+        <Loading />
+      </View>
+    );
   }
   return (
     <View>

@@ -40,7 +40,7 @@ const LikedRecipe = ({ onRecipeDetail }) => {
       </View>
       <ScrollView contentContainerStyle={{ paddingVertical: 5, paddingHorizontal: 15 }}>
         {data?.courses.map(item => (
-          <View>
+          <View key={item.id}>
             <RectButton
               rippleColor={colors.card}
               onPress={() => onRecipeDetail(item)}

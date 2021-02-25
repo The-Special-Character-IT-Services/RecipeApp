@@ -185,10 +185,9 @@ RATextInput.propTypes = {
     }),
     setFieldValue: PropTypes.func,
   }).isRequired,
-  innerRef: PropTypes.number.isRequired,
   style: PropTypes.string,
   leftIcon: PropTypes.func,
-  rightIcon: PropTypes.func,
+  rightIcon: PropTypes.string,
 };
 
 RATextInput.defaultProps = {

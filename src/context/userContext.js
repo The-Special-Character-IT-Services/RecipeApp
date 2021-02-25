@@ -25,8 +25,4 @@ const UserProvider = ({ children }) => {
   );
 };
 
-UserProvider.propTypes = {
-  children: PropTypes.number.isRequired,
-};
-
 export default UserProvider;
