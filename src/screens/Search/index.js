@@ -1,4 +1,3 @@
-/* eslint-disable react-native/no-inline-styles */
 import React, { useContext, useState } from 'react';
 import { ScrollView, View, Image, KeyboardAvoidingView } from 'react-native';
 import { useTheme } from '@react-navigation/native';
@@ -10,12 +9,11 @@ import { FlatList } from 'react-native-gesture-handler';
 import SearchBar from '../../components/Search';
 import RecentlyAdd from '../../components/RecentlyAdd';
 import SearchCuisine from '../../components/SearchCuisine';
-// import Data from '../../components/Carousal/data';
 import TextEle from '../../components/TextEle';
 
 const arr = ['Trending', 'Recently Added ', 'Rice Items', 'Sweets', 'Salads'];
 
-const Search = ({ name }) => {
+const Search = () => {
   const { colors } = useTheme();
   const insets = useSafeAreaInsets();
   const { user } = useContext(UserContext);
@@ -28,7 +26,6 @@ const Search = ({ name }) => {
     }),
   ]);
   const [text, setText] = useState('');
-  console.log(data?.courses);
 
   // const handler = useCallback(debounce(loadSearch, 2000), []);
 

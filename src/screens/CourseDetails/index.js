@@ -316,7 +316,9 @@ CourseDetails.propTypes = {
       userId: PropTypes.number.isRequired,
     }),
   }).isRequired,
-  navigation: PropTypes.func.isRequired,
+  navigation: PropTypes.shape({
+    navigate: PropTypes.func,
+  }).isRequired,
 };
 
 export default CourseDetails;

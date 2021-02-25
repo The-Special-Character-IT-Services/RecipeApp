@@ -1,5 +1,5 @@
 import React from 'react';
-import { Dimensions, Text, View } from 'react-native';
+import { Text, View } from 'react-native';
 import { ScrollView } from 'react-native-gesture-handler';
 import Video from 'react-native-video';
 import { Svg } from 'react-native-svg';
@@ -7,7 +7,6 @@ import PropTypes from 'prop-types';
 import { VictoryLabel, VictoryPie } from 'victory-native';
 import { useDeviceOrientation } from '@react-native-community/hooks';
 import Orientation from 'react-native-orientation-locker';
-import PlayerControls from '@components/PlayerControls';
 
 const summary = `Macronutrients: Macronutrients are required daily in large quantities. They include proteins, fats, carbohydrates, some minerals, and water.
 
@@ -75,7 +74,9 @@ const RecipeVideo = () => {
           </Svg>
           <View>
             {chartData.map(item => (
-              <View style={{ flexDirection: 'row', paddingVertical: 5, alignItems: 'center' }}>
+              <View
+                key={item.id}
+                style={{ flexDirection: 'row', paddingVertical: 5, alignItems: 'center' }}>
                 <View
                   style={{
                     height: 10,

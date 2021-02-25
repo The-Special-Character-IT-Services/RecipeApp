@@ -46,7 +46,6 @@ const RecipeDetail = ({ route, navigation }) => {
           <View
             style={{
               borderRadius: 16,
-              marginBottom: 100,
               backgroundColor: colors.background,
             }}>
             <Ingrediants ingredients={item?.ingredients} />

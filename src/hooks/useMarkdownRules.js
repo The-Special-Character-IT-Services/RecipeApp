@@ -47,8 +47,8 @@ const useMarkdownRules = () => {
 
       if (hasParents(parent, 'ordered_list')) {
         return (
-          <View key={node.key} style={styles.listOrderedItem}>
-            <TextEle variant="p1">
+          <View key={node.key} style={[styles.listOrderedItem, {}]}>
+            <TextEle style={{ marginVertical: 10, marginRight: 10 }} variant="p1">
               {node.index + 1}
               {node.markup}
             </TextEle>
