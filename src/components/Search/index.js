@@ -1,7 +1,6 @@
 /* eslint-disable react-native/no-inline-styles */
 /* eslint-disable react/no-unused-state */
 import { useTheme } from '@react-navigation/native';
-import PropTypes from 'prop-types';
 import Icon from 'react-native-vector-icons/Ionicons';
 import React from 'react';
 import { Pressable, TextInput, View } from 'react-native';
@@ -60,11 +59,6 @@ const Search = ({ text, clearText, ...rest }) => {
       </View>
     </View>
   );
-};
-
-Search.propTypes = {
-  text: PropTypes.string.isRequired,
-  clearText: PropTypes.string.isRequired,
 };
 
 export default Search;

@@ -2,7 +2,6 @@
 import React, { useContext, useState } from 'react';
 import { ScrollView, View, Image, KeyboardAvoidingView } from 'react-native';
 import { useTheme } from '@react-navigation/native';
-import PropTypes from 'prop-types';
 import useSWR from 'swr';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { coursesQuery } from '@hooks/useCoursesApiHook';
@@ -46,7 +45,7 @@ const Search = ({ name }) => {
         horizontal>
         {arr.map(x => (
           <View
-            key={x.id}
+            key={x.name}
             style={{
               paddingHorizontal: 10,
               borderRadius: 8,
@@ -100,10 +99,6 @@ const Search = ({ name }) => {
       )}
     </KeyboardAvoidingView>
   );
-};
-
-Search.propTypes = {
-  name: PropTypes.string.isRequired,
 };
 
 export default Search;
