@@ -26,57 +26,54 @@ const MyRecipes = () => {
   //   x => x.course.id === data?.courses.id && x.status === 'purchased',
   // );
 
-  console.log(data?.image?.url);
+  const renderItem = ({ item }) => (
+    <View
+      key={item?.id}
+      style={{
+        flex: 1,
+      }}>
+      {item.purchase_details.some(x => x.course.id === item.id && x.status === 'purchased') && (
+        <>
+          <Image
+            source={{ uri: item?.image?.formats?.medium?.url }}
+            resizeMode="cover"
+            style={{
+              flex: 1,
+              height: 230,
+              borderRadius: 10,
+            }}
+          />
+          <View
+            style={{
+              flexDirection: 'row',
+              alignItems: 'center',
+              justifyContent: 'space-between',
+              paddingBottom: 15,
+            }}>
+            <TextEle
+              numberOfLines={1}
+              variant="body2"
+              style={{ color: colors.text, paddingLeft: 5 }}>
+              {item?.name}
+            </TextEle>
+            <View>
+              <StarIcon fill={colors.text} />
+              {/* <TextEle variant="body2" style={{ color: colors.text }}>
+                    {item.rating}
+                  </TextEle> */}
+            </View>
+          </View>
+        </>
+      )}
+    </View>
+  );
 
   return (
     <FlatList
       data={data?.courses}
       style={{ backgroundColor: colors.card }}
       contentContainerStyle={{ marginHorizontal: 20 }}
-      renderItem={({ item, index }) => (
-        <View
-          key={item?.id}
-          style={{
-            flex: 1,
-            flexDirection: 'column',
-            marginRight: index % 2 === 0 ? 10 : 0,
-          }}>
-          {item.purchase_details.some(x => x.course.id === item.id && x.status === 'purchased') && (
-            <>
-              <Image
-                source={{ uri: item?.image?.formats?.medium?.url }}
-                resizeMode="cover"
-                style={{
-                  flex: 1,
-                  height: 230,
-                  width: undefined,
-                  borderRadius: 10,
-                }}
-              />
-              <View
-                style={{
-                  flexDirection: 'row',
-                  alignItems: 'center',
-                  justifyContent: 'space-between',
-                  paddingBottom: 15,
-                }}>
-                <TextEle
-                  numberOfLines={1}
-                  variant="body2"
-                  style={{ color: colors.text, paddingLeft: 5 }}>
-                  {item?.name}
-                </TextEle>
-                <View style={{}}>
-                  <StarIcon fill={colors.text} />
-                  {/* <TextEle variant="body2" style={{ color: colors.text }}>
-                    {item.rating}
-                  </TextEle> */}
-                </View>
-              </View>
-            </>
-          )}
-        </View>
-      )}
+      renderItem={renderItem}
       numColumns={2}
     />
   );
