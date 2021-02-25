@@ -26,11 +26,12 @@ const MyRecipes = () => {
   //   x => x.course.id === data?.courses.id && x.status === 'purchased',
   // );
 
-  const renderItem = ({ item }) => (
+  const renderItem = ({ item, index }) => (
     <View
       key={item?.id}
       style={{
         flex: 1,
+        marginLeft: index % 2 === 0 ? 0 : 10,
       }}>
       {item.purchase_details.some(x => x.course.id === item.id && x.status === 'purchased') && (
         <>

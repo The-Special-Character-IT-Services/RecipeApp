@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import { useTheme } from '@react-navigation/native';
 import React, { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import YoutubePlayer from 'react-native-youtube-iframe';
-import { View, StatusBar, StyleSheet } from 'react-native';
+import { View, StatusBar } from 'react-native';
 import Markdown from 'react-native-markdown-renderer';
 import { deviceWidth, deviceHeight, showErrorToast } from '@utils/index';
 import RAButton1 from '@components/RAButton1';
@@ -277,11 +277,7 @@ const CourseDetails = ({ route, navigation }) => {
           </View>
           <View style={{ marginBottom: 100 }}>
             <TextEle>Varieties:-</TextEle>
-            <View style={{ flex: 1 }}>
-              <Markdown style={{ margin: 20 }} rules={rules}>
-                {data?.course?.description}
-              </Markdown>
-            </View>
+            <Markdown rules={rules}>{data?.course?.description}</Markdown>
           </View>
         </BottomSheetScrollView>
       </BottomSheet>
