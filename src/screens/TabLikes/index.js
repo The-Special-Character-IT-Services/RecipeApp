@@ -1,11 +1,13 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import PropTypes from 'prop-types';
+import { UserContext } from '@context/userContext';
 import { View } from 'react-native';
 import SearchBar from '../../components/Search';
 import LikedRecipe from '../../components/LikedRecipe';
 
 const TabLikes = ({ navigation }) => {
   const [text, setText] = useState('');
+  const { user } = useContext(UserContext);
 
   const onChangeText = val => {
     setText(val);
@@ -16,7 +18,9 @@ const TabLikes = ({ navigation }) => {
       <SearchBar onChangeText={onChangeText} value={text} clearText={() => setText('')} />
       <LikedRecipe
         onRecipeDetail={item => {
-          navigation.navigate('RecipeDetail', item);
+          (item.purchase_details.status === 'purchased' &&
+            navigation.navigate('CourseDetailsBought', { id: item?.id, userId: user.id })) ||
+            navigation.navigate('CourseDetails', { id: item?.id, userId: user.id });
         }}
       />
     </View>

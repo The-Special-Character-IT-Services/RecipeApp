@@ -37,7 +37,7 @@ export const coursesQuery = ({ pageIndex, limit, sort = 'id:ASC', where = '{}', 
       id
       name
     }
-    purchase_details(where: { user_id: { id: ${userId} } }) {
+    purchase_details(where: { user_id: { id: ${userId} }, status: "purchased" }) {
       id
       course {
         id
