@@ -36,31 +36,9 @@ const TabHome = ({ navigation }) => {
       <Pressable ref={playerRef} onPress={() => navigation.navigate('Search')}>
         <SearchBar editable={false} selectTextOnFocus={false} onchangeText={handler} value={text} />
       </Pressable>
-      <Category
+      {/* <Category
         onCategoryDetails={() => navigation.navigate('FilterList', { name: 'Search Category' })}
-      />
-      {!!user?.id && (
-        <HomeList
-          title="New Courses"
-          userId={user.id}
-          onPressViewAll={() => navigation.navigate('FilterList', { name: 'All Courses' })}
-          onRecipePress={async item => {
-            if (item.purchase_details && item.purchase_details.length > 0) {
-              if (
-                item.purchase_details.some(
-                  x => x.course.id === item?.id && x.status === 'purchased',
-                )
-              ) {
-                navigation.navigate('CourseDetailsBought', { id: item?.id, userId: user.id });
-              } else {
-                navigation.navigate('CourseDetails', { id: item?.id, userId: user.id });
-              }
-            } else {
-              navigation.navigate('CourseDetails', { id: item?.id, userId: user.id });
-            }
-          }}
-        />
-      )}
+      /> */}
       <Cuisines
         onCuisinePress={item =>
           navigation.navigate('FilterList', {
@@ -70,6 +48,62 @@ const TabHome = ({ navigation }) => {
           })
         }
       />
+      {!!user?.id && (
+        <>
+          <HomeList
+            title="New Courses"
+            userId={user.id}
+            onPressViewAll={() =>
+              navigation.navigate('FilterList', {
+                name: 'All Courses',
+                where: '{}',
+                userId: user.id,
+              })
+            }
+            onRecipePress={async item => {
+              if (item.purchase_details && item.purchase_details.length > 0) {
+                if (
+                  item.purchase_details.some(
+                    x => x.course.id === item?.id && x.status === 'purchased',
+                  )
+                ) {
+                  navigation.navigate('CourseDetailsBought', { id: item?.id, userId: user.id });
+                } else {
+                  navigation.navigate('CourseDetails', { id: item?.id, userId: user.id });
+                }
+              } else {
+                navigation.navigate('CourseDetails', { id: item?.id, userId: user.id });
+              }
+            }}
+          />
+          <HomeList
+            title="Popular Courses"
+            userId={user.id}
+            onPressViewAll={() =>
+              navigation.navigate('FilterList', {
+                name: 'All Courses',
+                where: '{}',
+                userId: user.id,
+              })
+            }
+            onRecipePress={async item => {
+              if (item.purchase_details && item.purchase_details.length > 0) {
+                if (
+                  item.purchase_details.some(
+                    x => x.course.id === item?.id && x.status === 'purchased',
+                  )
+                ) {
+                  navigation.navigate('CourseDetailsBought', { id: item?.id, userId: user.id });
+                } else {
+                  navigation.navigate('CourseDetails', { id: item?.id, userId: user.id });
+                }
+              } else {
+                navigation.navigate('CourseDetails', { id: item?.id, userId: user.id });
+              }
+            }}
+          />
+        </>
+      )}
     </ScrollView>
   );
 };

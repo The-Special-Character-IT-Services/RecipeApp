@@ -88,6 +88,7 @@ const CourseDetails = ({ route, navigation }) => {
     });
     navigation.navigate('PurchaseUser', {
       orderDetails: orderDetails.data,
+      item: id,
     });
   }, [
     data?.course?.price,
@@ -222,14 +223,20 @@ const CourseDetails = ({ route, navigation }) => {
             <View style={{ height: 2, width: 100, backgroundColor: colors.text }} />
           </View>
           <View>
-            <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
+            <View
+              style={{
+                flexDirection: 'row',
+                justifyContent: 'space-between',
+              }}>
               <TextEle variant="body2" style={{ paddingVertical: 10 }}>
                 Duration
               </TextEle>
-              <TextEle variant="body2" style={{ paddingVertical: 10, color: 'gray', width: 120 }}>
+              <TextEle
+                variant="body2"
+                style={{ paddingVertical: 10, color: 'gray', width: 120, alignSelf: 'flex-end' }}>
                 {`Launching on ${
                   data?.course?.launchDate
-                    ? format(new Date(data?.course?.launchDate), 'yyyy-MM-dd HH:mm')
+                    ? format(new Date(data?.course?.launchDate), 'yyyy-MM-dd')
                     : data?.course?.launchDate
                 }`}
               </TextEle>
