@@ -66,7 +66,9 @@ const RecipeVideo = () => (
         </Svg>
         <View>
           {chartData.map(item => (
-            <View style={{ flexDirection: 'row', paddingVertical: 5, alignItems: 'center' }}>
+            <View
+              key={item.id}
+              style={{ flexDirection: 'row', paddingVertical: 5, alignItems: 'center' }}>
               <View
                 style={{
                   height: 10,

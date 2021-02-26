@@ -171,7 +171,7 @@ const CourseDetailsBought = ({ route, navigation, item }) => {
                     onPress={onRatingpress}
                     rating={rating}
                     length={5}
-                    totalRating={courseDetail?.rattings?.length || 0}
+                    totalRating={courseDetail?.rattings || 0}
                   />
                 </View>
               </View>
