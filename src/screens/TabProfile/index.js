@@ -70,6 +70,7 @@ const Profile = () => {
                 Courses
               </TextEle>
             </View>
+            <View style={{ height: 50, width: 1, backgroundColor: 'gray' }} />
             <View
               style={{
                 justifyContent: 'flex-start',
@@ -77,12 +78,13 @@ const Profile = () => {
                 flexDirection: 'column',
               }}>
               <TextEle variant="header2" style={{ color: colors.text }}>
-                {purchasedCourseCount}
+                0
               </TextEle>
               <TextEle variant="body2" style={{ color: colors.text }}>
-                Courses
+                Likes
               </TextEle>
             </View>
+            <View style={{ height: 50, width: 1, backgroundColor: 'gray' }} />
             <View
               style={{
                 justifyContent: 'flex-start',
@@ -90,10 +92,10 @@ const Profile = () => {
                 flexDirection: 'column',
               }}>
               <TextEle variant="header2" style={{ color: colors.text }}>
-                {purchasedCourseCount}
+                0
               </TextEle>
               <TextEle variant="body2" style={{ color: colors.text }}>
-                Courses
+                Saves
               </TextEle>
             </View>
           </View>
