@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import { useTheme } from '@react-navigation/native';
 import React, { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import YoutubePlayer from 'react-native-youtube-iframe';
-import { View, StatusBar, StyleSheet } from 'react-native';
+import { View, StatusBar } from 'react-native';
 import Markdown from 'react-native-markdown-renderer';
 import { deviceWidth, deviceHeight, showErrorToast } from '@utils/index';
 import RAButton1 from '@components/RAButton1';
@@ -178,7 +178,7 @@ const CourseDetails = ({ route, navigation }) => {
   }
 
   return (
-    <View style={{ flex: 1, padding: 16 }}>
+    <View style={{ flex: 1 }}>
       <StatusBar hidden />
       <YoutubePlayer
         play={playing}
@@ -210,8 +210,9 @@ const CourseDetails = ({ route, navigation }) => {
         onChange={handleSheetChanges}>
         <BottomSheetScrollView
           style={{
-            paddingVertical: 10,
+            paddingVertical: 20,
             paddingHorizontal: 20,
+            flex: 1,
             backgroundColor: colors.background,
           }}>
           <View style={{ justifyContent: 'center', alignItems: 'center', marginBottom: 20 }}>
@@ -225,11 +226,12 @@ const CourseDetails = ({ route, navigation }) => {
               <TextEle variant="body2" style={{ paddingVertical: 10 }}>
                 Duration
               </TextEle>
-              <TextEle variant="body2" style={{ paddingVertical: 10, color: 'gray', width: 100 }}>
-                Launching on
-                {data?.course?.launchDate
-                  ? format(new Date(data?.course?.launchDate), 'yyyy-MM-dd HH:mm')
-                  : data?.course?.launchDate}
+              <TextEle variant="body2" style={{ paddingVertical: 10, color: 'gray', width: 120 }}>
+                {`Launching on ${
+                  data?.course?.launchDate
+                    ? format(new Date(data?.course?.launchDate), 'yyyy-MM-dd HH:mm')
+                    : data?.course?.launchDate
+                }`}
               </TextEle>
             </View>
             <View style={{ height: 1, width: 400, backgroundColor: 'gray' }} />
@@ -237,7 +239,7 @@ const CourseDetails = ({ route, navigation }) => {
               <TextEle variant="body2" style={{ paddingVertical: 10 }}>
                 Total Recipes covered
               </TextEle>
-              <TextEle variant="body2" style={{ paddingVertical: 10, color: 'gray', width: 100 }}>
+              <TextEle variant="body2" style={{ paddingVertical: 10, color: 'gray', width: 120 }}>
                 {data?.course?.recipes.length}
               </TextEle>
             </View>
@@ -246,7 +248,7 @@ const CourseDetails = ({ route, navigation }) => {
               <TextEle variant="body2" style={{ paddingVertical: 10 }}>
                 Video Validity
               </TextEle>
-              <TextEle variant="body2" style={{ paddingVertical: 10, color: 'gray', width: 100 }}>
+              <TextEle variant="body2" style={{ paddingVertical: 10, color: 'gray', width: 120 }}>
                 {data?.course?.validity}
               </TextEle>
             </View>
@@ -255,7 +257,7 @@ const CourseDetails = ({ route, navigation }) => {
               <TextEle variant="body2" style={{ paddingVertical: 10 }}>
                 Written Recipe
               </TextEle>
-              <TextEle variant="body2" style={{ paddingVertical: 10, color: 'gray', width: 100 }}>
+              <TextEle variant="body2" style={{ paddingVertical: 10, color: 'gray', width: 120 }}>
                 Available
               </TextEle>
             </View>
@@ -288,7 +290,7 @@ const CourseDetails = ({ route, navigation }) => {
           bottom: 10,
           width: '100%',
           justifyContent: 'center',
-          // margin: 20,
+          // marginHorizontal: 20,
         }}>
         <RAButton1
           variant="fill"
@@ -313,6 +315,9 @@ CourseDetails.propTypes = {
       id: PropTypes.string.isRequired,
       userId: PropTypes.number.isRequired,
     }),
+  }).isRequired,
+  navigation: PropTypes.shape({
+    navigate: PropTypes.func,
   }).isRequired,
 };
 
