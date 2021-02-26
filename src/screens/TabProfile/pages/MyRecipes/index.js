@@ -50,18 +50,18 @@ const MyRecipes = () => {
                 style={{
                   flexDirection: 'row',
                   alignItems: 'center',
-                  justifyContent: 'space-between',
-                  paddingBottom: 15,
+                  justifyContent: 'space-evenly',
+                  paddingBottom: 10,
                 }}>
                 <TextEle
-                  numberOfLines={1}
+                  numberOfLines={2}
                   variant="body2"
                   style={{ color: colors.text, paddingLeft: 5 }}>
                   {item?.name}
                 </TextEle>
-                <View style={{}}>
+                {/* <View>
                   <StarIcon fill={colors.text} />
-                </View>
+                </View> */}
               </View>
             </View>
           ) : (
