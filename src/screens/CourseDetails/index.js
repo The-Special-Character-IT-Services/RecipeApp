@@ -15,7 +15,7 @@ import { addDays, isAfter, format } from 'date-fns';
 import { v4 as uuidv4 } from 'uuid';
 // import { format, subDays } from 'date-fns';
 import useMarkdownRules from '@hooks/useMarkdownRules';
-import { useHeaderHeight } from '@react-navigation/stack';
+// import { useHeaderHeight } from '@react-navigation/stack';
 import useSWR from 'swr';
 // import ActionButton from '@components/ActionButton';
 import { courseQuery } from '@hooks/useCoursesApiHook';
@@ -26,7 +26,7 @@ const subt = `Recipes in this write-up are protected by copyright law. Reproduct
 of the same without a written consent from Studio D’ Food Couture is prohibited. ©
 Studio De Food Couture `;
 
-const YOUTUBE_VIDEO_HEIGHT = (deviceWidth / 16) * 9;
+const YOUTUBE_VIDEO_HEIGHT = (deviceWidth / 15) * 10;
 
 // const styles = StyleSheet.create({
 //   text: {
@@ -40,11 +40,9 @@ const CourseDetails = ({ route, navigation }) => {
   const [loading, setLoading] = useState(false);
   const { data, isValidating, error } = useSWR([courseQuery(id, userId)]);
   const [playing, setPlaying] = useState(false);
-  const headerHeight = useHeaderHeight();
+  // const headerHeight = useHeaderHeight();
   const bottomSheetRef = useRef(null);
-  const snapPoints = useMemo(() => [deviceHeight - YOUTUBE_VIDEO_HEIGHT - headerHeight, '100%'], [
-    headerHeight,
-  ]);
+  const snapPoints = useMemo(() => [deviceHeight - YOUTUBE_VIDEO_HEIGHT, '100%'], []);
 
   const rules = useMarkdownRules();
 
@@ -88,7 +86,6 @@ const CourseDetails = ({ route, navigation }) => {
     });
     navigation.navigate('PurchaseUser', {
       orderDetails: orderDetails.data,
-      item: id,
     });
   }, [
     data?.course?.price,
@@ -210,10 +207,10 @@ const CourseDetails = ({ route, navigation }) => {
         )}
         onChange={handleSheetChanges}>
         <BottomSheetScrollView
+          showsVerticalScrollIndicator={false}
           style={{
             paddingVertical: 20,
             paddingHorizontal: 20,
-            flex: 1,
             backgroundColor: colors.background,
           }}>
           <View style={{ justifyContent: 'center', alignItems: 'center', marginBottom: 20 }}>

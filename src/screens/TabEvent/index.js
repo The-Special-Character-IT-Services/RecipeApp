@@ -4,10 +4,10 @@ import PropTypes from 'prop-types';
 import getCoursesApi, { coursesQuery } from '@hooks/useCoursesApiHook';
 import Image from 'react-native-fast-image';
 import useSWR, { useSWRInfinite } from 'swr';
-import { View } from 'react-native';
+import { Pressable, View } from 'react-native';
 import { UserContext } from '@context/userContext';
 import Loading from '@components/loading';
-import { FlatList, RectButton } from 'react-native-gesture-handler';
+import { FlatList } from 'react-native-gesture-handler';
 import LikeButton from '@components/LikeButton';
 import TextEle from '@components/TextEle';
 import { format } from 'date-fns';
@@ -24,7 +24,6 @@ const TabEvent = () => {
       pageIndex: 0,
       limit: 7,
       sort: 'launchDate:DESC',
-      where: `{like_event:{user:${user?.id}}}`,
       userId: user?.id,
     }),
   ]);
@@ -39,13 +38,12 @@ const TabEvent = () => {
   };
 
   const TodayDate = format(new Date(), 'yyyy-MM-dd');
-  console.log(TodayDate);
 
   const renderItem = useCallback(
     ({ item }) => {
-      if (format(new Date(item.launchDate), 'yyyy-MM-dd') >= TodayDate) {
+      if (format(new Date(item?.launchDate), 'yyyy-MM-dd') >= TodayDate) {
         return (
-          <RectButton
+          <Pressable
             rippleColor={colors.card}
             onPress={onEventPress}
             key={item.id}
@@ -53,7 +51,6 @@ const TabEvent = () => {
               backgroundColor: colors.background,
               margin: 5,
             }}>
-            {console.log(format(new Date(item.launchDate), 'dd'))}
             <Image
               source={{
                 uri: item.image.url,
@@ -76,11 +73,10 @@ const TabEvent = () => {
               </View>
               <LikeButton courseId={item.id} />
             </View>
-          </RectButton>
+          </Pressable>
         );
-      } else {
-        return <View />;
       }
+      return <></>;
     },
     [TodayDate, colors.card, colors.background, onEventPress],
   );

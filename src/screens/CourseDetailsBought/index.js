@@ -12,7 +12,7 @@ import { View, StatusBar, Dimensions, Pressable } from 'react-native';
 import Image from 'react-native-fast-image';
 import { deviceWidth, deviceHeight, showErrorToast } from '@utils/index';
 // import { format, subDays } from 'date-fns';
-import { useHeaderHeight } from '@react-navigation/stack';
+// import { useHeaderHeight } from '@react-navigation/stack';
 import useSWR from 'swr';
 import Icon from 'react-native-vector-icons/Ionicons';
 import Rating from '@components/Rating';
@@ -20,31 +20,29 @@ import axios from '@utils/axios';
 import { courseQuery } from '@hooks/useCoursesApiHook';
 
 import Loading from '@components/loading';
-import TextEle from '../../components/TextEle';
 import { FlatList } from 'react-native-gesture-handler';
+import TextEle from '../../components/TextEle';
 
 const subt = `Recipes in this write-up are protected by copyright law. Reproduction and distribution
 of the same without a written consent from Studio D’ Food Couture is prohibited. ©
 Studio De Food Couture `;
 
-const YOUTUBE_VIDEO_HEIGHT = (deviceWidth / 16) * 9;
+const YOUTUBE_VIDEO_HEIGHT = (deviceWidth / 15) * 10;
 
 const { width: windowWidth } = Dimensions.get('window');
 
 export const CARD_WIDTH = windowWidth * 0.9;
 
-const cardInset = (windowWidth - CARD_WIDTH) / 1.5;
+// const cardInset = (windowWidth - CARD_WIDTH) / 1.5;
 
 const CourseDetailsBought = ({ route, navigation, item }) => {
   const { id, userId } = route.params;
   const { colors } = useTheme();
   const { data: courseDetail, mutate } = useSWR([courseQuery(id, userId)]);
   const [playing, setPlaying] = useState(false);
-  const headerHeight = useHeaderHeight();
+  // const headerHeight = useHeaderHeight();
   const bottomSheetRef = useRef(null);
-  const snapPoints = useMemo(() => [deviceHeight - YOUTUBE_VIDEO_HEIGHT - headerHeight, '100%'], [
-    headerHeight,
-  ]);
+  const snapPoints = useMemo(() => [deviceHeight - YOUTUBE_VIDEO_HEIGHT, '100%'], []);
 
   const rating = useMemo(
     () =>
@@ -100,7 +98,7 @@ const CourseDetailsBought = ({ route, navigation, item }) => {
             flexDirection: 'row',
             marginVertical: 4,
           }}>
-          {item.name}
+          {item?.name}
         </TextEle>
         <TextEle
           variant="caption"
@@ -109,7 +107,7 @@ const CourseDetailsBought = ({ route, navigation, item }) => {
             flexDirection: 'row',
             marginVertical: 4,
           }}>
-          {item.cookingLevel}
+          {item?.cookingLevel}
         </TextEle>
       </View>
       <View

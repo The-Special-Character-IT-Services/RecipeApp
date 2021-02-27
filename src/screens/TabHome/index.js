@@ -13,6 +13,8 @@ import Cuisines from '@components/Cuisines';
 import HomeList from '@components/HomeList';
 import { UserContext } from '@context/userContext';
 import debounce from 'lodash.debounce';
+import { rattingQuery } from '@hooks/useRattingApiHook';
+import useSWR from 'swr';
 import Header from '../Header';
 
 const TabHome = ({ navigation }) => {
@@ -26,6 +28,15 @@ const TabHome = ({ navigation }) => {
     }, 2000),
     [],
   );
+
+  const { data, mutate } = useSWR([
+    rattingQuery({
+      pageIndex: 0,
+      limit: 5,
+      sort: 'rattings:{ratting:ASC}',
+      userId: user?.id,
+    }),
+  ]);
 
   return (
     <ScrollView

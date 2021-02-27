@@ -5,7 +5,7 @@ import TextEle from '@components/TextEle';
 import RAButton1 from '@components/RAButton1';
 import { UserContext } from '@context/userContext';
 
-const PaymentSuccess = ({ item, navigation }) => {
+const PaymentSuccess = ({ navigation }) => {
   const { user } = useContext(UserContext);
   return (
     <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
@@ -20,9 +20,7 @@ const PaymentSuccess = ({ item, navigation }) => {
         style={{ position: 'absolute', bottom: 10, width: '100%' }}
         variant="fill"
         text="Done"
-        onPress={() =>
-          navigation.navigate('CourseDetailsBought', { id: item?.id, userId: user.id })
-        }
+        onPress={() => navigation.navigate('CourseDetailsBought', { userId: user.id })}
       />
     </View>
   );
