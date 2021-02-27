@@ -17,11 +17,11 @@ const TabLikes = ({ navigation }) => {
     <View style={{ flex: 1 }}>
       <SearchBar onChangeText={onChangeText} value={text} clearText={() => setText('')} />
       <LikedRecipe
-        onRecipeDetail={item => {
-          (item.purchase_details.status === 'purchased' &&
-            navigation.navigate('CourseDetailsBought', { id: item?.id, userId: user.id })) ||
-            navigation.navigate('CourseDetails', { id: item?.id, userId: user.id });
-        }}
+        onRecipeDetail={item =>
+          item.purchase_details.some(x => x.course.id === item?.id && x.status === 'purchased')
+            ? navigation.navigate('CourseDetailsBought', { id: item?.id, userId: user.id })
+            : navigation.navigate('CourseDetails', { id: item?.id, userId: user.id })
+        }
       />
     </View>
   );

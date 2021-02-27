@@ -10,6 +10,7 @@ import Loading from '@components/loading';
 import { FlatList, RectButton } from 'react-native-gesture-handler';
 import LikeButton from '@components/LikeButton';
 import TextEle from '@components/TextEle';
+import { format } from 'date-fns';
 import SearchBar from '../../components/Search';
 
 const ITEM_HEIGHT = 200;
@@ -22,7 +23,7 @@ const TabEvent = () => {
     coursesQuery({
       pageIndex: 0,
       limit: 7,
-      sort: 'updated_at:DESC',
+      sort: 'launchDate:DESC',
       where: `{like_event:{user:${user?.id}}}`,
       userId: user?.id,
     }),
@@ -37,41 +38,51 @@ const TabEvent = () => {
     setText(val);
   };
 
+  const TodayDate = format(new Date(), 'yyyy-MM-dd');
+  console.log(TodayDate);
+
   const renderItem = useCallback(
-    ({ item }) => (
-      <RectButton
-        rippleColor={colors.card}
-        onPress={onEventPress}
-        key={item.id}
-        style={{
-          backgroundColor: colors.background,
-          margin: 5,
-        }}>
-        <Image
-          source={{
-            uri: item.image.url,
-          }}
-          style={{ aspectRatio: 16 / 9, borderRadius: 20 }}
-        />
-        <View style={{ flexDirection: 'row', flex: 1 }}>
-          <View style={{ flexDirection: 'column', flex: 1, paddingRight: 20 }}>
-            <TextEle style={{ paddingTop: 10 }} numberOfLines={1} variant="h1">
-              {item.name}
-            </TextEle>
-            <TextEle variant="p1">
-              {new Intl.NumberFormat('en-IN', {
-                style: 'currency',
-                currency: 'INR',
-                maximumFractionDigits: 0,
-                minimumFractionDigits: 0,
-              }).format(item.price)}
-            </TextEle>
-          </View>
-          <LikeButton courseId={item.id} />
-        </View>
-      </RectButton>
-    ),
-    [onEventPress, colors],
+    ({ item }) => {
+      if (format(new Date(item.launchDate), 'yyyy-MM-dd') >= TodayDate) {
+        return (
+          <RectButton
+            rippleColor={colors.card}
+            onPress={onEventPress}
+            key={item.id}
+            style={{
+              backgroundColor: colors.background,
+              margin: 5,
+            }}>
+            {console.log(format(new Date(item.launchDate), 'dd'))}
+            <Image
+              source={{
+                uri: item.image.url,
+              }}
+              style={{ aspectRatio: 16 / 9, borderRadius: 20 }}
+            />
+            <View style={{ flexDirection: 'row', flex: 1 }}>
+              <View style={{ flexDirection: 'column', flex: 1, paddingRight: 20 }}>
+                <TextEle style={{ paddingTop: 10 }} numberOfLines={1} variant="h1">
+                  {item.name}
+                </TextEle>
+                <TextEle variant="p1">
+                  {new Intl.NumberFormat('en-IN', {
+                    style: 'currency',
+                    currency: 'INR',
+                    maximumFractionDigits: 0,
+                    minimumFractionDigits: 0,
+                  }).format(item.price)}
+                </TextEle>
+              </View>
+              <LikeButton courseId={item.id} />
+            </View>
+          </RectButton>
+        );
+      } else {
+        return <View />;
+      }
+    },
+    [TodayDate, colors.card, colors.background, onEventPress],
   );
 
   const getItemLayout = useCallback(

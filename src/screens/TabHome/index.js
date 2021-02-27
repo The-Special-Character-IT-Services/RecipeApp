@@ -16,10 +16,10 @@ import debounce from 'lodash.debounce';
 import Header from '../Header';
 
 const TabHome = ({ navigation }) => {
+  const [text, setText] = useState('');
+  const { user } = useContext(UserContext);
   const playerRef = useRef();
   const insets = useSafeAreaInsets();
-  const { user } = useContext(UserContext);
-  const [text, setText] = useState('');
   const handler = useCallback(
     debounce(val => {
       setText(val);
@@ -53,6 +53,7 @@ const TabHome = ({ navigation }) => {
           <HomeList
             title="New Courses"
             userId={user.id}
+            sort="updated_at:DESC"
             onPressViewAll={() =>
               navigation.navigate('FilterList', {
                 name: 'All Courses',

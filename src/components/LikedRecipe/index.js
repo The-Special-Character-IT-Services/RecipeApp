@@ -1,9 +1,8 @@
 /* eslint-disable react-native/no-inline-styles */
 import React, { useContext } from 'react';
 import PropTypes from 'prop-types';
-import { View, ScrollView } from 'react-native';
+import { View, ScrollView, Pressable } from 'react-native';
 import Image from 'react-native-fast-image';
-import { RectButton } from 'react-native-gesture-handler';
 import { useTheme } from '@react-navigation/native';
 import useSWR from 'swr';
 import { UserContext } from '@context/userContext';
@@ -15,7 +14,7 @@ import TextEle from '../TextEle';
 const LikedRecipe = ({ onRecipeDetail }) => {
   const { colors } = useTheme();
   const { user } = useContext(UserContext);
-  const { data } = useSWR([
+  const { data, mutate } = useSWR([
     coursesQuery({
       pageIndex: 0,
       limit: 5,
@@ -27,6 +26,7 @@ const LikedRecipe = ({ onRecipeDetail }) => {
   if (!data) {
     return <Loading />;
   }
+
   // useFocusEffect(
   //   useCallback(() => {
   //     mutate();
@@ -39,9 +39,9 @@ const LikedRecipe = ({ onRecipeDetail }) => {
         <View style={{ flexDirection: 'row', alignItems: 'center' }} />
       </View>
       <ScrollView contentContainerStyle={{ paddingVertical: 5, paddingHorizontal: 15 }}>
-        {data?.courses.map(item => (
+        {data?.courses?.map(item => (
           <View key={item.id}>
-            <RectButton
+            <Pressable
               rippleColor={colors.card}
               onPress={() => onRecipeDetail(item)}
               key={item.id}
@@ -71,7 +71,7 @@ const LikedRecipe = ({ onRecipeDetail }) => {
                 </View>
                 <LikeButton courseId={item.id} />
               </View>
-            </RectButton>
+            </Pressable>
           </View>
         ))}
       </ScrollView>

@@ -19,7 +19,7 @@ const MyRecipes = () => {
 
   const filteredData = data?.courses?.filter(x => x.purchase_details.length > 0);
 
-  const flatListData = filteredData.length % 2 === 0 ? filteredData : [...filteredData, {}];
+  const flatListData = filteredData?.length % 2 === 0 ? filteredData : [...filteredData, {}];
 
   return (
     <FlatList

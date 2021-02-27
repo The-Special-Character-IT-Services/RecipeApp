@@ -32,6 +32,7 @@ const Profile = () => {
   ]);
 
   const purchasedCourseCount = data?.courses?.reduce((p, c) => p + c.purchase_details?.length, 0);
+  const likedCourseCount = data?.courses?.reduce((p, c) => p + c.like_event?.length, 0);
 
   return (
     <View style={{ flex: 1 }}>
@@ -78,7 +79,7 @@ const Profile = () => {
                 flexDirection: 'column',
               }}>
               <TextEle variant="header2" style={{ color: colors.text }}>
-                0
+                {likedCourseCount && likedCourseCount - 1}
               </TextEle>
               <TextEle variant="body2" style={{ color: colors.text }}>
                 Likes
