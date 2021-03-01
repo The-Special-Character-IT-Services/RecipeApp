@@ -6,10 +6,17 @@ export const UserContext = createContext();
 
 const UserProvider = ({ children }) => {
   const [user, setUser] = useState();
+  const [loading, setLoading] = useState(true);
   useEffect(() => {
     const loadUser = async () => {
-      const token = await getToken();
-      setUser(token?.user);
+      try {
+        const token = await getToken();
+        setUser(token?.user);
+      } catch (error) {
+        console.log('user not loaded');
+      } finally {
+        setLoading(false);
+      }
     };
     loadUser();
   }, []);
@@ -18,6 +25,7 @@ const UserProvider = ({ children }) => {
     <UserContext.Provider
       value={{
         user,
+        loading,
         setUser,
       }}>
       {children}
