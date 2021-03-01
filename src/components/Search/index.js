@@ -17,14 +17,18 @@ const Search = ({ text, clearText, ...rest }) => {
           placeholderTextColor={colors.text}
           style={{
             flex: 1,
-            height: 50,
-            fontSize: 20,
-            color: colors.text,
-            borderColor: colors.text,
+            height: 56,
+            paddingHorizontal: 24,
+            borderColor: 'gray',
             borderWidth: 1,
-            borderRadius: 20,
-            // paddingVertical: 5,
-            paddingHorizontal: 20,
+            borderRadius: 32,
+            fontWeight: '500',
+            fontFamily: 'Inter-Medium',
+            fontSize: 15,
+            fontStyle: 'normal',
+            lineHeight: 18,
+            letterSpacing: 0.7,
+            textAlign: 'left',
           }}
           {...rest}
         />
@@ -39,14 +43,14 @@ const Search = ({ text, clearText, ...rest }) => {
               right: 10,
             }}
             onPress={clearText}>
-            <Icon name="close-outline" size={30} style={{ color: colors.text }} />
+            <Icon name="close-outline" size={30} style={{ color: colors.primary }} />
           </Pressable>
         ) : (
           <View>
             <Icon
               name="search-outline"
               size={24}
-              style={{ position: 'absolute', color: colors.text, top: 13, right: 13 }}
+              style={{ position: 'absolute', color: colors.primary, top: 13, right: 13 }}
             />
           </View>
         )}
