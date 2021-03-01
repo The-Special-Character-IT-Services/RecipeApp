@@ -9,14 +9,15 @@ import { Pressable, View } from 'react-native';
 import useSWR from 'swr';
 import ListItem from './ListItem';
 
-const HomeList = ({ title, onPressViewAll, onRecipePress, userId }) => {
+const HomeList = ({ title, onPressViewAll, onRecipePress, userId, sort, where }) => {
   const { colors } = useTheme();
   const { data } = useSWR([
     coursesQuery({
       pageIndex: 0,
       limit: 5,
-      sort: 'updated_at:DESC',
+      sort,
       userId,
+      where,
     }),
   ]);
 

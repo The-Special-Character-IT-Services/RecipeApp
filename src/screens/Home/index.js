@@ -5,7 +5,7 @@ import { createStackNavigator } from '@react-navigation/stack';
 import { useTheme } from '@react-navigation/native';
 import Icon from 'react-native-vector-icons/Ionicons';
 import { BorderlessButton } from 'react-native-gesture-handler';
-import { Pressable, View, Text } from 'react-native';
+import { Pressable, View, Modal } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { UserContext } from '@context/userContext';
 import TabHome from '../TabHome';
@@ -80,8 +80,8 @@ const TabProfile = () => {
               <View style={{ flexDirection: 'row', marginRight: 20 }}>
                 <Pressable
                   onPress={() => {
-                    AsyncStorage.clear();
-                    setUser(null);
+                    // AsyncStorage.clear();
+                    // setUser(null);
                   }}>
                   <Icon name="log-out-outline" color={colors.primary} size={24} />
                 </Pressable>

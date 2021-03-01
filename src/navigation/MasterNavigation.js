@@ -9,12 +9,17 @@ import ShareButton from '@components/ShareButton';
 import LikeButton from '@components/LikeButton';
 import YoutubeVideo from '@screens/YoutubeVideo';
 import { UserContext } from '@context/userContext';
+import Loading from '@components/loading';
 
 const MainStack = createStackNavigator();
 
 const MainStackScreen = ({ route }) => {
   const { colors } = useTheme();
-  const { user } = useContext(UserContext);
+  const { user, loading } = useContext(UserContext);
+
+  if (loading) {
+    <Loading />;
+  }
 
   return (
     <MainStack.Navigator

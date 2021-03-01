@@ -1,5 +1,9 @@
 /* eslint-disable react-native/no-inline-styles */
-import BottomSheet, { BottomSheetFlatList, BottomSheetScrollView } from '@gorhom/bottom-sheet';
+import BottomSheet, {
+  BottomSheetFlatList,
+  BottomSheetScrollView,
+  BottomSheetView,
+} from '@gorhom/bottom-sheet';
 import PropTypes from 'prop-types';
 import { useTheme } from '@react-navigation/native';
 import React, { useMemo, useRef, useState } from 'react';
@@ -8,40 +12,37 @@ import { View, StatusBar, Dimensions, Pressable } from 'react-native';
 import Image from 'react-native-fast-image';
 import { deviceWidth, deviceHeight, showErrorToast } from '@utils/index';
 // import { format, subDays } from 'date-fns';
-import { useHeaderHeight } from '@react-navigation/stack';
+// import { useHeaderHeight } from '@react-navigation/stack';
 import useSWR from 'swr';
 import Icon from 'react-native-vector-icons/Ionicons';
 import Rating from '@components/Rating';
 import axios from '@utils/axios';
-import { RectButton, BorderlessButton } from 'react-native-gesture-handler';
 import { courseQuery } from '@hooks/useCoursesApiHook';
 
 import Loading from '@components/loading';
+import { FlatList } from 'react-native-gesture-handler';
 import TextEle from '../../components/TextEle';
-import { likesQuery } from '@hooks/useLikesApiHook';
 
 const subt = `Recipes in this write-up are protected by copyright law. Reproduction and distribution
 of the same without a written consent from Studio D’ Food Couture is prohibited. ©
 Studio De Food Couture `;
 
-const YOUTUBE_VIDEO_HEIGHT = (deviceWidth / 16) * 9;
+const YOUTUBE_VIDEO_HEIGHT = (deviceWidth / 15) * 10;
 
 const { width: windowWidth } = Dimensions.get('window');
 
 export const CARD_WIDTH = windowWidth * 0.9;
 
-const cardInset = (windowWidth - CARD_WIDTH) / 1.5;
+// const cardInset = (windowWidth - CARD_WIDTH) / 1.5;
 
 const CourseDetailsBought = ({ route, navigation, item }) => {
   const { id, userId } = route.params;
   const { colors } = useTheme();
   const { data: courseDetail, mutate } = useSWR([courseQuery(id, userId)]);
   const [playing, setPlaying] = useState(false);
-  const headerHeight = useHeaderHeight();
+  // const headerHeight = useHeaderHeight();
   const bottomSheetRef = useRef(null);
-  const snapPoints = useMemo(() => [deviceHeight - YOUTUBE_VIDEO_HEIGHT - headerHeight, '100%'], [
-    headerHeight,
-  ]);
+  const snapPoints = useMemo(() => [deviceHeight - YOUTUBE_VIDEO_HEIGHT, '100%'], []);
 
   const rating = useMemo(
     () =>
@@ -97,7 +98,7 @@ const CourseDetailsBought = ({ route, navigation, item }) => {
             flexDirection: 'row',
             marginVertical: 4,
           }}>
-          {item.name}
+          {item?.name}
         </TextEle>
         <TextEle
           variant="caption"
@@ -106,7 +107,7 @@ const CourseDetailsBought = ({ route, navigation, item }) => {
             flexDirection: 'row',
             marginVertical: 4,
           }}>
-          {item.cookingLevel}
+          {item?.cookingLevel}
         </TextEle>
       </View>
       <View
@@ -153,30 +154,30 @@ const CourseDetailsBought = ({ route, navigation, item }) => {
             />
           </View>
         )}>
-        <BottomSheetScrollView
+        <BottomSheetView
           style={{
             paddingVertical: 10,
             paddingHorizontal: 20,
             flex: 1,
             backgroundColor: colors.background,
           }}>
-          <View style={{ marginBottom: 100 }}>
-            <View>
+          <BottomSheetView style={{ marginBottom: 100 }}>
+            <BottomSheetView>
               <TextEle variant="subTitle2">{courseDetail?.course?.name}</TextEle>
               <TextEle variant="caption">{courseDetail?.course?.caption}</TextEle>
-              <View>
+              <BottomSheetView>
                 <TextEle variant="caption">{courseDetail?.course?.cuisine?.name}</TextEle>
-                <View style={{ alignItems: 'flex-start' }}>
+                <BottomSheetView style={{ marginVertical: 5, alignItems: 'flex-start' }}>
                   <Rating
                     onPress={onRatingpress}
                     rating={rating}
                     length={5}
-                    totalRating={courseDetail?.rattings?.length || 0}
+                    totalRating={courseDetail?.rattings || 0}
                   />
-                </View>
-              </View>
-            </View>
-            <View
+                </BottomSheetView>
+              </BottomSheetView>
+            </BottomSheetView>
+            <BottomSheetView
               style={{
                 justifyContent: 'center',
                 alignItems: 'flex-start',
@@ -186,16 +187,16 @@ const CourseDetailsBought = ({ route, navigation, item }) => {
               <TextEle variant="header1" style={{ marginBottom: 10 }}>
                 Recipes
               </TextEle>
-              <View style={{ height: 2, width: 100, backgroundColor: colors.text }} />
-            </View>
-            <BottomSheetFlatList
+              <BottomSheetView style={{ height: 2, width: 100, backgroundColor: colors.text }} />
+            </BottomSheetView>
+            <FlatList
               data={courseDetail?.course?.recipes || []}
               showsVerticalScrollIndicator={false}
               renderItem={renderItem}
               keyExtractor={item => `${item?.id}`}
             />
-          </View>
-        </BottomSheetScrollView>
+          </BottomSheetView>
+        </BottomSheetView>
       </BottomSheet>
     </View>
   );

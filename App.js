@@ -1,11 +1,12 @@
 /* eslint-disable react-native/no-inline-styles */
 import React, { useEffect, useRef, useState } from 'react';
-import { NavigationContainer } from '@react-navigation/native';
+import { NavigationContainer, useNavigation } from '@react-navigation/native';
 import analytics from '@react-native-firebase/analytics';
 import { createStackNavigator, CardStyleInterpolators } from '@react-navigation/stack';
-import { KeyboardAvoidingView, StatusBar } from 'react-native';
+import { Alert, KeyboardAvoidingView, StatusBar } from 'react-native';
 import { SWRConfig } from 'swr';
 import { enableScreens } from 'react-native-screens';
+import messaging from '@react-native-firebase/messaging';
 import ErrorScreen from '@screens/Error';
 import { useColorScheme } from 'react-native-appearance';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
@@ -28,6 +29,7 @@ const RootStack = createStackNavigator();
 
 const App = () => {
   const scheme = useColorScheme();
+  // const navigation = useNavigation();
   const routeNameRef = useRef();
   const navigationRef = useRef();
 
@@ -36,12 +38,36 @@ const App = () => {
 
   useEffect(() => {
     SplashScreen.hide();
-
-    const unsubscribe = NetInfo.addEventListener(state => {
+    const unsubscribeNetInfo = NetInfo.addEventListener(state => {
       setIsInternetAvailable(state.isConnected);
     });
+    const unsubscribeMessaging = messaging().onMessage(async remoteMessage => {
+      Alert.alert('A new FCM message arrived!', JSON.stringify(remoteMessage));
+    });
+    messaging().onNotificationOpenedApp(remoteMessage => {
+      console.log(
+        'Notification caused app to open from background state:',
+        remoteMessage.notification,
+      );
+      // navigation.navigate(remoteMessage.data.type);
+    });
+
+    messaging()
+      .getInitialNotification()
+      .then(remoteMessage => {
+        if (remoteMessage) {
+          console.log(
+            'Notification caused app to open from quit state:',
+            remoteMessage.notification,
+          );
+          // setInitialRoute(remoteMessage.data.type); // e.g. "Settings"
+        }
+        // setLoading(false);
+      });
+
     return () => {
-      unsubscribe();
+      unsubscribeNetInfo();
+      unsubscribeMessaging();
     };
   }, []);
 

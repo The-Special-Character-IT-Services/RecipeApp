@@ -2,6 +2,7 @@ import { getDeviceInfo, setToken } from '@utils/index';
 import axios from '@utils/axios';
 import analytics from '@react-native-firebase/analytics';
 import Config from 'react-native-config';
+import messaging from '@react-native-firebase/messaging';
 import { FOODCOUTURE_TOKEN } from '@constants/';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { UserContext } from '@context/userContext';
@@ -32,8 +33,10 @@ const useLoginHook = () => {
           users_permissions_user: res.data.user.id,
         });
       } else if (data[1].data.length < Config.NUMBER_OF_DIVECE_ALLOWED) {
+        const firebaseToken = await messaging().getToken();
         await axios.post('device-infos', {
           ...data[0],
+          firebaseToken,
           users_permissions_user: res.data.user.id,
         });
       } else {

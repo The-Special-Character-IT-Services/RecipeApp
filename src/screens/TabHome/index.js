@@ -13,19 +13,30 @@ import Cuisines from '@components/Cuisines';
 import HomeList from '@components/HomeList';
 import { UserContext } from '@context/userContext';
 import debounce from 'lodash.debounce';
+import { rattingQuery } from '@hooks/useRattingApiHook';
+import useSWR from 'swr';
 import Header from '../Header';
 
 const TabHome = ({ navigation }) => {
+  const [text, setText] = useState('');
+  const { user } = useContext(UserContext);
   const playerRef = useRef();
   const insets = useSafeAreaInsets();
-  const { user } = useContext(UserContext);
-  const [text, setText] = useState('');
   const handler = useCallback(
     debounce(val => {
       setText(val);
     }, 2000),
     [],
   );
+
+  const { data, mutate } = useSWR([
+    rattingQuery({
+      pageIndex: 0,
+      limit: 5,
+      sort: 'rattings:{ratting:ASC}',
+      userId: user?.id,
+    }),
+  ]);
 
   return (
     <ScrollView
@@ -36,31 +47,9 @@ const TabHome = ({ navigation }) => {
       <Pressable ref={playerRef} onPress={() => navigation.navigate('Search')}>
         <SearchBar editable={false} selectTextOnFocus={false} onchangeText={handler} value={text} />
       </Pressable>
-      <Category
+      {/* <Category
         onCategoryDetails={() => navigation.navigate('FilterList', { name: 'Search Category' })}
-      />
-      {!!user?.id && (
-        <HomeList
-          title="New Courses"
-          userId={user.id}
-          onPressViewAll={() => navigation.navigate('FilterList', { name: 'All Courses' })}
-          onRecipePress={async item => {
-            if (item.purchase_details && item.purchase_details.length > 0) {
-              if (
-                item.purchase_details.some(
-                  x => x.course.id === item?.id && x.status === 'purchased',
-                )
-              ) {
-                navigation.navigate('CourseDetailsBought', { id: item?.id, userId: user.id });
-              } else {
-                navigation.navigate('CourseDetails', { id: item?.id, userId: user.id });
-              }
-            } else {
-              navigation.navigate('CourseDetails', { id: item?.id, userId: user.id });
-            }
-          }}
-        />
-      )}
+      /> */}
       <Cuisines
         onCuisinePress={item =>
           navigation.navigate('FilterList', {
@@ -70,6 +59,63 @@ const TabHome = ({ navigation }) => {
           })
         }
       />
+      {!!user?.id && (
+        <>
+          <HomeList
+            title="New Courses"
+            userId={user.id}
+            sort="updated_at:DESC"
+            onPressViewAll={() =>
+              navigation.navigate('FilterList', {
+                name: 'All Courses',
+                where: '{}',
+                userId: user.id,
+              })
+            }
+            onRecipePress={async item => {
+              if (item.purchase_details && item.purchase_details.length > 0) {
+                if (
+                  item.purchase_details.some(
+                    x => x.course.id === item?.id && x.status === 'purchased',
+                  )
+                ) {
+                  navigation.navigate('CourseDetailsBought', { id: item?.id, userId: user.id });
+                } else {
+                  navigation.navigate('CourseDetails', { id: item?.id, userId: user.id });
+                }
+              } else {
+                navigation.navigate('CourseDetails', { id: item?.id, userId: user.id });
+              }
+            }}
+          />
+          <HomeList
+            title="Popular Courses"
+            userId={user.id}
+            onPressViewAll={() =>
+              navigation.navigate('FilterList', {
+                name: 'All Courses',
+                where: '{}',
+                userId: user.id,
+              })
+            }
+            onRecipePress={async item => {
+              if (item.purchase_details && item.purchase_details.length > 0) {
+                if (
+                  item.purchase_details.some(
+                    x => x.course.id === item?.id && x.status === 'purchased',
+                  )
+                ) {
+                  navigation.navigate('CourseDetailsBought', { id: item?.id, userId: user.id });
+                } else {
+                  navigation.navigate('CourseDetails', { id: item?.id, userId: user.id });
+                }
+              } else {
+                navigation.navigate('CourseDetails', { id: item?.id, userId: user.id });
+              }
+            }}
+          />
+        </>
+      )}
     </ScrollView>
   );
 };

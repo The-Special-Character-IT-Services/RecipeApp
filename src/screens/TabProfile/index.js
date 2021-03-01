@@ -9,7 +9,6 @@ import { coursesQuery } from '@hooks/useCoursesApiHook';
 import MyRecipes from './pages/MyRecipes';
 import Settings from './pages/Settings';
 import SavedVideos from './pages/SavedVideos';
-import { lastItem } from 'country-codes-list/countriesData';
 
 const { width: windowWidth } = Dimensions.get('window');
 const Tab = createMaterialTopTabNavigator();
@@ -32,6 +31,9 @@ const Profile = () => {
     coursesQuery({ pageIndex: 0, limit: 5, sort: 'updated_at:ASC', userId: user?.id }),
   ]);
 
+  const purchasedCourseCount = data?.courses?.reduce((p, c) => p + c.purchase_details?.length, 0);
+  const likedCourseCount = data?.courses?.reduce((p, c) => p + c.like_event?.length, 0);
+
   return (
     <View style={{ flex: 1 }}>
       <View
@@ -44,44 +46,59 @@ const Profile = () => {
         }}>
         <View
           style={{
-            flex: 1,
             paddingHorizontal: 25,
           }}>
           <View
             style={{
               flexDirection: 'row',
-              justifyContent: 'space-evenly',
+              justifyContent: 'space-around',
               alignItems: 'center',
               backgroundColor: colors.card,
               borderRadius: 25,
               height: 100,
               marginVertical: 20,
             }}>
-            {data?.courses?.map((x, i) => (
-              <>
-                {i !== 0 && i !== 3 && (
-                  <View key={x.id} style={{ height: 40, width: 1, backgroundColor: 'gray' }} />
-                )}
-                <View
-                  key={x.text}
-                  style={{
-                    justifyContent: 'flex-start',
-                    alignItems: 'center',
-                    flexDirection: 'column',
-                  }}>
-                  <TextEle variant="header2" style={{ color: colors.text }}>
-                    {i === 0 && x?.purchase_details?.length}
-                    {i === 1 && x?.like_event?.length}
-                    {i === 2 && 0}
-                  </TextEle>
-                  <TextEle variant="body2" style={{ color: colors.text }}>
-                    {i === 0 && 'Courses'}
-                    {i === 1 && 'liked'}
-                    {i === 2 && 'Saved'}
-                  </TextEle>
-                </View>
-              </>
-            ))}
+            <View
+              style={{
+                justifyContent: 'flex-start',
+                alignItems: 'center',
+                flexDirection: 'column',
+              }}>
+              <TextEle variant="header2" style={{ color: colors.text }}>
+                {purchasedCourseCount}
+              </TextEle>
+              <TextEle variant="body2" style={{ color: colors.text }}>
+                Courses
+              </TextEle>
+            </View>
+            <View style={{ height: 50, width: 1, backgroundColor: 'gray' }} />
+            <View
+              style={{
+                justifyContent: 'flex-start',
+                alignItems: 'center',
+                flexDirection: 'column',
+              }}>
+              <TextEle variant="header2" style={{ color: colors.text }}>
+                {likedCourseCount && likedCourseCount - 1}
+              </TextEle>
+              <TextEle variant="body2" style={{ color: colors.text }}>
+                Likes
+              </TextEle>
+            </View>
+            <View style={{ height: 50, width: 1, backgroundColor: 'gray' }} />
+            <View
+              style={{
+                justifyContent: 'flex-start',
+                alignItems: 'center',
+                flexDirection: 'column',
+              }}>
+              <TextEle variant="header2" style={{ color: colors.text }}>
+                0
+              </TextEle>
+              <TextEle variant="body2" style={{ color: colors.text }}>
+                Saves
+              </TextEle>
+            </View>
           </View>
         </View>
       </View>

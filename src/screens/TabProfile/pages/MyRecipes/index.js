@@ -2,7 +2,7 @@ import React, { useContext } from 'react';
 import { View } from 'react-native';
 import Image from 'react-native-fast-image';
 import { useTheme } from '@react-navigation/native';
-import { FlatList } from 'react-native-gesture-handler';
+import { FlatList, RectButton, TouchableHighlight } from 'react-native-gesture-handler';
 import TextEle from '@components/TextEle';
 import { coursesQuery } from '@hooks/useCoursesApiHook';
 import useSWR from 'swr';
@@ -16,21 +16,14 @@ const MyRecipes = () => {
   const { data } = useSWR([
     coursesQuery({ pageIndex: 0, limit: 5, sort: 'updated_at:DESC', userId: user?.id }),
   ]);
-  // const [recipes, setRecipes] = useState(data);
-  // useEffect(() => {
-  //   setRecipes([...recipes, { isEmpty: true }]);
-  //  // eslint-disable-next-line react-hooks/exhaustive-deps
-  // }, []);
 
-  // const isPurchased = data?.courses.purchase_details.some(
-  //   x => x.course.id === data?.courses.id && x.status === 'purchased',
-  // );
+  const filteredData = data?.courses?.filter(x => x.purchase_details.length > 0);
 
-  console.log(data?.image?.url);
+  const flatListData = filteredData?.length % 2 === 0 ? filteredData : [...filteredData, {}];
 
   return (
     <FlatList
-      data={data?.courses}
+      data={flatListData}
       style={{ backgroundColor: colors.card }}
       contentContainerStyle={{ marginHorizontal: 20 }}
       renderItem={({ item, index }) => (
@@ -41,8 +34,8 @@ const MyRecipes = () => {
             flexDirection: 'column',
             marginRight: index % 2 === 0 ? 10 : 0,
           }}>
-          {item.purchase_details.some(x => x.course.id === item.id && x.status === 'purchased') && (
-            <>
+          {Object.keys(item).length !== 0 ? (
+            <View>
               <Image
                 source={{ uri: item?.image?.formats?.medium?.url }}
                 resizeMode="cover"
@@ -57,23 +50,22 @@ const MyRecipes = () => {
                 style={{
                   flexDirection: 'row',
                   alignItems: 'center',
-                  justifyContent: 'space-between',
-                  paddingBottom: 15,
+                  justifyContent: 'space-evenly',
+                  paddingBottom: 10,
                 }}>
                 <TextEle
-                  numberOfLines={1}
+                  numberOfLines={2}
                   variant="body2"
                   style={{ color: colors.text, paddingLeft: 5 }}>
                   {item?.name}
                 </TextEle>
-                <View style={{}}>
+                {/* <View>
                   <StarIcon fill={colors.text} />
-                  {/* <TextEle variant="body2" style={{ color: colors.text }}>
-                    {item.rating}
-                  </TextEle> */}
-                </View>
+                </View> */}
               </View>
-            </>
+            </View>
+          ) : (
+            <View />
           )}
         </View>
       )}
