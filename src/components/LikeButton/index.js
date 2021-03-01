@@ -17,13 +17,13 @@ const LikeButton = ({ courseId, withBackground = true }) => {
     try {
       if (data?.likes?.length === 0) {
         await axios.post('likes', {
-          user: user.id,
+          user: user?.id,
           course: courseId,
         });
       } else {
         await axios.delete(`likes/${data.likes[0].id}`);
       }
-      mutate([likesQuery(user.id, courseId)]);
+      mutate([likesQuery(user?.id, courseId)]);
     } catch (error) {
       showErrorToast(error);
     }
