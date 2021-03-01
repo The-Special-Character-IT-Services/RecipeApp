@@ -288,7 +288,7 @@ const CourseDetails = ({ route, navigation }) => {
           bottom: 10,
           width: '100%',
           justifyContent: 'center',
-          // margin: 20,
+          margin: 20,
         }}>
         <RAButton1
           variant="fill"
