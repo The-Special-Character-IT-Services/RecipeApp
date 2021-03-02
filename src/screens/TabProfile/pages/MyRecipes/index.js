@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import { View } from 'react-native';
 import Image from 'react-native-fast-image';
 import { useTheme } from '@react-navigation/native';
@@ -7,6 +7,8 @@ import TextEle from '@components/TextEle';
 import { coursesQuery } from '@hooks/useCoursesApiHook';
 import { UserContext } from '@context/userContext';
 import useSWR from 'swr';
+import { showErrorToast } from '@utils/';
+import Loading from '@components/loading';
 
 const MyRecipes = () => {
   const { colors } = useTheme();
@@ -15,16 +17,13 @@ const MyRecipes = () => {
     coursesQuery({ pageIndex: 0, limit: 5, sort: 'updated_at:DESC', userId: user?.id }),
   ]);
 
-  const filteredData = data?.courses?.filter(x => x.purchase_details.length > 0) || [];
+  // if (!data) {
+  //   return <Loading />;
+  // }
 
-  const flatListData = filteredData?.length % 2 === 0 ? filteredData : [...filteredData, {}];
-
-  return (
-    <FlatList
-      data={flatListData || []}
-      style={{ backgroundColor: colors.card }}
-      contentContainerStyle={{ marginHorizontal: 20 }}
-      renderItem={({ item, index }) => (
+  const renderCourses = ({ item, index }) => {
+    try {
+      return (
         <View
           key={item?.id}
           style={{
@@ -57,18 +56,32 @@ const MyRecipes = () => {
                   {item?.name}
                 </TextEle>
                 {/* <View>
-                  <StarIcon fill={colors.text} />
-                </View> */}
+                      <StarIcon fill={colors.text} />
+                    </View> */}
               </View>
             </View>
           ) : (
             <View />
           )}
         </View>
-      )}
+      );
+    } catch (err) {
+      return showErrorToast(err);
+    }
+  };
+
+  const filteredData = data?.courses?.filter(x => x.purchase_details.length > 0) || [];
+
+  const flatListData = filteredData?.length % 2 === 0 ? filteredData : [...filteredData, {}];
+
+  return (
+    <FlatList
+      data={flatListData || []}
+      style={{ backgroundColor: colors.card }}
+      contentContainerStyle={{ marginHorizontal: 20 }}
+      renderItem={renderCourses}
       numColumns={2}
     />
   );
 };
-
 export default MyRecipes;

@@ -1,6 +1,6 @@
 /* eslint-disable react-native/no-inline-styles */
 import React, { useEffect, useRef, useState } from 'react';
-import { NavigationContainer, useNavigation } from '@react-navigation/native';
+import { NavigationContainer } from '@react-navigation/native';
 import analytics from '@react-native-firebase/analytics';
 import { createStackNavigator, CardStyleInterpolators } from '@react-navigation/stack';
 import { Alert, KeyboardAvoidingView, StatusBar } from 'react-native';

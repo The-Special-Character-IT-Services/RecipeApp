@@ -9,6 +9,7 @@ import { coursesQuery } from '@hooks/useCoursesApiHook';
 import MyRecipes from './pages/MyRecipes';
 import Settings from './pages/Settings';
 import SavedVideos from './pages/SavedVideos';
+import Loading from '@components/loading';
 
 const { width: windowWidth } = Dimensions.get('window');
 const Tab = createMaterialTopTabNavigator();
@@ -33,6 +34,10 @@ const Profile = () => {
 
   const purchasedCourseCount = data?.courses?.reduce((p, c) => p + c.purchase_details?.length, 0);
   const likedCourseCount = data?.courses?.reduce((p, c) => p + c.like_event?.length, 0);
+
+  if (!likedCourseCount && !purchasedCourseCount) {
+    return <Loading />;
+  }
 
   return (
     <View style={{ flex: 1 }}>
