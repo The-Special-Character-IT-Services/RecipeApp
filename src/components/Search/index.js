@@ -29,6 +29,7 @@ const Search = ({ text, clearText, ...rest }) => {
             lineHeight: 18,
             letterSpacing: 0.7,
             textAlign: 'left',
+            color: colors.text,
           }}
           {...rest}
         />

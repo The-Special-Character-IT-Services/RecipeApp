@@ -6,6 +6,7 @@ import TextEle from '@components/TextEle';
 import { UserContext } from '@context/userContext';
 import useSWR from 'swr';
 import { coursesQuery } from '@hooks/useCoursesApiHook';
+import Loading from '@components/loading';
 import MyRecipes from './pages/MyRecipes';
 import Settings from './pages/Settings';
 import SavedVideos from './pages/SavedVideos';
@@ -33,6 +34,10 @@ const Profile = () => {
 
   const purchasedCourseCount = data?.courses?.reduce((p, c) => p + c.purchase_details?.length, 0);
   const likedCourseCount = data?.courses?.reduce((p, c) => p + c.like_event?.length, 0);
+
+  if (!likedCourseCount && !purchasedCourseCount) {
+    return <Loading />;
+  }
 
   return (
     <View style={{ flex: 1 }}>
@@ -118,7 +123,7 @@ const Profile = () => {
               height: 5,
               width: 5,
               borderRadius: 2,
-              marginBottom: 5,
+              marginBottom: 4,
               borderBottomWidth: 0,
               alignSelf: 'center',
               left: windowWidth / 3 / 2 - 2,

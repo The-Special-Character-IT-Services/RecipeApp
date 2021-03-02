@@ -94,7 +94,7 @@ const RATextInput = ({
             style={{ margin: 0 }}>
             <View style={{ backgroundColor: '#fff', paddingTop: 20 }}>
               <View style={{ alignItems: 'center' }}>
-                <TextEle variant="title">Search your Country here</TextEle>
+                <TextEle variant="title1">Search your Country here</TextEle>
               </View>
 
               <SearchBar onChangeText={t => setText(t)} value={text} />
