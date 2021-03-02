@@ -10,7 +10,9 @@
     "test": "jest",
     "lint": "eslint . --quiet",
     "lint:write": "eslint . --fix --quiet",
-    "prettier": "prettier --write src/**/*.js"
+    "prettier": "prettier --write src/**/*.js",
+    "ios:beta": "fastlane ios beta",
+    "android:beta": "fastlane android beta"
   },
   "dependencies": {
     "@gorhom/bottom-sheet": "3.2.0",
