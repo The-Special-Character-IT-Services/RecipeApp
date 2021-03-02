@@ -2,13 +2,11 @@ import React, { useContext } from 'react';
 import { View } from 'react-native';
 import Image from 'react-native-fast-image';
 import { useTheme } from '@react-navigation/native';
-import { FlatList, RectButton, TouchableHighlight } from 'react-native-gesture-handler';
+import { FlatList } from 'react-native-gesture-handler';
 import TextEle from '@components/TextEle';
 import { coursesQuery } from '@hooks/useCoursesApiHook';
-import useSWR from 'swr';
-// import data from './data';
 import { UserContext } from '@context/userContext';
-import StarIcon from '../../../../assets/icons/star-icon.svg';
+import useSWR from 'swr';
 
 const MyRecipes = () => {
   const { colors } = useTheme();
@@ -17,13 +15,13 @@ const MyRecipes = () => {
     coursesQuery({ pageIndex: 0, limit: 5, sort: 'updated_at:DESC', userId: user?.id }),
   ]);
 
-  const filteredData = data?.courses?.filter(x => x.purchase_details.length > 0);
+  const filteredData = data?.courses?.filter(x => x.purchase_details.length > 0) || [];
 
   const flatListData = filteredData?.length % 2 === 0 ? filteredData : [...filteredData, {}];
 
   return (
     <FlatList
-      data={flatListData}
+      data={flatListData || []}
       style={{ backgroundColor: colors.card }}
       contentContainerStyle={{ marginHorizontal: 20 }}
       renderItem={({ item, index }) => (
@@ -42,7 +40,6 @@ const MyRecipes = () => {
                 style={{
                   flex: 1,
                   height: 230,
-                  width: undefined,
                   borderRadius: 10,
                 }}
               />

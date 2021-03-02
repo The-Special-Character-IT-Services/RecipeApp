@@ -20,7 +20,7 @@ const PaymentSuccess = ({ navigation }) => {
         style={{ position: 'absolute', bottom: 10, width: '100%' }}
         variant="fill"
         text="Done"
-        onPress={() => navigation.navigate('CourseDetailsBought', { userId: user.id })}
+        onPress={() => navigation.navigate('CourseDetailsBought', { userId: user?.id })}
       />
     </View>
   );

@@ -55,7 +55,7 @@ const TabHome = ({ navigation }) => {
           navigation.navigate('FilterList', {
             name: 'Search Cuisine',
             where: `{cuisine:{id: ${item?.id}}}`,
-            userId: user.id,
+            userId: user?.id,
           })
         }
       />
@@ -63,13 +63,13 @@ const TabHome = ({ navigation }) => {
         <>
           <HomeList
             title="New Courses"
-            userId={user.id}
+            userId={user?.id}
             sort="updated_at:DESC"
             onPressViewAll={() =>
               navigation.navigate('FilterList', {
                 name: 'All Courses',
                 where: '{}',
-                userId: user.id,
+                userId: user?.id,
               })
             }
             onRecipePress={async item => {
@@ -79,23 +79,23 @@ const TabHome = ({ navigation }) => {
                     x => x.course.id === item?.id && x.status === 'purchased',
                   )
                 ) {
-                  navigation.navigate('CourseDetailsBought', { id: item?.id, userId: user.id });
+                  navigation.navigate('CourseDetailsBought', { id: item?.id, userId: user?.id });
                 } else {
-                  navigation.navigate('CourseDetails', { id: item?.id, userId: user.id });
+                  navigation.navigate('CourseDetails', { id: item?.id, userId: user?.id });
                 }
               } else {
-                navigation.navigate('CourseDetails', { id: item?.id, userId: user.id });
+                navigation.navigate('CourseDetails', { id: item?.id, userId: user?.id });
               }
             }}
           />
           <HomeList
             title="Popular Courses"
-            userId={user.id}
+            userId={user?.id}
             onPressViewAll={() =>
               navigation.navigate('FilterList', {
                 name: 'All Courses',
                 where: '{}',
-                userId: user.id,
+                userId: user?.id,
               })
             }
             onRecipePress={async item => {
@@ -105,12 +105,12 @@ const TabHome = ({ navigation }) => {
                     x => x.course.id === item?.id && x.status === 'purchased',
                   )
                 ) {
-                  navigation.navigate('CourseDetailsBought', { id: item?.id, userId: user.id });
+                  navigation.navigate('CourseDetailsBought', { id: item?.id, userId: user?.id });
                 } else {
-                  navigation.navigate('CourseDetails', { id: item?.id, userId: user.id });
+                  navigation.navigate('CourseDetails', { id: item?.id, userId: user?.id });
                 }
               } else {
-                navigation.navigate('CourseDetails', { id: item?.id, userId: user.id });
+                navigation.navigate('CourseDetails', { id: item?.id, userId: user?.id });
               }
             }}
           />

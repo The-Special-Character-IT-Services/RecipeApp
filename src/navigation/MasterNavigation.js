@@ -17,6 +17,8 @@ const MainStackScreen = ({ route }) => {
   const { colors } = useTheme();
   const { user, loading } = useContext(UserContext);
 
+  console.log(user);
+
   if (loading) {
     <Loading />;
   }
@@ -28,7 +30,7 @@ const MainStackScreen = ({ route }) => {
         headerTintColor: colors.primary,
         title: false,
       }}>
-      {user ? (
+      {!!user ? (
         <>
           <MainStack.Screen name="Home" getComponent={() => require('@screens/Home').default} />
           <MainStack.Screen

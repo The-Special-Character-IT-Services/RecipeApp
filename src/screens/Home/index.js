@@ -5,7 +5,7 @@ import { createStackNavigator } from '@react-navigation/stack';
 import { useTheme } from '@react-navigation/native';
 import Icon from 'react-native-vector-icons/Ionicons';
 import { BorderlessButton } from 'react-native-gesture-handler';
-import { Pressable, View, Modal } from 'react-native';
+import { Alert, Pressable, View } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { UserContext } from '@context/userContext';
 import TabHome from '../TabHome';
@@ -13,7 +13,6 @@ import LikesScreen from '../TabLikes';
 import ProfileScreen from '../TabProfile';
 import EventScreen from '../TabEvent';
 // import CartButton from '../CartButton';
-// import CartScreen from '../CartScreen';
 import YoutubeScreen from '../TabYoutube';
 
 const Tab = createBottomTabNavigator();
@@ -68,26 +67,27 @@ const TabProfile = () => {
   return (
     <TabProfileStack.Navigator>
       <TabProfileStack.Screen
-        name="TabLikesPage"
+        name="TabProfilePage"
         component={ProfileScreen}
-        options={({ navigation }) => ({
+        options={() => ({
           title: 'Profile',
           headerShown: true,
           headerLeft: false,
-          headerRight: () => {
-            const { setUser } = useContext(UserContext);
-            return (
-              <View style={{ flexDirection: 'row', marginRight: 20 }}>
-                <Pressable
-                  onPress={() => {
-                    // AsyncStorage.clear();
-                    // setUser(null);
-                  }}>
-                  <Icon name="log-out-outline" color={colors.primary} size={24} />
-                </Pressable>
-              </View>
-            );
-          },
+          headerRight: () => (
+            <View style={{ flexDirection: 'row', marginRight: 20 }}>
+              <UserContext.Consumer>
+                {({ setUser }) => (
+                  <Pressable
+                    onPress={() => {
+                      AsyncStorage.clear();
+                      setUser(null);
+                    }}>
+                    <Icon name="log-out-outline" color={colors.primary} size={24} />
+                  </Pressable>
+                )}
+              </UserContext.Consumer>
+            </View>
+          ),
           headerTitleAlign: 'center',
           headerTintColor: colors.primary,
         })}
