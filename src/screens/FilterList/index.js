@@ -6,6 +6,7 @@ import { useTheme } from '@react-navigation/native';
 import { useSWRInfinite } from 'swr';
 import { getInfiniteFilteredCourses } from '@hooks/useCoursesApiHook';
 import LottieView from 'lottie-react-native';
+import Loading from '@components/loading';
 import Image from 'react-native-fast-image';
 import SearchBar from '../../components/Search';
 import TextEle from '../../components/TextEle';
@@ -26,7 +27,6 @@ const FilterList = ({ route }) => {
   const onChangeText = val => {
     setText(val);
   };
-
   const keyExtractor = useCallback(item => `${item?.id}`, []);
 
   const renderItem = useCallback(
@@ -80,15 +80,18 @@ const FilterList = ({ route }) => {
             backgroundColor: colors.background,
             bottom: 150,
           }}>
-          <TextEle variant="error" style={{ color: '#ff7f00', textAlign: 'center' }}>
+          <TextEle variant="error" style={{ color: colors.primary, textAlign: 'center' }}>
             Sorry!!
           </TextEle>
-          <TextEle variant="error1" style={{ color: '#ff7f00', textAlign: 'center' }}>
+          <TextEle variant="error1" style={{ color: colors.primary, textAlign: 'center' }}>
             No data available
           </TextEle>
         </View>
       </View>
     );
+  }
+  if (!data) {
+    return <Loading />;
   }
   return (
     <View style={{ flex: 1 }}>
@@ -106,7 +109,7 @@ const FilterList = ({ route }) => {
         removeClippedSubviews
         ListFooterComponent={() => {
           if (isValidating) {
-            return <ActivityIndicator animating size="large" color={colors.pr} />;
+            return <ActivityIndicator animating size="large" color={colors.primary} />;
           }
           return null;
         }}

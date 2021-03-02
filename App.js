@@ -2,6 +2,7 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import analytics from '@react-native-firebase/analytics';
+import remoteConfig from '@react-native-firebase/remote-config';
 import { createStackNavigator, CardStyleInterpolators } from '@react-navigation/stack';
 import { Alert, KeyboardAvoidingView, StatusBar } from 'react-native';
 import { SWRConfig } from 'swr';
@@ -17,6 +18,7 @@ import fetcher from '@utils/fetcher';
 // import YoutubeVideo from '@screens/YoutubeVideo';
 import UserProvider from '@context/userContext';
 import Toast from 'react-native-toast-message';
+import Loading from '@components/loading';
 import NetInfo from '@react-native-community/netinfo';
 import { isIOS } from './src/utils';
 import YoutubeFilter from './src/screens/YoutubeFilter';
@@ -29,11 +31,10 @@ const RootStack = createStackNavigator();
 
 const App = () => {
   const scheme = useColorScheme();
-  // const navigation = useNavigation();
   const routeNameRef = useRef();
   const navigationRef = useRef();
+  const [currentTheme, setCurrentTheme] = useState(scheme === 'dark' ? RADarkTheme : RALightTheme);
 
-  const currentTheme = scheme === 'dark' ? RADarkTheme : RALightTheme;
   const [isInternetAvailable, setIsInternetAvailable] = useState(true);
 
   useEffect(() => {
@@ -65,6 +66,23 @@ const App = () => {
         // setLoading(false);
       });
 
+    const fetchConfigData = async () => {
+      try {
+        const isActivate = await remoteConfig().fetchAndActivate();
+        console.log(isActivate);
+        if (isActivate) {
+          const theme = remoteConfig().getValue(scheme === 'dark' ? 'darkTheme' : 'lightTheme');
+          if (theme) {
+            setCurrentTheme(JSON.parse(theme.asString()));
+          }
+        }
+      } catch (error) {
+        console.log(error);
+      }
+    };
+
+    fetchConfigData();
+
     return () => {
       unsubscribeNetInfo();
       unsubscribeMessaging();
@@ -73,6 +91,10 @@ const App = () => {
 
   if (!isInternetAvailable) {
     return <ErrorScreen />;
+  }
+
+  if (!currentTheme) {
+    return <Loading />;
   }
 
   return (
