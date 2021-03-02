@@ -10,7 +10,7 @@ export const RADarkTheme = {
   colors: {
     ...DarkTheme.colors,
     ...colors,
-    primary: '#FABC05',
+    primary: '#F6552E',
     secondaryText: 'rgba(0,0,0,0.7)',
     error: '#FF6464',
   },
@@ -21,7 +21,7 @@ export const RALightTheme = {
   colors: {
     ...DefaultTheme.colors,
     ...colors,
-    primary: '#FABC05',
+    primary: '#F6552E',
     secondaryText: 'rgba(255,255,255,0.7)',
     error: '#FF6464',
   },
