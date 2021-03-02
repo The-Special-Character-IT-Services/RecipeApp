@@ -6,10 +6,10 @@ import TextEle from '@components/TextEle';
 import { UserContext } from '@context/userContext';
 import useSWR from 'swr';
 import { coursesQuery } from '@hooks/useCoursesApiHook';
+import Loading from '@components/loading';
 import MyRecipes from './pages/MyRecipes';
 import Settings from './pages/Settings';
 import SavedVideos from './pages/SavedVideos';
-import Loading from '@components/loading';
 
 const { width: windowWidth } = Dimensions.get('window');
 const Tab = createMaterialTopTabNavigator();
@@ -123,7 +123,7 @@ const Profile = () => {
               height: 5,
               width: 5,
               borderRadius: 2,
-              marginBottom: 5,
+              marginBottom: 4,
               borderBottomWidth: 0,
               alignSelf: 'center',
               left: windowWidth / 3 / 2 - 2,

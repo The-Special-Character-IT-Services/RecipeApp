@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext } from 'react';
 import { View } from 'react-native';
 import Image from 'react-native-fast-image';
 import { useTheme } from '@react-navigation/native';
@@ -8,7 +8,7 @@ import { coursesQuery } from '@hooks/useCoursesApiHook';
 import { UserContext } from '@context/userContext';
 import useSWR from 'swr';
 import { showErrorToast } from '@utils/';
-import Loading from '@components/loading';
+// import Loading from '@components/loading';
 
 const MyRecipes = () => {
   const { colors } = useTheme();
@@ -29,6 +29,7 @@ const MyRecipes = () => {
           style={{
             flex: 1,
             flexDirection: 'column',
+            marginTop: 20,
             marginRight: index % 2 === 0 ? 10 : 0,
           }}>
           {Object.keys(item).length !== 0 ? (
