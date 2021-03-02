@@ -29,7 +29,7 @@ const MyRecipes = () => {
           style={{
             flex: 1,
             flexDirection: 'column',
-            marginTop: 20,
+            marginTop: index === 0 || index === 1 ? 20 : 0,
             marginRight: index % 2 === 0 ? 10 : 0,
           }}>
           {Object.keys(item).length !== 0 ? (
