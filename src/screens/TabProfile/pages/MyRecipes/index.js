@@ -78,6 +78,7 @@ const MyRecipes = () => {
   return (
     <FlatList
       data={flatListData || []}
+      keyExtractor={item => item.id}
       style={{ backgroundColor: colors.card }}
       contentContainerStyle={{ marginHorizontal: 20 }}
       renderItem={renderCourses}

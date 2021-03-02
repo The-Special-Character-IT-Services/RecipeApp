@@ -86,6 +86,7 @@ const CourseDetails = ({ route, navigation }) => {
     });
     navigation.navigate('PurchaseUser', {
       orderDetails: orderDetails.data,
+      CourseID: data?.course?.id,
     });
   }, [
     data?.course?.price,
@@ -129,6 +130,7 @@ const CourseDetails = ({ route, navigation }) => {
       });
       navigation.navigate('PurchaseUser', {
         orderDetails: orderDetails.data,
+        CourseID: data?.course?.id,
       });
     },
     [

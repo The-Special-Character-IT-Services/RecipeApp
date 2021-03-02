@@ -13,12 +13,13 @@ import axios from '@utils/axios';
 import { initialValues, purchaseUserForm, formRef } from './fields';
 
 const PurchaseUser = ({ route, navigation }) => {
-  const { orderDetails } = route.params;
+  const { orderDetails, CourseID } = route.params;
   const [passwordVal, setPasswordVal] = useState('');
   const [loading, setLoading] = useState(false);
   const headerHight = useHeaderHeight();
   const insets = useSafeAreaInsets();
   const cancelSource = useMemo(() => CancelToken.source(), []);
+  console.log(CourseID);
 
   useEffect(
     () => () => {
@@ -68,7 +69,7 @@ const PurchaseUser = ({ route, navigation }) => {
           fail: false,
           error: '',
         });
-        navigation.navigate('PaymentSuccess');
+        navigation.navigate('PaymentSuccess', { CourseID: CourseID });
       })
       .catch(async error => {
         // handle failure
@@ -77,7 +78,7 @@ const PurchaseUser = ({ route, navigation }) => {
           fail: true,
           error: error.description,
         });
-        navigation.navigate('PaymentSuccess');
+        navigation.navigate('PaymentSuccess', { CourseID: CourseID });
       });
   };
 
