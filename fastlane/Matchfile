@@ -2,7 +2,7 @@ git_url("https://github.com/The-Special-Character-IT-Services/food_couture_ios_c
 
 storage_mode("git")
 
-type("development") # The default type, can be: appstore, adhoc, enterprise or development
+type("appstore") # The default type, can be: appstore, adhoc, enterprise or development
 
 app_identifier(["in.foodcouture.chetnapatel"])
 username("yagnesh.modh@gmail.com") # Your Apple Developer Portal username
