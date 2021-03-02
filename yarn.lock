@@ -1178,6 +1178,11 @@
   resolved "https://registry.yarnpkg.com/@react-native-firebase/messaging/-/messaging-10.8.1.tgz#da9e0db91645e70e7853e5b91c06771fffbea8bb"
   integrity sha512-DVgibb4XERG+5TQQiHKJ1qF+5cbpfiKGRFze9WcbE+FxSYwNMIzyt6u3l7WMBLz6wXcqAq3zLRo6SBbSt37uDw==
 
+"@react-native-firebase/remote-config@^10.8.1":
+  version "10.8.1"
+  resolved "https://registry.yarnpkg.com/@react-native-firebase/remote-config/-/remote-config-10.8.1.tgz#c6587c2ee3610870372084ed51dbfd66d26ffbc3"
+  integrity sha512-zONnuaNsyFziNXR5ee222QgcJv8OIvPufMwzXaY180XRzNnBUsCPWmOvhQouA3ko8oUKov1J/sXPAL9DWpb+JQ==
+
 "@react-navigation/bottom-tabs@^5.11.2":
   version "5.11.7"
   resolved "https://registry.yarnpkg.com/@react-navigation/bottom-tabs/-/bottom-tabs-5.11.7.tgz#a1d220afe02b6897c0705ddc40265e65c01fa0ba"

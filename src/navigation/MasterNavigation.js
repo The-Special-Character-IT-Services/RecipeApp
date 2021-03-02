@@ -17,8 +17,6 @@ const MainStackScreen = ({ route }) => {
   const { colors } = useTheme();
   const { user, loading } = useContext(UserContext);
 
-  console.log(user);
-
   if (loading) {
     <Loading />;
   }
