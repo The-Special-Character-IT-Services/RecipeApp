@@ -89,6 +89,9 @@ export const courseQuery = (id, userId) => `{
         url
         formats
       }
+      recipeVideo {
+        url
+      }
       isIndividual {
         price
         validity
@@ -131,9 +134,14 @@ export const courseQuery = (id, userId) => `{
       }
     }
     purchase_details(where: { user_id: { id: ${userId} } }) {
+      id
       user_id {
         id
       }
+      course {
+        id
+      }
+      status
     }
   }
 }`;

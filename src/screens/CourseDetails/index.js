@@ -1,10 +1,10 @@
 /* eslint-disable react-native/no-inline-styles */
-import BottomSheet, { BottomSheetScrollView } from '@gorhom/bottom-sheet';
+import BottomSheet, { BottomSheetScrollView, BottomSheetView } from '@gorhom/bottom-sheet';
 import PropTypes from 'prop-types';
 import { useTheme } from '@react-navigation/native';
 import React, { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import YoutubePlayer from 'react-native-youtube-iframe';
-import { View, StatusBar } from 'react-native';
+import { View, StatusBar, Pressable, Image } from 'react-native';
 import Markdown from 'react-native-markdown-renderer';
 import { deviceWidth, deviceHeight, showErrorToast } from '@utils/index';
 import RAButton1 from '@components/RAButton1';
@@ -19,7 +19,11 @@ import useMarkdownRules from '@hooks/useMarkdownRules';
 import useSWR from 'swr';
 // import ActionButton from '@components/ActionButton';
 import { courseQuery } from '@hooks/useCoursesApiHook';
+import { FlatList } from 'react-native-gesture-handler';
+import Icon from 'react-native-vector-icons/Ionicons';
+import Rating from '@components/Rating';
 import Loading from '@components/loading';
+import ShareButton from '../../components/ShareButton';
 import TextEle from '../../components/TextEle';
 
 const subt = `Recipes in this write-up are protected by copyright law. Reproduction and distribution
@@ -38,13 +42,19 @@ const CourseDetails = ({ route, navigation }) => {
   const { id, userId } = route.params;
   const { colors } = useTheme();
   const [loading, setLoading] = useState(false);
-  const { data, isValidating, error } = useSWR([courseQuery(id, userId)]);
+  const { data, isValidating, error, mutate } = useSWR([courseQuery(id, userId)]);
   const [playing, setPlaying] = useState(false);
   // const headerHeight = useHeaderHeight();
   const bottomSheetRef = useRef(null);
   const snapPoints = useMemo(() => [deviceHeight - YOUTUBE_VIDEO_HEIGHT, '100%'], []);
 
   const rules = useMarkdownRules();
+
+  const isPurchased = data?.course?.purchase_details?.some(
+    x => x.course.id === id && x.status === 'purchased',
+  );
+
+  console.log(isPurchased);
 
   useEffect(() => {
     if (error) {
@@ -173,9 +183,222 @@ const CourseDetails = ({ route, navigation }) => {
     }
   }, [createPurchaseOrder, updatePurchaseOrder, userId, data?.course?.id]);
 
+  const rating = useMemo(
+    () => (data?.course?.rattings || []).reduce((p, c, i, a) => p + c.ratting / a.length, 0),
+    [data?.course?.rattings],
+  );
+
+  const onRatingpress = async ratting => {
+    try {
+      const ratt = data?.course?.rattings.find(x => Number(x.user.id) === Number(userId));
+      if (ratt) {
+        await axios.put(`rattings/${ratt.id}`, {
+          user: userId,
+          course: id,
+          ratting,
+        });
+      } else {
+        await axios.post('rattings', {
+          user: userId,
+          course: id,
+          ratting,
+        });
+      }
+      mutate();
+    } catch (err) {
+      showErrorToast(err);
+    }
+  };
+
   if (isValidating) {
     return <Loading />;
   }
+  if (!isPurchased) {
+    return (
+      <View style={{ flex: 1 }}>
+        <StatusBar hidden />
+        <YoutubePlayer
+          play={playing}
+          height={YOUTUBE_VIDEO_HEIGHT}
+          videoId={data?.course?.promoVideoYoutubeId}
+        />
+        <BottomSheet
+          ref={bottomSheetRef}
+          initialSnapIndex={0}
+          snapPoints={snapPoints}
+          handleComponent={() => (
+            <View
+              style={{
+                paddingHorizontal: 16,
+                paddingVertical: 16,
+                backgroundColor: colors.background,
+              }}>
+              <View
+                style={{
+                  alignSelf: 'center',
+                  width: (8 * deviceWidth) / 100,
+                  height: 5,
+                  borderRadius: 4,
+                  backgroundColor: colors.text,
+                }}
+              />
+            </View>
+          )}
+          onChange={handleSheetChanges}>
+          <BottomSheetScrollView
+            showsVerticalScrollIndicator={false}
+            style={{
+              paddingVertical: 20,
+              paddingHorizontal: 20,
+              backgroundColor: colors.background,
+            }}>
+            <View style={{ justifyContent: 'center', alignItems: 'center', marginBottom: 20 }}>
+              <TextEle variant="header1" style={{ marginBottom: 10 }}>
+                Key Points
+              </TextEle>
+              <View style={{ height: 2, width: 100, backgroundColor: colors.text }} />
+            </View>
+            <View>
+              <View
+                style={{
+                  flexDirection: 'row',
+                  justifyContent: 'space-between',
+                }}>
+                <TextEle variant="body2" style={{ paddingVertical: 10 }}>
+                  Duration
+                </TextEle>
+                <TextEle
+                  variant="body2"
+                  style={{ paddingVertical: 10, color: 'gray', width: 120, alignSelf: 'flex-end' }}>
+                  {`Launching on ${
+                    data?.course?.launchDate
+                      ? format(new Date(data?.course?.launchDate), 'yyyy-MM-dd')
+                      : data?.course?.launchDate
+                  }`}
+                </TextEle>
+              </View>
+              <View style={{ height: 1, width: 400, backgroundColor: 'gray' }} />
+              <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
+                <TextEle variant="body2" style={{ paddingVertical: 10 }}>
+                  Total Recipes covered
+                </TextEle>
+                <TextEle variant="body2" style={{ paddingVertical: 10, color: 'gray', width: 120 }}>
+                  {data?.course?.recipes.length}
+                </TextEle>
+              </View>
+              <View style={{ height: 1, width: 400, backgroundColor: 'gray' }} />
+              <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
+                <TextEle variant="body2" style={{ paddingVertical: 10 }}>
+                  Video Validity
+                </TextEle>
+                <TextEle variant="body2" style={{ paddingVertical: 10, color: 'gray', width: 120 }}>
+                  {data?.course?.validity}
+                </TextEle>
+              </View>
+              <View style={{ height: 1, width: 400, backgroundColor: 'gray' }} />
+              <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
+                <TextEle variant="body2" style={{ paddingVertical: 10 }}>
+                  Written Recipe
+                </TextEle>
+                <TextEle variant="body2" style={{ paddingVertical: 10, color: 'gray', width: 120 }}>
+                  Available
+                </TextEle>
+              </View>
+              <View style={{ height: 1, width: 400, backgroundColor: 'gray' }} />
+              <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
+                <TextEle variant="body2" style={{ paddingVertical: 10 }}>
+                  Fees
+                </TextEle>
+                <TextEle variant="body2" style={{ paddingVertical: 10, color: 'gray', width: 120 }}>
+                  {data?.course?.price}
+                </TextEle>
+              </View>
+              <View style={{ height: 1, width: 400, backgroundColor: 'gray' }} />
+              <TextEle variant="caption" style={{ marginVertical: 20 }}>
+                {subt}
+              </TextEle>
+            </View>
+            <View style={{ marginBottom: 100 }}>
+              <TextEle>Varieties:-</TextEle>
+              <Markdown rules={rules}>{data?.course?.description}</Markdown>
+            </View>
+          </BottomSheetScrollView>
+        </BottomSheet>
+        {/* <View style={{ position: 'absolute', left: 400, top: 640 }}>
+          <ActionButton />
+        </View> */}
+        <View
+          style={{
+            position: 'absolute',
+            bottom: 10,
+            width: '100%',
+            justifyContent: 'center',
+            // marginHorizontal: 20,
+          }}>
+          <RAButton1
+            variant="fill"
+            text={`Buy For ${new Intl.NumberFormat('en-IN', {
+              style: 'currency',
+              currency: 'INR',
+              maximumFractionDigits: 0,
+              minimumFractionDigits: 0,
+            }).format(data?.course?.price || 0)}`}
+            onPress={buyCourse}
+            disable={loading}
+            loading={loading}
+          />
+        </View>
+      </View>
+    );
+  }
+
+  const renderItem = ({ item }) => (
+    <Pressable
+      key={item?.id}
+      style={{
+        marginVertical: 10,
+        marginHorizontal: 10,
+        alignItems: 'center',
+        flexDirection: 'row',
+      }}
+      onPress={() => navigation.navigate('RecipeDetail', { item })}>
+      <Image
+        source={{ uri: item?.recipeImage?.url }}
+        style={{ height: 80, width: 100, borderRadius: 10 }}
+      />
+      <View style={{ flex: 1, height: '100%', paddingHorizontal: 12 }}>
+        <TextEle
+          variant="body1"
+          style={{
+            color: colors.text,
+            flexDirection: 'row',
+            marginVertical: 4,
+          }}>
+          {item?.name}
+        </TextEle>
+        <TextEle
+          variant="caption"
+          style={{
+            color: 'gray',
+            flexDirection: 'row',
+            marginVertical: 4,
+          }}>
+          {item?.cookingLevel}
+        </TextEle>
+      </View>
+      <View
+        style={{
+          backgroundColor: colors.primary,
+          borderRadius: 24,
+          justifyContent: 'center',
+          alignItems: 'center',
+          height: 40,
+          width: 40,
+        }}>
+        <Icon name="play-outline" size={24} color={colors.background} />
+      </View>
+    </Pressable>
+  );
 
   return (
     <View style={{ flex: 1 }}>
@@ -206,111 +429,57 @@ const CourseDetails = ({ route, navigation }) => {
               }}
             />
           </View>
-        )}
-        onChange={handleSheetChanges}>
-        <BottomSheetScrollView
-          showsVerticalScrollIndicator={false}
+        )}>
+        <BottomSheetView
           style={{
-            paddingVertical: 20,
+            paddingVertical: 10,
             paddingHorizontal: 20,
+            flex: 1,
             backgroundColor: colors.background,
           }}>
-          <View style={{ justifyContent: 'center', alignItems: 'center', marginBottom: 20 }}>
-            <TextEle variant="header1" style={{ marginBottom: 10 }}>
-              Key Points
-            </TextEle>
-            <View style={{ height: 2, width: 100, backgroundColor: colors.text }} />
-          </View>
-          <View>
-            <View
+          <BottomSheetView style={{ marginBottom: 100 }}>
+            <BottomSheetView>
+              <TextEle variant="subTitle2">{data?.course?.name}</TextEle>
+              <TextEle variant="caption">{data?.course?.caption}</TextEle>
+              <BottomSheetView>
+                <TextEle variant="caption">{data?.course?.cuisine?.name}</TextEle>
+                <BottomSheetView
+                  style={{
+                    marginVertical: 5,
+                    flexDirection: 'row',
+                    justifyContent: 'space-between',
+                  }}>
+                  <Rating
+                    onPress={onRatingpress}
+                    rating={rating}
+                    length={5}
+                    totalRating={data?.rattings || 0}
+                  />
+                  <ShareButton />
+                </BottomSheetView>
+              </BottomSheetView>
+            </BottomSheetView>
+            <BottomSheetView
               style={{
-                flexDirection: 'row',
-                justifyContent: 'space-between',
+                justifyContent: 'center',
+                alignItems: 'flex-start',
+                marginBottom: 20,
+                paddingVertical: 10,
               }}>
-              <TextEle variant="body2" style={{ paddingVertical: 10 }}>
-                Duration
+              <TextEle variant="header1" style={{ marginBottom: 10 }}>
+                Recipes
               </TextEle>
-              <TextEle
-                variant="body2"
-                style={{ paddingVertical: 10, color: 'gray', width: 120, alignSelf: 'flex-end' }}>
-                {`Launching on ${
-                  data?.course?.launchDate
-                    ? format(new Date(data?.course?.launchDate), 'yyyy-MM-dd')
-                    : data?.course?.launchDate
-                }`}
-              </TextEle>
-            </View>
-            <View style={{ height: 1, width: 400, backgroundColor: 'gray' }} />
-            <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
-              <TextEle variant="body2" style={{ paddingVertical: 10 }}>
-                Total Recipes covered
-              </TextEle>
-              <TextEle variant="body2" style={{ paddingVertical: 10, color: 'gray', width: 120 }}>
-                {data?.course?.recipes.length}
-              </TextEle>
-            </View>
-            <View style={{ height: 1, width: 400, backgroundColor: 'gray' }} />
-            <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
-              <TextEle variant="body2" style={{ paddingVertical: 10 }}>
-                Video Validity
-              </TextEle>
-              <TextEle variant="body2" style={{ paddingVertical: 10, color: 'gray', width: 120 }}>
-                {data?.course?.validity}
-              </TextEle>
-            </View>
-            <View style={{ height: 1, width: 400, backgroundColor: 'gray' }} />
-            <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
-              <TextEle variant="body2" style={{ paddingVertical: 10 }}>
-                Written Recipe
-              </TextEle>
-              <TextEle variant="body2" style={{ paddingVertical: 10, color: 'gray', width: 120 }}>
-                Available
-              </TextEle>
-            </View>
-            <View style={{ height: 1, width: 400, backgroundColor: 'gray' }} />
-            <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
-              <TextEle variant="body2" style={{ paddingVertical: 10 }}>
-                Fees
-              </TextEle>
-              <TextEle variant="body2" style={{ paddingVertical: 10, color: 'gray', width: 120 }}>
-                {data?.course?.price}
-              </TextEle>
-            </View>
-            <View style={{ height: 1, width: 400, backgroundColor: 'gray' }} />
-            <TextEle variant="caption" style={{ marginVertical: 20 }}>
-              {subt}
-            </TextEle>
-          </View>
-          <View style={{ marginBottom: 100 }}>
-            <TextEle>Varieties:-</TextEle>
-            <Markdown rules={rules}>{data?.course?.description}</Markdown>
-          </View>
-        </BottomSheetScrollView>
+              <BottomSheetView style={{ height: 2, width: 100, backgroundColor: colors.text }} />
+            </BottomSheetView>
+            <FlatList
+              data={data?.course?.recipes || []}
+              showsVerticalScrollIndicator={false}
+              renderItem={renderItem}
+              keyExtractor={item => `${item?.id}`}
+            />
+          </BottomSheetView>
+        </BottomSheetView>
       </BottomSheet>
-      {/* <View style={{ position: 'absolute', left: 400, top: 640 }}>
-        <ActionButton />
-      </View> */}
-      <View
-        style={{
-          position: 'absolute',
-          bottom: 10,
-          width: '100%',
-          justifyContent: 'center',
-          // marginHorizontal: 20,
-        }}>
-        <RAButton1
-          variant="fill"
-          text={`Buy For ${new Intl.NumberFormat('en-IN', {
-            style: 'currency',
-            currency: 'INR',
-            maximumFractionDigits: 0,
-            minimumFractionDigits: 0,
-          }).format(data?.course?.price || 0)}`}
-          onPress={buyCourse}
-          disable={loading}
-          loading={loading}
-        />
-      </View>
     </View>
   );
 };

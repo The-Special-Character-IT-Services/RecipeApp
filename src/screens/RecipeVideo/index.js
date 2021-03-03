@@ -27,15 +27,23 @@ const chartData = [
   { nutriText: 'Fibers', color: 'navy', weight: 20, unit: 'g', id: 5 },
 ];
 
-const RecipeVideo = () => {
+const RecipeVideo = ({ route }) => {
   const { landscape } = useDeviceOrientation();
+  const { Rvideo } = route.params;
   Orientation.unlockAllOrientations();
+
   return (
-    <View style={{ flex: 1, backgroundColor: '#ebebeb' }}>
+    <View
+      style={{
+        flex: 1,
+        backgroundColor: 'black',
+        alignItems: 'center',
+        justifyContent: 'center',
+      }}>
       <Video
         paused
         source={{
-          uri: 'http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4',
+          uri: `${Rvideo}`,
         }}
         style={{
           width: '100%',
@@ -46,11 +54,11 @@ const RecipeVideo = () => {
         resizeMode="cover"
       />
 
-      <ScrollView showsVerticalScrollIndicator={false} style={{ flex: 1, margin: 15 }}>
-        {/* <View style={{ paddingVertical: 10 }}>
+      {/* <ScrollView showsVerticalScrollIndicator={false} style={{ flex: 1, margin: 15 }}>
+        <View style={{ paddingVertical: 10 }}>
           <Text style={{ fontSize: 25, fontWeight: 'bold' }}>{TextHeading}</Text>
           <Text style={{ fontSize: 20 }}>{Description}</Text>
-        </View> */}
+        </View>
         <Text style={{ fontSize: 20, fontWeight: 'bold' }}>Nutritional Info.</Text>
         <View
           style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between' }}>
@@ -97,7 +105,7 @@ const RecipeVideo = () => {
           Generally, nutrients are divided into two classes:
         </Text>
         <Text style={{ fontSize: 15, textAlign: 'justify' }}>{summary}</Text>
-      </ScrollView>
+      </ScrollView> */}
     </View>
   );
 };

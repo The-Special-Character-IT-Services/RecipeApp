@@ -5,11 +5,8 @@ import TextEle from '@components/TextEle';
 import RAButton1 from '@components/RAButton1';
 import { UserContext } from '@context/userContext';
 
-const PaymentSuccess = ({ route, navigation }) => {
+const PaymentSuccess = ({ navigation }) => {
   const { user } = useContext(UserContext);
-  const { CourseID } = route.params;
-  console.log(CourseID);
-
   return (
     <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
       <LottieView
@@ -23,9 +20,7 @@ const PaymentSuccess = ({ route, navigation }) => {
         style={{ position: 'absolute', bottom: 10, width: '100%' }}
         variant="fill"
         text="Done"
-        onPress={() =>
-          navigation.navigate('CourseDetailsBought', { id: CourseID, userId: user?.id })
-        }
+        onPress={() => navigation.navigate('TabHome')}
       />
     </View>
   );

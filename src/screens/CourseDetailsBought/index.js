@@ -18,9 +18,9 @@ import Icon from 'react-native-vector-icons/Ionicons';
 import Rating from '@components/Rating';
 import axios from '@utils/axios';
 import { courseQuery } from '@hooks/useCoursesApiHook';
-
 import Loading from '@components/loading';
 import { FlatList } from 'react-native-gesture-handler';
+import ShareButton from '../../components/ShareButton';
 import TextEle from '../../components/TextEle';
 
 const subt = `Recipes in this write-up are protected by copyright law. Reproduction and distribution
@@ -167,13 +167,19 @@ const CourseDetailsBought = ({ route, navigation, item }) => {
               <TextEle variant="caption">{courseDetail?.course?.caption}</TextEle>
               <BottomSheetView>
                 <TextEle variant="caption">{courseDetail?.course?.cuisine?.name}</TextEle>
-                <BottomSheetView style={{ marginVertical: 5, alignItems: 'flex-start' }}>
+                <BottomSheetView
+                  style={{
+                    marginVertical: 5,
+                    flexDirection: 'row',
+                    justifyContent: 'space-between',
+                  }}>
                   <Rating
                     onPress={onRatingpress}
                     rating={rating}
                     length={5}
                     totalRating={courseDetail?.rattings || 0}
                   />
+                  <ShareButton />
                 </BottomSheetView>
               </BottomSheetView>
             </BottomSheetView>

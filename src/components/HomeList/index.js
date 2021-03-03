@@ -34,6 +34,7 @@ const HomeList = ({ title, onPressViewAll, onRecipePress, userId, sort, where })
         style={{
           flexDirection: 'row',
           justifyContent: 'space-between',
+          alignItems: 'center',
           marginHorizontal: 20,
           marginVertical: 10,
         }}>
