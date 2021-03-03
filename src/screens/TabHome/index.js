@@ -73,19 +73,20 @@ const TabHome = ({ navigation }) => {
               })
             }
             onRecipePress={async item => {
-              if (item.purchase_details && item.purchase_details.length > 0) {
-                if (
-                  item.purchase_details.some(
-                    x => x.course.id === item?.id && x.status === 'purchased',
-                  )
-                ) {
-                  navigation.navigate('CourseDetailsBought', { id: item?.id, userId: user?.id });
-                } else {
-                  navigation.navigate('CourseDetails', { id: item?.id, userId: user?.id });
-                }
-              } else {
-                navigation.navigate('CourseDetails', { id: item?.id, userId: user?.id });
-              }
+              navigation.navigate('CourseDetails', { id: item?.id, userId: user?.id });
+              // if (item.purchase_details && item.purchase_details.length > 0) {
+              //   if (
+              //     item.purchase_details.some(
+              //       x => x.course.id === item?.id && x.status === 'purchased',
+              //     )
+              //   ) {
+              //     navigation.navigate('CourseDetailsBought', { id: item?.id, userId: user?.id });
+              //   } else {
+              //     navigation.navigate('CourseDetails', { id: item?.id, userId: user?.id });
+              //   }
+              // } else {
+              //   navigation.navigate('CourseDetails', { id: item?.id, userId: user?.id });
+              // }
             }}
           />
           <HomeList

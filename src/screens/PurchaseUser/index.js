@@ -78,7 +78,7 @@ const PurchaseUser = ({ route, navigation }) => {
           fail: true,
           error: error.description,
         });
-        navigation.navigate('PaymentSuccess', { CourseID: CourseID });
+        navigation.navigate('PaymentUnsuccessfull', { CourseID: CourseID });
       });
   };
 
@@ -120,6 +120,7 @@ const PurchaseUser = ({ route, navigation }) => {
 PurchaseUser.propTypes = {
   route: PropTypes.shape({}).isRequired,
   navigation: PropTypes.shape({
+    replace: PropTypes.func,
     navigate: PropTypes.func,
   }).isRequired,
 };

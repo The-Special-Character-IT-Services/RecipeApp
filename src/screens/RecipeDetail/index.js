@@ -58,7 +58,7 @@ const RecipeDetail = ({ route, navigation }) => {
           variant="fill"
           text="Watch Video"
           icon="play"
-          onPress={() => navigation.navigate('RecipeVideo')}
+          onPress={() => navigation.navigate('RecipeVideo', { Rvideo: item?.recipeVideo?.url })}
         />
       </View>
       {/* <RectButton

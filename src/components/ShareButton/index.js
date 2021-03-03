@@ -26,7 +26,7 @@ const ShareIcon = () => {
   return (
     <View style={{ marginRight: 20 }}>
       <Pressable onPress={onShare} title="Share">
-        <ShareButton height={24} width={24} fill={colors.background} />
+        <ShareButton height={24} width={24} fill={colors.primary} />
       </Pressable>
     </View>
   );
