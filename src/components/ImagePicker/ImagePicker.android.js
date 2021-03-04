@@ -25,22 +25,15 @@ class ImagePicker extends PureComponent {
             <View
               style={{
                 padding: 12,
-                justifyContent: 'center',
+                justifyContent: 'space-evenly',
                 backgroundColor: colors.card,
                 width: width * 0.9,
-                height: height * 0.28,
+                height: height * 0.4,
                 marginBottom: 20,
               }}>
-              <View
-                style={{
-                  marginBottom: 20,
-                  borderBottomWidth: 0.3,
-                  borderBottomColor: 'white',
-                }}>
-                <TextEle variant="title1" style={{ paddingVerticle: 8, color: colors.text }}>
-                  Select Image
-                </TextEle>
-              </View>
+              <TextEle variant="title" style={{ paddingVerticle: 8, color: colors.primary }}>
+                Select Image
+              </TextEle>
               <Pressable
                 style={{ paddingVerticle: 8 }}
                 onPress={() =>
@@ -57,10 +50,8 @@ class ImagePicker extends PureComponent {
                     },
                   )
                 }>
-                <View style={{ margingVerticle: 10 }}>
-                  <TextEle variant="subTitle2" style={{ marginVerticle: 5 }}>
-                    Take Photo
-                  </TextEle>
+                <View style={{ marginVertical: 10 }}>
+                  <TextEle variant="subTitle2">Take Photo...</TextEle>
                 </View>
               </Pressable>
               <Pressable
@@ -80,13 +71,13 @@ class ImagePicker extends PureComponent {
                   )
                 }>
                 <View style={{ margingVerticle: 10 }}>
-                  <TextEle variant="subTitle2">Choose From Library</TextEle>
+                  <TextEle variant="subTitle2">Choose From Library....</TextEle>
                 </View>
               </Pressable>
               <Pressable
-                style={{ paddingVertical: 3, alignSelf: 'flex-end' }}
+                style={{ paddingVertical: 2, alignSelf: 'flex-end' }}
                 onPress={() => this.openImageSelector(false)}>
-                <TextEle variant="h1" style={{ fontSize: 16 }}>
+                <TextEle variant="h1" style={{ fontSize: 16, color: colors.primary }}>
                   CANCEL
                 </TextEle>
               </Pressable>
