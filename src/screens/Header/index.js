@@ -1,6 +1,6 @@
 /* eslint-disable react-native/no-inline-styles */
 /* eslint-disable global-require */
-import React, { useCallback, useEffect, useState, useRef } from 'react';
+import React, { useCallback, useEffect, useState, useRef, memo } from 'react';
 // import PropTypes from 'prop-types';
 import { View, Pressable } from 'react-native';
 import { useTheme } from '@react-navigation/native';
@@ -10,7 +10,7 @@ import { getToken } from '@utils/';
 import ImagePicker from '../../components/ImagePicker/ImagePicker';
 
 const Header = () => {
-  const { colors } = useTheme();
+  const { dark, colors } = useTheme();
   const [name, setName] = useState('');
   const imagePickerRef = useRef();
   useEffect(() => {
@@ -40,36 +40,29 @@ const Header = () => {
         </TextEle>
 
         <Pressable style={{ justifyContent: 'center' }}>
-          {image?.uri ? (
-            <Image
-              source={{
-                uri: image.uri,
-              }}
-              style={{
-                height: 90,
-                width: 90,
-                borderRadius: 50,
-              }}
-            />
-          ) : (
-            <ImagePicker onSelectImage={onSelectImage} ref={imagePickerRef}>
-              <Pressable
-                onPress={() => {
-                  imagePickerRef.current.openImageSelector();
-                }}>
-                <View style={{ justifyContent: 'center' }}>
-                  <Image
-                    style={{ height: 80, width: 80, borderRadius: 10 }}
-                    source={require('../../assets/images/profilelogo.png')}
-                  />
-                </View>
-              </Pressable>
-            </ImagePicker>
-          )}
+          <ImagePicker {...{dark, colors}} onSelectImage={onSelectImage} ref={imagePickerRef}>
+            <Pressable
+              onPress={() => {
+                imagePickerRef.current.openImageSelector();
+              }}>
+              <View style={{ justifyContent: 'center' }}>
+                <Image
+                  style={{
+                    height: 90,
+                    width: 90,
+                    borderRadius: 50,
+                  }}
+                  source={
+                    image?.uri ? { uri: image.uri } : require('../../assets/images/profilelogo.png')
+                  }
+                />
+              </View>
+            </Pressable>
+          </ImagePicker>
         </Pressable>
       </View>
     </View>
   );
 };
 
-export default Header;
+export default memo(Header);

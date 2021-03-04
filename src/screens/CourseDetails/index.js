@@ -54,8 +54,6 @@ const CourseDetails = ({ route, navigation }) => {
     x => x.course.id === id && x.status === 'purchased',
   );
 
-  console.log(isPurchased);
-
   useEffect(() => {
     if (error) {
       showErrorToast(error);
@@ -210,6 +208,54 @@ const CourseDetails = ({ route, navigation }) => {
     }
   };
 
+  const renderItem = ({ item }) => (
+    <Pressable
+      key={item?.id}
+      style={{
+        marginVertical: 10,
+        marginHorizontal: 10,
+        alignItems: 'center',
+        flexDirection: 'row',
+      }}
+      onPress={() => navigation.navigate('RecipeDetail', { item })}>
+      <Image
+        source={{ uri: item?.recipeImage?.url }}
+        style={{ height: 80, width: 100, borderRadius: 10 }}
+      />
+      <View style={{ flex: 1, height: '100%', paddingHorizontal: 12 }}>
+        <TextEle
+          variant="body1"
+          style={{
+            color: colors.text,
+            flexDirection: 'row',
+            marginVertical: 4,
+          }}>
+          {item?.name}
+        </TextEle>
+        <TextEle
+          variant="caption"
+          style={{
+            color: 'gray',
+            flexDirection: 'row',
+            marginVertical: 4,
+          }}>
+          {item?.cookingLevel}
+        </TextEle>
+      </View>
+      <View
+        style={{
+          backgroundColor: colors.primary,
+          borderRadius: 24,
+          justifyContent: 'center',
+          alignItems: 'center',
+          height: 40,
+          width: 40,
+        }}>
+        <Icon name="play-outline" size={24} color={colors.background} />
+      </View>
+    </Pressable>
+  );
+
   if (isValidating) {
     return <Loading />;
   }
@@ -352,53 +398,6 @@ const CourseDetails = ({ route, navigation }) => {
     );
   }
 
-  const renderItem = ({ item }) => (
-    <Pressable
-      key={item?.id}
-      style={{
-        marginVertical: 10,
-        marginHorizontal: 10,
-        alignItems: 'center',
-        flexDirection: 'row',
-      }}
-      onPress={() => navigation.navigate('RecipeDetail', { item })}>
-      <Image
-        source={{ uri: item?.recipeImage?.url }}
-        style={{ height: 80, width: 100, borderRadius: 10 }}
-      />
-      <View style={{ flex: 1, height: '100%', paddingHorizontal: 12 }}>
-        <TextEle
-          variant="body1"
-          style={{
-            color: colors.text,
-            flexDirection: 'row',
-            marginVertical: 4,
-          }}>
-          {item?.name}
-        </TextEle>
-        <TextEle
-          variant="caption"
-          style={{
-            color: 'gray',
-            flexDirection: 'row',
-            marginVertical: 4,
-          }}>
-          {item?.cookingLevel}
-        </TextEle>
-      </View>
-      <View
-        style={{
-          backgroundColor: colors.primary,
-          borderRadius: 24,
-          justifyContent: 'center',
-          alignItems: 'center',
-          height: 40,
-          width: 40,
-        }}>
-        <Icon name="play-outline" size={24} color={colors.background} />
-      </View>
-    </Pressable>
-  );
 
   return (
     <View style={{ flex: 1 }}>
