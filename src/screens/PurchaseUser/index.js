@@ -3,6 +3,7 @@ import { Keyboard, View } from 'react-native';
 import PropTypes from 'prop-types';
 import Form from '@components/Form';
 import { useHeaderHeight } from '@react-navigation/stack';
+import Modal from 'react-native-modal';
 import { CancelToken } from 'axios';
 import RAText from '@components/RAText';
 import RAButton1 from '@components/RAButton1';
@@ -10,16 +11,18 @@ import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { TouchableWithoutFeedback } from 'react-native-gesture-handler';
 import RazorpayCheckout from 'react-native-razorpay';
 import axios from '@utils/axios';
+import PaymentSuccess from '@screens/PaymentSuccess';
+import PaymentUnsuccessfull from '@screens/PaymentUnsuccessfull';
 import { initialValues, purchaseUserForm, formRef } from './fields';
 
 const PurchaseUser = ({ route, navigation }) => {
   const { orderDetails, CourseID } = route.params;
   const [passwordVal, setPasswordVal] = useState('');
   const [loading, setLoading] = useState(false);
+  const [result, setResult] = useState('');
   const headerHight = useHeaderHeight();
   const insets = useSafeAreaInsets();
   const cancelSource = useMemo(() => CancelToken.source(), []);
-  console.log(CourseID);
 
   useEffect(
     () => () => {
@@ -29,6 +32,7 @@ const PurchaseUser = ({ route, navigation }) => {
   );
 
   const onSubmit = async values => {
+    setLoading(true);
     const options = {
       description: `Credits towards ${orderDetails.course.name} course`,
       image:
@@ -70,7 +74,7 @@ const PurchaseUser = ({ route, navigation }) => {
           fail: false,
           error: '',
         });
-        navigation.navigate('PaymentSuccess', { CourseID: CourseID });
+        setResult('success');
       })
       .catch(async error => {
         // handle failure
@@ -79,42 +83,55 @@ const PurchaseUser = ({ route, navigation }) => {
           fail: true,
           error: error.description,
         });
-        navigation.navigate('PaymentUnsuccessfull', { CourseID: CourseID });
+        setResult('fail');
+      })
+      .finally(() => {
+        setLoading(false);
       });
   };
 
   return (
-    <View
-      style={{
-        flex: 1,
-        paddingTop: headerHight,
-        paddingBottom: insets.bottom + 20,
-        paddingHorizontal: 20,
-      }}>
-      <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
-        <View style={{ alignItems: 'center', marginBottom: 32 }}>
-          <RAText variant="h1">Welcome!</RAText>
-          <RAText variant="p2">Please enter your account here</RAText>
-        </View>
-        <Form
-          validate={values => {
-            setPasswordVal(values.password);
-            return {};
-          }}
-          ref={formRef}
-          initialValues={initialValues}
-          fields={purchaseUserForm}
-          onSubmit={onSubmit}
-        />
-        <RAButton1
-          loading={loading}
-          style={{ marginVertical: 16 }}
-          variant="fill"
-          text="Submit"
-          onPress={() => formRef.current?.handleSubmit()}
-        />
-      </TouchableWithoutFeedback>
-    </View>
+    <>
+      <View
+        style={{
+          flex: 1,
+          paddingTop: headerHight,
+          paddingBottom: insets.bottom + 20,
+          paddingHorizontal: 20,
+        }}>
+        <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
+          <View style={{ alignItems: 'center', marginBottom: 32 }}>
+            <RAText variant="h1">Welcome!</RAText>
+            <RAText variant="p2">Please enter your account here</RAText>
+          </View>
+          <Form
+            validate={values => {
+              setPasswordVal(values.password);
+              return {};
+            }}
+            ref={formRef}
+            initialValues={initialValues}
+            fields={purchaseUserForm}
+            onSubmit={onSubmit}
+          />
+          <RAButton1
+            loading={loading}
+            style={{ marginVertical: 16 }}
+            variant="fill"
+            text="Submit"
+            onPress={() => formRef.current?.handleSubmit()}
+          />
+        </TouchableWithoutFeedback>
+      </View>
+      {!!result && (
+        <Modal isVisible={!!result} style={{ margin: 0, padding: 0}}>
+          <View style={{ flex: 1, backgroundColor: '#fff'}}>
+          {result === 'success' && <PaymentSuccess onDone={() => { console.log('heello'); setResult(''); navigation.goBack()}} />}
+          {result === 'fail' && <PaymentUnsuccessfull onDone={() => {setResult(''); navigation.goBack()}} />}
+          </View>
+        </Modal>
+      )}
+    </>
   );
 };
 

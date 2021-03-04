@@ -5,25 +5,21 @@ import TextEle from '@components/TextEle';
 import RAButton1 from '@components/RAButton1';
 import { UserContext } from '@context/userContext';
 
-const PaymentSuccess = ({ navigation }) => {
-  const { user } = useContext(UserContext);
-  return (
-    <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-      <LottieView
-        source={require('@assets/lottie/10470-confirm.json')}
-        style={{ height: 300, width: 300 }}
-        autoPlay
-        loop={false}
-      />
-      <TextEle variant="header1">Payment Successful</TextEle>
-      <RAButton1
-        style={{ position: 'absolute', bottom: 10, width: '100%' }}
-        variant="fill"
-        text="Done"
-        onPress={() => navigation.navigate('TabHome')}
-      />
+const PaymentSuccess = ({ onDone }) => (
+  <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+    <LottieView
+      source={require('@assets/lottie/10470-confirm.json')}
+      style={{ height: 300, width: 300 }}
+      autoPlay
+      loop={false}
+    />
+    <View style={{ position: 'absolute', bottom: 10, width: '100%', zIndex: 10 }}>
+      <TextEle variant="header1" style={{ textAlign: 'center', marginBottom: 60 }}>
+        Payment Successful
+      </TextEle>
+      <RAButton1 style={{ margin: 20 }} variant="fill" text="Done" onPress={onDone} />
     </View>
-  );
-};
+  </View>
+);
 
 export default PaymentSuccess;

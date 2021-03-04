@@ -1,9 +1,9 @@
 /* eslint-disable react-native/no-inline-styles */
-import React, { useContext } from 'react';
+import React, { useCallback, useContext } from 'react';
 import PropTypes from 'prop-types';
 import { View, ScrollView, Pressable } from 'react-native';
 import Image from 'react-native-fast-image';
-import { useTheme } from '@react-navigation/native';
+import { useFocusEffect, useTheme } from '@react-navigation/native';
 import useSWR from 'swr';
 import { UserContext } from '@context/userContext';
 import LikeButton from '@components/LikeButton';
@@ -23,15 +23,16 @@ const LikedRecipe = ({ onRecipeDetail }) => {
       userId: user?.id,
     }),
   ]);
+
+  useFocusEffect(
+    useCallback(() => {
+      mutate();
+    }, [mutate]),
+  );
+
   if (!data) {
     return <Loading />;
   }
-
-  // useFocusEffect(
-  //   useCallback(() => {
-  //     mutate();
-  //   }, [mutate]),
-  // );
 
   return (
     <View style={{ flex: 1, backgroundColor: colors.background, borderRadius: 20 }}>
