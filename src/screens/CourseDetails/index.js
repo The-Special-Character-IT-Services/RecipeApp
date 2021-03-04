@@ -43,6 +43,7 @@ const CourseDetails = ({ route, navigation }) => {
   const { colors } = useTheme();
   const [loading, setLoading] = useState(false);
   const { data, isValidating, error, mutate } = useSWR([courseQuery(id, userId)]);
+
   const [playing, setPlaying] = useState(false);
   // const headerHeight = useHeaderHeight();
   const bottomSheetRef = useRef(null);
@@ -366,7 +367,9 @@ const CourseDetails = ({ route, navigation }) => {
             </View>
             <View style={{ marginBottom: 100 }}>
               <TextEle>Varieties:-</TextEle>
-              <Markdown rules={rules}>{data?.course?.description}</Markdown>
+              {data?.course?.description && (
+                <Markdown rules={rules}>{data.course.description}</Markdown>
+              )}
             </View>
           </BottomSheetScrollView>
         </BottomSheet>
