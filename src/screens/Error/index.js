@@ -8,7 +8,7 @@ const Error = () => {
   // const { colors } = useTheme();
   // const { width, height } = useWindowDimensions();
 
-  const errMsg = `Sorry ! Something went wrong. 
+  const errMsg = `Something went wrong.
 Check your internet connection.`;
 
   return (
@@ -18,8 +18,10 @@ Check your internet connection.`;
         autoPlay
         loop
       />
-      <View style={{ position: 'absolute', bottom: 100 }}>
-        <TextEle variant="error" style={{ color: '#ff7f00', textAlign: 'center' }}>
+      <View style={{ position: 'absolute', bottom: 100, marginVertical: 40 }}>
+        <TextEle
+          variant="error"
+          style={{ color: '#ff7f00', textAlign: 'center', marginVertical: 30 }}>
           OOPS!!
         </TextEle>
         <TextEle variant="error1" style={{ color: '#ff7f00', textAlign: 'center' }}>

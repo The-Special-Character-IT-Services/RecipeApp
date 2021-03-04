@@ -1,8 +1,9 @@
-import React, { useContext } from 'react';
+import React, { useContext, useRef } from 'react';
 import { View } from 'react-native';
 import Image from 'react-native-fast-image';
 import { useTheme } from '@react-navigation/native';
 import { FlatList } from 'react-native-gesture-handler';
+import LottieView from 'lottie-react-native';
 import TextEle from '@components/TextEle';
 import { coursesQuery } from '@hooks/useCoursesApiHook';
 import { UserContext } from '@context/userContext';
@@ -74,6 +75,36 @@ const MyRecipes = () => {
   const filteredData = data?.courses?.filter(x => x.purchase_details.length > 0) || [];
 
   const flatListData = filteredData?.length % 2 === 0 ? filteredData : [...filteredData, {}];
+
+  const animation = useRef(null);
+
+  if (filteredData.length === 0) {
+    return (
+      <View style={{ alignItems: 'center', justifyContent: 'center', marginBottom: 300 }}>
+        <LottieView
+          ref={animation}
+          source={require('@assets/lottie/9923-box-empty.json')}
+          style={{ height: 600, width: 600 }}
+          autoPlay
+          loop
+        />
+        <View
+          style={{
+            justifyContent: 'center',
+            alignItems: 'center',
+            backgroundColor: colors.background,
+            bottom: 150,
+          }}>
+          <TextEle variant="error" style={{ color: colors.primary, textAlign: 'center' }}>
+            Sorry!!
+          </TextEle>
+          <TextEle variant="error1" style={{ color: colors.primary, textAlign: 'center' }}>
+            No data available
+          </TextEle>
+        </View>
+      </View>
+    );
+  }
 
   return (
     <FlatList
