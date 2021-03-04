@@ -11,7 +11,7 @@ class ImagePicker extends PureComponent {
   };
 
   openImageSelector = () => {
-    this.setState((state) => ({ isModalVisible: !state.isModalVisible }));
+    this.setState(state => ({ isModalVisible: !state.isModalVisible }));
   };
 
   render() {
@@ -25,56 +25,59 @@ class ImagePicker extends PureComponent {
             <View
               style={{
                 padding: 12,
-                justifyContent: 'center',
+                justifyContent: 'space-evenly',
                 backgroundColor: colors.card,
                 width: width * 0.9,
-                height: height * 0.3,
+                height: height * 0.4,
+                marginBottom: 20,
               }}>
-              <TextEle variant="h1" style={{ paddingVerticle: 8, color: colors.text }}>
+              <TextEle variant="title" style={{ paddingVerticle: 8, color: colors.primary }}>
                 Select Image
               </TextEle>
               <Pressable
                 style={{ paddingVerticle: 8 }}
                 onPress={() =>
                   launchCamera(
-                  {
-                    mediaType: 'photo',
-                    includeBase64: false,
-                    maxHeight: 200,
-                    maxWidth: 200,
-                  },
-                  response => {
-                    this.openImageSelector(false);
-                    onSelectImage(response);
-                  },
-                )
+                    {
+                      mediaType: 'photo',
+                      includeBase64: false,
+                      maxHeight: 200,
+                      maxWidth: 200,
+                    },
+                    response => {
+                      this.openImageSelector(false);
+                      onSelectImage(response);
+                    },
+                  )
                 }>
-                <TextEle variant="h2" style={{ marginVerticle: 5 }}>
-                  Take Photo...
-                </TextEle>
+                <View style={{ marginVertical: 10 }}>
+                  <TextEle variant="subTitle2">Take Photo...</TextEle>
+                </View>
               </Pressable>
               <Pressable
                 style={{ paddingVertical: 8 }}
                 onPress={() =>
                   launchImageLibrary(
-                  {
-                    mediaType: 'photo',
-                    includeBase64: false,
-                    maxHeight: 200,
-                    maxWidth: 200,
-                  },
-                  response => {
-                    this.openImageSelector(false);
-                    onSelectImage(response);
-                  },
-                )
+                    {
+                      mediaType: 'photo',
+                      includeBase64: false,
+                      maxHeight: 200,
+                      maxWidth: 200,
+                    },
+                    response => {
+                      this.openImageSelector(false);
+                      onSelectImage(response);
+                    },
+                  )
                 }>
-                <TextEle variant="h2">Choose From Library...</TextEle>
+                <View style={{ margingVerticle: 10 }}>
+                  <TextEle variant="subTitle2">Choose From Library....</TextEle>
+                </View>
               </Pressable>
               <Pressable
-                style={{ paddingVertical: 8, alignSelf: 'flex-end' }}
+                style={{ paddingVertical: 2, alignSelf: 'flex-end' }}
                 onPress={() => this.openImageSelector(false)}>
-                <TextEle variant="h1" style={{ fontSize: 16 }}>
+                <TextEle variant="h1" style={{ fontSize: 16, color: colors.primary }}>
                   CANCEL
                 </TextEle>
               </Pressable>
