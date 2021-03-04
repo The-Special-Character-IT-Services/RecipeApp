@@ -398,7 +398,6 @@ const CourseDetails = ({ route, navigation }) => {
     );
   }
 
-
   return (
     <View style={{ flex: 1 }}>
       <StatusBar hidden />
