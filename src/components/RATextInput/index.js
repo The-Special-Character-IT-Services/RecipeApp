@@ -171,6 +171,7 @@ const RATextInput = ({
 };
 
 RATextInput.propTypes = {
+  innerRef: PropTypes.shape({}),
   field: PropTypes.shape({
     name: PropTypes.string,
     value: PropTypes.string,
@@ -186,11 +187,12 @@ RATextInput.propTypes = {
     setFieldValue: PropTypes.func,
   }).isRequired,
   style: PropTypes.string,
-  leftIcon: PropTypes.func,
+  leftIcon: PropTypes.string,
   rightIcon: PropTypes.string,
 };
 
 RATextInput.defaultProps = {
+  innerRef: null,
   style: '',
   leftIcon: null,
   rightIcon: null,

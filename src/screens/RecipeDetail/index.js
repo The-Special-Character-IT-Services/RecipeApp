@@ -82,15 +82,15 @@ const RecipeDetail = ({ route, navigation }) => {
 
 RecipeDetail.propTypes = {
   route: PropTypes.shape({
-    params: PropTypes.shape({
-      img: PropTypes.number,
-      TextHeading: PropTypes.string,
-      Description: PropTypes.string,
-    }),
+    params: PropTypes.object,
   }).isRequired,
   navigation: PropTypes.shape({
     navigate: PropTypes.func,
   }).isRequired,
 };
+
+// RecipeDetail.defaultProps = {
+//   route: null,
+// };
 
 export default RecipeDetail;

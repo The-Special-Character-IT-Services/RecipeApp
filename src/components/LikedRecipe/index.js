@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import { View, ScrollView, Pressable } from 'react-native';
 import Image from 'react-native-fast-image';
 import { useFocusEffect, useTheme } from '@react-navigation/native';
-import useSWR from 'swr';
+import useSWR, { mutate } from 'swr';
 import { UserContext } from '@context/userContext';
 import LikeButton from '@components/LikeButton';
 import Loading from '@components/loading';
@@ -14,7 +14,7 @@ import TextEle from '../TextEle';
 const LikedRecipe = ({ onRecipeDetail }) => {
   const { colors } = useTheme();
   const { user } = useContext(UserContext);
-  const { data, mutate } = useSWR([
+  const { data } = useSWR([
     coursesQuery({
       pageIndex: 0,
       limit: 5,
@@ -27,7 +27,7 @@ const LikedRecipe = ({ onRecipeDetail }) => {
   useFocusEffect(
     useCallback(() => {
       mutate();
-    }, [mutate]),
+    }, []),
   );
 
   if (!data) {

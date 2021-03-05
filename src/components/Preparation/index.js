@@ -1,11 +1,12 @@
 /* eslint-disable import/no-unresolved */
-import React, { useEffect, useRef } from 'react';
-import { View, Dimensions, Platform } from 'react-native';
+import React, { useRef } from 'react';
+import PropTypes from 'prop-types';
+import { View, Dimensions } from 'react-native';
 import { useTheme } from '@react-navigation/native';
 import { FlatList } from 'react-native-gesture-handler';
 import Timer from '../../assets/icons/timer.svg';
 import TextEle from '../TextEle';
-import data from './data';
+
 import ListItem from './ListItem';
 
 const { width: windowWidth } = Dimensions.get('window');
@@ -15,6 +16,7 @@ export const CARD_WIDTH = windowWidth * 0.9;
 const Preparation = ({ preparation }) => {
   const { colors } = useTheme();
   const flatListRef = useRef(null);
+  console.log(preparation);
 
   return (
     <>
@@ -50,6 +52,10 @@ const Preparation = ({ preparation }) => {
       </View>
     </>
   );
+};
+
+Preparation.propTypes = {
+  preparation: PropTypes.arrayOf(PropTypes.object).isRequired,
 };
 
 export default Preparation;

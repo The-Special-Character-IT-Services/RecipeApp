@@ -69,7 +69,6 @@ const App = () => {
     const fetchConfigData = async () => {
       try {
         const isActivate = await remoteConfig().fetchAndActivate();
-        console.log(isActivate);
         if (isActivate) {
           const theme = remoteConfig().getValue(scheme === 'dark' ? 'darkTheme' : 'lightTheme');
           if (theme) {
@@ -87,7 +86,7 @@ const App = () => {
       unsubscribeNetInfo();
       unsubscribeMessaging();
     };
-  }, []);
+  }, [scheme]);
 
   if (!isInternetAvailable) {
     return <ErrorScreen />;

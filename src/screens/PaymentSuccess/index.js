@@ -1,4 +1,5 @@
 import React, { useContext } from 'react';
+import PropTypes from 'prop-types';
 import { View } from 'react-native';
 import LottieView from 'lottie-react-native';
 import TextEle from '@components/TextEle';
@@ -21,5 +22,18 @@ const PaymentSuccess = ({ onDone }) => (
     </View>
   </View>
 );
+
+PaymentSuccess.propTypes = {
+  route: PropTypes.shape({
+    params: PropTypes.shape({
+      CourseID: PropTypes.number.isRequired,
+      id: PropTypes.string.isRequired,
+      userId: PropTypes.number.isRequired,
+    }),
+  }),
+  navigation: PropTypes.shape({
+    navigate: PropTypes.func,
+  }),
+};
 
 export default PaymentSuccess;
