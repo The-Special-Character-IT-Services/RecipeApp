@@ -35,11 +35,12 @@ const PurchaseUser = ({ route, navigation }) => {
     setLoading(true);
     const options = {
       description: `Credits towards ${orderDetails.course.name} course`,
-      image: 'https://i.imgur.com/3g7nmJC.png',
+      image:
+        'https://res.cloudinary.com/thespecialcharacter-com/image/upload/v1614838972/48_f2075ba286.png',
       currency: orderDetails.currency,
       key: 'rzp_test_YI9BcxZ3N5ZRSL',
       amount: orderDetails.amount,
-      name: 'Acme Corp',
+      name: 'Gourmet Food',
       order_id: orderDetails.razorpay_order_id,
       prefill: {
         ...orderDetails,
