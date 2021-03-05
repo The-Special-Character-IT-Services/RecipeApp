@@ -1,11 +1,11 @@
 import TextEle from '@components/TextEle';
+import PropTypes from 'prop-types';
 import { useTheme } from '@react-navigation/native';
 import React from 'react';
-import { View, Text, Pressable } from 'react-native';
-import { color } from 'react-native-reanimated';
+import { View, Pressable } from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
 
-const Rating = ({ rating, length, totalRating, onPress }) => {
+const Rating = ({ rating, length, onPress }) => {
   const { colors } = useTheme();
   return (
     <View style={{ flexDirection: 'row', alignItems: 'center' }}>
@@ -23,6 +23,12 @@ const Rating = ({ rating, length, totalRating, onPress }) => {
       <TextEle style={{ color: colors.primary }}>{`${rating} `}</TextEle>
     </View>
   );
+};
+
+Rating.propTypes = {
+  rating: PropTypes.number.isRequired,
+  onPress: PropTypes.func,
+  length: PropTypes.number.isRequired,
 };
 
 export default Rating;

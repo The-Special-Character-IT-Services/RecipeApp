@@ -9,7 +9,7 @@ import { coursesQuery } from '@hooks/useCoursesApiHook';
 import { UserContext } from '@context/userContext';
 import useSWR from 'swr';
 import { showErrorToast } from '@utils/';
-// import Loading from '@components/loading';
+import Loading from '@components/loading';
 
 const MyRecipes = () => {
   const { colors } = useTheme();
@@ -18,9 +18,9 @@ const MyRecipes = () => {
     coursesQuery({ pageIndex: 0, limit: 5, sort: 'updated_at:DESC', userId: user?.id }),
   ]);
 
-  // if (!data) {
-  //   return <Loading />;
-  // }
+  if (!data) {
+    return <Loading />;
+  }
 
   const renderCourses = ({ item, index }) => {
     try {

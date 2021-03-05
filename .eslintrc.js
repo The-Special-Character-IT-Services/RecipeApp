@@ -31,6 +31,7 @@ module.exports = {
 
     'react/jsx-filename-extension': [1, { extensions: ['.js', '.jsx'] }],
     'react/state-in-constructor': [1, 'never'],
+    'react/forbid-prop-types': 0,
     'react/static-property-placement': [
       'error',
       'property assignment',

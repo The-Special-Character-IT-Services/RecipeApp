@@ -55,6 +55,8 @@ RAButton1.propTypes = {
   size: PropTypes.oneOf(['default', 'medium', 'small']),
   text: PropTypes.string,
   disable: PropTypes.bool,
+  icon: PropTypes.string,
+  style: PropTypes.object,
   onPress: PropTypes.func,
   loading: PropTypes.bool,
 };

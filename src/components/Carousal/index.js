@@ -53,6 +53,7 @@ const Carousal = ({ renderItem, ListFooterComponent, onRecipePress, ...rest }) =
 Carousal.propTypes = {
   ListFooterComponent: PropTypes.func.isRequired,
   renderItem: PropTypes.func.isRequired,
+  onRecipePress: PropTypes.func,
 };
 
 export default Carousal;

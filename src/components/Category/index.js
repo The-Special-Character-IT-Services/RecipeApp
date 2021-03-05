@@ -1,6 +1,7 @@
 /* eslint-disable react-native/no-inline-styles */
 /* eslint-disable global-require */
 import React from 'react';
+import PropTypes from 'prop-types';
 import { Pressable, View } from 'react-native';
 import { ScrollView } from 'react-native-gesture-handler';
 import { useTheme } from '@react-navigation/native';
@@ -60,6 +61,10 @@ const Category = ({ onCategoryDetails }) => {
       </ScrollView>
     </View>
   );
+};
+
+Category.propTypes = {
+  onCategoryDetails: PropTypes.func.isRequired,
 };
 
 export default Category;

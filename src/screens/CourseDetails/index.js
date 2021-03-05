@@ -486,6 +486,11 @@ const CourseDetails = ({ route, navigation }) => {
 };
 
 CourseDetails.propTypes = {
+  data: PropTypes.shape({
+    course: PropTypes.shape({
+      description: PropTypes.string,
+    }),
+  }),
   route: PropTypes.shape({
     params: PropTypes.shape({
       id: PropTypes.string.isRequired,
@@ -495,6 +500,9 @@ CourseDetails.propTypes = {
   navigation: PropTypes.shape({
     navigate: PropTypes.func,
   }).isRequired,
+};
+CourseDetails.defaultProps = {
+  data: null,
 };
 
 export default CourseDetails;

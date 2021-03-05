@@ -48,7 +48,9 @@ const ListItem = ({ item, cardWidth }) => {
 
 ListItem.propTypes = {
   item: PropTypes.shape({
-    img: PropTypes.number,
+    id: PropTypes.string.isRequired,
+    description: PropTypes.string.isRequired,
+    image: PropTypes.number,
     text: PropTypes.string,
   }).isRequired,
   cardWidth: PropTypes.number.isRequired,

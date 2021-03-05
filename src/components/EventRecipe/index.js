@@ -1,10 +1,10 @@
 import { BottomSheetFlatList } from '@gorhom/bottom-sheet';
 import React from 'react';
-import PropTypes from 'prop-types';
-import { useTheme } from '@react-navigation/native';
+// import PropTypes from 'prop-types';
+// import { useTheme } from '@react-navigation/native';
 import data from './data';
 
-const EventRecipe = ({ onEventPress }) => (
+const EventRecipe = () => (
   <BottomSheetFlatList
     data={data}
     keyExtractor={i => i}
@@ -50,8 +50,8 @@ const EventRecipe = ({ onEventPress }) => (
   //   </BottomSheetScrollView>
   // </BottomSheetView>
 );
-EventRecipe.propTypes = {
-  onEventPress: PropTypes.func.isRequired,
-};
+// EventRecipe.propTypes = {
+//   onEventPress: PropTypes.func.isRequired,
+// };
 
 export default EventRecipe;

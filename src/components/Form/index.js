@@ -19,6 +19,7 @@ const index = forwardRef(({ fields, formStyle, ...rest }, ref) => (
 
 index.propTypes = {
   fields: PropTypes.arrayOf(PropTypes.object).isRequired,
+  formStyle: PropTypes.func,
 };
 
 export default index;

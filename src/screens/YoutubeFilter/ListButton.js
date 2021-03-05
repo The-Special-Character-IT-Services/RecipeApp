@@ -1,6 +1,7 @@
 import TextEle from '@components/TextEle';
+import PropTypes from 'prop-types';
 import React, { useState } from 'react';
-import { Text, View } from 'react-native';
+import { View } from 'react-native';
 import { RectButton } from 'react-native-gesture-handler';
 import Icon from 'react-native-vector-icons/Ionicons';
 
@@ -29,6 +30,12 @@ const ListButton = ({ label, isVisibleIcon, onPress }) => {
       </View>
     </RectButton>
   );
+};
+
+ListButton.propTypes = {
+  onPress: PropTypes.func.isRequired,
+  isVisibleIcon: PropTypes.bool.isRequired,
+  label: PropTypes.string.isRequired,
 };
 
 export default ListButton;

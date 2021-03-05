@@ -1,15 +1,17 @@
 import { UserContext } from '@context/userContext';
+import PropTypes from 'prop-types';
 import { likesQuery } from '@hooks/useLikesApiHook';
-import { useTheme } from '@react-navigation/native';
+// import { useTheme } from '@react-navigation/native';
 import React, { useContext, useEffect, useRef } from 'react';
 import LottieView from 'lottie-react-native';
 import { Pressable } from 'react-native';
 import useSWR from 'swr';
-import axios from '../../utils/axios';
+
 import { showErrorToast } from '@utils/';
+import axios from '../../utils/axios';
 
 const LikeButton = ({ courseId, withBackground = true }) => {
-  const { colors } = useTheme();
+  // const { colors } = useTheme();
   const { user } = useContext(UserContext);
   const { data, mutate } = useSWR([likesQuery(user?.id, courseId)]);
 
@@ -74,6 +76,11 @@ const LikeButton = ({ courseId, withBackground = true }) => {
       />
     </Pressable>
   );
+};
+
+LikeButton.propTypes = {
+  courseId: PropTypes.string.isRequired,
+  withBackground: PropTypes.bool,
 };
 
 export default LikeButton;

@@ -3,17 +3,15 @@
 import { useTheme } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import React, { useContext } from 'react';
-import { Pressable, View, Text } from 'react-native';
+import { Pressable, Text } from 'react-native';
 
-import ShareButton from '@components/ShareButton';
-import LikeButton from '@components/LikeButton';
 import YoutubeVideo from '@screens/YoutubeVideo';
 import { UserContext } from '@context/userContext';
 import Loading from '@components/loading';
 
 const MainStack = createStackNavigator();
 
-const MainStackScreen = ({ route }) => {
+const MainStackScreen = () => {
   const { colors } = useTheme();
   const { user, loading } = useContext(UserContext);
 
@@ -105,7 +103,7 @@ const MainStackScreen = ({ route }) => {
           <MainStack.Screen
             name="CourseDetails"
             getComponent={() => require('@screens/CourseDetails').default}
-            options={({ route }) => ({
+            options={() => ({
               headerShown: true,
               headerTransparent: 1,
               headerTintColor: colors.primary,
@@ -114,7 +112,7 @@ const MainStackScreen = ({ route }) => {
           <MainStack.Screen
             name="CourseDetailsBought"
             getComponent={() => require('@screens/CourseDetailsBought').default}
-            options={({ route }) => ({
+            options={() => ({
               headerShown: true,
               headerTransparent: 1,
               headerTintColor: colors.primary,

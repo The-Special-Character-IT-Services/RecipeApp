@@ -25,7 +25,6 @@ const Header = () => {
 
   const [image, setImage] = useState();
   const onSelectImage = useCallback(response => {
-    console.log(response);
     setImage(response);
   }, []);
 
@@ -40,7 +39,7 @@ const Header = () => {
         </TextEle>
 
         <Pressable style={{ justifyContent: 'center' }}>
-          <ImagePicker {...{dark, colors}} onSelectImage={onSelectImage} ref={imagePickerRef}>
+          <ImagePicker {...{ dark, colors }} onSelectImage={onSelectImage} ref={imagePickerRef}>
             <Pressable
               onPress={() => {
                 imagePickerRef.current.openImageSelector();
