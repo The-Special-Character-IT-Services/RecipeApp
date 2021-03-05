@@ -5,18 +5,13 @@ import { View } from 'react-native';
 import Image from 'react-native-fast-image';
 import PropTypes from 'prop-types';
 import { RectButton, ScrollView } from 'react-native-gesture-handler';
-import Loading from '@components/loading';
 import TextEle from '../TextEle';
 import useCuisinesApi from '../../hooks/useCuisinesApiHook';
 
 const Cuisine = ({ onCuisinePress }) => {
   const { data } = useCuisinesApi();
   if (!data?.cuisines) {
-    return (
-      <View style={{ flex: 1, marginTop: 10 }}>
-        <Loading />
-      </View>
-    );
+    return null;
   }
   return (
     <View>
@@ -29,7 +24,7 @@ const Cuisine = ({ onCuisinePress }) => {
         horizontal
         showsHorizontalScrollIndicator={false}
         contentContainerStyle={{ paddingHorizontal: 20 }}>
-        {data?.cuisines.map(item => (
+        {data?.cuisines?.map(item => (
           <View
             key={item.id}
             style={{
@@ -45,7 +40,7 @@ const Cuisine = ({ onCuisinePress }) => {
                   height: 70,
                   width: 70,
                 }}
-                source={{ uri: item.image.formats.thumbnail.url }}
+                source={{ uri: item?.image?.formats.thumbnail.url }}
               />
             </RectButton>
             <TextEle variant="caption">{item.name}</TextEle>
