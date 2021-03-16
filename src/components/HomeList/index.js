@@ -75,6 +75,8 @@ HomeList.propTypes = {
   onPressViewAll: PropTypes.func.isRequired,
   onRecipePress: PropTypes.func.isRequired,
   userId: PropTypes.number.isRequired,
+  sort: PropTypes.string,
+  where: PropTypes.string,
 };
 
 export default HomeList;

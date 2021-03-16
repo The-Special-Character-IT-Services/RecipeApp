@@ -7,22 +7,22 @@ import { getUniqueID, hasParents } from 'react-native-markdown-renderer';
 const useMarkdownRules = () => {
   const { colors } = useTheme();
   return {
-    heading1: (node, children, parent, styles) => (
+    heading1: (node, children) => (
       <TextEle key={getUniqueID()} variant="h1">
         [{children}]
       </TextEle>
     ),
-    heading2: (node, children, parent, styles) => (
+    heading2: (node, children) => (
       <TextEle key={getUniqueID()} variant="h2">
         [{children}]
       </TextEle>
     ),
-    heading3: (node, children, parent, styles) => (
+    heading3: (node, children) => (
       <TextEle key={getUniqueID()} variant="h3">
         [{children}]
       </TextEle>
     ),
-    text: (node, children, parent, styles) => (
+    text: node => (
       <TextEle key={getUniqueID()} variant="p1">
         {node.content}
       </TextEle>

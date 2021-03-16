@@ -1,9 +1,9 @@
-import { FOODCOUTURE_TOKEN, NUMBER_OF_DIVECE_ALLOWED } from '@constants/index';
+import { FOODCOUTURE_TOKEN } from '@constants/index';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { Platform, Dimensions } from 'react-native';
 import Toast from 'react-native-toast-message';
 import messaging from '@react-native-firebase/messaging';
-import analytics from '@react-native-firebase/analytics';
+// import analytics from '@react-native-firebase/analytics';
 import {
   getUniqueId,
   getManufacturer,
@@ -16,7 +16,7 @@ import {
   getBuildNumber,
   getSystemName,
 } from 'react-native-device-info';
-import axios from '@utils/axios';
+// import axios from '@utils/axios';
 
 export const { height: deviceHeight, width: deviceWidth } = Dimensions.get('window');
 

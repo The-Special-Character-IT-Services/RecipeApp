@@ -1,9 +1,5 @@
 /* eslint-disable react-native/no-inline-styles */
-import BottomSheet, {
-  BottomSheetFlatList,
-  BottomSheetScrollView,
-  BottomSheetView,
-} from '@gorhom/bottom-sheet';
+import BottomSheet, { BottomSheetView } from '@gorhom/bottom-sheet';
 import PropTypes from 'prop-types';
 import { useTheme } from '@react-navigation/native';
 import React, { useMemo, useRef, useState } from 'react';
@@ -23,10 +19,6 @@ import { FlatList } from 'react-native-gesture-handler';
 import ShareButton from '../../components/ShareButton';
 import TextEle from '../../components/TextEle';
 
-const subt = `Recipes in this write-up are protected by copyright law. Reproduction and distribution
-of the same without a written consent from Studio D’ Food Couture is prohibited. ©
-Studio De Food Couture `;
-
 const YOUTUBE_VIDEO_HEIGHT = (deviceWidth / 15) * 10;
 
 const { width: windowWidth } = Dimensions.get('window');
@@ -35,11 +27,11 @@ export const CARD_WIDTH = windowWidth * 0.9;
 
 // const cardInset = (windowWidth - CARD_WIDTH) / 1.5;
 
-const CourseDetailsBought = ({ route, navigation, item }) => {
+const CourseDetailsBought = ({ route, navigation }) => {
   const { id, userId } = route.params;
   const { colors } = useTheme();
   const { data: courseDetail, mutate } = useSWR([courseQuery(id, userId)]);
-  const [playing, setPlaying] = useState(false);
+  const [playing] = useState(false);
   // const headerHeight = useHeaderHeight();
   const bottomSheetRef = useRef(null);
   const snapPoints = useMemo(() => [deviceHeight - YOUTUBE_VIDEO_HEIGHT, '100%'], []);
@@ -209,6 +201,9 @@ const CourseDetailsBought = ({ route, navigation, item }) => {
 };
 
 CourseDetailsBought.propTypes = {
+  navigation: PropTypes.shape({
+    navigate: PropTypes.func,
+  }).isRequired,
   route: PropTypes.shape({
     params: PropTypes.shape({
       id: PropTypes.string.isRequired,

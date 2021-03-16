@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import { ImageBackground, Pressable, View } from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
 import Rating from '@components/Rating';
-import { Colors } from 'react-native/Libraries/NewAppScreen';
+
 import { useTheme } from '@react-navigation/native';
 import TextEle from '../TextEle';
 import LikeButton from '../LikeButton';

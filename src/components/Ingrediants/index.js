@@ -1,4 +1,5 @@
 import React, { useEffect, useRef } from 'react';
+import PropTypes from 'prop-types';
 import { useTheme } from '@react-navigation/native';
 import { Dimensions, FlatList, View } from 'react-native';
 import Image from 'react-native-fast-image';
@@ -20,38 +21,38 @@ const Ingrediants = ({ ingredients }) => {
     });
   }, []);
 
-  const image = [
-    {
-      id: 1,
-      img: require('../../assets/images/EroticSandwich.png'),
-      TextHeading: 'Tomato',
-    },
-    {
-      id: 2,
-      img: require('../../assets/images/pulavspecial.png'),
-      TextHeading: 'Lemon',
-    },
-    {
-      id: 3,
-      img: require('../../assets/images/WinterSpecialVasana.png'),
-      TextHeading: 'Onion',
-    },
-    {
-      id: 4,
-      img: require('../../assets/images/WinterSpecialVasana.png'),
-      TextHeading: 'Cheese',
-    },
-    {
-      id: 5,
-      img: require('../../assets/images/WinterSpecialVasana.png'),
-      TextHeading: 'Salt',
-    },
-    {
-      id: 6,
-      img: require('../../assets/images/WinterSpecialVasana.png'),
-      TextHeading: 'Garlic',
-    },
-  ];
+  // const image = [
+  //   {
+  //     id: 1,
+  //     img: require('../../assets/images/EroticSandwich.png'),
+  //     TextHeading: 'Tomato',
+  //   },
+  //   {
+  //     id: 2,
+  //     img: require('../../assets/images/pulavspecial.png'),
+  //     TextHeading: 'Lemon',
+  //   },
+  //   {
+  //     id: 3,
+  //     img: require('../../assets/images/WinterSpecialVasana.png'),
+  //     TextHeading: 'Onion',
+  //   },
+  //   {
+  //     id: 4,
+  //     img: require('../../assets/images/WinterSpecialVasana.png'),
+  //     TextHeading: 'Cheese',
+  //   },
+  //   {
+  //     id: 5,
+  //     img: require('../../assets/images/WinterSpecialVasana.png'),
+  //     TextHeading: 'Salt',
+  //   },
+  //   {
+  //     id: 6,
+  //     img: require('../../assets/images/WinterSpecialVasana.png'),
+  //     TextHeading: 'Garlic',
+  //   },
+  // ];
 
   return (
     <>
@@ -89,6 +90,12 @@ const Ingrediants = ({ ingredients }) => {
       </View>
     </>
   );
+};
+
+// doubt
+
+Ingrediants.propTypes = {
+  ingredients: PropTypes.arrayOf(PropTypes.object).isRequired,
 };
 
 export default Ingrediants;

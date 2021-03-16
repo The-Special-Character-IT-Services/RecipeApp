@@ -124,10 +124,24 @@ const PurchaseUser = ({ route, navigation }) => {
         </TouchableWithoutFeedback>
       </View>
       {!!result && (
-        <Modal isVisible={!!result} style={{ margin: 0, padding: 0}}>
-          <View style={{ flex: 1, backgroundColor: '#fff'}}>
-          {result === 'success' && <PaymentSuccess onDone={() => { console.log('heello'); setResult(''); navigation.goBack()}} />}
-          {result === 'fail' && <PaymentUnsuccessfull onDone={() => {setResult(''); navigation.goBack()}} />}
+        <Modal isVisible={!!result} style={{ margin: 0, padding: 0 }}>
+          <View style={{ flex: 1, backgroundColor: '#fff' }}>
+            {result === 'success' && (
+              <PaymentSuccess
+                onDone={() => {
+                  setResult('');
+                  navigation.goBack();
+                }}
+              />
+            )}
+            {result === 'fail' && (
+              <PaymentUnsuccessfull
+                onDone={() => {
+                  setResult('');
+                  navigation.goBack();
+                }}
+              />
+            )}
           </View>
         </Modal>
       )}
@@ -136,7 +150,22 @@ const PurchaseUser = ({ route, navigation }) => {
 };
 
 PurchaseUser.propTypes = {
-  route: PropTypes.shape({}).isRequired,
+  route: PropTypes.shape({
+    params: PropTypes.shape({
+      CourseID: PropTypes.string,
+      orderDetails: PropTypes.shape({
+        amount_due: PropTypes.number,
+        amount_paid: PropTypes.number,
+        currency: PropTypes.string,
+        razorpay_order_id: PropTypes.string,
+        amount: PropTypes.number,
+        course: PropTypes.shape({
+          name: PropTypes.string,
+        }).isRequired,
+        id: PropTypes.number.isRequired,
+      }),
+    }).isRequired,
+  }).isRequired,
   navigation: PropTypes.shape({
     replace: PropTypes.func,
     navigate: PropTypes.func,

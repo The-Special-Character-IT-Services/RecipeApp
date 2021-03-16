@@ -33,4 +33,10 @@ const UserProvider = ({ children }) => {
   );
 };
 
+// doubt
+
+UserProvider.propTypes = {
+  children: PropTypes.object.isRequired,
+};
+
 export default UserProvider;

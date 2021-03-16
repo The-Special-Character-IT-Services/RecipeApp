@@ -66,28 +66,27 @@ const App = () => {
         // setLoading(false);
       });
 
-    const fetchConfigData = async () => {
-      try {
-        const isActivate = await remoteConfig().fetchAndActivate();
-        console.log(isActivate);
-        if (isActivate) {
-          const theme = remoteConfig().getValue(scheme === 'dark' ? 'darkTheme' : 'lightTheme');
-          if (theme) {
-            setCurrentTheme(JSON.parse(theme.asString()));
-          }
-        }
-      } catch (error) {
-        console.log(error);
-      }
-    };
+    // const fetchConfigData = async () => {
+    //   try {
+    //     const isActivate = await remoteConfig().fetchAndActivate();
+    //     if (isActivate) {
+    //       const theme = remoteConfig().getValue(scheme === 'dark' ? 'darkTheme' : 'lightTheme');
+    //       if (theme) {
+    //         setCurrentTheme(JSON.parse(theme.asString()));
+    //       }
+    //     }
+    //   } catch (error) {
+    //     console.log(error);
+    //   }
+    // };
 
-    fetchConfigData();
+    // fetchConfigData();
 
     return () => {
       unsubscribeNetInfo();
       unsubscribeMessaging();
     };
-  }, []);
+  }, [scheme]);
 
   if (!isInternetAvailable) {
     return <ErrorScreen />;
