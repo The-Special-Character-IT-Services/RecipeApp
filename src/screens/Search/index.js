@@ -82,7 +82,7 @@ const Search = () => {
                 marginHorizontal: 10,
               }}>
               <Image
-                source={{ uri: item.image.url }}
+                source={{ uri: item?.image?.url }}
                 style={{ height: 50, width: 50, borderRadius: 5 }}
               />
               <TextEle

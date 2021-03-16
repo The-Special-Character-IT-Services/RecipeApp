@@ -17,6 +17,7 @@ const MyRecipes = () => {
   const { data } = useSWR([
     coursesQuery({ pageIndex: 0, limit: 5, sort: 'updated_at:DESC', userId: user?.id }),
   ]);
+  const animation = useRef(null);
 
   if (!data) {
     return <Loading />;
@@ -75,8 +76,6 @@ const MyRecipes = () => {
   const filteredData = data?.courses?.filter(x => x.purchase_details.length > 0) || [];
 
   const flatListData = filteredData?.length % 2 === 0 ? filteredData : [...filteredData, {}];
-
-  const animation = useRef(null);
 
   if (filteredData.length === 0) {
     return (
