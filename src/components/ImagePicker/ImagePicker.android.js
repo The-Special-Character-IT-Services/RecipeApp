@@ -31,7 +31,7 @@ class ImagePicker extends PureComponent {
                 height: height * 0.4,
                 marginBottom: 20,
               }}>
-              <TextEle variant="title" style={{ paddingVertical: 8, color: colors.primary }}>
+              <TextEle variant="title1" style={{ paddingVertical: 8, color: colors.primary }}>
                 Select Image
               </TextEle>
               <Pressable
