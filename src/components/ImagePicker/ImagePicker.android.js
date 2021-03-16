@@ -31,11 +31,11 @@ class ImagePicker extends PureComponent {
                 height: height * 0.4,
                 marginBottom: 20,
               }}>
-              <TextEle variant="title" style={{ paddingVerticle: 8, color: colors.primary }}>
+              <TextEle variant="title1" style={{ paddingVertical: 8, color: colors.primary }}>
                 Select Image
               </TextEle>
               <Pressable
-                style={{ paddingVerticle: 8 }}
+                style={{ paddingVertical: 5 }}
                 onPress={() =>
                   launchCamera(
                     {
@@ -55,7 +55,7 @@ class ImagePicker extends PureComponent {
                 </View>
               </Pressable>
               <Pressable
-                style={{ paddingVertical: 8 }}
+                style={{ paddingVertical: 5 }}
                 onPress={() =>
                   launchImageLibrary(
                     {
@@ -70,7 +70,7 @@ class ImagePicker extends PureComponent {
                     },
                   )
                 }>
-                <View style={{ margingVerticle: 10 }}>
+                <View style={{ margingVertical: 5 }}>
                   <TextEle variant="subTitle2">Choose From Library....</TextEle>
                 </View>
               </Pressable>

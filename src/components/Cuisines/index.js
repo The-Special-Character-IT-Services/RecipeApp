@@ -9,7 +9,7 @@ import TextEle from '../TextEle';
 import useCuisinesApi from '../../hooks/useCuisinesApiHook';
 
 const Cuisine = ({ onCuisinePress }) => {
-  const { data } = useCuisinesApi();
+  const { data, isValidating } = useCuisinesApi();
   if (!data?.cuisines) {
     return null;
   }
