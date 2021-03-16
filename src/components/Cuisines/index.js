@@ -10,13 +10,9 @@ import TextEle from '../TextEle';
 import useCuisinesApi from '../../hooks/useCuisinesApiHook';
 
 const Cuisine = ({ onCuisinePress }) => {
-  const { data } = useCuisinesApi();
+  const { data, isValidating } = useCuisinesApi();
   if (!data?.cuisines) {
-    return (
-      <View style={{ flex: 1, marginTop: 10 }}>
-        <Loading />
-      </View>
-    );
+    return null;
   }
   return (
     <View>
