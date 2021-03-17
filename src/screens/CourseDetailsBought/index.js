@@ -9,11 +9,11 @@ import Image from 'react-native-fast-image';
 import { deviceWidth, deviceHeight, showErrorToast } from '@utils/index';
 // import { format, subDays } from 'date-fns';
 // import { useHeaderHeight } from '@react-navigation/stack';
-import useSWR from 'swr';
 import Icon from 'react-native-vector-icons/Ionicons';
 import Rating from '@components/Rating';
 import axios from '@utils/axios';
 import { courseQuery } from '@hooks/useCoursesApiHook';
+import useFetchData from '@hooks/useFetchData';
 import Loading from '@components/loading';
 import { FlatList } from 'react-native-gesture-handler';
 import ShareButton from '../../components/ShareButton';
@@ -30,7 +30,9 @@ export const CARD_WIDTH = windowWidth * 0.9;
 const CourseDetailsBought = ({ route, navigation }) => {
   const { id, userId } = route.params;
   const { colors } = useTheme();
-  const { data: courseDetail, mutate, loading } = useSWR([courseQuery(id, userId)]);
+  const { data: courseDetail, fetchData, loading } = useFetchData({
+    query: courseQuery(id, userId),
+  });
   const [playing] = useState(false);
   // const headerHeight = useHeaderHeight();
   const bottomSheetRef = useRef(null);
@@ -58,7 +60,7 @@ const CourseDetailsBought = ({ route, navigation }) => {
           ratting,
         });
       }
-      mutate();
+      fetchData();
     } catch (error) {
       showErrorToast(error);
     }

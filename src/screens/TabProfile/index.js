@@ -5,8 +5,8 @@ import React, { useContext } from 'react';
 import { Dimensions, View } from 'react-native';
 import TextEle from '@components/TextEle';
 import { UserContext } from '@context/userContext';
-import useSWR from 'swr';
 import { coursesQuery } from '@hooks/useCoursesApiHook';
+import useFetchData from '@hooks/useFetchData';
 // import Loading from '@components/loading';
 import MyRecipes from './pages/MyRecipes';
 import Settings from './pages/Settings';
@@ -29,9 +29,14 @@ const Tab = createMaterialTopTabNavigator();
 const Profile = () => {
   const { colors } = useTheme();
   const { user } = useContext(UserContext);
-  const { data } = useSWR([
-    coursesQuery({ pageIndex: 0, limit: 5, sort: 'updated_at:ASC', userId: user?.id }),
-  ]);
+  const { data } = useFetchData({
+    query: coursesQuery({
+      pageIndex: 0,
+      limit: 5,
+      sort: 'updated_at:ASC',
+      userId: user?.id,
+    }),
+  });
 
   const purchasedCourseCount = data?.courses?.reduce((p, c) => p + c.purchase_details?.length, 0);
   const likedCourseCount = data?.courses?.reduce((p, c) => p + c.like_event?.length, 0);
@@ -71,7 +76,7 @@ const Profile = () => {
                 flexDirection: 'column',
               }}>
               <TextEle variant="header2" style={{ color: colors.text }}>
-                {purchasedCourseCount}
+                {purchasedCourseCount || 0}
               </TextEle>
               <TextEle variant="body2" style={{ color: colors.text }}>
                 Courses
@@ -85,7 +90,7 @@ const Profile = () => {
                 flexDirection: 'column',
               }}>
               <TextEle variant="header2" style={{ color: colors.text }}>
-                {likedCourseCount && likedCourseCount}
+                {(likedCourseCount && likedCourseCount) || 0}
               </TextEle>
               <TextEle variant="body2" style={{ color: colors.text }}>
                 Likes

@@ -7,16 +7,16 @@ import LottieView from 'lottie-react-native';
 import TextEle from '@components/TextEle';
 import { coursesQuery } from '@hooks/useCoursesApiHook';
 import { UserContext } from '@context/userContext';
-import useSWR from 'swr';
 import { showErrorToast } from '@utils/';
 import Loading from '@components/loading';
+import useFetchData from '@hooks/useFetchData';
 
 const MyRecipes = () => {
   const { colors } = useTheme();
   const { user } = useContext(UserContext);
-  const { data, loading } = useSWR([
-    coursesQuery({ pageIndex: 0, limit: 5, sort: 'updated_at:DESC', userId: user?.id }),
-  ]);
+  const { data, loading } = useFetchData({
+    query: coursesQuery({ pageIndex: 0, limit: 5, sort: 'updated_at:DESC', userId: user?.id }),
+  });
   const animation = useRef(null);
 
   if (loading) {
