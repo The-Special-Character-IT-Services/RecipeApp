@@ -1,25 +1,35 @@
 /* eslint-disable react/prop-types */
 /* eslint-disable react-native/no-inline-styles */
-import React, { useCallback, useRef, useState } from 'react';
-import { View, ActivityIndicator, FlatList } from 'react-native';
+import React, { useCallback, useState } from 'react';
+import { View, FlatList } from 'react-native';
 import { useTheme } from '@react-navigation/native';
-import { useSWRInfinite } from 'swr';
-import { getInfiniteFilteredCourses } from '@hooks/useCoursesApiHook';
-import LottieView from 'lottie-react-native';
-import Loading from '@components/loading';
+import { coursesQuery } from '@hooks/useCoursesApiHook';
 import Image from 'react-native-fast-image';
+import LottieView from 'lottie-react-native';
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
+import Loading from '@components/loading';
+import useInfiniteScroll from '@hooks/useInfiniteScroll';
 import SearchBar from '../../components/Search';
 import TextEle from '../../components/TextEle';
 
 const ITEM_HEIGHT = 100;
 
 const FilterList = ({ route }) => {
-  const animation = useRef(null);
-
   const { where, userId } = route.params;
-  const { data, isValidating, size, setSize } = useSWRInfinite((...props) =>
-    getInfiniteFilteredCourses(...props, where, userId),
-  );
+  const { data, loading, error } = useInfiniteScroll({
+    callback: coursesQuery,
+    callbackProps: {
+      sort: 'updated_at:DESC',
+      where,
+      userId,
+    },
+    limit: 10,
+    response: 'courses',
+  });
+  const insets = useSafeAreaInsets();
+  // const { data, isValidating, size, setSize } = useSWRInfinite((...props) =>
+  //   getInfiniteFilteredCourses(...props, where, userId),
+  // );
 
   // const { data, isValidating } = useSWR([coursesCategoryQuery(0, 5, 'updated_at:DESC', where)]);
   const { colors } = useTheme();
@@ -55,7 +65,7 @@ const FilterList = ({ route }) => {
   );
 
   const getItemLayout = useCallback(
-    (data, index) => ({
+    (_, index) => ({
       length: ITEM_HEIGHT,
       offset: ITEM_HEIGHT * index,
       index,
@@ -63,11 +73,10 @@ const FilterList = ({ route }) => {
     [],
   );
 
-  if (data?.reduce((p, c) => [...p, ...c.courses], []).length === 0) {
+  if (!loading && data.length === 0) {
     return (
       <View style={{ alignItems: 'center' }}>
         <LottieView
-          ref={animation}
           source={require('@assets/lottie/9923-box-empty.json')}
           style={{ height: 600, width: 600 }}
           autoPlay
@@ -90,9 +99,15 @@ const FilterList = ({ route }) => {
       </View>
     );
   }
-  if (!data) {
+
+  if (loading && data.length === 0) {
     return <Loading />;
   }
+
+  if (error) {
+    return null;
+  }
+
   return (
     <View style={{ flex: 1 }}>
       <View style={{ paddingTop: 10 }}>
@@ -100,16 +115,17 @@ const FilterList = ({ route }) => {
       </View>
       <FlatList
         contentContainerStyle={{
-          margin: 15,
+          paddingBottom: insets.bottom + 15,
+          marginHorizontal: 20,
         }}
-        data={data?.reduce((p, c) => [...p, ...c.courses], []) || []}
+        data={data}
         keyExtractor={keyExtractor}
         renderItem={renderItem}
         getItemLayout={getItemLayout}
         removeClippedSubviews
         ListFooterComponent={() => {
-          if (isValidating) {
-            return <ActivityIndicator animating size="large" color={colors.primary} />;
+          if (loading) {
+            return <Loading />;
           }
           return null;
         }}
@@ -122,11 +138,11 @@ const FilterList = ({ route }) => {
             }}
           />
         )}
-        onEndReached={({ distanceFromEnd }) => {
-          if (distanceFromEnd < 0) return;
-          setSize(size + 1);
+        onEndReached={() => {
+          // if (distanceFromEnd < 0) return;
+          // setPage(page + 1);
         }}
-        onEndReachedThreshold={0.5}
+        onEndReachedThreshold={0.9}
       />
     </View>
   );

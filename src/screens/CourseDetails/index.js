@@ -156,7 +156,7 @@ const CourseDetails = ({ route, navigation }) => {
     try {
       setLoading(true);
       const purchaseRes = await utilsAxios.get(
-        `https://calm-oasis-43947.herokuapp.com/purchase-details?user_id=${userId}&course=${data?.course?.id}`,
+        `purchase-details?user_id=${userId}&course=${data?.course?.id}`,
       );
 
       if (purchaseRes.data.length === 0) {

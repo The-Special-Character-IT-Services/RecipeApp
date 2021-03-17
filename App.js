@@ -2,10 +2,8 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import analytics from '@react-native-firebase/analytics';
-import remoteConfig from '@react-native-firebase/remote-config';
 import { createStackNavigator, CardStyleInterpolators } from '@react-navigation/stack';
 import { Alert, KeyboardAvoidingView, StatusBar } from 'react-native';
-import { SWRConfig } from 'swr';
 import { enableScreens } from 'react-native-screens';
 import messaging from '@react-native-firebase/messaging';
 import ErrorScreen from '@screens/Error';
@@ -14,7 +12,6 @@ import { SafeAreaProvider } from 'react-native-safe-area-context';
 import SplashScreen from 'react-native-splash-screen';
 import MasterNavigation from '@navigation/MasterNavigation';
 import { RADarkTheme, RALightTheme } from '@theme/index';
-import fetcher from '@utils/fetcher';
 // import YoutubeVideo from '@screens/YoutubeVideo';
 import UserProvider from '@context/userContext';
 import Toast from 'react-native-toast-message';
@@ -33,7 +30,7 @@ const App = () => {
   const scheme = useColorScheme();
   const routeNameRef = useRef();
   const navigationRef = useRef();
-  const [currentTheme, setCurrentTheme] = useState(scheme === 'dark' ? RADarkTheme : RALightTheme);
+  const [currentTheme] = useState(scheme === 'dark' ? RADarkTheme : RALightTheme);
 
   const [isInternetAvailable, setIsInternetAvailable] = useState(true);
 
@@ -102,75 +99,69 @@ const App = () => {
         backgroundColor={currentTheme.colors.card}
         barStyle={scheme === 'dark' ? 'light-content' : 'dark-content'}
       />
-      <SWRConfig
-        value={{
-          fetcher,
-          errorRetryCount: 3,
-        }}>
-        <UserProvider>
-          <KeyboardAvoidingView
-            {...(isIOS && { behavior: 'padding' })}
-            style={{ flex: 1 }}
-            enabled={isIOS}>
-            <NavigationContainer
-              ref={navigationRef}
-              theme={currentTheme}
-              onReady={() => {
-                routeNameRef.current = navigationRef.current.getCurrentRoute().name;
-              }}
-              onStateChange={async () => {
-                const previousRouteName = routeNameRef.current;
-                const currentRouteName = navigationRef.current.getCurrentRoute().name;
+      <UserProvider>
+        <KeyboardAvoidingView
+          {...(isIOS && { behavior: 'padding' })}
+          style={{ flex: 1 }}
+          enabled={isIOS}>
+          <NavigationContainer
+            ref={navigationRef}
+            theme={currentTheme}
+            onReady={() => {
+              routeNameRef.current = navigationRef.current.getCurrentRoute().name;
+            }}
+            onStateChange={async () => {
+              const previousRouteName = routeNameRef.current;
+              const currentRouteName = navigationRef.current.getCurrentRoute().name;
 
-                if (previousRouteName !== currentRouteName) {
-                  // Change this line to use another Mobile analytics SDK
-                  await analytics().logScreenView({
-                    screen_name: currentRouteName,
-                    screen_class: currentRouteName,
-                  });
-                }
+              if (previousRouteName !== currentRouteName) {
+                // Change this line to use another Mobile analytics SDK
+                await analytics().logScreenView({
+                  screen_name: currentRouteName,
+                  screen_class: currentRouteName,
+                });
+              }
 
-                // Save the current route name for later comparision
-                routeNameRef.current = currentRouteName;
-              }}>
-              <RootStack.Navigator initialRouteName="Main" mode="modal" headerMode="none">
-                <RootStack.Screen
-                  name="Main"
-                  component={MasterNavigation}
-                  options={{
-                    headerShown: true,
-                    headerTransparent: 1,
-                    headerTintColor: currentTheme.colors.primary,
-                    cardStyleInterpolator: CardStyleInterpolators.forFadeFromBottomAndroid,
-                  }}
-                />
-                <RootStack.Screen
-                  name="PaymentSuccess"
-                  getComponent={() => require('@screens/PaymentSuccess').default}
-                  options={{
-                    headerShown: true,
-                    headerTransparent: true,
-                  }}
-                />
-                <RootStack.Screen
-                  name="PaymentUnsuccessfull"
-                  getComponent={() => require('@screens/PaymentUnsuccessfull').default}
-                  options={{
-                    headerShown: true,
-                    headerTransparent: true,
-                  }}
-                />
-                <RootStack.Screen name="YoutubeFilter" component={YoutubeFilter} />
-                {/* <RootStack.Screen
+              // Save the current route name for later comparision
+              routeNameRef.current = currentRouteName;
+            }}>
+            <RootStack.Navigator initialRouteName="Main" mode="modal" headerMode="none">
+              <RootStack.Screen
+                name="Main"
+                component={MasterNavigation}
+                options={{
+                  headerShown: true,
+                  headerTransparent: 1,
+                  headerTintColor: currentTheme.colors.primary,
+                  cardStyleInterpolator: CardStyleInterpolators.forFadeFromBottomAndroid,
+                }}
+              />
+              <RootStack.Screen
+                name="PaymentSuccess"
+                getComponent={() => require('@screens/PaymentSuccess').default}
+                options={{
+                  headerShown: true,
+                  headerTransparent: true,
+                }}
+              />
+              <RootStack.Screen
+                name="PaymentUnsuccessfull"
+                getComponent={() => require('@screens/PaymentUnsuccessfull').default}
+                options={{
+                  headerShown: true,
+                  headerTransparent: true,
+                }}
+              />
+              <RootStack.Screen name="YoutubeFilter" component={YoutubeFilter} />
+              {/* <RootStack.Screen
                   name="YoutubeVideo"
                   component={YoutubeVideo}
                   options={{ headerShown: true, headerTransparent: true }}
                 /> */}
-              </RootStack.Navigator>
-            </NavigationContainer>
-          </KeyboardAvoidingView>
-        </UserProvider>
-      </SWRConfig>
+            </RootStack.Navigator>
+          </NavigationContainer>
+        </KeyboardAvoidingView>
+      </UserProvider>
       <Toast ref={ref => Toast.setRef(ref)} />
     </SafeAreaProvider>
   );

@@ -19,10 +19,6 @@ const getToken = async () => {
 
 const instance = axios.create({
   baseURL: Config.API_URL,
-  timeout: 3000,
-  headers: {
-    'Content-Type': 'application/json',
-  },
 });
 
 // Add a request interceptor

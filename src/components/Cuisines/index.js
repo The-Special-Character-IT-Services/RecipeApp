@@ -1,16 +1,22 @@
 /* eslint-disable react-native/no-inline-styles */
 /* eslint-disable global-require */
-import React from 'react';
+import React, { memo } from 'react';
 import { View } from 'react-native';
 import Image from 'react-native-fast-image';
 import PropTypes from 'prop-types';
 import { RectButton, ScrollView } from 'react-native-gesture-handler';
+import useFetchData from '@hooks/useFetchData';
+import { cuisinesQuery } from '@hooks/useCuisinesApiHook';
+import Loading from '@components/loading';
 import TextEle from '../TextEle';
-import useCuisinesApi from '../../hooks/useCuisinesApiHook';
 
 const Cuisine = ({ onCuisinePress }) => {
-  const { data } = useCuisinesApi();
-  if (!data?.cuisines) {
+  const { data, loading } = useFetchData({ query: cuisinesQuery });
+
+  if (loading) {
+    return <Loading />;
+  }
+  if (!data) {
     return null;
   }
   return (
@@ -55,4 +61,4 @@ Cuisine.propTypes = {
   onCuisinePress: PropTypes.func.isRequired,
 };
 
-export default Cuisine;
+export default memo(Cuisine);

@@ -2,31 +2,34 @@ import Carousal from '@components/Carousal';
 import Loading from '@components/loading';
 import TextEle from '@components/TextEle';
 import { coursesQuery } from '@hooks/useCoursesApiHook';
+import useFetchData from '@hooks/useFetchData';
 import { useTheme } from '@react-navigation/native';
 import PropTypes from 'prop-types';
 import React from 'react';
 import { Pressable, View } from 'react-native';
-import useSWR from 'swr';
 import ListItem from './ListItem';
 
 const HomeList = ({ title, onPressViewAll, onRecipePress, userId, sort, where }) => {
   const { colors } = useTheme();
-  const { data } = useSWR([
-    coursesQuery({
+  const { data, loading } = useFetchData({
+    query: coursesQuery({
       pageIndex: 0,
       limit: 5,
       sort,
       userId,
       where,
     }),
-  ]);
+  });
 
-  if (!data) {
+  if (loading) {
     return (
       <View style={{ flex: 1, height: 400 }}>
         <Loading />
       </View>
     );
+  }
+  if (!data) {
+    return null;
   }
   return (
     <>
@@ -77,6 +80,11 @@ HomeList.propTypes = {
   userId: PropTypes.number.isRequired,
   sort: PropTypes.string,
   where: PropTypes.string,
+};
+
+HomeList.defaultProps = {
+  sort: '',
+  where: '',
 };
 
 export default HomeList;

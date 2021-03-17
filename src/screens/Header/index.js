@@ -1,13 +1,10 @@
-/* eslint-disable react-native/no-inline-styles */
-/* eslint-disable global-require */
 import React, { useCallback, useEffect, useState, useRef, memo } from 'react';
-// import PropTypes from 'prop-types';
 import { View, Pressable } from 'react-native';
 import { useTheme } from '@react-navigation/native';
+import ImagePicker from '@components/ImagePicker/ImagePicker';
 import Image from 'react-native-fast-image';
 import TextEle from '@components/TextEle';
 import { getToken } from '@utils/';
-import ImagePicker from '../../components/ImagePicker/ImagePicker';
 
 const Header = () => {
   const { dark, colors } = useTheme();

@@ -29,15 +29,6 @@ const TabHome = ({ navigation }) => {
     [],
   );
 
-  // const { data, mutate } = useSWR([
-  //   rattingQuery({
-  //     pageIndex: 0,
-  //     limit: 5,
-  //     sort: 'rattings:{ratting:ASC}',
-  //     userId: user?.id,
-  //   }),
-  // ]);
-
   return (
     <ScrollView
       style={{ flex: 1 }}
@@ -47,9 +38,6 @@ const TabHome = ({ navigation }) => {
       <Pressable ref={playerRef} onPress={() => navigation.navigate('Search')}>
         <SearchBar editable={false} selectTextOnFocus={false} onchangeText={handler} value={text} />
       </Pressable>
-      {/* <Category
-        onCategoryDetails={() => navigation.navigate('FilterList', { name: 'Search Category' })}
-      /> */}
       <Cuisines
         onCuisinePress={item =>
           navigation.navigate('FilterList', {
@@ -74,19 +62,6 @@ const TabHome = ({ navigation }) => {
             }
             onRecipePress={async item => {
               navigation.navigate('CourseDetails', { id: item?.id, userId: user?.id });
-              // if (item.purchase_details && item.purchase_details.length > 0) {
-              //   if (
-              //     item.purchase_details.some(
-              //       x => x.course.id === item?.id && x.status === 'purchased',
-              //     )
-              //   ) {
-              //     navigation.navigate('CourseDetailsBought', { id: item?.id, userId: user?.id });
-              //   } else {
-              //     navigation.navigate('CourseDetails', { id: item?.id, userId: user?.id });
-              //   }
-              // } else {
-              //   navigation.navigate('CourseDetails', { id: item?.id, userId: user?.id });
-              // }
             }}
           />
           <HomeList
@@ -101,19 +76,6 @@ const TabHome = ({ navigation }) => {
             }
             onRecipePress={async item => {
               navigation.navigate('CourseDetails', { id: item?.id, userId: user?.id });
-              // if (item.purchase_details && item.purchase_details.length > 0) {
-              //   if (
-              //     item.purchase_details.some(
-              //       x => x.course.id === item?.id && x.status === 'purchased',
-              //     )
-              //   ) {
-              //     navigation.navigate('CourseDetailsBought', { id: item?.id, userId: user?.id });
-              //   } else {
-              //     navigation.navigate('CourseDetails', { id: item?.id, userId: user?.id });
-              //   }
-              // } else {
-              //   navigation.navigate('CourseDetails', { id: item?.id, userId: user?.id });
-              // }
             }}
           />
         </>
