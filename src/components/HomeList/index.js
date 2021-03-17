@@ -84,7 +84,7 @@ HomeList.propTypes = {
 
 HomeList.defaultProps = {
   sort: '',
-  where: '',
+  where: '{}',
 };
 
 export default HomeList;

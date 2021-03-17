@@ -4,9 +4,9 @@ import PropTypes from 'prop-types';
 import { View, ScrollView, Pressable } from 'react-native';
 import Image from 'react-native-fast-image';
 import { useFocusEffect, useTheme } from '@react-navigation/native';
-import useSWR, { mutate } from 'swr';
 import { UserContext } from '@context/userContext';
 import LikeButton from '@components/LikeButton';
+import useFetchData from '@hooks/useFetchData';
 import Loading from '@components/loading';
 import { coursesQuery } from '@hooks/useCoursesApiHook';
 import TextEle from '../TextEle';
@@ -14,19 +14,19 @@ import TextEle from '../TextEle';
 const LikedRecipe = ({ onRecipeDetail }) => {
   const { colors } = useTheme();
   const { user } = useContext(UserContext);
-  const { data } = useSWR([
-    coursesQuery({
+  const { data, fetchData } = useFetchData({
+    query: coursesQuery({
       pageIndex: 0,
       limit: 5,
       sort: 'updated_at:DESC',
       where: `{like_event:{user:${user?.id}}}`,
       userId: user?.id,
     }),
-  ]);
+  });
 
   useFocusEffect(
     useCallback(() => {
-      mutate();
+      fetchData();
     }, []),
   );
 

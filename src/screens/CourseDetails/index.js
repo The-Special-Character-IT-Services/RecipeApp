@@ -16,10 +16,10 @@ import { v4 as uuidv4 } from 'uuid';
 // import { format, subDays } from 'date-fns';
 import useMarkdownRules from '@hooks/useMarkdownRules';
 // import { useHeaderHeight } from '@react-navigation/stack';
-import useSWR from 'swr';
 // import ActionButton from '@components/ActionButton';
 import { courseQuery } from '@hooks/useCoursesApiHook';
 import { FlatList } from 'react-native-gesture-handler';
+import useFetchData from '@hooks/useFetchData';
 import Icon from 'react-native-vector-icons/Ionicons';
 import Rating from '@components/Rating';
 import Loading from '@components/loading';
@@ -42,7 +42,7 @@ const CourseDetails = ({ route, navigation }) => {
   const { id, userId } = route.params;
   const { colors } = useTheme();
   const [loading, setLoading] = useState(false);
-  const { data, isValidating, error, mutate } = useSWR([courseQuery(id, userId)]);
+  const { data, error, fetchData } = useFetchData({ query: courseQuery(id, userId) });
 
   const [playing, setPlaying] = useState(false);
   // const headerHeight = useHeaderHeight();
@@ -203,7 +203,7 @@ const CourseDetails = ({ route, navigation }) => {
           ratting,
         });
       }
-      mutate();
+      fetchData();
     } catch (err) {
       showErrorToast(err);
     }
@@ -257,7 +257,7 @@ const CourseDetails = ({ route, navigation }) => {
     </Pressable>
   );
 
-  if (isValidating) {
+  if (loading) {
     return <Loading />;
   }
   if (!isPurchased) {

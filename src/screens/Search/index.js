@@ -1,11 +1,11 @@
 import React, { useContext, useState } from 'react';
 import { ScrollView, View, Image, KeyboardAvoidingView } from 'react-native';
 import { useTheme } from '@react-navigation/native';
-import useSWR from 'swr';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { coursesQuery } from '@hooks/useCoursesApiHook';
 import { UserContext } from '@context/userContext';
 import { FlatList } from 'react-native-gesture-handler';
+import useFetchData from '@hooks/useFetchData';
 import SearchBar from '../../components/Search';
 import RecentlyAdd from '../../components/RecentlyAdd';
 import SearchCuisine from '../../components/SearchCuisine';
@@ -17,14 +17,14 @@ const Search = () => {
   const { colors } = useTheme();
   const insets = useSafeAreaInsets();
   const { user } = useContext(UserContext);
-  const { data } = useSWR([
-    coursesQuery({
+  const { data } = useFetchData({
+    query: coursesQuery({
       pageIndex: 0,
       limit: 5,
       sort: 'updated_at:DESC',
       userId: user?.id,
     }),
-  ]);
+  });
   const [text, setText] = useState('');
 
   // const handler = useCallback(debounce(loadSearch, 2000), []);
