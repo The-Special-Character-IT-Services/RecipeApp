@@ -30,7 +30,7 @@ const LikedRecipe = ({ onRecipeDetail }) => {
     }, []),
   );
 
-  if (loading) {
+  if (!data) {
     return <Loading />;
   }
 

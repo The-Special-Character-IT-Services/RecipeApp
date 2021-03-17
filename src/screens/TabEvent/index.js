@@ -1,15 +1,16 @@
 import { useTheme } from '@react-navigation/native';
-import React, { useCallback, useContext, useRef, useState } from 'react';
+import React, { useCallback, useContext, useState } from 'react';
 import PropTypes from 'prop-types';
 import getCoursesApi, { coursesQuery } from '@hooks/useCoursesApiHook';
 import Image from 'react-native-fast-image';
 // import { useSWRInfinite } from 'swr';
-import LottieView from 'lottie-react-native';
+// import LottieView from 'lottie-react-native';
 import { Pressable, View } from 'react-native';
 import { UserContext } from '@context/userContext';
 import Loading from '@components/loading';
 import { FlatList } from 'react-native-gesture-handler';
 import LikeButton from '@components/LikeButton';
+import Lottie from '@components/NodataLottie';
 import useInfiniteScroll from '@hooks/useInfiniteScroll';
 import TextEle from '@components/TextEle';
 import { format } from 'date-fns';
@@ -48,7 +49,7 @@ const TabEvent = () => {
     setText(val);
   };
 
-  const animation = useRef(null);
+  // const animation = useRef(null);
 
   const TodayDate = format(new Date(), 'yyyy-MM-dd');
 
@@ -95,35 +96,8 @@ const TabEvent = () => {
           </>
         );
       }
-      return (
-        <>
-          <View style={{ alignItems: 'center' }}>
-            <LottieView
-              ref={animation}
-              source={require('@assets/lottie/9923-box-empty.json')}
-              style={{ height: 600, width: 600 }}
-              autoPlay
-              loop
-            />
-            <View
-              style={{
-                justifyContent: 'center',
-                alignItems: 'center',
-                backgroundColor: colors.background,
-                bottom: 150,
-              }}>
-              <TextEle variant="error" style={{ color: colors.primary, textAlign: 'center' }}>
-                Sorry!!
-              </TextEle>
-              <TextEle variant="error1" style={{ color: colors.primary, textAlign: 'center' }}>
-                No data available
-              </TextEle>
-            </View>
-          </View>
-        </>
-      );
     },
-    [TodayDate, colors.card, colors.primary, text, colors.background, onEventPress],
+    [TodayDate, colors.card, text, colors.background, onEventPress],
   );
 
   const getItemLayout = useCallback(
@@ -139,6 +113,15 @@ const TabEvent = () => {
   if (loading) {
     return <Loading />;
   }
+
+  if (!loading) {
+    return (
+      <View>
+        <Lottie />
+      </View>
+    );
+  }
+
   return (
     <View
       style={{

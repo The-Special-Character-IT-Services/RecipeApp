@@ -1,3 +1,5 @@
+/* eslint-disable jsx-control-statements/jsx-use-if-tag */
+/* eslint-disable react-native/no-inline-styles */
 import React, { useContext, useRef } from 'react';
 import { View } from 'react-native';
 import Image from 'react-native-fast-image';
@@ -14,12 +16,12 @@ import useFetchData from '@hooks/useFetchData';
 const MyRecipes = () => {
   const { colors } = useTheme();
   const { user } = useContext(UserContext);
-  const { data, loading } = useFetchData({
+  const { data } = useFetchData({
     query: coursesQuery({ pageIndex: 0, limit: 5, sort: 'updated_at:DESC', userId: user?.id }),
   });
   const animation = useRef(null);
 
-  if (loading) {
+  if (!data) {
     return <Loading />;
   }
 
