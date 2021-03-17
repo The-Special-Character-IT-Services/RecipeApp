@@ -20,7 +20,7 @@ const TabEvent = () => {
   const { colors } = useTheme();
   const { user } = useContext(UserContext);
 
-  const { data } = useSWR([
+  const { data, loading } = useSWR([
     coursesQuery({
       pageIndex: 0,
       limit: 7,
@@ -126,7 +126,7 @@ const TabEvent = () => {
   );
 
   const keyExtractor = useCallback(item => `${item?.id}`, []);
-  if (!data) {
+  if (loading) {
     return <Loading />;
   }
   return (

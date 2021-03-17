@@ -1,3 +1,4 @@
+/* eslint-disable react-native/no-inline-styles */
 import { useTheme } from '@react-navigation/native';
 import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
 import React, { useContext } from 'react';
@@ -6,7 +7,7 @@ import TextEle from '@components/TextEle';
 import { UserContext } from '@context/userContext';
 import useSWR from 'swr';
 import { coursesQuery } from '@hooks/useCoursesApiHook';
-import Loading from '@components/loading';
+// import Loading from '@components/loading';
 import MyRecipes from './pages/MyRecipes';
 import Settings from './pages/Settings';
 import SavedVideos from './pages/SavedVideos';

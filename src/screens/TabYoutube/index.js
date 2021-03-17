@@ -97,7 +97,7 @@ const TabYoutube = ({ navigation }) => {
     [loadData],
   );
 
-  if (!youtubeData) {
+  if (loading) {
     <Loading />;
   }
 

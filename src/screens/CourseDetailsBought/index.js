@@ -30,7 +30,7 @@ export const CARD_WIDTH = windowWidth * 0.9;
 const CourseDetailsBought = ({ route, navigation }) => {
   const { id, userId } = route.params;
   const { colors } = useTheme();
-  const { data: courseDetail, mutate } = useSWR([courseQuery(id, userId)]);
+  const { data: courseDetail, mutate, loading } = useSWR([courseQuery(id, userId)]);
   const [playing] = useState(false);
   // const headerHeight = useHeaderHeight();
   const bottomSheetRef = useRef(null);
@@ -64,7 +64,7 @@ const CourseDetailsBought = ({ route, navigation }) => {
     }
   };
 
-  if (!courseDetail?.course) {
+  if (loading) {
     return <Loading />;
   }
 

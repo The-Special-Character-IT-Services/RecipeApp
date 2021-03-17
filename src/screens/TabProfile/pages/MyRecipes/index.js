@@ -14,12 +14,12 @@ import Loading from '@components/loading';
 const MyRecipes = () => {
   const { colors } = useTheme();
   const { user } = useContext(UserContext);
-  const { data } = useSWR([
+  const { data, loading } = useSWR([
     coursesQuery({ pageIndex: 0, limit: 5, sort: 'updated_at:DESC', userId: user?.id }),
   ]);
   const animation = useRef(null);
 
-  if (!data) {
+  if (loading) {
     return <Loading />;
   }
 
