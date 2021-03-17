@@ -16,6 +16,7 @@ const Cuisine = ({ onCuisinePress }) => {
   if (loading) {
     return <Loading />;
   }
+
   if (!data) {
     return null;
   }
