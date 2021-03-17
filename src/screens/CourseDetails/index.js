@@ -257,7 +257,7 @@ const CourseDetails = ({ route, navigation }) => {
     </Pressable>
   );
 
-  if (loading) {
+  if (!data) {
     return <Loading />;
   }
   if (!isPurchased) {
