@@ -21,7 +21,7 @@ const TabEvent = () => {
   const { colors } = useTheme();
   const { user } = useContext(UserContext);
 
-  const { data } = useFetchData({
+  const { data, loading } = useFetchData({
     query: coursesQuery({
       pageIndex: 0,
       limit: 7,
@@ -127,7 +127,7 @@ const TabEvent = () => {
   );
 
   const keyExtractor = useCallback(item => `${item?.id}`, []);
-  if (!data) {
+  if (loading) {
     return <Loading />;
   }
   return (

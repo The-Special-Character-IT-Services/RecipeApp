@@ -14,7 +14,7 @@ import TextEle from '../TextEle';
 const LikedRecipe = ({ onRecipeDetail }) => {
   const { colors } = useTheme();
   const { user } = useContext(UserContext);
-  const { data, fetchData } = useFetchData({
+  const { data, loading, fetchData } = useFetchData({
     query: coursesQuery({
       pageIndex: 0,
       limit: 5,
@@ -30,7 +30,7 @@ const LikedRecipe = ({ onRecipeDetail }) => {
     }, []),
   );
 
-  if (!data) {
+  if (loading) {
     return <Loading />;
   }
 

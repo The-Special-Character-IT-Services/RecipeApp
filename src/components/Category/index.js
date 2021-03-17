@@ -12,8 +12,8 @@ import TextEle from '../TextEle';
 
 const Category = ({ onCategoryDetails }) => {
   const { colors } = useTheme();
-  const { data } = useCategoriesApi();
-  if (!data?.categories) {
+  const { data, loading } = useCategoriesApi();
+  if (loading) {
     return <Loading style={{ flex: 1, height: 100 }} />;
   }
   return (
