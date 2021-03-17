@@ -3,13 +3,14 @@ import React, { useCallback, useContext, useRef, useState } from 'react';
 import PropTypes from 'prop-types';
 import getCoursesApi, { coursesQuery } from '@hooks/useCoursesApiHook';
 import Image from 'react-native-fast-image';
-import useSWR, { useSWRInfinite } from 'swr';
+import { useSWRInfinite } from 'swr';
 import LottieView from 'lottie-react-native';
 import { Pressable, View } from 'react-native';
 import { UserContext } from '@context/userContext';
 import Loading from '@components/loading';
 import { FlatList } from 'react-native-gesture-handler';
 import LikeButton from '@components/LikeButton';
+import useFetchData from '@hooks/useFetchData';
 import TextEle from '@components/TextEle';
 import { format } from 'date-fns';
 import SearchBar from '../../components/Search';
@@ -20,14 +21,14 @@ const TabEvent = () => {
   const { colors } = useTheme();
   const { user } = useContext(UserContext);
 
-  const { data, loading } = useSWR([
-    coursesQuery({
+  const { data, loading } = useFetchData({
+    query: coursesQuery({
       pageIndex: 0,
       limit: 7,
       sort: 'launchDate:DESC',
       userId: user?.id,
     }),
-  ]);
+  });
   const { size, setSize } = useSWRInfinite(getCoursesApi);
 
   const onEventPress = useCallback(() => {}, []);

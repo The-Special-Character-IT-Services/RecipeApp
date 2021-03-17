@@ -5,7 +5,7 @@ import { likesQuery } from '@hooks/useLikesApiHook';
 import React, { useContext, useEffect, useRef } from 'react';
 import LottieView from 'lottie-react-native';
 import { Pressable } from 'react-native';
-import useSWR from 'swr';
+import useFetchData from '@hooks/useFetchData';
 
 import { showErrorToast } from '@utils/';
 import axios from '../../utils/axios';
@@ -13,7 +13,7 @@ import axios from '../../utils/axios';
 const LikeButton = ({ courseId, withBackground = true }) => {
   // const { colors } = useTheme();
   const { user } = useContext(UserContext);
-  const { data, mutate } = useSWR([likesQuery(user?.id, courseId)]);
+  const { data, fetchData } = useFetchData({ query: likesQuery(user?.id, courseId) });
 
   const onLikePress = async () => {
     try {
@@ -25,7 +25,7 @@ const LikeButton = ({ courseId, withBackground = true }) => {
       } else {
         await axios.delete(`likes/${data.likes[0].id}`);
       }
-      mutate([likesQuery(user?.id, courseId)]);
+      fetchData();
     } catch (error) {
       showErrorToast(error);
     }
