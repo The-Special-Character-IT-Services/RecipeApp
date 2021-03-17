@@ -5,10 +5,10 @@ import { View, FlatList } from 'react-native';
 import { useTheme } from '@react-navigation/native';
 import { coursesQuery } from '@hooks/useCoursesApiHook';
 import Image from 'react-native-fast-image';
-import LottieView from 'lottie-react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import Loading from '@components/loading';
 import useInfiniteScroll from '@hooks/useInfiniteScroll';
+import Lottie from '../../components/NodataLottie';
 import SearchBar from '../../components/Search';
 import TextEle from '../../components/TextEle';
 
@@ -76,26 +76,7 @@ const FilterList = ({ route }) => {
   if (!loading && data.length === 0) {
     return (
       <View style={{ alignItems: 'center' }}>
-        <LottieView
-          source={require('@assets/lottie/9923-box-empty.json')}
-          style={{ height: 600, width: 600 }}
-          autoPlay
-          loop
-        />
-        <View
-          style={{
-            justifyContent: 'center',
-            alignItems: 'center',
-            backgroundColor: colors.background,
-            bottom: 150,
-          }}>
-          <TextEle variant="error" style={{ color: colors.primary, textAlign: 'center' }}>
-            Sorry!!
-          </TextEle>
-          <TextEle variant="error1" style={{ color: colors.primary, textAlign: 'center' }}>
-            No data available
-          </TextEle>
-        </View>
+        <Lottie />
       </View>
     );
   }
