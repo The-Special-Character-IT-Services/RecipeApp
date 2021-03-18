@@ -15,17 +15,6 @@ import SavedVideos from './pages/SavedVideos';
 const { width: windowWidth } = Dimensions.get('window');
 const Tab = createMaterialTopTabNavigator();
 
-// const data = [
-//   {
-//     text: 'Liked',
-//     value: 12,
-//   },
-//   {
-//     text: 'Saves',
-//     value: 0,
-//   },
-// ];
-
 const Profile = () => {
   const { colors } = useTheme();
   const { user } = useContext(UserContext);

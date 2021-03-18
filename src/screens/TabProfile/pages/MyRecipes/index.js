@@ -1,7 +1,7 @@
 /* eslint-disable jsx-control-statements/jsx-use-if-tag */
 /* eslint-disable react-native/no-inline-styles */
 import React, { useContext, useRef } from 'react';
-import { View } from 'react-native';
+import { Pressable, View } from 'react-native';
 import Image from 'react-native-fast-image';
 import { useTheme } from '@react-navigation/native';
 import { FlatList } from 'react-native-gesture-handler';
@@ -12,17 +12,27 @@ import { UserContext } from '@context/userContext';
 import { showErrorToast } from '@utils/';
 import Loading from '@components/loading';
 import useFetchData from '@hooks/useFetchData';
+import PropTypes from 'prop-types';
+import Lottie from '@components/NodataLottie';
 
-const MyRecipes = () => {
+const MyRecipes = ({ navigation }) => {
   const { colors } = useTheme();
   const { user } = useContext(UserContext);
-  const { data } = useFetchData({
+  const { data, loading } = useFetchData({
     query: coursesQuery({ pageIndex: 0, limit: 5, sort: 'updated_at:DESC', userId: user?.id }),
   });
   const animation = useRef(null);
 
   if (!data) {
     return <Loading />;
+  }
+
+  if (!loading && data.lenght === 0) {
+    return (
+      <View>
+        <Lottie />
+      </View>
+    );
   }
 
   const renderCourses = ({ item, index }) => {
@@ -37,7 +47,10 @@ const MyRecipes = () => {
             marginRight: index % 2 === 0 ? 10 : 0,
           }}>
           {Object.keys(item).length !== 0 ? (
-            <View>
+            <Pressable
+              onPress={() => {
+                navigation.navigate('CourseDetails', { id: item?.id, userId: user?.id });
+              }}>
               <Image
                 source={{ uri: item?.image?.formats?.medium?.url }}
                 resizeMode="cover"
@@ -64,7 +77,7 @@ const MyRecipes = () => {
                       <StarIcon fill={colors.text} />
                     </View> */}
               </View>
-            </View>
+            </Pressable>
           ) : (
             <View />
           )}
@@ -117,5 +130,11 @@ const MyRecipes = () => {
       numColumns={2}
     />
   );
+};
+
+MyRecipes.propTypes = {
+  navigation: PropTypes.shape({
+    navigate: PropTypes.func.isRequired,
+  }).isRequired,
 };
 export default MyRecipes;

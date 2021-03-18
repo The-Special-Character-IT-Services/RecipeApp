@@ -26,7 +26,7 @@ const MainStackScreen = () => {
         headerTintColor: colors.primary,
         title: false,
       }}>
-      {!!user ? (
+      {user ? (
         <>
           <MainStack.Screen name="Home" getComponent={() => require('@screens/Home').default} />
           <MainStack.Screen

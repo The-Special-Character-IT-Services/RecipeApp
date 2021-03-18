@@ -2,18 +2,25 @@ import React, { useContext, useRef, useState } from 'react';
 import PropTypes from 'prop-types';
 import { UserContext } from '@context/userContext';
 import { View } from 'react-native';
-import TextEle from '@components/TextEle';
-import LottieView from 'lottie-react-native';
+import Lottie from '@components/NodataLottie';
 import SearchBar from '../../components/Search';
 import LikedRecipe from '../../components/LikedRecipe';
 
 const TabLikes = ({ navigation }) => {
   const [text, setText] = useState('');
-  const { user } = useContext(UserContext);
+  const { user, loading, data } = useContext(UserContext);
 
   const onChangeText = val => {
     setText(val);
   };
+
+  if (!loading && data?.lenght === 0) {
+    return (
+      <View>
+        <Lottie />
+      </View>
+    );
+  }
 
   return (
     <View style={{ flex: 1 }}>

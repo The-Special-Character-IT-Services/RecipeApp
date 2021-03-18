@@ -1,11 +1,15 @@
+/* eslint-disable jsx-control-statements/jsx-use-if-tag */
+/* eslint-disable react-native/no-inline-styles */
 import React, { useContext, useState } from 'react';
 import { ScrollView, View, Image, KeyboardAvoidingView } from 'react-native';
 import { useTheme } from '@react-navigation/native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { coursesQuery } from '@hooks/useCoursesApiHook';
 import { UserContext } from '@context/userContext';
+import PropTypes from 'prop-types';
 import { FlatList } from 'react-native-gesture-handler';
 import useFetchData from '@hooks/useFetchData';
+import { Pressable } from 'react-native';
 import SearchBar from '../../components/Search';
 import RecentlyAdd from '../../components/RecentlyAdd';
 import SearchCuisine from '../../components/SearchCuisine';
@@ -13,7 +17,7 @@ import TextEle from '../../components/TextEle';
 
 const arr = ['Trending', 'Recently Added ', 'Rice Items', 'Sweets', 'Salads'];
 
-const Search = () => {
+const Search = ({ navigation }) => {
   const { colors } = useTheme();
   const insets = useSafeAreaInsets();
   const { user } = useContext(UserContext);
@@ -75,11 +79,15 @@ const Search = () => {
           data={text.length >= 3 ? data?.courses.filter(x => x.name.includes(text)) : data?.courses}
           showsHorizontalScrollIndicator={false}
           renderItem={({ item }) => (
-            <View
+            <Pressable
+              onPress={() => {
+                navigation.navigate('CourseDetails', { id: item?.id, userId: user?.id });
+              }}
               style={{
                 flexDirection: 'row',
                 marginVertical: 10,
                 marginHorizontal: 10,
+                marginLeft: 20,
               }}>
               <Image
                 source={{ uri: item?.image?.url }}
@@ -95,37 +103,19 @@ const Search = () => {
                 }}>
                 {item.name}
               </TextEle>
-            </View>
+            </Pressable>
           )}
           removeClippedSubviews
         />
-        // {data?.courses.map(item => (
-        //   <View
-        //     style={{
-        //       flexDirection: 'row',
-        //       marginVertical: 10,
-        //       marginHorizontal: 10,
-        //     }}>
-        //     <Image
-        //       source={{ uri: item.image.url }}
-        //       style={{ height: 50, width: 50, borderRadius: 5 }}
-        //     />
-        //     <TextEle
-        //       variant="body1"
-        //       style={{
-        //         color: colors.text,
-        //         flexDirection: 'row',
-        //         marginHorizontal: 10,
-        //         marginVertical: 3,
-        //       }}>
-        //       {item.name}
-        //     </TextEle>
-        //   </View>
-        // ))}
-        // </ScrollView>
       )}
     </KeyboardAvoidingView>
   );
+};
+
+Search.propTypes = {
+  navigation: PropTypes.shape({
+    navigate: PropTypes.func.isRequired,
+  }).isRequired,
 };
 
 export default Search;
