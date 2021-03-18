@@ -27,9 +27,9 @@ const MyRecipes = ({ navigation }) => {
     return <Loading />;
   }
 
-  if (!loading && data.lenght === 0) {
+  if (!data || !data?.courses || data?.courses?.length === 0) {
     return (
-      <View>
+      <View style={{ flex: 1, justifyContent: 'center' }}>
         <Lottie />
       </View>
     );
@@ -137,4 +137,5 @@ MyRecipes.propTypes = {
     navigate: PropTypes.func.isRequired,
   }).isRequired,
 };
+
 export default MyRecipes;
