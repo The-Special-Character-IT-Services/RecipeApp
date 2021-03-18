@@ -1,6 +1,6 @@
 /* eslint-disable react/prop-types */
 /* eslint-disable react-native/no-inline-styles */
-import React, { useCallback, useState } from 'react';
+import React, { useCallback, useContext, useState } from 'react';
 import { View, FlatList } from 'react-native';
 import { useTheme } from '@react-navigation/native';
 import { coursesQuery } from '@hooks/useCoursesApiHook';
@@ -10,6 +10,7 @@ import { Pressable } from 'react-native';
 import Loading from '@components/loading';
 import PropTypes from 'prop-types';
 import useInfiniteScroll from '@hooks/useInfiniteScroll';
+import { UserContext } from '@context/userContext';
 import Lottie from '../../components/NodataLottie';
 import SearchBar from '../../components/Search';
 import TextEle from '../../components/TextEle';
@@ -18,6 +19,7 @@ const ITEM_HEIGHT = 100;
 
 const FilterList = ({ route, navigation }) => {
   const { where, userId } = route.params;
+  const { user } = useContext(UserContext);
   const { data, loading, error } = useInfiniteScroll({
     callback: coursesQuery,
     callbackProps: {
@@ -42,7 +44,7 @@ const FilterList = ({ route, navigation }) => {
   const keyExtractor = useCallback(item => `${item?.id}`, []);
 
   const renderItem = useCallback(
-    ({ item, user }) => (
+    ({ item }) => (
       <Pressable
         style={{
           flexDirection: 'row',

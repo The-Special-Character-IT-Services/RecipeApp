@@ -42,7 +42,12 @@ const ListItem = ({ onRecipePress, item, cardWidth }) => {
               borderRadius: 10,
               padding: 2,
             }}>
-            <Rating rating={rating} length={1} totalRating={item?.rattings?.length} />
+            <Rating
+              editable={false}
+              rating={rating}
+              length={1}
+              totalRating={item?.rattings?.length}
+            />
           </View>
           {!isPurchased && (
             <View
