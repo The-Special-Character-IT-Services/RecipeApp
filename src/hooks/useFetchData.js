@@ -3,12 +3,12 @@ import fetcher from '@utils/fetcher';
 
 const useFetchData = ({ query, variables, response }) => {
   const [data, setData] = useState();
-  const [loading, setLoading] = useState();
+  const [loading, setLoading] = useState(false);
   const [error, setError] = useState();
 
   const fetchData = useCallback(async () => {
     try {
-      setLoading(false);
+      setLoading(true);
       const res = await fetcher(query, variables, response);
       setData(res);
     } catch (err) {

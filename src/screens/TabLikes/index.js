@@ -14,13 +14,13 @@ const TabLikes = ({ navigation }) => {
     setText(val);
   };
 
-  if (!loading && data?.lenght === 0) {
-    return (
-      <View>
-        <Lottie />
-      </View>
-    );
-  }
+  // if (!loading) {
+  //   return (
+  //     <View>
+  //       <Lottie />
+  //     </View>
+  //   );
+  // }
 
   return (
     <View style={{ flex: 1 }}>

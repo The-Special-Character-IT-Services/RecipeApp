@@ -114,9 +114,9 @@ const TabEvent = () => {
     return <Loading />;
   }
 
-  if (!loading) {
+  if (!data || !data?.courses || data?.courses?.length === 0) {
     return (
-      <View>
+      <View style={{ flex: 1, justifyContent: 'center' }}>
         <Lottie />
       </View>
     );

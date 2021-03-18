@@ -23,7 +23,7 @@ const MyRecipes = ({ navigation }) => {
   });
   const animation = useRef(null);
 
-  if (!data) {
+  if (loading) {
     return <Loading />;
   }
 

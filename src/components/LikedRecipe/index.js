@@ -9,12 +9,13 @@ import LikeButton from '@components/LikeButton';
 import useFetchData from '@hooks/useFetchData';
 import Loading from '@components/loading';
 import { coursesQuery } from '@hooks/useCoursesApiHook';
+import Lottie from '@components/NodataLottie';
 import TextEle from '../TextEle';
 
 const LikedRecipe = ({ onRecipeDetail }) => {
   const { colors } = useTheme();
   const { user } = useContext(UserContext);
-  const { data, fetchData } = useFetchData({
+  const { data, fetchData, loading } = useFetchData({
     query: coursesQuery({
       pageIndex: 0,
       limit: 5,
@@ -30,8 +31,16 @@ const LikedRecipe = ({ onRecipeDetail }) => {
     }, []),
   );
 
-  if (!data) {
+  if (loading) {
     return <Loading />;
+  }
+
+  if (!data || !data?.courses || data?.courses?.length === 0) {
+    return (
+      <View style={{ flex: 1, justifyContent: 'center' }}>
+        <Lottie />
+      </View>
+    );
   }
 
   return (
