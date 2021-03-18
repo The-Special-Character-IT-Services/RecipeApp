@@ -11,9 +11,9 @@ import Loading from '@components/loading';
 import TextEle from '../TextEle';
 
 const Cuisine = ({ onCuisinePress }) => {
-  const { data, loading } = useFetchData({ query: cuisinesQuery });
+  const { data } = useFetchData({ query: cuisinesQuery });
 
-  if (loading) {
+  if (!data) {
     return <Loading />;
   }
 
