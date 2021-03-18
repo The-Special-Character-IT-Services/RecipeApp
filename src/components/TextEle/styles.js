@@ -9,6 +9,10 @@ const styles = StyleSheet.create({
     fontSize: 30,
     fontWeight: 'bold',
   },
+  header: {
+    fontSize: 26,
+    fontWeight: 'bold',
+  },
   error: {
     fontSize: 28,
     fontWeight: 'bold',

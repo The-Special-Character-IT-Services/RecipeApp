@@ -17,6 +17,7 @@ const TextEle = ({ variant, style, ...rest }) => {
 
 TextEle.propTypes = {
   variant: PropTypes.oneOf([
+    'header',
     'header1',
     'header2',
     'title1',
