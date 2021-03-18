@@ -16,7 +16,7 @@ const MainStackScreen = () => {
   const { user, loading } = useContext(UserContext);
 
   if (loading) {
-    <Loading />;
+    return <Loading />;
   }
 
   return (

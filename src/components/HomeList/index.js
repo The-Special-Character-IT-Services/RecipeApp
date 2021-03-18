@@ -11,7 +11,7 @@ import ListItem from './ListItem';
 
 const HomeList = ({ title, onPressViewAll, onRecipePress, userId, sort, where }) => {
   const { colors } = useTheme();
-  const { data } = useFetchData({
+  const { data, loading } = useFetchData({
     query: coursesQuery({
       pageIndex: 0,
       limit: 5,
@@ -21,7 +21,7 @@ const HomeList = ({ title, onPressViewAll, onRecipePress, userId, sort, where })
     }),
   });
 
-  if (!data) {
+  if (loading) {
     return (
       <View style={{ flex: 1, height: 400 }}>
         <Loading />
