@@ -14,7 +14,7 @@ import TextEle from '../TextEle';
 const LikedRecipe = ({ onRecipeDetail }) => {
   const { colors } = useTheme();
   const { user } = useContext(UserContext);
-  const { data, loading, fetchData } = useFetchData({
+  const { data, fetchData } = useFetchData({
     query: coursesQuery({
       pageIndex: 0,
       limit: 5,
@@ -51,7 +51,7 @@ const LikedRecipe = ({ onRecipeDetail }) => {
               }}>
               <Image
                 source={{
-                  uri: item.image.url,
+                  uri: item?.image?.url,
                 }}
                 style={{ aspectRatio: 16 / 9, borderRadius: 20 }}
               />
